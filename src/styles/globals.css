@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+/* .mui-style-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
+right: 16px !important;
+} */
+/* .react-tel-input .flag-dropdown{
+  position: absolute !important;
+  left:-1px!important
+} */
+.mui-style-1m9128y {
+  text-align: left !important;
+  margin-top:10px !important;
+  transform: translateY(5px) !important;
+  -webkit-transform: translateY(5px) !important;
+  -moz-transform: translateY(5px) !important;
+  -ms-transform: translateY(5px) !important;
+  -o-transform: translateY(5px) !important;
+  font-size: 25px !important
+};
+
+.rtl-1m9128y{
+  text-align: right !important;
+  margin-top:10px !important;
+  transform: translateY(5px) !important;
+  -webkit-transform: translateY(5px) !important;
+  -moz-transform: translateY(5px) !important;
+  -ms-transform: translateY(5px) !important;
+  -o-transform: translateY(5px) !important;
+  font-size: 25px !important
+}
+
+.mui-style-aq8pb7-MuiSvgIcon-root{
+  color:white !important
+};
+
+
+.react-tel-input .selected-flag .arrow{
+  display: none !important;
+  visibility: hidden !important;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+.closebtn {
+  position: absolute;
+  left: unset;
+  right:10px;
+  top: 1rem;
+  border: none;
+  border-radius: 50%;
+  /*width: 2rem;*/
+  /*height: 2rem;*/
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+}
