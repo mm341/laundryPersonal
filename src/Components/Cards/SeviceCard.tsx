@@ -23,9 +23,9 @@ const SeviceCard = ({
   const router = useRouter();
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
-  const [showButton, setShowButton] = useState<boolean>(false);
+ 
   return (
-    <Box sx={{ position: "relative" }} className="group">
+    <Box data-aos="fade-left" sx={{ position: "relative" }} className="group">
       <img
         src={element?.image_path}
         alt="img"

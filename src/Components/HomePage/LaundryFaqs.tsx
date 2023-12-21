@@ -24,10 +24,7 @@ const LaundryFaqs = () => {
       question: "h7",
       answer: "h8",
     },
-    {
-      question: "h9",
-      answer: "h10",
-    },
+   
    
   ];
   return (
@@ -37,7 +34,7 @@ const LaundryFaqs = () => {
 
         <Box
           sx={{
-            width: "65%",
+            width: {md:"65%",xs:"100%"},
             mx: "auto",
             display: "flex",
             flexDirection: "column",

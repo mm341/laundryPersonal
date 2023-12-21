@@ -21,38 +21,34 @@ const clientSideEmotionCache = createEmotionCache();
 import type {} from "@mui/lab/themeAugmentation";
 // When using TypeScript 3.x and below
 import "@mui/lab/themeAugmentation";
-
+import AOS from "aos";
 import Footer from "@/Components/FooterMiddleLandingPage";
 import Navbar from "@/Components/Navbar";
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
+import ScrollToTop from "@/Components/GlobalComponent/scroll-top/ScrollToTop";
 export default function App({
   Component,
   pageProps,
   emotionCache = clientSideEmotionCache,
 }: AppProps | any) {
+  //  hooks
+
   const { t } = useTranslation();
   const [languagedirection, setlanguagedirection] = useState<string>("");
-  const [theme_mode, setThemeMode] = useState<string>("");
+  const { locale } = useRouter();
+  //  handel language direction
   useEffect(() => {
-    // Perform localStorage action
     if (typeof window !== "undefined") {
       setlanguagedirection(localStorage.getItem("direction") ?? "ltr");
     }
   }, [languagedirection]);
-
-  useEffect(() => {
-    // Perform localStorage action
-    if (typeof window !== "undefined") {
-      setThemeMode(localStorage.getItem("mode") ?? "light");
-    }
-  }, [theme_mode]);
-
+  //  handel language
   let userLanguage: string | any = undefined;
   if (typeof window !== "undefined") {
     userLanguage = localStorage.getItem("language");
   }
 
-  const { locale } = useRouter();
+  //  handel language
   useEffect(() => {
     if (locale === "en") {
       i18n.changeLanguage("en");
@@ -68,6 +64,8 @@ export default function App({
   }, [locale]);
 
   let persistor = persistStore(store);
+
+  //  custom theme
   const theme = useMemo(
     () =>
       createTheme({
@@ -77,13 +75,18 @@ export default function App({
   );
   const getLayout = Component.getLayout ?? ((page: any) => page);
   const queryClient = new QueryClient();
-
   const router = useRouter();
- 
-  // const tajawal = Tajawal({
-  //   subsets: ["latin"],
-  //   weight: ["400", "500", "700", "800"],
-  // });
+
+  //   aos custom
+  useEffect(() => {
+    AOS.init({
+      easing: "ease-out-cubic",
+      once: true,
+      offset: 50,
+      duration: 1500,
+      delay: 300,
+    });
+  }, []);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -97,10 +100,14 @@ export default function App({
                 <title>{t("Loading...")}</title>
               </Head>
               <Navbar />
+              <ScrollToTop />
               <Box
                 sx={{
                   minHeight: "80vh",
-                  mt: {md:router.pathname !== "/" ? "7rem" : "3.9rem",xs:router.pathname !== "/" ? "7rem" : "5rem"},
+                  mt: {
+                    md: router.pathname !== "/" ? "7rem" : "3.9rem",
+                    xs: router.pathname !== "/" ? "7rem" : "5rem",
+                  },
                   mb: "5rem",
                 }}
               >
@@ -114,5 +121,3 @@ export default function App({
     </CacheProvider>
   );
 }
-
-

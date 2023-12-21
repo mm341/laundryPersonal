@@ -19,12 +19,13 @@ import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import NavServices from "./NavServices";
 import AreaDialog from "./Dialogs/AreaDialog";
-import AuthModal from "./AuthBox/auth";
+
 import DrawerMenu from "./DrawerMenu";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import accountphoto from "../../public/navbar/accountPhoto.svg";
 import { AccountPopover } from "./GlobalComponent/AccountPopover";
 import { useAppSelector } from "@/redux/store";
+import AuthModal from "./AuthBox/AuthModel";
 const Navbar = () => {
   //  hooks
   const router = useRouter();
@@ -46,15 +47,14 @@ const Navbar = () => {
   };
   //  selectors
 
-  const { services ,areas} = useAppSelector((state) => state.services);
-
+  const { services, areas } = useAppSelector((state) => state.services);
 
   //  open auth model
 
-  const handleOpenAuthModal=()=>{
-    setOpen(true)
+  const handleOpenAuthModal = () => {
+    setOpen(true);
     setModalFor("sign-in");
-  }
+  };
   //  close auth model
   const handleCloseAuthModal = () => {
     setOpen(false);
@@ -110,7 +110,11 @@ const Navbar = () => {
                 }}
               >
                 {/* services */}
-                <NavServices setServiceId={setServiceId} services={services} setOpenAreaDialog={setOpenAreaDialog} />
+                <NavServices
+                  setServiceId={setServiceId}
+                  services={services}
+                  setOpenAreaDialog={setOpenAreaDialog}
+                />
                 <CustomNavbarTypography>
                   {t("How It Work")}
                 </CustomNavbarTypography>
@@ -186,7 +190,12 @@ const Navbar = () => {
             </GlobalDisplayFlexBox>
           </PublicContainer>
         ) : (
-          <DrawerMenu services={services} areas={areas} onClose={handleClosePopover} open={openPopover}>
+          <DrawerMenu
+            services={services}
+            areas={areas}
+            onClose={handleClosePopover}
+            open={openPopover}
+          >
             <Box
               component={ButtonBase}
               onClick={handleOpenPopover}
@@ -224,7 +233,12 @@ const Navbar = () => {
           </DrawerMenu>
         )}
       </Box>
-      <AreaDialog openAreaDialog={openAreaDialog} handleClose={CloseDialog} homeAreas={areas} ServiceId={ServiceId} />
+      <AreaDialog
+        openAreaDialog={openAreaDialog}
+        handleClose={CloseDialog}
+        homeAreas={areas}
+        ServiceId={ServiceId}
+      />
       <AuthModal
         open={authModalOpen}
         modalFor={modalFor}

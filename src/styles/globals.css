@@ -19,21 +19,42 @@
 /* .mui-style-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
 right: 16px !important;
 } */
-.react-tel-input .flag-dropdown{
+/* .react-tel-input .flag-dropdown{
   position: absolute !important;
   left:-1px!important
-}
+} */
 .mui-style-1m9128y {
   text-align: left !important;
-  margin-top: 10px
-  
+  margin-top:10px !important;
+  transform: translateY(5px) !important;
+  -webkit-transform: translateY(5px) !important;
+  -moz-transform: translateY(5px) !important;
+  -ms-transform: translateY(5px) !important;
+  -o-transform: translateY(5px) !important;
+  font-size: 25px !important
 };
 
+.rtl-1m9128y{
+  text-align: right !important;
+  margin-top:10px !important;
+  transform: translateY(5px) !important;
+  -webkit-transform: translateY(5px) !important;
+  -moz-transform: translateY(5px) !important;
+  -ms-transform: translateY(5px) !important;
+  -o-transform: translateY(5px) !important;
+  font-size: 25px !important
+}
+
+.mui-style-aq8pb7-MuiSvgIcon-root{
+  color:white !important
+};
 
 
 .react-tel-input .selected-flag .arrow{
   display: none !important;
+  visibility: hidden !important;
 }
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

@@ -31,8 +31,8 @@ import { Button, Typography } from "@mui/material";
 import CustomPhoneInput from "../../CustomPhoneInput";
 import CustomLoadingSubmitButton from "@/Components/GlobalComponent/CustomLoadingSubmitButton";
 import { AuthApi } from "@/React-Query/authApi";
-import { onErrorResponse } from "@/utils/PublicHandelingErrors";
-// import onErrorResponse from "../../../../utils/PublicHandelingErrors"
+import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
+
 export interface SignModel {
   handleClose: () => void;
   signInSuccess?: boolean;
@@ -56,13 +56,13 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
     validationSchema: Yup.object({
       phone: Yup.string()
         .required(t("Please give a phone number"))
-        .min(7, "number must be 10 digits"),
+        .min(12, t("number must be 12 digits")),
     }),
     onSubmit: async (values: { phone: string }) => {
       try {
         const data: { phone?: string } = {};
         data.phone = `+${values.phone.toString()}`;
-        // data.password = values.password
+
         formSubmitHandler(data);
       } catch (err) {}
     },
@@ -88,7 +88,7 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
         //   setMainToken(response);
         // }
       },
-      onError: onErrorResponse,
+      onError: PublicHandelingErrors.onErrorResponse,
     });
   };
 
@@ -122,7 +122,7 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
 
   const languagedirection = localStorage.getItem("direction");
   return (
-    <CustomBoxForModal>
+    <CustomBoxForModal sx={{ width: { md: "700px", xs: "400px" } }}>
       <RTL direction={languagedirection}>
         <GlobalDisplayFlexBox
           sx={{ flexDirection: { md: "row", xs: "column" }, gap: "50px" }}
@@ -165,11 +165,15 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
                     rtlChange
                     touched={loginFormik.touched.phone}
                     errors={loginFormik.errors.phone}
-                    //   isLoading={isLoading}
+                    isLoading={isLoading}
                   />
                 </CustomStackFullWidth>
 
-                <CustomLoadingSubmitButton word="Sign In" />
+                <CustomLoadingSubmitButton
+                  size={25}
+                  loading={isLoading}
+                  word="Sign In"
+                />
               </form>
             </CustomStackFullWidth>
 

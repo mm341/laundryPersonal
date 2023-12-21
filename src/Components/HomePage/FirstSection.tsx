@@ -1,13 +1,12 @@
 import {
   Box,
-  Container,
   SelectChangeEvent,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
-import PublicContainer from "../PublicContainer";
+
 import {
   GlobalButton,
   GlobalDisplayFlexBox,
@@ -25,16 +24,7 @@ import AppSmallSection from "./AppSmallSection";
 import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import Carousel from "react-material-ui-carousel";
-import { makeStyles } from "@mui/styles";
-const useStyles = makeStyles({
-  root: {
-    // other styles...
 
-    '&.mui-style-1m9128y': {
-      textAlign: 'left',
-    },
-  },
-});
 const FirstSection = ({
   homeServices,
   homeAreas,
@@ -64,7 +54,7 @@ const FirstSection = ({
   const handelClose = () => {
     setOpenOrderDialog(false);
   };
-  const classes = useStyles();
+
   return (
     <>
       <Box
@@ -80,6 +70,7 @@ const FirstSection = ({
           <GlobalDisplayFlexBox>
             {/*  leftSection */}
             <GlobalDisplayFlexColumnBox
+              data-aos="fade-right"
               width={!issmall ? "42%" : "100%"}
               gap={"50px"}
               alignItems={"center"}
@@ -94,25 +85,30 @@ const FirstSection = ({
               >
                 <img
                   src={photo?.src}
-                  style={{ width: "100%", height: "100%" }}
+                  style={{ width: "100%", height: "100%", marginTop: "30px" }}
                   alt="img"
                   loading="lazy"
                 />
               </Box>
-              <GlobalDisplayFlexColumnBox width={"100%"} gap={"15px"}>
+              <GlobalDisplayFlexColumnBox
+                sx={{ marginTop: "30px" }}
+                width={"100%"}
+                gap={"15px"}
+              >
                 <GlobalTypography
                   text={"Say goodbye to laundry day"}
                   FirstSection
                 />
+
                 <Carousel
-                sx={{
-                  '&.mui-style-1m9128y': {
-                    textAlign: 'left !important',
-                  },
-                  '&.mui-style-aq8pb7-MuiSvgIcon-root':{
-                    color:"white !important"
-                  }
-                }}
+                  sx={{
+                    "&.mui-style-1m9128y": {
+                      textAlign: "left !important",
+                    },
+                    "&.mui-style-aq8pb7-MuiSvgIcon-root": {
+                      color: "white !important",
+                    },
+                  }}
                   // className={`${classes.root} mui-style-1m9128y`}
                   animation={"fade"}
                   duration={50}
@@ -142,7 +138,9 @@ const FirstSection = ({
                       mt: "20px",
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium tempore molestias optio tenetur? Itaque, autem quia. Exercitationem nisi optio accusamus quasi, enim dolore, eos assumenda eum expedita reiciendis atque sequi.
+                    {t(
+                      "You deserve more time for  really important in your life, where the stressful task of laundry is no longer a time-consuming chore."
+                    )}
                   </Typography>
                   <Typography
                     sx={{
@@ -152,14 +150,16 @@ const FirstSection = ({
                       mt: "20px",
                     }}
                   >
-                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem dolores numquam neque, est quae repudiandae quas! Reprehenderit possimus, sequi corrupti excepturi voluptates voluptatem nobis aspernatur tenetur quam, fugiat error recusandae!
+                    {t(
+                      "You deserve more time for  really important in your life, where the stressful task of laundry is no longer a time-consuming chore."
+                    )}
                   </Typography>
                 </Carousel>
               </GlobalDisplayFlexColumnBox>
 
               <Box
                 sx={{
-                  width: "75%",
+                  width: { md: "85%", xs: "90%" },
                   mr: "auto",
                   transform: { sm: "translateX(-15px)", xs: "translateX(0px)" },
                   display: "flex",
@@ -210,11 +210,12 @@ const FirstSection = ({
             {/*  Image Right Section */}
 
             <Box
+              data-aos="fade-left"
               sx={{
                 width: { md: "50%", xs: "100%" },
                 height: { sm: "710px", xs: "350px" },
-                display:"flex",
-                justifyContent:"flex-end"
+                display: "flex",
+                justifyContent: "flex-end",
               }}
             >
               <img

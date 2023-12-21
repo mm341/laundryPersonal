@@ -25,13 +25,14 @@ const AppSection = () => {
     >
       <PublicContainer>
         <GlobalDisplayFlexBox>
-          {/*  top section */}
           <GlobalDisplayFlexColumnBox width={"100%"} gap={"72px"}>
+            {/*  top section */}
             <GlobalTypography text={"usability become smooth"} />
-
+            {/*  bottom section */}
             <GlobalDisplayFlexBox>
               {/*  left section */}
               <GlobalDisplayFlexColumnBox
+               data-aos="fade-right"
                 width={!issmall ? "45%" : "100%"}
                 gap={"28px"}
               >
@@ -58,27 +59,32 @@ const AppSection = () => {
                 <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                   <GlobalDisplayFlexBox
                     sx={{
-                      justifyContent: {sm:"flex-start",xs:"center"},
+                      justifyContent: { sm: "flex-start", xs: "center" },
                       gap: "20px",
-                      alignItems: {sm:"flex-end",xs:"flex-start"},
+                      alignItems: { sm: "flex-end", xs: "flex-start" },
                     }}
                   >
                     <Typography
                       sx={{
                         fontSize: { sm: "24px", xs: "18px" },
                         fontWeight: "600",
-                        
                       }}
                     >
                       {t("Download the app and book in seconds")}
                     </Typography>
-                    <img src={fakeImg?.src} style={{width:"72px",height:"72px"}} loading="lazy" alt="img" />
+                    <img
+                      src={fakeImg?.src}
+                      style={{ width: "72px", height: "72px" }}
+                      loading="lazy"
+                      alt="img"
+                    />
                   </GlobalDisplayFlexBox>
                   <AppSmallSection />
                 </GlobalDisplayFlexColumnBox>
               </GlobalDisplayFlexColumnBox>
               {/*  right Photo section */}
               <Box
+               data-aos="fade-left"
                 sx={{
                   width: { md: "50%", xs: "70%" },
                   display: "flex",

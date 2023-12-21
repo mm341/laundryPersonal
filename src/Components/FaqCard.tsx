@@ -25,7 +25,17 @@ const FaqCard = ({
   const [previewAnswer, setPreviewAnswer] = useState<Boolean>(false);
 
   return (
-    <Stack direction={"column"} gap={"0px"} sx={{backgroundColor:previewAnswer?theme.palette.background.default:"white",p:previewAnswer?"15px":"15px",borderRadius:"20px"}}>
+    <Stack
+      direction={"column"}
+      gap={"0px"}
+      sx={{
+        backgroundColor: previewAnswer
+          ? theme.palette.background.default
+          : "white",
+        p: previewAnswer ? "15px" : "15px",
+        borderRadius: "20px",
+      }}
+    >
       <Stack
         direction={"row"}
         alignItems={"flex-start"}
@@ -50,17 +60,24 @@ const FaqCard = ({
           width={"100%"}
           gap={"15px"}
         >
-          <GlobalDisplayFlexBox>
-            <Typography sx={{ fontSize: "24px", fontWeight: "600" }}>
+          
+            <Typography
+              sx={{
+                fontSize: { md: "24px", xs: "16px" },
+                fontWeight: "600",
+                textAlign: "left",
+              }}
+            >
               {t(e?.question)}
             </Typography>
-          </GlobalDisplayFlexBox>
+          
           {previewAnswer && (
             <Typography
               sx={{
-                fontSize: "20px",
+                fontSize: { md: "20px", xs: "12px" },
                 fontWeight: "400",
                 opacity: "0.7",
+                textAlign: "left",
               }}
               style={{ opacity: "0.7" }}
             >

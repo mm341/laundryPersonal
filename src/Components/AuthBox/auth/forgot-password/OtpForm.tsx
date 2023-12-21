@@ -9,7 +9,7 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import * as Yup from 'yup'
 import { useTheme } from '@mui/material'
 import resendImg from '../../../../public/LogIn/resendCode.svg'
-import AuthModal from '..'
+
 import { useState } from 'react'
 import { useEffect } from 'react'
 

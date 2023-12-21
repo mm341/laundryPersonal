@@ -8,7 +8,7 @@ import { useMutation } from "react-query";
 import { useFormik } from "formik";
 import CustomPhoneInput from "../../CustomPhoneInput";
 import { useTranslation } from "react-i18next";
-import SignUpValidation from "../SignUpValidation";
+
 
 import { useTheme } from "@mui/material/styles";
 import { CustomBoxForModal } from "../auth.style";
@@ -31,7 +31,9 @@ import { AccountRegister } from "@/interfaces/FormRegisterInterface";
 import img from "../../../../../public/navbar/signUp.svg";
 import CustomLoadingSubmitButton from "@/Components/GlobalComponent/CustomLoadingSubmitButton";
 import { AuthApi } from "@/React-Query/authApi";
-import { onErrorResponse } from "@/utils/PublicHandelingErrors";
+import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
+import SignUpvalidation from "../SignUpValidation";
+
 const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
       name: "",
       phone: "",
     },
-    validationSchema: SignUpValidation(),
+    validationSchema: SignUpvalidation(),
     onSubmit: async (values, helpers) => {
       try {
         formSubmitHandler(values);
@@ -55,12 +57,12 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
     },
   });
 
-    const { mutate, isLoading, error } = useMutation("sign-up", AuthApi.signUp);
-    // useEffect(() => {
-    //   if (otpData?.phone) {
-    //     setOpenOtpModal(true);
-    //   }
-    // }, [otpData]);
+  const { mutate, isLoading, error } = useMutation("sign-up", AuthApi.signUp);
+  // useEffect(() => {
+  //   if (otpData?.phone) {
+  //     setOpenOtpModal(true);
+  //   }
+  // }, [otpData]);
 
   const formSubmitHandler = (values: AccountRegister) => {
     const signUpData: AccountRegister = {
@@ -76,7 +78,7 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
         //   setMainToken(response);
         // }
       },
-      onError: onErrorResponse,
+      onError: PublicHandelingErrors.onErrorResponse,
     });
   };
 
@@ -110,7 +112,7 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
 
   const languagedirection = localStorage.getItem("direction");
   return (
-    <CustomBoxForModal>
+    <CustomBoxForModal sx={{width:{md:"700px",xs:"400px"}}}>
       <RTL direction={languagedirection}>
         <GlobalDisplayFlexBox
           sx={{
@@ -139,6 +141,7 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
               <CustomStackFullWidth spacing={{ xs: 2, md: 3 }}>
                 <TextField
                   sx={{ backgroundColor: "white" }}
+                  disabled={isLoading}
                   required
                   fullWidth
                   id="f_name"
@@ -166,10 +169,10 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
                   errors={signUpFormik.errors.phone}
                   // rtlChange="true"
                   rtlChange
-                  // isLoading={isLoading}
+                  isLoading={isLoading}
                 />
               </CustomStackFullWidth>
-              <CustomLoadingSubmitButton word="Sign Up" />
+              <CustomLoadingSubmitButton size={25} loading={isLoading} word="Sign Up" />
             </form>
 
             <CustomTypography

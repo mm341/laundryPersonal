@@ -2,10 +2,26 @@ import {
   GlobalButton,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-import { Box, Typography, useTheme } from "@mui/material";
-import React from "react";
-
-const GlobalLaundryCard = () => {
+import { Typography, useTheme } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { work } from "../HomePage/LaundryWork";
+import { useRouter } from "next/router";
+import { motion } from "framer-motion";
+const GlobalLaundryCard = ({ element }: { element: work }) => {
+  //  hooks
+  const { locale } = useRouter();
+  const [title, setTitle] = useState<string>("");
+  const [desribtion, setDesribtion] = useState<string>("");
+  //  translate title and describtion due to language
+  useEffect(() => {
+    if (locale === "en") {
+      setTitle(element?.title?.en);
+      setDesribtion(element?.describtion?.en);
+    } else {
+      setTitle(element?.title?.ar);
+      setDesribtion(element?.describtion?.ar);
+    }
+  }, [locale]);
   return (
     <GlobalDisplayFlexColumnBox
       width={"90%"}
@@ -14,29 +30,32 @@ const GlobalLaundryCard = () => {
       alignItems={"Center"}
     >
       <img
+        data-aos="fade-down"
         style={{ width: "200px", height: "200px", borderRadius: "100%" }}
         loading="lazy"
         alt="img"
-        src={"http://laundry.razinsoft.com/images/work1.jpg"}
+        src={element?.img.src}
       />
+
       <Typography
         sx={{
           textAlign: "center",
-          fontSize: {sm:"20px",xs:"17px"},
+          fontSize: { sm: "20px", xs: "17px" },
           fontWeight: "600",
         }}
       >
-        Determine the schedule
+        {title}
       </Typography>
+
       <Typography
+        data-aos="fade-up"
         sx={{
           textAlign: "center",
-          fontSize: {sm:"18px",xs:"15px"},
+          fontSize: { sm: "18px", xs: "15px" },
           fontWeight: "400",
         }}
       >
-        Choose your area and the pickup and delivery times that suit you through
-        our mobile or web.
+        {desribtion}
       </Typography>
     </GlobalDisplayFlexColumnBox>
   );

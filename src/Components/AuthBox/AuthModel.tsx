@@ -6,14 +6,13 @@ import SignUpPage from "./auth/sign-up/SignUp";
 export interface authModel {
   open: boolean;
   handleClose: () => void;
-  signInSuccess: boolean;
   modalFor?: string;
   setModalFor: (e: string) => void;
 }
 const AuthModal = ({
   open,
   handleClose,
-  signInSuccess,
+  
   modalFor,
   setModalFor,
 }: authModel) => {
@@ -28,7 +27,7 @@ const AuthModal = ({
       >
         {modalFor === "sign-in" ? (
           <SignInPage
-            signInSuccess={signInSuccess}
+            
             handleClose={handleClose}
             setModalFor={setModalFor}
           />

@@ -1,41 +1,33 @@
-import { styled } from "@mui/material/styles";
+
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
-import LockIcon from "@mui/icons-material/Lock";
 import {
-  alpha,
-  Button,
+  
   Container,
   IconButton,
-  Stack,
   Typography,
   useTheme,
 } from "@mui/material";
-
-import { useDispatch, useSelector } from "react-redux";
-import Router, { useRouter } from "next/router";
+import  { useRouter } from "next/router";
 
 import { useTranslation } from "react-i18next";
 import { RTL } from "./GlobalComponent/RTL/RTL";
-import { useQuery } from "react-query";
 
-import { toast } from "react-hot-toast";
 import {
   CustomDrawer,
   CustomNavbarTypography,
   GlobalButton,
-  GlobalDisplayFlexBox,
 } from "@/styles/PublicStyles";
-import AuthModal from "./AuthBox/auth";
-import NavServices from "./NavServices";
+
 import AreaDialog from "./Dialogs/AreaDialog";
 import CollapsableMenu from "./GlobalComponent/CollapsableMenu";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import { HomeServices } from "@/interfaces/HomeServices";
+import AuthModal from "./AuthBox/AuthModel";
 
 const DrawerMenu = ({
   onClose,
