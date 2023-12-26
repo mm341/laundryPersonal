@@ -5,16 +5,17 @@ import { useTranslation } from "react-i18next";
 const CustomLoadingSubmitButton = ({
   word,
   loading,
-  size
+  size,
 }: {
   word: string;
   loading?: boolean;
-  size?:number
+  size?: number;
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
   return (
     <Button
+      style={{ backgroundColor: "#329CD7" }}
       disabled={loading}
       className="bg-[#329CD7]"
       fullWidth
@@ -29,7 +30,14 @@ const CustomLoadingSubmitButton = ({
       variant="contained"
       type="submit"
     >
-      {loading ? <CircularProgress sx={{ color: "white",fontSize:"10px" }}  size={size}/> : t(word)}
+      {loading ? (
+        <CircularProgress
+          sx={{ color: "white", fontSize: "10px" }}
+          size={size}
+        />
+      ) : (
+        t(word)
+      )}
     </Button>
   );
 };

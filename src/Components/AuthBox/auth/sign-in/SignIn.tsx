@@ -51,18 +51,20 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
 
   const loginFormik = useFormik({
     initialValues: {
-      phone: "",
+      contact: "",
     },
     validationSchema: Yup.object({
-      phone: Yup.string()
+      contact: Yup.string()
         .required(t("Please give a phone number"))
         .min(12, t("number must be 12 digits")),
     }),
-    onSubmit: async (values: { phone: string }) => {
+    onSubmit: async (values: { contact: string }) => {
       try {
-        const data: { phone?: string } = {};
-        data.phone = `+${values.phone.toString()}`;
+        const data: { contact?: string } = {};
+        // data.contact = `+${values.contact.toString()}`;
+        data.contact = "01061320051";
 
+        data.password = "Abcdefghij@#123";
         formSubmitHandler(data);
       } catch (err) {}
     },
@@ -82,7 +84,15 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
 
   const formSubmitHandler = (values: { phone?: string }) => {
     loginMutation(values, {
-      onSuccess: async (response) => {
+      onSuccess: async (response: any) => {
+       
+        if (response.data.data.access.token) {
+         
+          toast.success(response.data.message);
+          localStorage.setItem("token", response.data.data.access.token);
+          // window.location.reload();
+          handleClose?.();
+        }
         // if (global?.customer_verification) {
         //   setOtpData({ phone: values?.phone });
         //   setMainToken(response);
@@ -93,7 +103,7 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
   };
 
   const handleOnChange = (e: string) => {
-    loginFormik.setFieldValue("phone", e);
+    loginFormik.setFieldValue("contact", e);
   };
 
   //   const handelErrorFromOtp = (error) => {
@@ -159,12 +169,12 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
                   spacing={{ xs: 2, md: 2 }}
                 >
                   <CustomPhoneInput
-                    value={loginFormik.values.phone}
+                    value={loginFormik.values.contact}
                     onHandleChange={handleOnChange}
                     // initCountry={global?.country}
                     rtlChange
-                    touched={loginFormik.touched.phone}
-                    errors={loginFormik.errors.phone}
+                    touched={loginFormik.touched.contact}
+                    errors={loginFormik.errors.contact}
                     isLoading={isLoading}
                   />
                 </CustomStackFullWidth>

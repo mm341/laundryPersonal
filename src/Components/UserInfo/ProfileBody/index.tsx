@@ -1,29 +1,30 @@
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProfilePage from "../ProfilePage";
 
 import OrderPage from "../OrderPage";
 import MyAddresses from "./MyAddresses";
+import { useRouter } from "next/router";
 
 const ProfileBody = ({ page }: { page: string }) => {
-  let languagedirection = undefined;
-  if (typeof window !== "undefined") {
-    languagedirection = localStorage.getItem("direction");
-  }
+  const { locale } = useRouter();
+  const [languagedirection, setLanguagedirection] = useState<string>("ltr");
+
+  useEffect(() => {
+    locale === "en" ? setLanguagedirection("ltr") : setLanguagedirection("rtl");
+  }, [locale]);
 
   const activeComponent = () => {
     if (page === "profile") {
       return <ProfilePage />;
     }
     if (page === "Address") {
-      return <MyAddresses  />;
+      return <MyAddresses />;
     }
 
-   
     if (page === "order") {
       return <OrderPage />;
     }
-    
   };
 
   return <RTL direction={languagedirection}>{activeComponent()}</RTL>;

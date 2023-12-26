@@ -8,7 +8,8 @@ import {
   ButtonBase,
   PopoverVirtualElement,
 } from "@mui/material";
-import React, { useRef, useState } from "react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import React, { useEffect, useRef, useState } from "react";
 import PublicContainer from "./PublicContainer";
 import {
   CustomNavbarTypography,
@@ -29,25 +30,26 @@ import AuthModal from "./AuthBox/AuthModel";
 const Navbar = () => {
   //  hooks
   const router = useRouter();
-  const { push, locale } = useRouter();
+  const { push, locale, pathname, query, asPath } = useRouter();
 
   const { t } = useTranslation();
   const theme = useTheme();
   const anchorRef = useRef<Element | PopoverVirtualElement | null>(null);
   const [openAreaDialog, setOpenAreaDialog] = useState<boolean>(false);
-
+  const [ServiceId, setServiceId] = useState<number | undefined>();
   const [modalFor, setModalFor] = useState<string>("sign-in");
 
   const [authModalOpen, setOpen] = useState<boolean>(false);
   const [openPopover, setOpenPopover] = useState<boolean>(false);
-
-  const issmall = useMediaQuery(theme.breakpoints.down("md"));
-  const changeLocale = (locale: string) => {
-    router.push(router.pathname, router.asPath, { locale });
-  };
   //  selectors
 
   const { services, areas } = useAppSelector((state) => state.services);
+  const issmall = useMediaQuery(theme.breakpoints.down("md"));
+
+  //  change language function
+  const changeLocale = (locale: string) => {
+    router.push({ pathname, query }, asPath, { locale });
+  };
 
   //  open auth model
 
@@ -62,16 +64,75 @@ const Navbar = () => {
   };
   //  open  account popover
   const handleOpenPopover = () => {
-    setOpenPopover(true);
-    setModalFor("sign-in");
+    setOpenPopover(!openPopover);
   };
   //  close Popover model
   const handleClosePopover = () => {
     setOpenPopover(false);
   };
-  const [ServiceId, setServiceId] = useState<number | undefined>();
+
   //  close Area model
   const CloseDialog = () => setOpenAreaDialog(false);
+
+  //   save token in variable from localstaorage
+
+  let token: undefined | any | string = undefined;
+
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+
+  //  handel profile section and login button due to token
+
+  const handelAuth = (): React.ReactNode => {
+    return !token ? (
+      <Box>
+      <GlobalButton
+        onClick={handleOpenAuthModal}
+        sx={{
+          backgroundColor: theme.palette.primary.main,
+          color: "white",
+          borderRadius: "4px",
+        }}
+        px={"30px"}
+        py={"10px"}
+      >
+        {t("Login")}
+      </GlobalButton>
+      </Box>
+    ) : (
+      <Box  onClick={handleOpenPopover}>
+        <Stack
+          sx={{
+            gap: "10px",
+            justifyContent: "center",
+            display: "flex",
+            flexDirection: "row",
+            cursor: "pointer",
+          }}
+        >
+          <GlobalDisplayFlexBox sx={{ justifyContent: "center", gap: "3px" }}>
+            <Typography
+              sx={{
+                fontSize: { xl: "16px", md: "12px" },
+                fontWeight: "400",
+                color: "#636363",
+              }}
+            >
+              Hello, Mohamed
+            </Typography>
+            <KeyboardArrowDownIcon />
+          </GlobalDisplayFlexBox>
+          <img
+            style={{ width: "33.5px", height: "33.5px" }}
+            src={accountphoto?.src}
+            loading="lazy"
+            alt="accountphoto"
+          />
+        </Stack>
+      </Box>
+    );
+  };
   return (
     <>
       <Box
@@ -81,157 +142,119 @@ const Navbar = () => {
           position: "fixed",
           top: "0",
           width: "100%",
-          zIndex: "100",
+          zIndex: 1005,
+          boxShadow: "0px 4px 4px 0px #0000000F",
         }}
       >
-        {!issmall ? (
-          <PublicContainer>
-            <GlobalDisplayFlexBox
-              sx={{
-                alignItems: { md: "center", xs: "flex-start" },
-                gap: { md: "0", xs: "50px" },
-              }}
-            >
-              {/*  logo side */}
-              <Box sx={{ width: { md: "40%", xs: "100%" } }}>
-                <Typography
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => push("/")}
-                >
-                  home
-                </Typography>
-              </Box>
-
+        <Box sx={{ position: "relative" }}>
+          {!issmall ? (
+            <PublicContainer>
               <GlobalDisplayFlexBox
                 sx={{
-                  width: { md: "60%", xs: "100%" },
-                  gap: "45px",
-                  justifyContent: "flex-end",
+                  alignItems: { md: "center", xs: "flex-start" },
+                  gap: { md: "0", xs: "50px" },
                 }}
               >
-                {/* services */}
-                <NavServices
-                  setServiceId={setServiceId}
-                  services={services}
-                  setOpenAreaDialog={setOpenAreaDialog}
-                />
-                <CustomNavbarTypography>
-                  {t("How It Work")}
-                </CustomNavbarTypography>
-                <CustomNavbarTypography>{t("Pricing")}</CustomNavbarTypography>
-                <CustomNavbarTypography>
-                  {t("Contact us")}
-                </CustomNavbarTypography>
-                <CustomNavbarTypography
-                  onClick={() => {
-                    if (locale === "en") {
-                      changeLocale("ar");
-                      //   window.location.reload()
-                    } else {
-                      changeLocale("en");
-                      //   window.location.reload()
-                    }
-                  }}
-                  sx={{ textDecoration: "underline" }}
-                >
-                  {locale === "en" ? "AR" : "EN"}
-                </CustomNavbarTypography>
-                <GlobalButton
-                  onClick={handleOpenAuthModal}
-                  sx={{
-                    backgroundColor: theme.palette.primary.main,
-                    color: "white",
-                    borderRadius: "4px",
-                  }}
-                  px={"30px"}
-                  py={"10px"}
-                >
-                  {t("Login")}
-                </GlobalButton>
+                {/*  logo side */}
+                <Box sx={{ width: { md: "40%", xs: "100%" } }}>
+                  <Typography
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => push("/")}
+                  >
+                    home
+                  </Typography>
+                </Box>
 
-                {/*  account section */}
-                {/* <Box
-                  component={ButtonBase}
-                  onClick={handleOpenPopover}
-                  ref={anchorRef}
+                <GlobalDisplayFlexBox
+                  sx={{
+                    width: { md: "60%", xs: "100%" },
+                    gap: "45px",
+                    justifyContent: "flex-end",
+                  }}
                 >
-                  <Stack
+                  {/* services */}
+                  <NavServices
+                    setServiceId={setServiceId}
+                    services={services}
+                    setOpenAreaDialog={setOpenAreaDialog}
+                  />
+                  <CustomNavbarTypography>
+                    {t("How It Work")}
+                  </CustomNavbarTypography>
+                  <CustomNavbarTypography>
+                    {t("Pricing")}
+                  </CustomNavbarTypography>
+                  <CustomNavbarTypography>
+                    {t("Contact us")}
+                  </CustomNavbarTypography>
+                  <CustomNavbarTypography
+                    onClick={() => {
+                      if (locale === "en") {
+                        changeLocale("ar");
+                        // window.location.reload()
+                      } else {
+                        changeLocale("en");
+                        //   window.location.reload()
+                      }
+                    }}
+                    sx={{ textDecoration: "underline" }}
+                  >
+                    {locale === "en" ? "AR" : "EN"}
+                  </CustomNavbarTypography>
+                  {/*  login button */}
+                  {handelAuth()}
+                </GlobalDisplayFlexBox>
+              </GlobalDisplayFlexBox>
+            </PublicContainer>
+          ) : (
+            <DrawerMenu
+              services={services}
+              areas={areas}
+              onClose={handleClosePopover}
+              open={openPopover}
+            >
+              <Box
+                component={ButtonBase}
+                onClick={handleOpenPopover}
+                ref={anchorRef}
+                sx={{ transform: "translateY(5px)" }}
+              >
+                <Stack
+                  sx={{
+                    gap: "0px",
+                    justifyContent: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                    cursor: "pointer",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    style={{ width: "30px", height: "30px" }}
+                    src={accountphoto?.src}
+                    loading="lazy"
+                    alt="accountphoto"
+                  />
+
+                  <Typography
                     sx={{
-                      gap: "10px",
-                      justifyContent: "center",
-                      display: "flex",
-                      flexDirection: "row",
-                      cursor: "pointer",
+                      fontSize: "16px",
+                      fontWeight: "400",
+                      color: "#636363",
                     }}
                   >
-                    <GlobalDisplayFlexBox
-                      sx={{ justifyContent: "center", gap: "3px" }}
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: { xl: "20px", md: "12px" },
-                          fontWeight: "400",
-                          color: "#636363",
-                        }}
-                      >
-                        Hello, Mohamed
-                      </Typography>
-                      <KeyboardArrowDownIcon />
-                    </GlobalDisplayFlexBox>
-                    <img
-                      style={{ width: "38.5px", height: "38.5px" }}
-                      src={accountphoto?.src}
-                      loading="lazy"
-                      alt="accountphoto"
-                    />
-                  </Stack>
-                </Box> */}
-              </GlobalDisplayFlexBox>
-            </GlobalDisplayFlexBox>
-          </PublicContainer>
-        ) : (
-          <DrawerMenu
-            services={services}
-            areas={areas}
+                    Hello, Mohamed
+                  </Typography>
+                </Stack>
+              </Box>
+            </DrawerMenu>
+          )}
+          <AccountPopover
+            anchorEl={anchorRef.current}
             onClose={handleClosePopover}
             open={openPopover}
-          >
-            <Box
-              component={ButtonBase}
-              onClick={handleOpenPopover}
-              ref={anchorRef}
-              sx={{ transform: "translateY(5px)" }}
-            >
-              <Stack
-                sx={{
-                  gap: "0px",
-                  justifyContent: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  cursor: "pointer",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  style={{ width: "30px", height: "30px" }}
-                  src={accountphoto?.src}
-                  loading="lazy"
-                  alt="accountphoto"
-                />
-
-                <Typography
-                  sx={{
-                    fontSize: "16px",
-                    fontWeight: "400",
-                    color: "#636363",
-                  }}
-                >
-                  Hello, Mohamed
-                </Typography>
-              </Stack>
-            </Box>
-          </DrawerMenu>
-        )}
+          />
+        </Box>
       </Box>
       <AreaDialog
         openAreaDialog={openAreaDialog}
@@ -244,11 +267,6 @@ const Navbar = () => {
         modalFor={modalFor}
         setModalFor={setModalFor}
         handleClose={handleCloseAuthModal}
-      />
-      <AccountPopover
-        anchorEl={anchorRef.current}
-        onClose={handleClosePopover}
-        open={openPopover}
       />
     </>
   );

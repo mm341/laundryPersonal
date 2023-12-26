@@ -46,7 +46,7 @@ const NavServices = ({
             color: "black",
             fontWeight: "400",
 
-            fontSize: { xl: "20px", md: "12px" },
+            fontSize: { xl: "18px", md: "12px" },
           }}
         >
           {t("Services")}
@@ -81,7 +81,7 @@ const NavServices = ({
                     setServiceId(e?.id);
                   }}
                   sx={{
-                    fontSize: "20px",
+                    fontSize: "16px",
                     fontWeight: "400",
                     cursor: "pointer",
                   }}

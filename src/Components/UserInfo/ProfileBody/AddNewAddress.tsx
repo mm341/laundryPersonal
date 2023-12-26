@@ -14,35 +14,30 @@ const style = {
   transform: "translate(-50%, -50%)",
   maxWidth: 800,
   width: "80%",
-  bgcolor: "background.paper",
-  border: "1px solid white",
+  bgcolor: "white",
+  
   boxShadow: 24,
-  height: "40vh",
+  height: "70vh",
   overflowY: "auto",
   p: 3,
 };
-const AddNewAddress = ({ color }: { color: string }) => {
-  const theme = useTheme();
+const AddNewAddress = ({
+  color,
+  open,
+  setOpen,
+  
+}: {
+  color: string;
+  open: boolean;
+  setOpen: (e: boolean) => void;
+  
+}) => {
   const { t } = useTranslation();
-  const [open, setOpen] = useState(false);
 
   const clickAddNew = () => {
     setOpen(true);
   };
-  // const handleChange = (e) => {
-  //     setValue(e.target.value)
-  // }
 
-  // const { isloadingaddAdddresse } = useSelector((state) => state.handel)
-  const dispatch = useDispatch();
-  const formSubmitHandler = () => {
-    // dispatch(AddAddresse(values)).then((res) => {
-    //     if (res?.payload) {
-    //         refetch()
-    //         setOpen(false)
-    //     }
-    // })
-  };
   const languagedirection = localStorage.getItem("direction");
 
   return (
@@ -81,11 +76,7 @@ const AddNewAddress = ({ color }: { color: string }) => {
             </button>
 
             <RTL direction={languagedirection}>
-              <AddressForm
-                // formSubmit={formSubmitHandler}
-                // isLoading={isloadingaddAdddresse}
-                setOpen={setOpen}
-              />
+              <AddressForm setOpen={setOpen} />
             </RTL>
           </Stack>
         </Modal>

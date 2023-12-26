@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Box, Stack, Typography } from "@mui/material";
 
@@ -16,115 +16,99 @@ import AddresseShimmer from "@/Components/Chimmers/AddresseShimmer";
 import CustomEmptyResult from "@/Components/GlobalComponent/empty-view/CustomEmptyResult";
 import AddresseMenu from "./AddresseMenu";
 import AddNewAddress from "./AddNewAddress";
+import { useAppDispatch } from "@/redux/store";
+import { GetAllAdddressses } from "@/redux/slices/AddressesRequests";
+import DeleteDialog from "@/Components/DeleteDialogs";
 
 const MyAddresses = () => {
-  // const { data, refetch, isFetching, isLoading } = useQuery(
-  //     ['address-list'],
-  //     AddressApi.addressList,
-  //     {
-  //         onError: onSingleErrorResponse,
-  //     }
-  // )
-
+  //  hooks
   const theme = useTheme();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
-  const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
 
-  const [idRequest, setIdRequest] = useState("");
+  useEffect(() => {
+    dispatch(GetAllAdddressses());
+  }, []);
 
   return (
-    <CustomPaperBigCard>
-      <CustomStackFullWidth spacing={2}>
-        <CustomStackFullWidth
-          justifyContent="space-between"
-          direction="row"
-          alignItems="center"
-        >
-          <CustomTypography fontWeight="500">
-            {t("Saved Address")}
-          </CustomTypography>
-        </CustomStackFullWidth>
-        {/* {!isLoading ? ( */}
-        {/* <ScrollerProvider maxHeight="40vh"> */}
+    <>
+      <CustomPaperBigCard
+        sx={{
+          boxShadow: "box-shadow: 0px 0px 6px 0px #00000026",
+
+          backgroundColor: theme.palette.primary.dark,
+        }}
+      >
+        <CustomStackFullWidth spacing={5}>
           <AddresseMenu
-          // restaurantZone={restaurantZone}
-          // setAddresseId={setAddresseId}
-          // checkout={checkout}
-          // data={data}
-          // defaultAddresse={defaultAddresse}
-          // refetch={refetch}
-          // setIdRequest={setIdRequest}
-          // action={action}
-          // handelClose={handelClose}
+            setOpenDeleteDialog={setOpenDeleteDialog}
+            setOpen={setOpen}
           />
-        {/* </ScrollerProvider> */}
-        {/* ) : (
-          <AddresseShimmer />
-        )} */}
 
-        {/* {!isFetching && data?.data?.addresses?.length === 0 && (
-          <Stack width="100%" alignItems="center" justifyContent="center">
-            <CustomEmptyResult label="No Saved Address Found" image={noData} />
-          </Stack>
-        )} */}
-
-        <Stack direction={"row"} gap={"20px"} alignItems={"center"}>
-          {/* <Box
+          <Stack
             sx={{
-              width: "170px",
-              height: "40px",
-              display:
-                data?.data?.addresses?.length > 0 && !checkout
-                  ? "flex"
-                  : "none",
-              justifyContent: "center",
-              alignItems: "center",
-              color: theme.palette.primary.main,
-              borderRadius: "8px",
-              border: `1px solid ${theme.palette.primary.main}`,
-              fontSize: "16px",
-              fontWeight: "600",
+              flexDirection: { md: "row", xs: "column" },
+              paddingLeft: "10px",
             }}
+            gap={"30px"}
+            alignItems={"center"}
           >
-            <Typography
+            <Box
               sx={{
+                width: "170px",
+                height: "40px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: theme.palette.primary.main,
+                borderRadius: "8px",
+                border: `1px solid ${theme.palette.primary.main}`,
                 fontSize: "16px",
                 fontWeight: "600",
-                cursor: "pointer",
               }}
-              onClick={() => setOpen(true)}
             >
-              {t("Save As Default")}
-            </Typography>
-          </Box> */}
-          <Box
-            sx={{
-              width: "170px",
-              height: "40px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: theme.palette.primary.main,
-              borderRadius: "8px",
-              color: "white",
-            }}
-          >
-            <AddNewAddress color={"white"}  />
-          </Box>
-        </Stack>
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  cursor: "pointer",
+                }}
+              >
+                {t("Save As Default")}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                width: "190px",
+                height: "40px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: theme.palette.primary.main,
+                borderRadius: "8px",
+                color: "white",
+              }}
+            >
+              <AddNewAddress open={open} setOpen={setOpen} color={"white"} />
+            </Box>
+          </Stack>
+        </CustomStackFullWidth>
+      </CustomPaperBigCard>
 
-        {/* {open && (
-          <DefaultMainAddress
-            open={open}
-            handleClose={handleClose}
-            addressId={idRequest}
-            refetch={refetch}
-          />
-        )} */}
-      </CustomStackFullWidth>
-    </CustomPaperBigCard>
+      {openDeleteDialog && (
+        <DeleteDialog
+          Cancel={"Cancel"}
+          header={"Remove Address?"}
+          openDeleteDialog={openDeleteDialog}
+          setOpenDeleteDialog={setOpenDeleteDialog}
+          text={"Are you sure you want to delete the address?"}
+          primaryButtonText={"Yes, Delete"}
+        />
+      )}
+    </>
   );
 };
 

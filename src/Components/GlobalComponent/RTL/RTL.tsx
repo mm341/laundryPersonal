@@ -23,7 +23,7 @@ export const RTL = (props: rtl) => {
   }, [direction]);
 
   if (direction === "rtl") {
-    return <CacheProvider value={styleCache()}>{children}</CacheProvider>;
+    return <CacheProvider  value={styleCache()}>{children}</CacheProvider>;
   }
 
   return <>{children}</>;

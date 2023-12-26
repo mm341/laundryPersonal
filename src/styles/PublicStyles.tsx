@@ -8,6 +8,8 @@ import {
   Typography,
   styled,
   Link as MenuLink,
+  Button,
+  Rating,
 } from "@mui/material";
 
 export const HomeParentBox = styled(Box)(() => ({
@@ -30,7 +32,7 @@ export const GlobalDisplayFlexBox = styled(Box)(({ theme }) => ({
 }));
 
 export const GlobalDisplayFlexColumnBox = styled(Box)(
-  ({ gap, width }: { gap?: string; width: string }) => ({
+  ({ gap, width }: { gap?: string; width?: string }) => ({
     display: "flex",
     flexDirection: "column",
     gap: gap,
@@ -248,5 +250,19 @@ export const CustomDrawer = styled(Drawer)(({ theme }) => ({
     top: "0px",
     borderBottomRightRadius: "10px",
     borderBottomLeftRadius: "10px",
+  },
+}));
+
+export const CustomRating = styled(Rating)(({ theme, color }) => ({
+  color: "#FFC107",
+  // borderColor: (theme) => theme.palette.primary.main,
+
+  "& .MuiSvgIcon-root": {
+    fill: "#FFC107",
+  },
+  fontSize: "25px",
+  [theme.breakpoints.down("md")]: {
+    // styles
+    fontSize: "16px",
   },
 }));

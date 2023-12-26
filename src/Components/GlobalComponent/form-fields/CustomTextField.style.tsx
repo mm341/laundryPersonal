@@ -4,12 +4,14 @@ export const CustomTextFieldStyle = styled(TextField)(
   ({
     theme,
     languagedirection,
+    rate
   }: {
     languagedirection: string | undefined;
     theme: any;
+    rate?:boolean
   }) => ({
     borderRadius: "10px",
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor:!rate? "white":"transparent",
     "& .MuiOutlinedInput-root": {
       flexDirection:
         languagedirection && languagedirection === "rtl"
@@ -17,4 +19,6 @@ export const CustomTextFieldStyle = styled(TextField)(
           : "row",
     },
   })
-);
+)
+
+

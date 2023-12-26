@@ -49,6 +49,8 @@ export default function App({
   }
 
   //  handel language
+
+ 
   useEffect(() => {
     if (locale === "en") {
       i18n.changeLanguage("en");
@@ -109,6 +111,7 @@ export default function App({
                     xs: router.pathname !== "/" ? "7rem" : "5rem",
                   },
                   mb: "5rem",
+                 
                 }}
               >
                 {getLayout(<Component {...pageProps} />)}

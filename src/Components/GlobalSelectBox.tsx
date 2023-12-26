@@ -21,7 +21,7 @@ interface props {
 const GlobalSelectBox = ({ area, handleChange, label, homeAreas }: props) => {
   //  hooks
   const { t } = useTranslation();
-  
+
   return (
     <Box sx={{ backgroundColor: "white", borderRadius: "10px" }}>
       <FormControl fullWidth>
@@ -31,6 +31,7 @@ const GlobalSelectBox = ({ area, handleChange, label, homeAreas }: props) => {
             "&.mui-style-hfutr2-MuiSvgIcon-root-MuiSelect-icon": {
               right: "50px !important",
             },
+            color: "red",
           }}
           fullWidth
           required

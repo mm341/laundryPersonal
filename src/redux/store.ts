@@ -14,18 +14,20 @@ import {
 } from "redux-persist";
 import ServicesSlice from "./slices/Services";
 import MasterSlice from "./slices/MasterSlice";
+import { UpdatingProfile } from "./slices/HandelUpdateProfile";
+import { AddressesSlice } from "./slices/AddressesRequests";
 
 const persistConfig = {
   key: "Laundry",
   storage: storage,
-  blacklist: [
-    // 'searchFilterStore',
-  ],
+  blacklist: ["profile"],
   wishListSlice: ["services", "master"],
 };
 const reducers = combineReducers({
   services: ServicesSlice,
   master: MasterSlice,
+  profile: UpdatingProfile,
+  addresse: AddressesSlice,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 export const store = configureStore({

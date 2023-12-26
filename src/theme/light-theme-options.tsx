@@ -99,7 +99,7 @@ const primary: Primary = {
   // light: 'rgba(255, 121, 24, 0.8)',
   light: "#EBEFFD",
 
-  dark: "#a3460a",
+  dark: "#F6FCFF",
 
   text: "#FFC72D",
 };
@@ -108,7 +108,7 @@ const secondary: Primary = {
   main: "#934916",
   light: "#fafaf9",
   dark: "#a2684c",
-  contrastText: "#FFFFFF",
+  contrastText: "#9EA5AB",
 };
 
 interface Info {

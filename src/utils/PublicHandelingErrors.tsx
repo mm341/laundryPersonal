@@ -2,9 +2,7 @@ import { t } from "i18next";
 import { toast } from "react-hot-toast";
 import Router from "next/router";
 
-
-
-export default class PublicHandelingErrors{
+export default class PublicHandelingErrors {
   public static onErrorResponse = (
     error: unknown | any,
     variables: { phone?: string | undefined }
@@ -13,12 +11,14 @@ export default class PublicHandelingErrors{
       error?.response?.data?.errors?.forEach((item: any) => {
         toast.error(item?.message);
       });
+      this.handleTokenExpire(error?.response?.status);
     } else if (error?.response?.data?.message) {
       toast.error(error?.response?.data?.message);
+      this.handleTokenExpire(error?.response?.status);
     } else if (error?.response?.data?.error) {
       toast.error(error?.response?.data?.error);
+      this.handleTokenExpire(error?.response?.status);
     }
-   this.handleTokenExpire(error?.response?.status);
   };
 
   public static handleTokenExpire = (status: number) => {
@@ -30,6 +30,6 @@ export default class PublicHandelingErrors{
       }
     }
   };
-}
 
- 
+  
+}

@@ -1,6 +1,6 @@
 export interface AccountUpdate  { 
     name?:string
     phone?:string
-    f_name?:string
-    l_name?:string
+    alternative_phone?:string
+    profile_photo?:string
  }

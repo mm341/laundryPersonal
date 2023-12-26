@@ -20,7 +20,7 @@ import Link from "next/link";
 
 import { useTranslation } from "react-i18next";
 import { toast } from "react-hot-toast";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import profile from "../../../public/navbar/profileImg.svg";
 import order from "../../../public/navbar/orderImg.svg";
@@ -30,6 +30,7 @@ interface Props {
   anchorEl: Element | PopoverVirtualElement | null;
   onClose: () => void;
   open: boolean;
+  customClose?: any;
 }
 export const AccountPopover = (props: Props) => {
   const { locale } = useRouter();
@@ -85,100 +86,104 @@ export const AccountPopover = (props: Props) => {
     }
   }, [locale]);
 
+  //  handle close popover
+
+  let menuRef: any = useRef();
+  useEffect(() => {
+    const handler = (e: any) => {
+      if (!menuRef.current.contains(e.target)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, []);
+
   return (
-    <>
-      <Popover
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
+    <Box
+      ref={menuRef}
+      sx={{
+        display: open ? "flex" : "none",
+        position: "absolute",
+        top: { md: "40px", xs: "65px" },
+        right: locale === "en" ? "12%" : "14%",
+        backgroundColor: "#F3F6FF",
+        zIndex: "99999",
+        borderRadius: "5px",
+        flexDirection: "column",
+      }}
+    >
+      <Box
+        sx={{
+          // alignItems:languagedirection === 'rtl' ? 'end' : 'start',
+          width: "100%",
+          p: 1,
+          cursor: "pointer",
+          display: "flex",
+         
         }}
-        keepMounted
-        onClose={onClose}
-        open={open}
-        PaperProps={{ sx: { width: 300 } }}
-        transitionDuration={5}
       >
-        <Box
+        <MenuList sx={{ width: "100%" }}>
+          {menuData?.map((menu, index) => (
+            <MenuItem
+              onClick={() => handleClick(menu)}
+              key={index}
+              sx={{
+                justifyContent: `${
+                  languagedirection === "rtl" && "flex-start"
+                }`,
+                gap: "10px",
+                width: "100%",
+                my: "2px",
+                "&:hover": {
+                  backgroundColor: (theme) =>
+                    alpha(theme.palette.primary.main, 0.3),
+                },
+              }}
+            >
+              <img src={menu?.img?.src} loading="lazy" alt="accountIMg" />
+              <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
+                {t(menu?.label)}
+              </Typography>
+            </MenuItem>
+          ))}
+        </MenuList>
+      </Box>
+      <Divider />
+      <Box
+        sx={{ my: 1, cursor: "pointer" }}
+        alignItems={languagedirection === "rtl" ? "end" : "start"}
+        width="100%"
+      >
+        <MenuItem
+          onClick={() => setOpenModal(true)}
           sx={{
-            // alignItems:languagedirection === 'rtl' ? 'end' : 'start',
-            width: "100%",
-            p: 1,
-            cursor: "pointer",
-            display: "flex",
+            justifyContent: `${
+              languagedirection === "rtl" ? "flex-end" : "flex-start"
+            }`,
+            "&:hover": {
+              backgroundColor: (theme) =>
+                alpha(theme.palette.primary.main, 0.3),
+            },
           }}
         >
-          <MenuList sx={{ width: "100%" }}>
-            {menuData?.map((menu, index) => (
-              <MenuItem
-                onClick={() => handleClick(menu)}
-                key={index}
-                sx={{
-                  justifyContent: `${
-                    languagedirection === "rtl" && "flex-start"
-                  }`,
-                  gap: "10px",
-                  width: "100%",
-                  my: "2px",
-                  "&:hover": {
-                    backgroundColor: (theme) =>
-                      alpha(theme.palette.primary.main, 0.3),
-                  },
-                }}
-              >
-                <img src={menu?.img?.src} loading="lazy" alt="accountIMg" />
-                <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
-                  {t(menu?.label)}
-                </Typography>
-              </MenuItem>
-            ))}
-          </MenuList>
-        </Box>
-        <Divider />
-        <Box
-          sx={{ my: 1, cursor: "pointer" }}
-          alignItems={languagedirection === "rtl" ? "end" : "start"}
-          width="100%"
-        >
-          <MenuItem
-            onClick={() => setOpenModal(true)}
-            sx={{
-              justifyContent: `${
-                languagedirection === "rtl" ? "flex-end" : "flex-start"
-              }`,
-              "&:hover": {
-                backgroundColor: (theme) =>
-                  alpha(theme.palette.primary.main, 0.3),
-              },
-            }}
-          >
-            <ListItemIcon>
-              <LogoutIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText
-              onClick={handleLogout}
-              primary={
-                <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
-                  {t("Logout")}
-                </Typography>
-              }
-            />
-          </MenuItem>
-        </Box>
-      </Popover>
-      {/* <CustomDialogConfirm
-        isLoading={isLogoutLoading}
-        dialogTexts={t("Are you sure you want to  logout?")}
-        open={openModal}
-        onClose={() => setOpenModal(false)}
-        onSuccess={handleLogout}
-      /> */}
-    </>
+          <ListItemIcon>
+            <LogoutIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText
+            onClick={handleLogout}
+            primary={
+              <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
+                {t("Logout")}
+              </Typography>
+            }
+          />
+        </MenuItem>
+      </Box>
+    </Box>
   );
-};
-
-AccountPopover.propTypes = {
-  anchorEl: PropTypes.any,
-  onClose: PropTypes.func,
-  open: PropTypes.bool,
 };

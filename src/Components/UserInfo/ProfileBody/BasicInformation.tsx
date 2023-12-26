@@ -5,29 +5,24 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { AccountUpdate } from "@/interfaces/FormUpdateAccountInterface";
 import BasicInformationForm from "./BasicInformationForm";
+import { useAppDispatch } from "@/redux/store";
+import { Updating } from "@/redux/slices/HandelUpdateProfile";
+import MainApi from "@/api/MainApi";
 const BasicInformation = () => {
   const [phoneVerify, setPhoneVerify] = useState(false);
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const formSubmitHandler = (values: AccountUpdate) => {
-    const { name, phone } = values;
-    let formData = new FormData();
-    if (name) {
-      formData.append("name", name);
-    }
+    const { name, phone, alternative_phone, profile_photo } = values;
 
-    if (phone) {
-      formData.append("phone", phone);
+    if (name || phone || alternative_phone || profile_photo) {
+      dispatch(Updating(values));
     }
   };
 
   return (
-    <Grid
-      sx={{
-        borderRadius: "10px",
-        background: (theme) => theme.palette.background.paper,
-      }}
-    >
-      <BasicInformationForm />
+    <Grid>
+      <BasicInformationForm formSubmitHandler={formSubmitHandler} />
     </Grid>
   );
 };

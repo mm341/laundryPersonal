@@ -20,7 +20,8 @@ interface textField {
   rows?: number;
   disabled?: boolean;
   languagedirection?: string;
-  comment?: string;
+  comment?: boolean;
+  rate?:boolean
 }
 const CustomTextFieldWithFormik = (props: textField) => {
   const {
@@ -37,6 +38,7 @@ const CustomTextFieldWithFormik = (props: textField) => {
     disabled,
     languagedirection,
     comment,
+    rate
   } = props;
   const theme = useTheme();
   const [inputValue, setInputValue] = useState<string>(value ?? "");
@@ -48,12 +50,13 @@ const CustomTextFieldWithFormik = (props: textField) => {
   const onBlurHandler = () => {
     // onChangeHandler(inputValue);
   };
-
+// theme.palette.secondary.contrastText
   const renderHandler = () => {
     if (type === "password") {
       return (
         <CustomTextFieldContainer>
           <CustomTextFieldStyle
+        
             theme={theme}
             // autoComplete="off"
             autoComplete="new-password"
@@ -91,6 +94,7 @@ const CustomTextFieldWithFormik = (props: textField) => {
       return (
         <CustomTextFieldContainer>
           <CustomTextFieldStyle
+            rate={rate}
             languagedirection={undefined}
             theme={theme}
             // autoComplete="off"
@@ -98,6 +102,7 @@ const CustomTextFieldWithFormik = (props: textField) => {
             disabled={disabled}
             // fullWidth
             sx={{
+              color:"black" ,
               width: comment ? { sm: "40%", xs: "80%" } : "100%",
               mx: "auto",
             }}

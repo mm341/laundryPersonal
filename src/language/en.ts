@@ -1,4 +1,17 @@
 export const english = {
+  "Pick Up at": "Pick Up at",
+  "Delivery at": "Delivery at",
+  "Delivery Charge": "Delivery Charge",
+  "Sub total":"Sub total",
+  "Order Details": "Order Details",
+  Completed: "Completed",
+  "Remove Address?": "Remove Address?",
+  "Are you sure you want to delete the address?":
+    "Are you sure you want to delete the address?",
+  Street: "Street",
+  "Save New Address": "Save New Address",
+  "Choose Area": "Choose Area",
+  "Alternative Phone": "Alternative Phone",
   "Full name is required": "Full name is required",
   "About Us": "About Us",
   "Please Select Area": "Choose Your Area",
@@ -98,7 +111,7 @@ export const english = {
   "Delivering More Than Food": "Delivering More Than Food",
   "This website collects cookies to deliver better user experience":
     "This website collects cookies to deliver better user experience",
-
+  "Profile Info": "Profile Info",
   Faqs: "Faqs",
   "Frequently Asked Questions": "Frequently Asked Questions",
   h1: "Why do you only offer pickup and delivery?",
@@ -168,7 +181,7 @@ export const english = {
     "i. Prices listed on the platform may include taxes and delivery fees.",
   "Prices are subject to change without notice.":
     " ii. Prices are subject to change without notice.",
-
+  Cancel: "Cancel",
   "Refunds and Cancellations:": "c. Refunds and Cancellations:",
   "Refer to our Refund and Cancellation Policy for details.":
     "i. Refer to our Refund and Cancellation Policy for details.",
@@ -267,7 +280,7 @@ export const english = {
   "Convert Points to wallet": "Convert Points to wallet",
   "Start Now": "Start Now",
   "Food Arrived In": "Food Arrived In",
-  "Order Details": "Order Details",
+
   "Enter referral code": "Enter referral code",
 
   "Delivery in your pocket": "Delivery in your pocket",
@@ -349,6 +362,7 @@ export const english = {
   "3 -Send your wallet money while order":
     "3 -Send your wallet money while order",
   "Phone Number": "Phone Number",
+  "Update Profile": "Update Profile",
   "Add New Payment Method": "Add New Payment Method",
   Date: "Date",
   Time: "Time",
@@ -460,6 +474,7 @@ export const english = {
   Add: "Add",
   wallet: "wallet",
   processing: "processing",
+  "Yes, Delete": "Yes, Delete",
   refund_request_canceled: "refund_request_canceled",
   "Refund cancellation note:": "Refund cancellation note:",
   "Refund request note:": "Refund request note:",
@@ -475,7 +490,7 @@ export const english = {
   "Collect Cash": "Collect Cash",
   "Open Confirm Dialog": "Open Confirm Dialog",
   "Confirm this request ? ": "Confirm this request ? ",
-  Cancel: "Cancel",
+
   Yes: "Yes",
   Download: "Download",
   Filter: "Filter",
@@ -564,7 +579,7 @@ export const english = {
     "Are Your Sure You Want to Delete This Zone ?",
   "This operation cannot be undone": "This operation cannot be undone",
   "No, Keep this ": "No, Keep this ",
-  "Yes, Delete": "Yes, Delete",
+
   "Provider Details With Cards and Tabs":
     "Provider Details With Cards and Tabs",
   Search: "Search",
@@ -677,6 +692,13 @@ export const english = {
   "Have a Coupon?": "Have a Coupon?",
   "Apply Now": "Apply Now",
   "View Saved Address": "View Saved Address",
+  "How Was Your Experience?":"How Was Your Experience?",
+  "Your feedback is valuable to us":"Your feedback is valuable to us",
+  "Write your comments here":"Write your comments here",
+  "Log out?":"Log out?",
+  "Are you sure you want to logout from this account?":"Are you sure you want to logout from this account?",
+  "Yes, Logout":"Yes, Logout",
+  "Rate your Experience":"Rate your Experience",
   "Delivery Address": "Delivery Address",
   " Add new address": " Add new address",
   " Add New +": " Add New +",
@@ -919,7 +941,7 @@ export const english = {
   "You have earned": "You have earned",
   "Minimum purchase value": "Minimum purchase value",
   "Max Discount": "Max Discount",
-
+  "Order Date": "Order Date",
   "Cart is Empty": "Cart is Empty",
   "in your cart": "in your cart",
   min: "min",

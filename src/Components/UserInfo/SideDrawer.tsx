@@ -4,23 +4,23 @@ import { useTheme } from "@mui/material/styles";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import CustomSideDrawer from "./CustomSideDrawer";
 import ProfileSideMenu from "./ProfileSideMenu";
+import { useRouter } from "next/router";
 
 const SideDrawer = ({ page }: { page: string }) => {
+  const { locale } = useRouter();
   const theme = useTheme();
   const [languagedirection, setlanguagedirection] = useState<string | null>(
     "ltr"
   );
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    if (localStorage.getItem("direction")) {
-      setlanguagedirection(localStorage.getItem("direction"));
-    }
-  }, []);
+    locale === "en" ? setlanguagedirection("ltr") : setlanguagedirection("rtl");
+  }, [locale]);
   return (
     <>
       {languagedirection && (
         <>
-          <Grid item xs={2} sm={2} md={2}>
+          <Grid item xs={2} sm={2} md={2} >
             <IconButton
               onClick={() => setOpen(true)}
               sx={{
