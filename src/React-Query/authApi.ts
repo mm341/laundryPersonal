@@ -4,7 +4,7 @@ export const AuthApi = {
   signUp: (formData: AccountRegister) => {
     return MainApi.post("register", formData);
   },
-  signIn: (formData: { phone?: string }) => {
+  signIn: (formData: { contact?: string,password?:string }) => {
     return MainApi.post("login", formData);
   },
 };

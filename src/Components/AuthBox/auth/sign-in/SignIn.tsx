@@ -60,7 +60,7 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
     }),
     onSubmit: async (values: { contact: string }) => {
       try {
-        const data: { contact?: string } = {};
+        const data: { contact?: string; password?: string } = {};
         // data.contact = `+${values.contact.toString()}`;
         data.contact = "01061320051";
 
@@ -82,12 +82,13 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
     error,
   } = useMutation("sign-in", AuthApi.signIn);
 
-  const formSubmitHandler = (values: { phone?: string }) => {
+  const formSubmitHandler = (values: {
+    contact?: string;
+    password?: string;
+  }) => {
     loginMutation(values, {
       onSuccess: async (response: any) => {
-       
         if (response.data.data.access.token) {
-         
           toast.success(response.data.message);
           localStorage.setItem("token", response.data.data.access.token);
           // window.location.reload();
