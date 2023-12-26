@@ -47,7 +47,7 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
   const signUpFormik = useFormik({
     initialValues: {
       name: "",
-      phone: "",
+      contact: "",
     },
     validationSchema: SignUpvalidation(),
     onSubmit: async (values, helpers) => {
@@ -68,7 +68,7 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
     const signUpData: AccountRegister = {
       name: values.name,
 
-      phone: `+${values?.phone.toString()}`,
+      contact: `+${values?.contact.toString()}`,
     };
 
     mutate(signUpData, {
@@ -162,11 +162,11 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
                 />
 
                 <CustomPhoneInput
-                  value={signUpFormik.values.phone}
+                  value={signUpFormik.values.contact}
                   onHandleChange={handleOnChange}
                   // initCountry={global?.country}
-                  touched={signUpFormik.touched.phone}
-                  errors={signUpFormik.errors.phone}
+                  touched={signUpFormik.touched.contact}
+                  errors={signUpFormik.errors.contact}
                   // rtlChange="true"
                   rtlChange
                   isLoading={isLoading}
