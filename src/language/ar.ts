@@ -1216,6 +1216,7 @@ export const arabic = {
   Included: "متضمن",
 
   Excluded: "مستبعد",
+  "Enter all required data":"ادخل كل المعلومات المطلوبه",
   "This order can not be reordered as the restaurant is not existing in your current zone.":
     "لا يمكن إعادة ترتيب هذا الطلب لأن المطعم غير موجود في منطقتك الحالية.",
   "ORDER TYPE &": "نوع الطلب &",

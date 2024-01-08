@@ -32,6 +32,7 @@ import SummaryCheckout from "@/Components/ChekoutPage/SummaryCheckout";
 import dayjs from "dayjs";
 import CommonUtil from "@/utils/common";
 import {
+  AddOrder,
   GetDeliveryDuration,
   GetPickUpDuration,
 } from "@/redux/slices/OrderSlice";
@@ -39,6 +40,7 @@ import timeIcon from "../../../public/CheckOut/timeIcon.svg";
 import dateIcon from "../../../public/CheckOut/dateIcon.svg";
 import CheckOutProductsSection from "@/Components/ChekoutPage/CheckOutProdcuctsSection";
 import Meta from "@/Components/GlobalComponent/Meta";
+import { toast } from "react-hot-toast";
 const CheckOutPage = () => {
   //  hooks
   const router = useRouter();
@@ -48,6 +50,7 @@ const CheckOutPage = () => {
   const dispatch: any = useAppDispatch();
   const [addresseValue, setAddressevalue] = useState<any>(0);
   const [pickupDate, setPickupData] = useState<string>("");
+  const { accountInfo } = useAppSelector((state) => state.profile);
   const [fullName, setFullName] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [addtionalInformation, setAdditionalInformation] = useState<string>("");
@@ -60,6 +63,13 @@ const CheckOutPage = () => {
   const { schedules, deliverySchedules } = useAppSelector(
     (state) => state.orders
   );
+
+  useEffect(() => {
+    if (accountInfo?.first_name && accountInfo?.mobile) {
+      setFullName(accountInfo?.first_name);
+      setPhoneNumber(accountInfo?.mobile);
+    }
+  }, [accountInfo?.first_name, accountInfo?.mobile]);
   useEffect(() => {
     if (myAddresses?.length > 0) {
       setAddressevalue(myAddresses[0]?.id);
@@ -87,9 +97,34 @@ const CheckOutPage = () => {
     }
   }, [deliveryDate, pickupDate, dispatch, pickupHour]);
 
+  //  function add order
+
+  const handelAddOrder = () => {
+    if (
+      deliveryDate &&
+      pickupDate &&
+      pickupHour &&
+      deliveryHour &&
+      addresseValue
+    ) {
+      dispatch(
+        AddOrder({
+          address_id: addresseValue,
+          delivery_date: deliveryDate,
+          delivery_hour: deliveryHour,
+          pick_date: pickupDate,
+          pick_hour: pickupHour,
+          products: [],
+        })
+      );
+    } else {
+      toast.error(t("Enter all required data"));
+    }
+  };
+
   return (
     <>
-     <Meta
+      <Meta
         title={"CheckOut"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
@@ -97,8 +132,8 @@ const CheckOutPage = () => {
         <CustomPaperBigCard
           sx={{ backgroundColor: theme.palette.primary.dark }}
         >
-          <CustomPaperBigCard sx={{ backgroundColor: "white"}}>
-            <Grid container spacing={3} sx={{alignItems:"flex-start"}}>
+          <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+            <Grid container spacing={3} sx={{ alignItems: "flex-start" }}>
               {/*  left section customer details */}
               <Grid item md={8} xs={12}>
                 <GlobalDisplayFlexColumnBox
@@ -138,6 +173,7 @@ const CheckOutPage = () => {
                     <Grid container spacing={3}>
                       <Grid item sm={6} xs={12}>
                         <TextField
+                          required
                           sx={{ width: "100%" }}
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
@@ -146,6 +182,7 @@ const CheckOutPage = () => {
                       </Grid>
                       <Grid item sm={6} xs={12}>
                         <TextField
+                          required
                           sx={{ width: "100%" }}
                           value={phoneNumber}
                           onChange={(e) => setPhoneNumber(e.target.value)}
@@ -196,7 +233,7 @@ const CheckOutPage = () => {
                               borderRadius: "6px",
                               border: "1px solid #999999",
                               backgroundColor: "#ECEFF1",
-                              color:"#999999"
+                              color: "#999999",
                             }}
                             alignItems={"center"}
                             px={"12px"}
@@ -237,7 +274,7 @@ const CheckOutPage = () => {
                               borderRadius: "6px",
                               border: "1px solid #999999",
                               backgroundColor: "#ECEFF1",
-                              color:"#999999"
+                              color: "#999999",
                             }}
                             gap={"10px"}
                             alignItems={"center"}
@@ -272,7 +309,7 @@ const CheckOutPage = () => {
                               borderRadius: "6px",
                               border: "1px solid #999999",
                               backgroundColor: "#ECEFF1",
-                              color:"#999999"
+                              color: "#999999",
                             }}
                             alignItems={"center"}
                             px={"12px"}
@@ -293,6 +330,7 @@ const CheckOutPage = () => {
 
                     {myAddresses?.length > 0 && (
                       <Select
+                        required
                         sx={{ width: "100%" }}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -374,7 +412,10 @@ const CheckOutPage = () => {
 
               {/*  right section products */}
               <Grid item md={4} xs={12}>
-                <CheckOutProductsSection checkOut />
+                <CheckOutProductsSection
+                  handelAddOrder={handelAddOrder}
+                  checkOut
+                />
               </Grid>
             </Grid>
           </CustomPaperBigCard>

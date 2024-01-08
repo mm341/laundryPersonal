@@ -5,14 +5,30 @@ import {
 } from "@/styles/PublicStyles";
 import React from "react";
 import ProductCardInCart from "../Cards/ProductCardInCart";
-import { Typography, styled, useTheme, useThemeProps } from "@mui/material";
+import {
+  CircularProgress,
+  Typography,
+  alpha,
+  styled,
+  useTheme,
+  useThemeProps,
+} from "@mui/material";
 import SimpleBar from "simplebar-react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useAppSelector } from "@/redux/store";
 
-const CheckOutProductsSection = ({ checkOut }: { checkOut: boolean }) => {
+const CheckOutProductsSection = ({
+  checkOut,
+  handelAddOrder,
+}: {
+  checkOut: boolean;
+  handelAddOrder: () => void;
+}) => {
   //  hooks
   const theme = useTheme();
   const { t } = useTranslation();
+  const { isloadingAddOrder } = useAppSelector((state) => state.orders);
   //  custom design of scrollbar
   const ScrollbarRoot = styled(SimpleBar)`
     .simplebar-scrollbar::before {
@@ -42,20 +58,38 @@ const CheckOutProductsSection = ({ checkOut }: { checkOut: boolean }) => {
           ))}
         </GlobalDisplayFlexColumnBox>
       </ScrollbarRoot>
-      <GlobalButton
-        sx={{
-          fontSize: "20px",
-          fontWeight: "500",
-          color: "white",
-          height:"48px",
-          backgroundColor: theme.palette.primary.main,
-          borderRadius:"5px"
-        }}
-        px={"0"}
-        py={"0"}
-      >
-        {t("Place Order")}
-      </GlobalButton>
+      {isloadingAddOrder ? (
+        <GlobalButton
+          sx={{
+            fontSize: "20px",
+            fontWeight: "500",
+            color: "white",
+            height: "48px",
+            backgroundColor: alpha(theme.palette.primary.main, 0.3),
+            borderRadius: "5px",
+          }}
+          px={"0"}
+          py={"0"}
+        >
+          <CircularProgress size={25} />
+        </GlobalButton>
+      ) : (
+        <GlobalButton
+          onClick={handelAddOrder}
+          sx={{
+            fontSize: "20px",
+            fontWeight: "500",
+            color: "white",
+            height: "48px",
+            backgroundColor: theme.palette.primary.main,
+            borderRadius: "5px",
+          }}
+          px={"0"}
+          py={"0"}
+        >
+          {t("Place Order")}
+        </GlobalButton>
+      )}
     </CustomPaperBigCard>
   );
 };

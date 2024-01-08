@@ -47,11 +47,36 @@ export const GetDeliveryDuration = createAsyncThunk(
     )
 );
 
+interface OrderPayload {
+  additional_service_id?: [];
+  address_id: number;
+  coupon_id?: string;
+  delivery_date: string;
+  delivery_hour: string;
+  instruction?: string;
+  pick_date: string;
+  pick_hour: string;
+
+  products: [];
+}
+export const AddOrder = createAsyncThunk(
+  "updateProfile/AddOrder",
+  (payload: OrderPayload) =>
+    PublicRequest.postData(payload, `orders`)
+      .then((res: any) => {
+        if (res) {
+          toast.success(res?.message);
+        }
+      })
+      .catch((err) => PublicHandelingErrors.onErrorResponse(err))
+);
+
 const initialState: OrdersModel = {
   isloading: false,
   orders: [],
   schedules: [],
   deliverySchedules: [],
+  isloadingAddOrder: false,
 };
 
 export const handelOrders = createSlice({
@@ -60,6 +85,7 @@ export const handelOrders = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
+    // GetOrders
     builder.addCase(GetOrders.pending, (state: OrdersModel) => {
       state.isloading = true;
       state.orders = [];
@@ -78,6 +104,8 @@ export const handelOrders = createSlice({
       state.orders = [];
     });
 
+    // GetPickUpDuration
+
     builder.addCase(GetPickUpDuration.pending, (state: OrdersModel) => {
       state.schedules = [];
     });
@@ -93,6 +121,7 @@ export const handelOrders = createSlice({
       state.schedules = [];
     });
 
+    // GetDeliveryDuration
     builder.addCase(GetDeliveryDuration.pending, (state: OrdersModel) => {
       state.deliverySchedules = [];
     });
@@ -106,6 +135,21 @@ export const handelOrders = createSlice({
     );
     builder.addCase(GetDeliveryDuration.rejected, (state: OrdersModel) => {
       state.deliverySchedules = [];
+    });
+
+    //  add order
+
+    builder.addCase(AddOrder.pending, (state: OrdersModel) => {
+      state.isloadingAddOrder = true;
+    });
+    builder.addCase(
+      AddOrder.fulfilled,
+      (state: OrdersModel, { payload }: any) => {
+        state.isloadingAddOrder = false;
+      }
+    );
+    builder.addCase(AddOrder.rejected, (state: OrdersModel) => {
+      state.isloadingAddOrder = true;
     });
   },
 });

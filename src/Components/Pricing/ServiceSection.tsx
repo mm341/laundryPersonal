@@ -36,7 +36,7 @@ const ServiceSection = ({
       <GlobalDisplayFlexColumnBox gap={"0px"}>
       <ScrollbarRoot
           style={{
-            maxHeight: "300px",
+            maxHeight: "650px",
           }}
         >
         {services?.map((e, i) => (
