@@ -1,6 +1,7 @@
 import { useAppSelector } from "@/redux/store";
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
 import { Box, Divider, Typography, styled, useTheme } from "@mui/material";
+import Image from "next/image";
 import React from "react";
 import SimpleBar from "simplebar-react";
 
@@ -52,10 +53,12 @@ const ServiceSection = ({
               }}
               onClick={() => setServiceId(e?.id)}
             >
-              <img
+              <Image
                 src={e?.image_path}
                 loading="lazy"
                 alt="img"
+                width={"100"}
+                height={"100"}
                 style={{ width: "28px", height: "28px" }}
               />
               <Typography
