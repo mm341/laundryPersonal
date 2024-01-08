@@ -27,6 +27,7 @@ import Footer from "@/Components/FooterMiddleLandingPage";
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import ScrollToTop from "@/Components/GlobalComponent/scroll-top/ScrollToTop";
 import dynamic from "next/dynamic";
+import logoHeader from "../../public/App/full body.webp";
 export default function App({
   Component,
   pageProps,
@@ -90,6 +91,16 @@ export default function App({
     });
   }, []);
 
+  const [previewLoader, setPreviewLoader] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (previewLoader) {
+      setTimeout(() => {
+        setPreviewLoader(false);
+      }, 100);
+    }
+  }, [previewLoader]);
+
   //  navbar
   const Navbar = dynamic(() => import("@/Components/Navbar"), { ssr: false });
   return (
@@ -104,19 +115,42 @@ export default function App({
                 <title>{t("Loading...")}</title>
               </Head>
               <Navbar />
-              <ScrollToTop />
               <Box
                 sx={{
-                  minHeight: "80vh",
-                  mt: {
-                    md: router.pathname !== "/" ? "7rem" : "3.9rem",
-                    xs: router.pathname !== "/" ? "7rem" : "5rem",
-                  },
-                  mb: "5rem",
-                
+                  display: !previewLoader ? "none" : "flex",
+                  width: "100vw",
+                  height: "100vh",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                {getLayout(<Component {...pageProps} />)}
+                <Box sx={{ width: { md: "30vw", xs: "80vw" } }}>
+                  <img
+                    src={logoHeader?.src}
+                    style={{ width: "100%" }}
+                    loading="lazy"
+                    alt="logoHeader"
+                  />
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: previewLoader ? "none" : "block",
+                }}
+              >
+                <ScrollToTop />
+                <Box
+                  sx={{
+                    minHeight: "80vh",
+                    mt: {
+                      md: router.pathname !== "/" ? "7rem" : "3.9rem",
+                      xs: router.pathname !== "/" ? "7rem" : "5rem",
+                    },
+                    mb: "5rem",
+                  }}
+                >
+                  {getLayout(<Component {...pageProps} />)}
+                </Box>
               </Box>
               <Footer />
             </RTL>
