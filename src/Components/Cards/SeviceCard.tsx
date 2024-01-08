@@ -19,13 +19,18 @@ const SeviceCard = ({
   element: HomeServices;
   setServiceId: (action: number | undefined) => void;
 }) => {
+  const [bright, setBright] = useState<boolean>(false);
   const { t } = useTranslation();
   const router = useRouter();
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <div className="group relative">
+    <Box
+      style={{ position: "relative" }}
+      onMouseOver={() => setBright(true)}
+      onMouseLeave={() => setBright(false)}
+    >
       <img
         src={element?.image_path}
         alt="img"
@@ -36,7 +41,7 @@ const SeviceCard = ({
           height: "250px",
           objectFit: "cover",
         }}
-        className=" brightness-75"
+        // className=" brightness-75"
       />
 
       <Box
@@ -72,41 +77,28 @@ const SeviceCard = ({
             {element?.description}
           </Typography>
 
-          <button
-            className="    hidden    group-hover:flex  duration-1000   bg-[#329CD7] border border-[#329CD7] rounded-[4px] text-[16px] px-[25px] py-[10px] text-white"
-            onClick={() => {
-              if (area) {
-                localStorage.setItem("service", element?.name);
-                router.push(`/products?service_id=${element?.id}`);
-              } else {
-                localStorage.setItem("service", element?.name);
-                setServiceId(element?.id);
-                setOpenOrderDialog(true);
-              }
-            }}
-          >
-            {t("Get the Service")}
-          </button>
-          {/* <GlobalButton
-            service
-            className="    hidden    group-hover:flex  duration-1000"
-            sx={{
-              color: "white",
-              backgroundColor: theme.palette.primary.main,
-              border: `1px solid ${theme.palette.primary.main}`,
-              borderRadius: "4px",
-              fontSize: { md: "16px", xs: "12px" },
-            }}
-            px={!issmall ? "25px" : "10px"}
-            py={!issmall ? "10px" : "6px"}
-          
-            // eslint-disable-next-line react/jsx-no-duplicate-props
-          >
-            {t("Get the Service")}
-          </GlobalButton> */}
+          {bright && (
+            <GlobalButton
+              service
+              sx={{
+                display: "flex",
+                color: "white",
+                backgroundColor: theme.palette.primary.main,
+                border: `1px solid ${theme.palette.primary.main}`,
+                borderRadius: "4px",
+                fontSize: { md: "16px", xs: "12px" },
+              }}
+              px={!issmall ? "25px" : "10px"}
+              py={!issmall ? "10px" : "6px"}
+
+              // eslint-disable-next-line react/jsx-no-duplicate-props
+            >
+              {t("Get the Service")}
+            </GlobalButton>
+          )}
         </GlobalDisplayFlexColumnBox>
       </Box>
-    </div>
+    </Box>
   );
 };
 

@@ -30,11 +30,11 @@ const GlobalLaundryCard = ({ element }: { element: work }) => {
       alignItems={"Center"}
     >
       <img
-        data-aos="fade-down"
+        // data-aos="fade-down"
         style={{ width: "200px", height: "200px", borderRadius: "100%" }}
         loading="lazy"
         alt="img"
-        src={element?.img.src}
+        src={element?.img?.src}
       />
 
       <Typography
