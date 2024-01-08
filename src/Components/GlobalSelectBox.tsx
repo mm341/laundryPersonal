@@ -18,8 +18,8 @@ interface props {
   ) => void;
   label: string;
   homeAreas: HomeAreas[];
-  errors: string | undefined;
-  touched: boolean | undefined;
+  errors?: string | undefined;
+  touched?: boolean | undefined;
 }
 const GlobalSelectBox = ({
   area,

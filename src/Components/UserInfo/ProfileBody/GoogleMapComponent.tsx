@@ -111,7 +111,7 @@ const GoogleMapComponent = ({
       });
     }
   }, [currentLocation]);
-console.log(addresse)
+
   useEffect(() => {
     if (addresse?.latitude && addresse?.longitude) {
       setCenterPosition({
