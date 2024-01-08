@@ -41,7 +41,7 @@ const SeviceCard = ({
           height: "250px",
           objectFit: "cover",
         }}
-        // className=" brightness-75"
+        className=" brightness-75"
       />
 
       <Box
@@ -79,10 +79,20 @@ const SeviceCard = ({
 
           {bright && (
             <GlobalButton
+              onClick={() => {
+                if (area) {
+                  localStorage.setItem("service", element?.name);
+                  router.push(`/products?service_id=${element?.id}`);
+                } else {
+                  localStorage.setItem("service", element?.name);
+                  setServiceId(element?.id);
+                  setOpenOrderDialog(true);
+                }
+              }}
               service
               sx={{
-                display: "flex",
                 color: "white",
+                display: "flex",
                 backgroundColor: theme.palette.primary.main,
                 border: `1px solid ${theme.palette.primary.main}`,
                 borderRadius: "4px",
