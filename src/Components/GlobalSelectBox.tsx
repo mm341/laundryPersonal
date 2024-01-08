@@ -5,6 +5,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -17,8 +18,17 @@ interface props {
   ) => void;
   label: string;
   homeAreas: HomeAreas[];
+  errors: string | undefined;
+  touched: boolean | undefined;
 }
-const GlobalSelectBox = ({ area, handleChange, label, homeAreas }: props) => {
+const GlobalSelectBox = ({
+  area,
+  handleChange,
+  label,
+  homeAreas,
+  errors,
+  touched,
+}: props) => {
   //  hooks
   const { t } = useTranslation();
 
@@ -48,6 +58,11 @@ const GlobalSelectBox = ({ area, handleChange, label, homeAreas }: props) => {
           ))}
         </Select>
       </FormControl>
+      {errors && touched && (
+        <Typography sx={{ color: "red", fontSize: "12px" }}>
+          {errors}
+        </Typography>
+      )}
     </Box>
   );
 };

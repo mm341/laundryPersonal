@@ -1221,6 +1221,8 @@ export const arabic = {
   "ORDER TYPE &": "نوع الطلب &",
   "Delivery fee increased": "زيادة رسوم التوصيل",
   "Deliver to :":"التوصيل إلى :",
+  "Addresse Type is required":"ادخل نوع العنوان",
+  "area is required":"ادخل المنطقه",
   "due to bad weather.": "بسبب سوء الطقس.",
   "Start date and end date can not be same for subscription orders.":
     "تاريخ البدء وتاريخ الانتهاء لا يمكن أن يكونا متطابقين لأوامر الاشتراك.",

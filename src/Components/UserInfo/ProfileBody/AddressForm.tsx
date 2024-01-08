@@ -28,6 +28,7 @@ import markerIcon from "../../../../public/info/markerIcon.svg";
 import GoogleMapComponent from "./GoogleMapComponent";
 import { useGeolocated } from "react-geolocated";
 import { useQuery } from "react-query";
+import ValidationSchemaForAddAddress from "./ValidationSchemaForAddAddress";
 export interface locationInterface {
   lat: number;
   lng: number;
@@ -55,17 +56,15 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
     useState<boolean>(false);
   const [locationEnabled, setLocationEnabled] = useState<boolean>(false);
   const [addresseNow, setAddresseNow] = useState<string>("");
-  const [placeDescription, setPlaceDescription] =
-    useState<undefined>(undefined);
+
   const [isDisablePickButton, setDisablePickButton] = useState<boolean>(false);
 
-  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
-    useGeolocated({
-      positionOptions: {
-        enableHighAccuracy: false,
-      },
-      userDecisionTimeout: 1000,
-    });
+  const { coords, isGeolocationEnabled } = useGeolocated({
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 1000,
+  });
 
   useEffect(() => {
     if (coords?.latitude && coords?.longitude && isGeolocationEnabled) {
@@ -129,62 +128,71 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
     currentLocation?.lng,
   ]);
 
-  // const addAddressFormik = useFormik({
-  //     initialValues: {
-  //         address: '',
-  //         address_type: item?.address_type ?? '',
-  //         address_label: '',
-  //         Building: item?.house ?? 0,
-  //         floor: item?.floor ?? 0,
-  //         apartment: item?.apartment ?? 0,
-  //     },
-  //     validationSchema: ValidationSchemaForAddAddress(),
-  //     onSubmit: async (values, helpers, errors) => {
-  //         try {
-  //             let newData = {
-  //                 latitude: lat,
-  //                 longitude: lng,
-  //                 address: values.address,
-  //                 house: values.Building,
-  //                 floor: values.floor,
-  //                 apartment: values.apartment,
-  //                 address_type:
-  //                     values.address_label !== ''
-  //                         ? values.address_label
-  //                         : values.address_type,
-  //                 id: item?.id,
-  //             }
-  //             formSubmitOnSuccess(newData)
-  //         } catch (err) {}
-  //     },
-  // })
+  //  validation of add addresse form
+  const addAddressFormik = useFormik({
+    initialValues: {
+      address_type: "",
+      area: "",
+      Building: "",
+      floor: "",
+      apartment: "",
+      street: "",
+    },
+    validationSchema: ValidationSchemaForAddAddress(),
+    onSubmit: async (values) => {
+      try {
+        // let newData = {
+        //     latitude: lat,
+        //     longitude: lng,
+        //     address: values.address,
+        //     house: values.Building,
+        //     floor: values.floor,
+        //     apartment: values.apartment,
+        //     address_type:
+        //         values.address_label !== ''
+        //             ? values.address_label
+        //             : values.address_type,
+        //     id: item?.id,
+        // }
+        // formSubmitOnSuccess(newData)
+        console.log(values);
+      } catch (err) {}
+    },
+  });
   // const formSubmitOnSuccess = (values) => {
   //     formSubmit(values)
   // }
 
-  // const addressTypeHandler = (value) => {
-  //     addAddressFormik.setFieldValue('address_type', value)
-  // }
-  // const addressLabelHandler = (value) => {
-  //     addAddressFormik.setFieldValue('address_label', value)
-  // }
+  const StreetHandler = (value: string) => {
+    addAddressFormik.setFieldValue("street", value);
+  };
 
-  // const houseHandler = (value) => {
-  //     addAddressFormik.setFieldValue('Building', value)
-  // }
-  // const floorHandler = (value) => {
-  //     addAddressFormik.setFieldValue('floor', value)
-  // }
-  // const appartmentHandler = (value) => {
-  //     addAddressFormik.setFieldValue('apartment', value)
-  // }
+  const BuildingHandler = (value: string) => {
+    addAddressFormik.setFieldValue("Building", value);
+  };
+  const floorHandler = (value: string) => {
+    addAddressFormik.setFieldValue("floor", value);
+  };
+  const appartmentHandler = (value: string) => {
+    addAddressFormik.setFieldValue("apartment", value);
+  };
   // useEffect(() => {
   //     addAddressFormik.setFieldValue('address', deliveryAddress)
   // }, [deliveryAddress])
 
+  useEffect(() => {
+    if (addresseType) {
+      addAddressFormik.setFieldValue("address_type", addresseType);
+    }
+  }, [addresseType]);
+  useEffect(() => {
+    if (selectValue) {
+      addAddressFormik.setFieldValue("area", selectValue);
+    }
+  }, [selectValue]);
   return (
     <Stack>
-      <form noValidate>
+      <form onSubmit={addAddressFormik.handleSubmit} noValidate>
         <Grid
           container
           spacing={3}
@@ -211,6 +219,8 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
 
           <Grid item md={8} sm={12} xs={12}>
             <GlobalSelectBox
+              touched={addAddressFormik.touched.apartment}
+              errors={addAddressFormik.errors.area}
               area={selectValue}
               handleChange={handelSelectBox}
               label={"Choose Area"}
@@ -236,22 +246,22 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
             <CustomTextFieldWithFormik
               type="number"
               label={t("Apartment")}
-              // touched={addAddressFormik.touched.apartment}
-              // errors={addAddressFormik.errors.apartment}
-              // fieldProps={addAddressFormik.getFieldProps("apartment")}
-              // onChangeHandler={appartmentHandler}
-              // value={addAddressFormik.values.apartment}
+              touched={addAddressFormik.touched.apartment}
+              errors={addAddressFormik.errors.apartment}
+              fieldProps={addAddressFormik.getFieldProps("apartment")}
+              onChangeHandler={appartmentHandler}
+              value={addAddressFormik.values.apartment}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik
               type="number"
               label={t("Building")}
-              // touched={addAddressFormik.touched.Building}
-              // errors={addAddressFormik.errors.Building}
-              // fieldProps={addAddressFormik.getFieldProps("Building")}
-              // onChangeHandler={houseHandler}
-              // value={addAddressFormik.values.Building}
+              touched={addAddressFormik.touched.Building}
+              errors={addAddressFormik.errors.Building}
+              fieldProps={addAddressFormik.getFieldProps("Building")}
+              onChangeHandler={BuildingHandler}
+              value={addAddressFormik.values.Building}
             />
           </Grid>
 
@@ -259,11 +269,11 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
             <CustomTextFieldWithFormik
               type="number"
               label={t("Floor")}
-              // touched={addAddressFormik.touched.floor}
-              // errors={addAddressFormik.errors.floor}
-              // fieldProps={addAddressFormik.getFieldProps("floor")}
-              // onChangeHandler={floorHandler}
-              // value={addAddressFormik.values.floor}
+              touched={addAddressFormik.touched.floor}
+              errors={addAddressFormik.errors.floor}
+              fieldProps={addAddressFormik.getFieldProps("floor")}
+              onChangeHandler={floorHandler}
+              value={addAddressFormik.values.floor}
             />
           </Grid>
 
@@ -271,11 +281,11 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
             <CustomTextFieldWithFormik
               type="text"
               label={t("Street")}
-              // touched={addAddressFormik.touched.floor}
-              // errors={addAddressFormik.errors.floor}
-              // fieldProps={addAddressFormik.getFieldProps("floor")}
-              // onChangeHandler={floorHandler}
-              // value={addAddressFormik.values.floor}
+              touched={addAddressFormik.touched.street}
+              errors={addAddressFormik.errors.street}
+              fieldProps={addAddressFormik.getFieldProps("street")}
+              onChangeHandler={StreetHandler}
+              value={addAddressFormik.values.street}
             />
           </Grid>
 

@@ -144,6 +144,8 @@ export const english = {
 
   "1. Acceptance of Terms and Conditions":
     "1. Acceptance of Terms and Conditions",
+    "Addresse Type is required":"Addresse Type is required",
+    "area is required":"area is required",
 "Deliver to :":"Deliver to :",
   "Welcome to Otlob, your trusted food delivery service. At Otlob, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, and protect your data when you use our website, mobile application, or any other services provided by Otlob.":
     "Welcome to Otlob, your trusted food delivery service. At Otlob, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, and protect your data when you use our website, mobile application, or any other services provided by Otlob.",
