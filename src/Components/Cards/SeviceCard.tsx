@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import dumyImg from "../../../public/DumyImg/img-service-2 1.png";
 import { useTranslation } from "react-i18next";
 import { HomeServices } from "@/interfaces/HomeServices";
+import Image from "next/image";
 const SeviceCard = ({
   setOpenOrderDialog,
   area,
@@ -31,7 +32,9 @@ const SeviceCard = ({
       onMouseOver={() => setBright(true)}
       onMouseLeave={() => setBright(false)}
     >
-      <img
+      <Image
+      width={"100"}
+      height={"100"}
         src={element?.image_path}
         alt="img"
         loading="lazy"

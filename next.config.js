@@ -12,7 +12,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
+        protocol: "http",
         hostname: "adminlaundry.razinsoft.com",
         port: "",
         pathname: "/**",
