@@ -15,19 +15,27 @@ import i18n, { t } from "i18next";
 import "../language/i18n";
 import { store } from "../redux/store";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
+
+import "../styles/nprogress.css";
+import nProgress from "nprogress";
 import "simplebar-react/dist/simplebar.min.css";
-const clientSideEmotionCache = createEmotionCache();
+
 import type {} from "@mui/lab/themeAugmentation";
 // When using TypeScript 3.x and below
 import "@mui/lab/themeAugmentation";
 import AOS from "aos";
 import Footer from "@/Components/FooterMiddleLandingPage";
-// import Navbar from "@/Components/Navbar";
+
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import ScrollToTop from "@/Components/GlobalComponent/scroll-top/ScrollToTop";
 import dynamic from "next/dynamic";
 import logoHeader from "../../public/App/full body.webp";
+
+Router.events.on("routeChangeStart", nProgress.start);
+Router.events.on("routeChangeError", nProgress.done);
+Router.events.on("routeChangeComplete", nProgress.done);
+const clientSideEmotionCache = createEmotionCache();
 export default function App({
   Component,
   pageProps,
