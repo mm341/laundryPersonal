@@ -42,6 +42,7 @@ import SimpleBar from "simplebar-react";
 import SubProductModel from "@/Components/Dialogs/SubProductModel";
 import dynamic from "next/dynamic";
 import CustomLoaderPage from "@/Components/GlobalComponent/CustomLoaderPage";
+import Meta from "@/Components/GlobalComponent/Meta";
 const ProductsPage = () => {
   //  hooks
   const { t } = useTranslation();
@@ -157,6 +158,7 @@ const ProductsPage = () => {
 
   return (
     <>
+     <Meta title={"services"} description="" keywords="" />
       {loading ? (
         <CustomLoaderPage loading={loading} />
       ) : (

@@ -33,8 +33,8 @@ const SeviceCard = ({
       onMouseLeave={() => setBright(false)}
     >
       <Image
-      width={"100"}
-      height={"100"}
+        width={"300"}
+        height={"300"}
         src={element?.image_path}
         alt="img"
         loading="lazy"

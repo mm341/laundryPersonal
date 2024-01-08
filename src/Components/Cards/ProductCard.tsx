@@ -14,11 +14,11 @@ import { useRouter } from "next/router";
 const ProductCard = ({
   product,
   setProduct,
-  setOpenDialog
+  setOpenDialog,
 }: {
   product: productInterface;
   setProduct: (e: productInterface) => void;
-  setOpenDialog:(e:boolean)=>void
+  setOpenDialog: (e: boolean) => void;
 }) => {
   //  hooks
   const { locale } = useRouter();
@@ -30,7 +30,6 @@ const ProductCard = ({
   let [quantity, setQuantity] = useState<number>(1);
   return (
     <CustomPaperBigCard
-    
       sx={{
         borderRadius: "10px",
         backgroundColor: "white",
@@ -99,7 +98,7 @@ const ProductCard = ({
               sx={{
                 width: "100%",
                 display: "flex",
-                justifyContent: locale==="en"?"flex-start":"flex-end",
+                justifyContent: locale === "en" ? "flex-start" : "flex-end",
                 gap: "10px",
                 alignItems: "center",
                 mt: { md: "12px", xs: "5px" },
@@ -167,8 +166,9 @@ const ProductCard = ({
             fontWeight: "500",
           }}
           onClick={() => {
-            setOpenDialog(true)
-            setProduct(product)}}
+            setOpenDialog(true);
+            setProduct(product);
+          }}
         >
           + {t("Add")}{" "}
         </GlobalButton>

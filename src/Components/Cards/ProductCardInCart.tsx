@@ -9,6 +9,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/router";
+import Image from "next/image";
 const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
   //  hooks
   const { locale } = useRouter();
@@ -25,7 +26,6 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
         position: "relative",
         overflowY: "hidden",
         overflowX: "hidden",
-        
       }}
     >
       <GlobalDisplayFlexBox sx={{ alignItems: "flex-end" }}>
@@ -48,7 +48,9 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
               borderRadius: "4px",
             }}
           >
-            <img
+            <Image
+              width={"100"}
+              height={"100"}
               src="http://adminlaundry.razinsoft.com/storage/images/products/QpiDQXTAt3KnmNfOtGEg66sQmU7ndpKigAzzUhBZ.jpg"
               loading="lazy"
               alt="productImg"
@@ -56,7 +58,10 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
             />
           </GlobalDisplayFlexBox>
 
-          <GlobalDisplayFlexColumnBox width={"100%"} gap={!checkOut?"16px":"10px"}>
+          <GlobalDisplayFlexColumnBox
+            width={"100%"}
+            gap={!checkOut ? "16px" : "10px"}
+          >
             {/*product  name */}
             <Typography sx={{ fontSize: "14px", fontWeight: "500" }}>
               Blouse
@@ -143,12 +148,17 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
               </Box>
             )}
 
-            {checkOut &&
-            
-            <Typography sx={{fontSize:"14px",fontWeight:"400",color:theme.palette.secondary.contrastText}}>
-              3×8.00 {master?.currency}
-            </Typography>
-            }
+            {checkOut && (
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontWeight: "400",
+                  color: theme.palette.secondary.contrastText,
+                }}
+              >
+                3×8.00 {master?.currency}
+              </Typography>
+            )}
           </GlobalDisplayFlexColumnBox>
         </Box>
 
