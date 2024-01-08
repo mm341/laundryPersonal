@@ -59,6 +59,7 @@ const CheckOutPage = () => {
   const [pickupHour, setPickupHour] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
   const [payment, setPayment] = useState<string>("cash");
+  const [onlineMethod,setOnlineMethod]=useState<string>("")
   const { myAddresses } = useAppSelector((state) => state.addresse);
   const { schedules, deliverySchedules } = useAppSelector(
     (state) => state.orders
@@ -115,6 +116,8 @@ const CheckOutPage = () => {
           pick_date: pickupDate,
           pick_hour: pickupHour,
           products: [],
+          instruction: addtionalInformation,
+          
         })
       );
     } else {
@@ -390,7 +393,7 @@ const CheckOutPage = () => {
                   <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                     <ChekOutTitle title="Payment Method" />
 
-                    <PaymentMethods setPayment={setPayment} payment={payment} />
+                    <PaymentMethods onlineMethod={onlineMethod} setOnlineMethod={setOnlineMethod} setPayment={setPayment} payment={payment} />
                   </GlobalDisplayFlexColumnBox>
 
                   {/* Summary Checkout */}
