@@ -240,7 +240,9 @@ const GoogleMapComponent = ({
             fontWeight: "400",
           }}
         >
-          {addresseNow}
+          {addresseNow && addresseNow.length < 50
+            ? addresseNow
+            : addresseNow?.slice(0, 50)}...
         </Typography>
       </Box>
     </Stack>

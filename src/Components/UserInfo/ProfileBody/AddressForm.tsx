@@ -43,18 +43,18 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
 
   //   handel google map componenet
   // /////////////////////////////////////////////////
-  const [location, setLocation] = useState<locationInterface>({
-    lat: 30,
-    lng: 31,
-  });
   const [currentLocation, setCurrentLocation] = useState<
     locationInterface | undefined
   >();
+  const [location, setLocation] = useState<locationInterface>({
+    lat: currentLocation?.lat ?? 30,
+    lng: currentLocation?.lng ?? 30,
+  });
 
   const [placeDetailsEnabled, setPlaceDetailsEnabled] =
     useState<boolean>(false);
   const [locationEnabled, setLocationEnabled] = useState<boolean>(false);
-  const [addresseNow, setAddresseNow] = useState("");
+  const [addresseNow, setAddresseNow] = useState<string>("");
   const [placeDescription, setPlaceDescription] =
     useState<undefined>(undefined);
   const [isDisablePickButton, setDisablePickButton] = useState<boolean>(false);
