@@ -43,7 +43,13 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
 
   //   handel google map componenet
   // /////////////////////////////////////////////////
-  const [location, setLocation] = useState<locationInterface>();
+  const [location, setLocation] = useState<locationInterface>({
+    lat: 30,
+    lng: 31,
+  });
+  const [currentLocation, setCurrentLocation] = useState<
+    locationInterface | undefined
+  >();
 
   const [placeDetailsEnabled, setPlaceDetailsEnabled] =
     useState<boolean>(false);
@@ -63,13 +69,14 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
 
   useEffect(() => {
     if (coords?.latitude && coords?.longitude && isGeolocationEnabled) {
-      setLocation({
+      setCurrentLocation({
         lat: coords?.latitude,
         lng: coords?.longitude,
       });
     }
   }, [coords?.latitude, coords?.longitude, isGeolocationEnabled]);
 
+ 
   // ///////////////////////////////////////////////////
   //  handel select area
   const handelSelectBox = (
@@ -108,7 +115,6 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
         });
     }
   }, [location?.lat, location?.lng]);
-
 
   // const addAddressFormik = useFormik({
   //     initialValues: {
@@ -163,7 +169,6 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
   //     addAddressFormik.setFieldValue('address', deliveryAddress)
   // }, [deliveryAddress])
 
- 
   return (
     <Stack>
       <form noValidate>
@@ -201,19 +206,18 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
           </Grid>
 
           <Grid item xs={12}>
-            {!!location && (
-              <GoogleMapComponent
-                addresseNow={addresseNow}
-                setLocation={setLocation}
-                location={location}
-                setPlaceDetailsEnabled={setPlaceDetailsEnabled}
-                placeDetailsEnabled={placeDetailsEnabled}
-                setLocationEnabled={setLocationEnabled}
-                setDisablePickButton={setDisablePickButton}
-                height="300px"
-                markerIcon={markerIcon}
-              />
-            )}
+            <GoogleMapComponent
+              currentLocation={currentLocation}
+              addresseNow={addresseNow}
+              setLocation={setLocation}
+              location={location}
+              setPlaceDetailsEnabled={setPlaceDetailsEnabled}
+              placeDetailsEnabled={placeDetailsEnabled}
+              setLocationEnabled={setLocationEnabled}
+              setDisablePickButton={setDisablePickButton}
+              height="300px"
+              markerIcon={markerIcon}
+            />
           </Grid>
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik

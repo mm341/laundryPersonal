@@ -35,7 +35,7 @@ interface props {
   setDisablePickButton: (e: boolean) => void;
   setLocationEnabled: (e: boolean) => void;
   setLocation: (e: locationInterface) => void;
-
+  currentLocation: locationInterface | undefined;
   location: locationInterface;
   setPlaceDetailsEnabled: (e: boolean) => void;
   placeDetailsEnabled: boolean;
@@ -54,6 +54,7 @@ const GoogleMapComponent = ({
   addresseNow,
   height,
   markerIcon,
+  currentLocation,
 }: props) => {
   //  hooks
 
@@ -76,7 +77,7 @@ const GoogleMapComponent = ({
   );
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY ?? "",
   });
   const [isMounted, setIsMounted] = useState(false);
   const [openInfoWindow, setOpenInfoWindow] = useState(false);
@@ -98,6 +99,15 @@ const GoogleMapComponent = ({
     setZoom(12);
     setMap(map);
   }, []);
+
+  useEffect(() => {
+    if (currentLocation?.lat) {
+      setCenterPosition({
+        lat: currentLocation?.lat,
+        lng: currentLocation?.lng,
+      });
+    }
+  }, [currentLocation]);
 
   useEffect(() => {
     if (location && placeDetailsEnabled) {
@@ -203,8 +213,8 @@ const GoogleMapComponent = ({
           boxShadow: "0px 4px 9px 0px #00000012",
           p: "10px",
           display: "flex",
-          flexDirection:{md:"row",xs:"column"},
-          alignItems: {md:"center",xs:"flex-start"},
+          flexDirection: { md: "row", xs: "column" },
+          alignItems: { md: "center", xs: "flex-start" },
           gap: "4px",
         }}
       >
@@ -214,8 +224,22 @@ const GoogleMapComponent = ({
           alt="icon"
           src={markerIcon?.src}
         />
-        <Typography sx={{ color: theme.palette.secondary.contrastText,fontSize:"14px",fontWeight:"500" }}>{t("Deliver to :")}</Typography>
-        <Typography sx={{ color: theme.palette.secondary.contrastText,fontSize:"14px",fontWeight:"400" }}>
+        <Typography
+          sx={{
+            color: theme.palette.secondary.contrastText,
+            fontSize: "14px",
+            fontWeight: "500",
+          }}
+        >
+          {t("Deliver to :")}
+        </Typography>
+        <Typography
+          sx={{
+            color: theme.palette.secondary.contrastText,
+            fontSize: "14px",
+            fontWeight: "400",
+          }}
+        >
           {addresseNow}
         </Typography>
       </Box>
