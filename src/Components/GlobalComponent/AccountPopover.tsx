@@ -66,6 +66,7 @@ export const AccountPopover = (props: Props) => {
     router.push("/");
     toast.success(t("Logout Successfully"));
     onClose?.();
+    // window.location.reload();
   };
 
   const handleClick = (item: { id: number; label: string; value: string }) => {
@@ -110,7 +111,7 @@ export const AccountPopover = (props: Props) => {
         display: open ? "flex" : "none",
         position: "absolute",
         top: { md: "40px", xs: "65px" },
-        right: locale === "en" ? "12%" : "14%",
+        right: locale === "en" ? "18%" : "21%",
         backgroundColor: "#F3F6FF",
         zIndex: "99999",
         borderRadius: "5px",
@@ -124,7 +125,6 @@ export const AccountPopover = (props: Props) => {
           p: 1,
           cursor: "pointer",
           display: "flex",
-         
         }}
       >
         <MenuList sx={{ width: "100%" }}>

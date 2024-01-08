@@ -30,6 +30,7 @@ const CollapsableMenu = ({
     setServiceId(e.id);
     setOpenAreaDialog(true);
     setOpenDrawer(false);
+    localStorage.setItem("service", e?.name);
   };
 
   return (

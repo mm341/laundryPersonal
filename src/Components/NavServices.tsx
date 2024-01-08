@@ -77,6 +77,7 @@ const NavServices = ({
               <Box key={e?.id}>
                 <Typography
                   onClick={() => {
+                    localStorage.setItem("service", e?.name);
                     setOpenAreaDialog(true);
                     setServiceId(e?.id);
                   }}

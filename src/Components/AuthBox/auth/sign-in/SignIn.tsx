@@ -32,6 +32,8 @@ import CustomPhoneInput from "../../CustomPhoneInput";
 import CustomLoadingSubmitButton from "@/Components/GlobalComponent/CustomLoadingSubmitButton";
 import { AuthApi } from "@/React-Query/authApi";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
+import { useAppDispatch } from "@/redux/store";
+import { SaveProfileData } from "@/redux/slices/HandelUpdateProfile";
 
 export interface SignModel {
   handleClose: () => void;
@@ -40,15 +42,19 @@ export interface SignModel {
   setModalFor: (e: string) => void;
 }
 const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { t } = useTranslation();
+  //  hooks
   const theme = useTheme();
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const [isRemember, setIsRemember] = useState<boolean>(false);
   const [openModal, setModalOpen] = useState<boolean>(false);
   const [openOtpModal, setOpenOtpModal] = useState<boolean>(false);
   const [otpData, setOtpData] = useState({ phone: "" });
   const [mainToken, setMainToken] = useState<null>(null);
 
+  //  login action validation and send api request
   const loginFormik = useFormik({
     initialValues: {
       contact: "",
@@ -62,7 +68,7 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
       try {
         const data: { contact?: string; password?: string } = {};
         // data.contact = `+${values.contact.toString()}`;
-        data.contact = "01061320051";
+        data.contact = "010613200513";
 
         data.password = "Abcdefghij@#123";
         formSubmitHandler(data);
@@ -88,12 +94,14 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
   }) => {
     loginMutation(values, {
       onSuccess: async (response: any) => {
-        if (response.data.data.access.token) {
-          toast.success(response.data.message);
-          localStorage.setItem("token", response.data.data.access.token);
-          // window.location.reload();
-          handleClose?.();
-        }
+ 
+        dispatch(SaveProfileData(response.data.data.user));
+        // if (response.data.data.access.token) {
+        toast.success(response?.data?.message);
+        localStorage.setItem("token", response?.data?.data?.access?.token);
+        // window.location.reload();
+        handleClose?.();
+        // }
         // if (global?.customer_verification) {
         //   setOtpData({ phone: values?.phone });
         //   setMainToken(response);

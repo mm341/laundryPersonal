@@ -12,20 +12,20 @@ const SeviceCard = ({
   setOpenOrderDialog,
   area,
   element,
-  setServiceId
+  setServiceId,
 }: {
   setOpenOrderDialog?: ((action: boolean) => void) | any;
   area?: boolean;
   element: HomeServices;
-  setServiceId:((action:number|undefined)=>void)
+  setServiceId: (action: number | undefined) => void;
 }) => {
   const { t } = useTranslation();
   const router = useRouter();
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
- 
+
   return (
-    <Box data-aos="fade-left" sx={{ position: "relative" }} className="group">
+    <div className="group relative">
       <img
         src={element?.image_path}
         alt="img"
@@ -72,7 +72,22 @@ const SeviceCard = ({
             {element?.description}
           </Typography>
 
-          <GlobalButton
+          <button
+            className="    hidden    group-hover:flex  duration-1000   bg-[#329CD7] border border-[#329CD7] rounded-[4px] text-[16px] px-[25px] py-[10px] text-white"
+            onClick={() => {
+              if (area) {
+                localStorage.setItem("service", element?.name);
+                router.push(`/products?service_id=${element?.id}`);
+              } else {
+                localStorage.setItem("service", element?.name);
+                setServiceId(element?.id);
+                setOpenOrderDialog(true);
+              }
+            }}
+          >
+            {t("Get the Service")}
+          </button>
+          {/* <GlobalButton
             service
             className="    hidden    group-hover:flex  duration-1000"
             sx={{
@@ -84,21 +99,14 @@ const SeviceCard = ({
             }}
             px={!issmall ? "25px" : "10px"}
             py={!issmall ? "10px" : "6px"}
-            onClick={() => {
-              if (area) {
-                router.push(`/products?service_id=${element?.id}`);
-              } else {
-                setServiceId(element?.id)
-                setOpenOrderDialog(true);
-              }
-            }}
+          
             // eslint-disable-next-line react/jsx-no-duplicate-props
           >
             {t("Get the Service")}
-          </GlobalButton>
+          </GlobalButton> */}
         </GlobalDisplayFlexColumnBox>
       </Box>
-    </Box>
+    </div>
   );
 };
 

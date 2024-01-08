@@ -5,12 +5,15 @@ import {
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
 import photoDumy from "../../../../public/info/61Ebo1dfRiL 1.png";
+import { OrdersInterface } from "@/interfaces/OrdersInterface";
+import { productInterface } from "@/interfaces/ProductInterface";
 const ProductsInOrderCard = ({
   openProductsDetails,
+  order,
 }: {
   openProductsDetails: boolean;
+  order: OrdersInterface;
 }) => {
-  const array = [...Array(3)];
   return (
     <Box
       sx={{
@@ -19,19 +22,17 @@ const ProductsInOrderCard = ({
       }}
     >
       {openProductsDetails &&
-        array?.map((e, i) => (
+        order?.products?.map((product: productInterface, i: number) => (
           <GlobalDisplayFlexColumnBox
-         
             key={i}
             gap={"20px"}
             sx={{ px: "18px", mt: i !== 0 ? "20px" : "0px" }}
             width={"100%"}
-           
           >
-            <GlobalDisplayFlexBox   >
+            <GlobalDisplayFlexBox>
               {/*  img and name  */}
               <GlobalDisplayFlexBox
-              style={{flexDirection:"row"}}
+                style={{ flexDirection: "row" }}
                 sx={{
                   width: {
                     md: "50%",
@@ -52,7 +53,7 @@ const ProductsInOrderCard = ({
                     height: "80px",
                   }}
                 >
-                  <img src={photoDumy?.src} loading="lazy" alt="img" />
+                  <img src={product?.image_path} loading="lazy" alt="img" />
                 </Box>
 
                 <Box
@@ -63,10 +64,10 @@ const ProductsInOrderCard = ({
                   }}
                 >
                   <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
-                    Blouse
+                    {product?.name}
                   </Typography>
                   <Typography sx={{ fontWeight: "400", fontSize: "16px" }}>
-                    Wash
+                    {product?.service?.name}
                   </Typography>
                 </Box>
               </GlobalDisplayFlexBox>
@@ -77,8 +78,8 @@ const ProductsInOrderCard = ({
                 sx={{
                   width: { md: "50%", xs: "100%" },
                   display: "flex",
-                  justifyContent: {md:"flex-end",xs:"flex-start"},
-                  alignItems: {md:"flex-end",xs:"flex-start"},
+                  justifyContent: { md: "flex-end", xs: "flex-start" },
+                  alignItems: { md: "flex-end", xs: "flex-start" },
                   flexDirection: "column",
                   gap: "20px",
                 }}

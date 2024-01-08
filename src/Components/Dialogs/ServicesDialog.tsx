@@ -28,7 +28,7 @@ const ServicesDialog = ({
     top: "50%",
     left: "50%",
     height: "83%",
-    oveflowY: "auto",
+    // oveflowY: "auto",
     transform: "translate(-50%, -50%)",
     width: { md: "60%", xs: "85%" },
     bgcolor: "background.paper",
@@ -36,7 +36,7 @@ const ServicesDialog = ({
     borderRadius: "10px",
   };
 
-  const array = [...Array(12)];
+
 
   return (
     <Modal
@@ -55,12 +55,12 @@ const ServicesDialog = ({
             display: "flex",
             flexDirection: "column",
             gap: "25px",
-            overflowY: "auto",
+          
           }}
         >
           <GlobalTypography text={"Select Service Category"} />
 
-          <Grid sx={{ mb: "40px" }} container spacing={3}>
+          <Grid sx={{ my: "40px",height:"100%",overflowY:"auto" }} container spacing={3} >
             {homeServices?.map((e: HomeServices, i: number) => (
               <Grid key={i} item md={4} sm={6} xs={12}>
                 <SeviceCard

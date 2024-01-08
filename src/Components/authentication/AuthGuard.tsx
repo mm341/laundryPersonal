@@ -16,13 +16,16 @@ const AuthGuard = (props: AuxProps) => {
         return;
       }
 
-      const token = localStorage.getItem("token");
+      let token: undefined | null | string = undefined;
+      if (typeof window !== "undefined") {
+        token = localStorage.getItem("token");
+      }
 
-    //   if (token) {
-    //     setChecked(true);
-    //   } else {
-    //     router.push("/");
-    //   }
+      if (token) {
+        setChecked(true);
+      } else {
+        router.push("/");
+      }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [router.isReady]

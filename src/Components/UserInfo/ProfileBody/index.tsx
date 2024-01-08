@@ -5,11 +5,15 @@ import ProfilePage from "../ProfilePage";
 import OrderPage from "../OrderPage";
 import MyAddresses from "./MyAddresses";
 import { useRouter } from "next/router";
+import { useAppSelector } from "@/redux/store";
 
 const ProfileBody = ({ page }: { page: string }) => {
+  //  hooks
   const { locale } = useRouter();
   const [languagedirection, setLanguagedirection] = useState<string>("ltr");
+  
 
+  //  handel language direction due to langauge
   useEffect(() => {
     locale === "en" ? setLanguagedirection("ltr") : setLanguagedirection("rtl");
   }, [locale]);

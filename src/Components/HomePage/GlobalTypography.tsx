@@ -6,9 +6,13 @@ import { motion } from "framer-motion";
 const GlobalTypography = ({
   text,
   FirstSection,
+  clearBg,
+  homePage,
 }: {
   text: string;
   FirstSection?: boolean;
+  clearBg?: boolean;
+  homePage?: boolean;
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -19,8 +23,8 @@ const GlobalTypography = ({
         display: "flex",
         flexDirection: !FirstSection ? "row" : "row-reverse",
         alignItems: "center",
-        gap: "12px",
-        justifyContent: !FirstSection ? "center" : "flex-end",
+        gap: "7px",
+        justifyContent: !homePage ? "center" : "flex-end",
       }}
     >
       <Typography
@@ -32,7 +36,7 @@ const GlobalTypography = ({
             xs: "18px",
           },
           fontWeight: "500",
-          backgroundColor: theme.palette.primary.light,
+          backgroundColor: !clearBg ? theme.palette.primary.light : "white",
           borderRadius: "50px",
           px: "15px",
           py: "7px",

@@ -5,7 +5,7 @@ import Router from "next/router";
 export default class PublicHandelingErrors {
   public static onErrorResponse = (
     error: unknown | any,
-    variables: { contact?: string | undefined }
+    variables?: { contact?: string | undefined,rating?:number|null }|any
   ) => {
     if (error?.response?.data?.errors?.length > 0) {
       error?.response?.data?.errors?.forEach((item: any) => {

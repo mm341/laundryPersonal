@@ -16,9 +16,10 @@ import AddresseShimmer from "@/Components/Chimmers/AddresseShimmer";
 import CustomEmptyResult from "@/Components/GlobalComponent/empty-view/CustomEmptyResult";
 import AddresseMenu from "./AddresseMenu";
 import AddNewAddress from "./AddNewAddress";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { GetAllAdddressses } from "@/redux/slices/AddressesRequests";
 import DeleteDialog from "@/Components/DeleteDialogs";
+import Meta from "@/Components/GlobalComponent/Meta";
 
 const MyAddresses = () => {
   //  hooks
@@ -29,12 +30,16 @@ const MyAddresses = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
 
+  //  selectors
+  const { myAddresses } = useAppSelector((state) => state.addresse);
+  //  request with api to get all addresses
   useEffect(() => {
     dispatch(GetAllAdddressses());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
+      <Meta title={"addresses"} description="" keywords="" />
       <CustomPaperBigCard
         sx={{
           boxShadow: "box-shadow: 0px 0px 6px 0px #00000026",
@@ -56,30 +61,32 @@ const MyAddresses = () => {
             gap={"30px"}
             alignItems={"center"}
           >
-            <Box
-              sx={{
-                width: "170px",
-                height: "40px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                color: theme.palette.primary.main,
-                borderRadius: "8px",
-                border: `1px solid ${theme.palette.primary.main}`,
-                fontSize: "16px",
-                fontWeight: "600",
-              }}
-            >
-              <Typography
+            {myAddresses?.length > 0 && (
+              <Box
                 sx={{
+                  width: "170px",
+                  height: "40px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: theme.palette.primary.main,
+                  borderRadius: "8px",
+                  border: `1px solid ${theme.palette.primary.main}`,
                   fontSize: "16px",
                   fontWeight: "600",
-                  cursor: "pointer",
                 }}
               >
-                {t("Save As Default")}
-              </Typography>
-            </Box>
+                <Typography
+                  sx={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                  }}
+                >
+                  {t("Save As Default")}
+                </Typography>
+              </Box>
+            )}
             <Box
               sx={{
                 width: "190px",

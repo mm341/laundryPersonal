@@ -6,9 +6,14 @@ import { Box, Typography, alpha } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import addresseIcon from "../../../../public/info/addresse.svg";
-const OrderDeliveryDetails = () => {
+import { OrdersInterface } from "@/interfaces/OrdersInterface";
+const OrderDeliveryDetails = ({
+  orderData,
+}: {
+  orderData: OrdersInterface;
+}) => {
   //  hooks
-
+  
   const { t } = useTranslation();
   return (
     <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
@@ -31,7 +36,7 @@ const OrderDeliveryDetails = () => {
 
           <GlobalDisplayFlexColumnBox width={"100%"} gap={"8px"}>
             <Typography sx={{ fontSize: "14px", fontWeight: "500" }}>
-              Adress Line 1
+              {orderData?.address?.address_name}
             </Typography>
             <Typography
               sx={{
@@ -40,7 +45,9 @@ const OrderDeliveryDetails = () => {
                 color: alpha("#272727", 0.6),
               }}
             >
-              House Number, Area Name, Address Line 2 (optional), ZIP Code,
+              {orderData?.address?.area} area {orderData?.address?.house_no}{" "}
+              Apartment, {orderData?.address?.flat_no} Floor,{" "}
+              {orderData?.address?.block} Building
             </Typography>
           </GlobalDisplayFlexColumnBox>
         </Box>

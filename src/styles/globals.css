@@ -16,6 +16,16 @@
   }
 }
 
+.mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
+  background-color: transparent !important;
+  color:blue !important
+};
+
+.mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: transparent !important;
+  color:blue !important
+}
+
 /* .mui-style-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
 right: 16px !important;
 } */

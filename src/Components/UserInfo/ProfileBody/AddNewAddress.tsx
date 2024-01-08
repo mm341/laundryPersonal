@@ -15,7 +15,7 @@ const style = {
   maxWidth: 800,
   width: "80%",
   bgcolor: "white",
-  
+  borderRadius: "10px",
   boxShadow: 24,
   height: "70vh",
   overflowY: "auto",
@@ -25,12 +25,10 @@ const AddNewAddress = ({
   color,
   open,
   setOpen,
-  
 }: {
   color: string;
   open: boolean;
   setOpen: (e: boolean) => void;
-  
 }) => {
   const { t } = useTranslation();
 
@@ -38,7 +36,11 @@ const AddNewAddress = ({
     setOpen(true);
   };
 
-  const languagedirection = localStorage.getItem("direction");
+  let languagedirection;
+
+  if (typeof window !== "undefined") {
+    languagedirection = localStorage.getItem("direction");
+  }
 
   return (
     <>

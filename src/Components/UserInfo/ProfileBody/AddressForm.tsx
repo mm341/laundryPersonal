@@ -27,6 +27,7 @@ import { GlobalDisplayFlexBox } from "@/styles/PublicStyles";
 import markerIcon from "../../../../public/info/markerIcon.svg";
 import GoogleMapComponent from "./GoogleMapComponent";
 import { useGeolocated } from "react-geolocated";
+import { useQuery } from "react-query";
 export interface locationInterface {
   lat: number;
   lng: number;
@@ -34,6 +35,7 @@ export interface locationInterface {
 
 const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
   //  hooks
+  const theme = useTheme();
   const [selectValue, setselectValue] = useState<string>("");
   const [addresseType, setAddresseType] = useState<string>("home");
   const { t } = useTranslation();
@@ -46,6 +48,7 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
   const [placeDetailsEnabled, setPlaceDetailsEnabled] =
     useState<boolean>(false);
   const [locationEnabled, setLocationEnabled] = useState<boolean>(false);
+  const [addresseNow, setAddresseNow] = useState("");
   const [placeDescription, setPlaceDescription] =
     useState<undefined>(undefined);
   const [isDisablePickButton, setDisablePickButton] = useState<boolean>(false);
@@ -56,17 +59,16 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
         enableHighAccuracy: false,
       },
       userDecisionTimeout: 1000,
-      // isGeolocationEnabled: true,
     });
 
   useEffect(() => {
-    if (coords) {
+    if (coords?.latitude && coords?.longitude && isGeolocationEnabled) {
       setLocation({
         lat: coords?.latitude,
         lng: coords?.longitude,
       });
     }
-  }, [coords]);
+  }, [coords?.latitude, coords?.longitude, isGeolocationEnabled]);
 
   // ///////////////////////////////////////////////////
   //  handel select area
@@ -94,6 +96,19 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
       img: OthersSelectIcon,
     },
   ];
+
+  useEffect(() => {
+    if (location?.lat && location?.lng) {
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location?.lat},${location?.lng}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
+      )
+        .then((res) => res.json())
+        .then((address) => {
+          setAddresseNow(address?.results[0]?.formatted_address);
+        });
+    }
+  }, [location?.lat, location?.lng]);
+
 
   // const addAddressFormik = useFormik({
   //     initialValues: {
@@ -148,8 +163,7 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
   //     addAddressFormik.setFieldValue('address', deliveryAddress)
   // }, [deliveryAddress])
 
-  const theme = useTheme();
-
+ 
   return (
     <Stack>
       <form noValidate>
@@ -189,6 +203,7 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
           <Grid item xs={12}>
             {!!location && (
               <GoogleMapComponent
+                addresseNow={addresseNow}
                 setLocation={setLocation}
                 location={location}
                 setPlaceDetailsEnabled={setPlaceDetailsEnabled}

@@ -23,9 +23,10 @@ import type {} from "@mui/lab/themeAugmentation";
 import "@mui/lab/themeAugmentation";
 import AOS from "aos";
 import Footer from "@/Components/FooterMiddleLandingPage";
-import Navbar from "@/Components/Navbar";
+// import Navbar from "@/Components/Navbar";
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import ScrollToTop from "@/Components/GlobalComponent/scroll-top/ScrollToTop";
+import dynamic from "next/dynamic";
 export default function App({
   Component,
   pageProps,
@@ -50,7 +51,6 @@ export default function App({
 
   //  handel language
 
- 
   useEffect(() => {
     if (locale === "en") {
       i18n.changeLanguage("en");
@@ -90,6 +90,8 @@ export default function App({
     });
   }, []);
 
+  //  navbar
+  const Navbar = dynamic(() => import("@/Components/Navbar"), { ssr: false });
   return (
     <CacheProvider value={emotionCache}>
       <QueryClientProvider client={queryClient}>
@@ -111,7 +113,7 @@ export default function App({
                     xs: router.pathname !== "/" ? "7rem" : "5rem",
                   },
                   mb: "5rem",
-                 
+                
                 }}
               >
                 {getLayout(<Component {...pageProps} />)}

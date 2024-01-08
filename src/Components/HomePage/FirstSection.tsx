@@ -98,6 +98,7 @@ const FirstSection = ({
                 <GlobalTypography
                   text={"Say goodbye to laundry day"}
                   FirstSection
+                  homePage
                 />
 
                 <Carousel

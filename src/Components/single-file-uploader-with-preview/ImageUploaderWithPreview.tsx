@@ -12,7 +12,7 @@ const ImageUploaderWithPreview = ({
   borderRadius,
   error,
 }: {
-  file: string | File | Blob | MediaSource|undefined;
+  file: string | File | Blob | MediaSource | undefined;
 
   labelText?: string;
 
@@ -20,7 +20,7 @@ const ImageUploaderWithPreview = ({
   width?: string;
   imageUrl?: string;
   borderRadius?: string;
-  error?: boolean|undefined|string;
+  error?: boolean | undefined | string;
 }) => {
   const imageContainerRef: any = useRef();
 

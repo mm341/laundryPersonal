@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import PropTypes from "prop-types";
 import { Rating } from "@mui/material";
 import { Stack } from "@mui/material";
@@ -7,24 +7,26 @@ import { useTheme } from "@mui/material/styles";
 import { CustomRating } from "@/styles/PublicStyles";
 
 interface customRating {
-  //   handleChangeRatings;
-  ratingValue: string;
+  handleChangeRatings: (value: number) => void;
+  ratingValue: number | string;
   readOnly: boolean;
-  color: string;
+  color?: string;
 }
 const CustomRatings = ({
-  //   handleChangeRatings,
+  handleChangeRatings,
   ratingValue,
   readOnly,
   color,
 }: customRating) => {
-  const [value, setValue] = useState(ratingValue);
-  // const handleChange = (event, newValue) => {
-  //     if (!readOnly) {
-  //         setValue(newValue)
-  //         handleChangeRatings(newValue)
-  //     }
-  // }
+  const [value, setValue] = useState<number | string | null>(ratingValue);
+  const handleChange = (e: SyntheticEvent, newValue: number | null) => {
+    if (!readOnly) {
+      if (newValue) {
+        setValue(newValue);
+        handleChangeRatings(newValue);
+      }
+    }
+  };
 
   return (
     <Stack
@@ -46,7 +48,7 @@ const CustomRatings = ({
         readOnly={readOnly}
         name="simple-controlled"
         value={Number(value)}
-        // onChange={(event, newValue) => handleChange(event, newValue)}
+        onChange={(e, newValue) => handleChange(e, newValue)}
       />
     </Stack>
   );

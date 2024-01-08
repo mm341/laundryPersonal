@@ -21,17 +21,18 @@ export const AddresseSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(GetAllAdddressses.pending, (state: AddressesModel) => {
       state.isloading = true;
+      state.myAddresses = [];
     });
     builder.addCase(
       GetAllAdddressses.fulfilled,
-      (state: AddressesModel, payload: any) => {
-      
+      (state: AddressesModel, { payload }: any) => {
         state.isloading = false;
-        state.myAddresses = payload.data;
+        state.myAddresses = payload?.data?.addresses;
       }
     );
     builder.addCase(GetAllAdddressses.rejected, (state: AddressesModel) => {
       state.isloading = false;
+      state.myAddresses = [];
     });
   },
 });

@@ -26,14 +26,16 @@ import {
 } from "@/styles/PublicStyles";
 import { useAppSelector } from "@/redux/store";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
+import { useRouter } from "next/router";
 
 const Footer = () => {
+  //  hooks
   const { t } = useTranslation();
-
+  const { push } = useRouter();
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
   const { footerLinks } = useAppSelector((state) => state.master);
-  
+
   return (
     <>
       <Stack
@@ -110,7 +112,7 @@ const Footer = () => {
                 {/* Download Now */}
                 <CustomFooterH1Box
                   sx={{
-                    width: { sm: "22%", xs: "50%" },
+                    width: { sm: "22%", xs: "100%" },
                   }}
                 >
                   <CustomFooterH2Typography
@@ -146,19 +148,29 @@ const Footer = () => {
                     {t("Quick links")}
                   </CustomFooterH2Typography>
                   <CustomFooterTypographyBox>
-                    <CustomFooterNestedTypography>
+                    <CustomFooterNestedTypography
+                      onClick={() => push("/howItWork")}
+                    >
                       {t("How It Work")}
                     </CustomFooterNestedTypography>
-                    <CustomFooterNestedTypography>
+                    <CustomFooterNestedTypography
+                      onClick={() => push("/pricing")}
+                    >
                       {t("Pricing")}
                     </CustomFooterNestedTypography>
-                    <CustomFooterNestedTypography>
+                    <CustomFooterNestedTypography
+                      onClick={() => push("/about")}
+                    >
                       {t("About Us")}
                     </CustomFooterNestedTypography>
-                    <CustomFooterNestedTypography>
+                    <CustomFooterNestedTypography
+                      onClick={() => push("/privacy")}
+                    >
                       {t("Privacy policy")}
                     </CustomFooterNestedTypography>
-                    <CustomFooterNestedTypography>
+                    <CustomFooterNestedTypography
+                      onClick={() => push("/terms")}
+                    >
                       {t("Terms of service")}
                     </CustomFooterNestedTypography>
                   </CustomFooterTypographyBox>
@@ -235,18 +247,17 @@ const Footer = () => {
                       width={"100%"}
                     >
                       {footerLinks?.map((e: FooterSocialLinks, i: number) => (
-                        <a   key={i} target="_blank" href={e?.url} >
-                        <img
-                        
-                          src={e?.photo_path}
-                          loading="lazy"
-                          alt="img"
-                          style={{
-                            cursor: "pointer",
-                            width: "40px",
-                            height: "40px",
-                          }}
-                        />
+                        <a key={i} target="_blank" href={e?.url}>
+                          <img
+                            src={e?.photo_path}
+                            loading="lazy"
+                            alt="img"
+                            style={{
+                              cursor: "pointer",
+                              width: "40px",
+                              height: "40px",
+                            }}
+                          />
                         </a>
                       ))}
                     </Stack>

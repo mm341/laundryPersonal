@@ -17,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/Components/AuthBox/auth/auth.style.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/Components/AuthBox/auth/auth.style.js", "server.js"],
   "exclude": ["node_modules"]
 }

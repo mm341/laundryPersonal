@@ -2,27 +2,19 @@ import { CustomStackFullWidth } from "@/styles/PublicStyles";
 import React from "react";
 import CustomShimmerForProfile from "../customShimmerForProfile/customShimmerForProfile";
 import EditProfile from "./ProfileBody/EditProfile";
+import Meta from "../GlobalComponent/Meta";
+import { useAppSelector } from "@/redux/store";
 
 const ProfilePage = () => {
-
-  
-  let data = true;
+  const { accountInfo } = useAppSelector((state) => state.profile);
+ 
   return (
     <>
-      {/* <Meta title={data?.data?.f_name} description="" keywords="" /> */}
-      {/* <AuthModal
-        open={authModalOpen}
-        handleClose={handleCloseAuthModal}
-        modalFor={modalFor}
-        setModalFor={setModalFor}
-    /> */}
-      {/* {data ? ( */}
-        <CustomStackFullWidth spacing={2}>
-          
-          {/* {editProfile */}
-          <EditProfile />
-        </CustomStackFullWidth>
-      
+      <Meta title={accountInfo?.first_name} description="" keywords="" />
+
+      <CustomStackFullWidth spacing={2}>
+        <EditProfile />
+      </CustomStackFullWidth>
     </>
   );
 };

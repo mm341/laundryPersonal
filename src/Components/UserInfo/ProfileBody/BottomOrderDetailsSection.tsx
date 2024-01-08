@@ -1,3 +1,5 @@
+import { OrdersInterface } from "@/interfaces/OrdersInterface";
+import { useAppSelector } from "@/redux/store";
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
 import { Box, Typography, alpha, useTheme } from "@mui/material";
 import React from "react";
@@ -5,24 +7,53 @@ import { useTranslation } from "react-i18next";
 
 interface OrderData {
   key: string;
-  value: string;
+  value: string | number;
 }
-const BottomOrderDetailsSection = () => {
+const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
   //  hooks
-  const theme = useTheme();
 
   const { t } = useTranslation();
+
+  const { master } = useAppSelector((state) => state.master);
   //  order data
   const orderDetailsData: OrderData[] = [
     { key: "Order Date", value: "28 Nov, 2023 16:04" },
-    { key: "Pick Up at", value: "28 Nov, 2023 16:04" },
-    { key: "Delivery at", value: "28 Nov, 2023 16:04" },
-    { key: "Order Status", value: "Delivered" },
+    { key: "Pick Up at", value: order?.pick_date },
+    { key: "Delivery at", value: order?.delivery_date },
+    { key: "Order Status", value: order?.order_status },
     { key: "Payment Status", value: "Paid" },
-    { key: "Sub total", value: "32.00 SAR" },
-    { key: "Delivery Charge", value: "32.00 SAR" },
-    { key: "Discount", value: "32.00 SAR" },
+    { key: "Sub total", value: `32.00 ${master?.currency}` },
+    {
+      key: "Delivery Charge",
+      value: `${order?.delivery_charge} ${master?.currency}`,
+    },
+    { key: "Discount", value: `${order?.discount} ${master?.currency}` },
   ];
+
+  //  handel order status color
+  const OrderActionStatus = (order: OrdersInterface, element: string) => {
+    let color;
+
+    if (element !== "Order Status") {
+      color = alpha("#272727", 0.6);
+    } else {
+      if (
+        order?.order_status === "cancelled" ||
+        order?.order_status === "Order confirmed" ||
+        order?.order_status === "Picked your order" ||
+        order?.order_status === "Pending" ||
+        order?.order_status === "Processing"
+      ) {
+        color = "#FFA412";
+      } else if (order?.order_status === "Delivered") {
+        color = "#00A53C";
+      } else if (order?.order_status === "Cancelled") {
+        color = "#8E1400";
+      }
+    }
+
+    return color;
+  };
   return (
     <Box sx={{ px: "18px" }}>
       <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
@@ -31,9 +62,9 @@ const BottomOrderDetailsSection = () => {
             key={i}
             sx={{
               display: "flex",
-              flexDirection: {sm:"row",xs:"column"},
+              flexDirection: { sm: "row", xs: "column" },
               justifyContent: "space-between",
-              alignItems: {sm:"center",xs:"flex-start"},
+              alignItems: { sm: "center", xs: "flex-start" },
             }}
           >
             <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
@@ -43,7 +74,7 @@ const BottomOrderDetailsSection = () => {
               sx={{
                 fontSize: "16px",
                 fontWeight: "400",
-                color: alpha("#272727", 0.6),
+                color: OrderActionStatus(order, e?.key),
               }}
             >
               {e?.value}
@@ -65,7 +96,7 @@ const BottomOrderDetailsSection = () => {
         <Box
           sx={{
             display: "flex",
-            flexDirection: {sm:"row",xs:"column"},
+            flexDirection: { sm: "row", xs: "column" },
             justifyContent: "space-between",
             alignItems: "center",
           }}
@@ -79,7 +110,7 @@ const BottomOrderDetailsSection = () => {
               fontWeight: "500",
             }}
           >
-            40.00 SAR
+            {order?.total_amount} {master?.currency}
           </Typography>
         </Box>
       </GlobalDisplayFlexColumnBox>

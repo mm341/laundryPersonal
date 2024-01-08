@@ -18,12 +18,13 @@ interface menubar {
 const MenuBar = ({ tabData, onClose, sidedrawer, page }: menubar) => {
   //  hooks
   const theme = useTheme();
-  const { locale, push } = useRouter();
+  const router=useRouter()
+  const { locale } = useRouter();
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
 
   //  change route due to page
   const handleClick = (item: TabDatainfo) => {
-    Router.push(
+    router.push(
       {
         pathname: "/info",
         query: { page: item?.value },
@@ -35,8 +36,11 @@ const MenuBar = ({ tabData, onClose, sidedrawer, page }: menubar) => {
   };
 
   const handellogout = () => {
+    // setOpenDeleteDialog(false)
+    
     localStorage.clear();
-    push("/");
+    router.push("/");
+    // window.location.reload();
     toast.success(t("Logout Successfully"));
   };
 
@@ -81,7 +85,7 @@ const MenuBar = ({ tabData, onClose, sidedrawer, page }: menubar) => {
           </MenuItem>
         ))}
         <CustomStackFullWidth
-          onClick={() => setOpenDeleteDialog(true)}
+          onClick={handellogout}
           direction="row"
           spacing={1.6}
           sx={{

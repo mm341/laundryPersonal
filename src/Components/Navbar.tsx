@@ -27,11 +27,13 @@ import accountphoto from "../../public/navbar/accountPhoto.svg";
 import { AccountPopover } from "./GlobalComponent/AccountPopover";
 import { useAppSelector } from "@/redux/store";
 import AuthModal from "./AuthBox/AuthModel";
+import cartIcon from "../../public/navbar/cart.svg";
+import notificationIcon from "../../public/navbar/notification.svg";
+import NotificationPoPover from "./Notification";
 const Navbar = () => {
   //  hooks
   const router = useRouter();
   const { push, locale, pathname, query, asPath } = useRouter();
-
   const { t } = useTranslation();
   const theme = useTheme();
   const anchorRef = useRef<Element | PopoverVirtualElement | null>(null);
@@ -41,8 +43,9 @@ const Navbar = () => {
 
   const [authModalOpen, setOpen] = useState<boolean>(false);
   const [openPopover, setOpenPopover] = useState<boolean>(false);
+  const [openNotification, setOpenNotification] = useState<boolean>(false);
   //  selectors
-
+  const { accountInfo } = useAppSelector((state) => state.profile);
   const { services, areas } = useAppSelector((state) => state.services);
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -71,66 +74,113 @@ const Navbar = () => {
     setOpenPopover(false);
   };
 
+  //  open notification popover
+
+  const handleOpenNotification = () => {
+    setOpenNotification(!openNotification);
+  };
+
+  //  close notification popover
+  const handleCloseNotification = () => {
+    setOpenNotification(false);
+  };
+
   //  close Area model
   const CloseDialog = () => setOpenAreaDialog(false);
 
   //   save token in variable from localstaorage
 
   let token: undefined | any | string = undefined;
-
+  let path: undefined | null | string = undefined;
   if (typeof window !== "undefined") {
+    path = localStorage.getItem("path");
     token = localStorage.getItem("token");
   }
 
   //  handel profile section and login button due to token
 
-  const handelAuth = (): React.ReactNode => {
-    return !token ? (
+  const handelAuth = () => {
+    return token ? (
       <Box>
-      <GlobalButton
-        onClick={handleOpenAuthModal}
-        sx={{
-          backgroundColor: theme.palette.primary.main,
-          color: "white",
-          borderRadius: "4px",
-        }}
-        px={"30px"}
-        py={"10px"}
-      >
-        {t("Login")}
-      </GlobalButton>
-      </Box>
-    ) : (
-      <Box  onClick={handleOpenPopover}>
         <Stack
           sx={{
-            gap: "10px",
+            gap: "32px",
             justifyContent: "center",
             display: "flex",
             flexDirection: "row",
-            cursor: "pointer",
           }}
         >
-          <GlobalDisplayFlexBox sx={{ justifyContent: "center", gap: "3px" }}>
-            <Typography
-              sx={{
-                fontSize: { xl: "16px", md: "12px" },
-                fontWeight: "400",
-                color: "#636363",
-              }}
-            >
-              Hello, Mohamed
-            </Typography>
-            <KeyboardArrowDownIcon />
-          </GlobalDisplayFlexBox>
+          <Stack
+            onClick={handleOpenPopover}
+            sx={{
+              gap: "10px",
+              justifyContent: "center",
+              display: "flex",
+              flexDirection: "row",
+              cursor: "pointer",
+            }}
+          >
+            <GlobalDisplayFlexBox sx={{ justifyContent: "center", gap: "3px" }}>
+              <Typography
+                sx={{
+                  fontSize: { xl: "16px", md: "12px" },
+                  fontWeight: "400",
+                  color: "#636363",
+                }}
+              >
+                Hello, {accountInfo?.name}
+              </Typography>
+              <KeyboardArrowDownIcon />
+            </GlobalDisplayFlexBox>
+            <img
+              style={{ width: "33.5px", height: "33.5px" }}
+              src={accountphoto?.src}
+              loading="lazy"
+              alt="accountphoto"
+            />
+          </Stack>
           <img
-            style={{ width: "33.5px", height: "33.5px" }}
-            src={accountphoto?.src}
+            onClick={() => {
+              if (path) {
+                router.push(path);
+              }
+            }}
+            style={{ width: "30px", height: "30px", cursor: "pointer" }}
+            src={cartIcon?.src}
             loading="lazy"
-            alt="accountphoto"
+            alt="cartIcon"
+          />
+          <img
+            onClick={handleOpenNotification}
+            style={{ width: "30px", height: "30px", cursor: "pointer" }}
+            src={notificationIcon?.src}
+            loading="lazy"
+            alt="notificationIcon"
           />
         </Stack>
       </Box>
+    ) : (
+      <Stack direction={"row"} gap={"32px"} alignItems={"center"}>
+        <GlobalButton
+          onClick={handleOpenAuthModal}
+          sx={{
+            backgroundColor: theme.palette.primary.main,
+            color: "white",
+            borderRadius: "4px",
+          }}
+          px={"30px"}
+          py={"10px"}
+        >
+          {t("Login")}
+        </GlobalButton>
+
+        <img
+          style={{ width: "30px", height: "30px", cursor: "pointer" }}
+          src={cartIcon?.src}
+          loading="lazy"
+          alt="cartIcon"
+        />
+      </Stack>
     );
   };
   return (
@@ -156,18 +206,19 @@ const Navbar = () => {
                 }}
               >
                 {/*  logo side */}
-                <Box sx={{ width: { md: "40%", xs: "100%" } }}>
-                  <Typography
-                    sx={{ cursor: "pointer" }}
-                    onClick={() => push("/")}
-                  >
-                    home
-                  </Typography>
+                <Box
+                  onClick={() => {
+                   
+                    router.push("/");
+                  }}
+                  sx={{ width: { md: "12%", xs: "100%" } }}
+                >
+                  <Typography sx={{ cursor: "pointer" }}>home</Typography>
                 </Box>
 
                 <GlobalDisplayFlexBox
                   sx={{
-                    width: { md: "60%", xs: "100%" },
+                    width: { md: "88%", xs: "100%" },
                     gap: "45px",
                     justifyContent: "flex-end",
                   }}
@@ -178,13 +229,13 @@ const Navbar = () => {
                     services={services}
                     setOpenAreaDialog={setOpenAreaDialog}
                   />
-                  <CustomNavbarTypography>
+                  <CustomNavbarTypography onClick={() => push("/howItWork")}>
                     {t("How It Work")}
                   </CustomNavbarTypography>
-                  <CustomNavbarTypography>
+                  <CustomNavbarTypography onClick={() => push("/pricing")}>
                     {t("Pricing")}
                   </CustomNavbarTypography>
-                  <CustomNavbarTypography>
+                  <CustomNavbarTypography onClick={() => push("/contactUs")}>
                     {t("Contact us")}
                   </CustomNavbarTypography>
                   <CustomNavbarTypography
@@ -208,6 +259,7 @@ const Navbar = () => {
             </PublicContainer>
           ) : (
             <DrawerMenu
+              token={token}
               services={services}
               areas={areas}
               onClose={handleClosePopover}
@@ -243,7 +295,7 @@ const Navbar = () => {
                       color: "#636363",
                     }}
                   >
-                    Hello, Mohamed
+                    Hello, {accountInfo?.name}
                   </Typography>
                 </Stack>
               </Box>
@@ -253,6 +305,10 @@ const Navbar = () => {
             anchorEl={anchorRef.current}
             onClose={handleClosePopover}
             open={openPopover}
+          />
+          <NotificationPoPover
+            onClose={handleCloseNotification}
+            open={openNotification}
           />
         </Box>
       </Box>

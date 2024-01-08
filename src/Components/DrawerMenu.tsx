@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -6,13 +5,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
-  
+  Button,
   Container,
   IconButton,
   Typography,
   useTheme,
 } from "@mui/material";
-import  { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 import { useTranslation } from "react-i18next";
 import { RTL } from "./GlobalComponent/RTL/RTL";
@@ -28,6 +27,7 @@ import CollapsableMenu from "./GlobalComponent/CollapsableMenu";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import { HomeServices } from "@/interfaces/HomeServices";
 import AuthModal from "./AuthBox/AuthModel";
+import { toast } from "react-hot-toast";
 
 const DrawerMenu = ({
   onClose,
@@ -35,12 +35,14 @@ const DrawerMenu = ({
   children,
   areas,
   services,
+  token,
 }: {
   open: boolean;
   onClose: (e: boolean) => void;
   children: React.ReactNode;
   areas: HomeAreas[];
   services: HomeServices[];
+  token: null | undefined | string;
 }) => {
   const [openAreaDialog, setOpenAreaDialog] = useState<boolean>(false);
   const [forSignup, setForSignup] = useState<string>("");
@@ -74,9 +76,11 @@ const DrawerMenu = ({
   //  logout function
   const handleLogout = async () => {
     try {
+      // window.location.reload();
       localStorage.clear();
-
+      router.push("/");
       setOpenDrawer(false);
+      toast.success(t("Logout Successfully"));
       //   toast.success(t(logoutSuccessFull));
       //   if (router.pathname === "/home") {
       //     router.push("/home");
@@ -126,7 +130,7 @@ const DrawerMenu = ({
           aria-labelledby="nested-list-subheader"
         >
           <CollapsableMenu
-          setServiceId={setServiceId}
+            setServiceId={setServiceId}
             setOpenDrawer={setOpenDrawer}
             setOpenAreaDialog={setOpenAreaDialog}
             services={services}
@@ -141,7 +145,7 @@ const DrawerMenu = ({
           >
             <ListItemText
               primary={t("How It Work")}
-              onClick={() => handleRoute("Work")}
+              onClick={() => handleRoute("howItWork")}
             />
           </ListItemButton>
 
@@ -155,7 +159,7 @@ const DrawerMenu = ({
           >
             <ListItemText
               primary={t("Pricing")}
-              onClick={() => handleRoute("Pricing")}
+              onClick={() => handleRoute("pricing")}
             />
           </ListItemButton>
 
@@ -169,7 +173,7 @@ const DrawerMenu = ({
           >
             <ListItemText
               primary={t("Contact us")}
-              onClick={() => handleRoute("Contact")}
+              onClick={() => handleRoute("contactUs")}
             />
           </ListItemButton>
 
@@ -208,27 +212,34 @@ const DrawerMenu = ({
               },
             }}
           >
-            <GlobalButton
-              onClick={handleOpenAuthModal}
-              sx={{
-                backgroundColor: theme.palette.primary.main,
-                color: "white",
-                borderRadius: "4px",
-              }}
-              px={"30px"}
-              py={"10px"}
-            >
-              {t("Login")}
-            </GlobalButton>
+            {token ? (
+              <GlobalButton
+                onClick={() => handleLogout()}
+                sx={{
+                  backgroundColor: theme.palette.primary.main,
+                  color: "white",
+                  borderRadius: "4px",
+                }}
+                px={"30px"}
+                py={"10px"}
+              >
+                {t("Logout")}
+              </GlobalButton>
+            ) : (
+              <GlobalButton
+                onClick={handleOpenAuthModal}
+                sx={{
+                  backgroundColor: theme.palette.primary.main,
+                  color: "white",
+                  borderRadius: "4px",
+                }}
+                px={"30px"}
+                py={"10px"}
+              >
+                {t("Login")}
+              </GlobalButton>
+            )}
           </ListItemButton>
-          {/* <Button
-            variant="contained"
-            fullWidth
-            sx={{ mt: 3, mb: 1, color: "white" }}
-            onClick={() => handleLogout()}
-          >
-            {t("Logout")}
-          </Button> */}
         </List>
       </Box>
     </RTL>
@@ -255,7 +266,9 @@ const DrawerMenu = ({
       <AreaDialog
         homeAreas={areas}
         openAreaDialog={openAreaDialog}
-        handleClose={CloseDialog} ServiceId={ServiceId}      />
+        handleClose={CloseDialog}
+        ServiceId={ServiceId}
+      />
       <Box
         sx={{
           display: "flex",
@@ -283,7 +296,7 @@ const DrawerMenu = ({
             justifyContent: "flex-end",
           }}
         >
-          {children}
+          {token && children}
           <IconButton
             size="large"
             aria-label="account of current user"

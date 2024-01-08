@@ -12,6 +12,8 @@ export const arabic = {
   "Alternative Phone": "رقم الجوال البديل ",
   "Full name is required": "يرجي ادخال الاسم بالكامل",
   "About Us": "عنا",
+  "Follow Us": "تابعنا علي",
+  Message: "الرسالة",
   "Please Select Area": "من فضلك حدد منطقه",
   "Laundry become simple": "الغسيل صار  بسيط",
   "Say goodbye to laundry day": "قل وداعا ليوم الغسيل",
@@ -65,12 +67,12 @@ export const arabic = {
   "more for free delivery": "المتبقي للحصول علي توصيل مجاني",
   "You Got A Free Delivery": "لقد حصلت علي توصيل مجاني",
   Open: "مفتوح",
-  Send: "ارسل",
+  Send: "إرسال",
   "Select an Address": "حدد عنوان",
   "No Prime available in this time": "لا يوجد برايم متاح في هذا الوقت",
   "Let's talk with us": "هيا تحدث معنا",
   "Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.":
-    '"هل لديك أسئلة أو تعليقات أو اقتراحات؟ ما عليك سوى ملء النموذج وسنتواصل معك قريبًا. "أسئلة أو تعليقات أو اقتراحات؟ ما عليك سوى ملء النموذج وسنتواصل معك قريبًا.",',
+    "أسئلة أو تعليقات أو اقتراحات؟ ببساطة املأ النموذج وسنتواصل معك قريبًا.",
   "Enter your email address": "ادخل عنوان البريد الالكتروني",
   "There are no cuisines": "لا يوجد مطابخ",
   "You must LogIn First": "يجب ان تسجل دخول اولا",
@@ -187,12 +189,54 @@ export const arabic = {
     "تقوم اطلب بجمع واستخدام المعلومات الشخصية كما هو موضح في سياسة الخصوصية الخاصة بنا.",
 
   "7. Intellectual Property": "7. الملكية الفكرية",
+  "How Alwan-Elghasil Work": "كيفية عمل ألوان الغسيل",
+
+  "About Alwan Elghasil": "عن الوان الغسيل",
+  "Welcome to Alwan Elghasil, where we redefine cleanliness and care for your garments with a commitment to quality and excellence. At Alwan Elghasil, we believe that every piece of clothing tells a story, and we are here to ensure that each story is told in pristine condition.":
+    "مرحبًا بكم في ألوان الغسيل، حيث نعيد تعريف النظافة والعناية بملابسك مع الالتزام بالجودة في ألوان الغسيل، نحن نؤمن بأن كل قطعة ملابس تحكي قصة، ونحن هنا للتأكد من أن كل قصة يتم سردها في حالتها الأصلية.",
+  "Our journey began with a simple yet powerful vision – to provide a laundry service that goes beyond just cleaning clothes a service that understands the importance of preserving the fabric, colors,and memories associated with each garment.":
+    "بدأت رحلتنا برؤية بسيطة لكنها قوية - تقديم خدمة غسيل ملابس تتجاوز مجرد تنظيف الملابس، خدمة تدرك أهميةالحفاظ على القماش والألوان والذكريات المرتبطة بكل قطعة ملابس.",
+  "Our Commitment": "التزامنا",
+  "At Alwan Elghasil, we are dedicated to delivering the highest standards of cleanliness and care. Our state-of-the-artfacilities are equipped with the latest technology, ensuring that your clothes are impeccably clean and treated with the utmost respect for the environment.":
+    "في ألوان الغسيل، نحن ملتزمون بتقديم أعلى معايير النظافة والرعاية. تم تجهيز مرافقنا الحديثة بأحدث التقنيات مما يضمن أن ملابسك نظيفة تمامًا ويتم التعامل معها بأقصى درجات الاحترام للبيئة.",
+
+  "Do you have a question for us?": "هل لديك بالنسبة سؤال لنا؟",
+  "Get In Touch": "ابقى على تواصل",
+
+  "What Sets Us Apart": "ما يميزنا",
+  "Quality Assurance": "تاكيد الجودة",
+  "We take pride in our rigorous quality control measures. Every garment undergoes a meticulous inspection process to guarantee that it meets our stringent standards before being returned to you.":
+    "نحن نفخر بتدابيرنا الصارمة لمراقبة الجودة. تخضع كل قطعة من الملابس لعملية فحص دقيقة لضمان استيفائها لمعاييرنا الصارمة قبل إعادتها إليك.",
+
+  "Customer-Centric Approach": "نهج يركز على العملاء",
+  "Your satisfaction is our priority. Our friendly and professional staff is always ready to assist you, whether it's addressing specific concerns, providing expert advice, or ensuring a seamless customer experience.":
+    "رضاكم هو أولويتنا. إن موظفينا الودودين والمحترفين مستعدون دائمًا لمساعدتك، سواء كان ذلك في معالجة مخاوف محدده أو تقديم مشورة الخبراء، أو ضمان تجربة سلسة للعملاء.",
+
+  "Eco-Friendly Practices": "الممارسات الصديقة للبيئة",
+  "We are committed to sustainability. Alwan Elghasil embraces eco-friendly practices, from our choice of detergents to our water and energy-saving initiatives, contributing to a healthier planet for future generations.":
+    "نحن ملتزمون بالاستدامة. تتبنى ألوان الغاسل ممارسات صديقة للبيئة، بدءًا من اختيارنا للمنظفات ووصولاً إلى مبادراتنا لتوفير المياه والطاقة، مما يساهم في توفير كوكب أكثر صحة للأجيال القادمة.",
+
+  "Our Team": "فريقنا",
+  "Behind Alwan Elghasil is a team of passionate individuals who share a common goal – to redefine the laundry experience.Our skilled and dedicated staff members are the backbone of our operations, ensuring that your garments receive the care they deserve.":
+    "خلف ألوان الغاسل فريق من الأفراد المتحمسين الذين يشتركون في هدف مشترك – إعادة تعريف تجربة الغسيل.ان موظفينا المهرة والمتفانين هم العمود الفقري لعملياتنا، مما يضمن حصول ملابس على الرعاية التي تستحقها.",
+
+  "The faster way to do Laundry and all you need so you never have to worry about washing":
+    "الطريقة الأسرع للقيام بالغسيل وكل ما تحتاجه حتى لا تقلق أبدًا بشأن الغسيل",
+  "Creating your account is fast and easy": "إنشاء حسابك يكون سريع وسهل",
+  "Type your full name and phone number to set up your account with us.":
+    "اكتب اسمك الكامل ورقم الهاتف لإنشاء حسابك معنا.",
+  "Add Your washing preferences": "أضف تفضيلاتك الخاصة للغسيل",
+  "Add what you need through many of the services we provide to you":
+    "أضف ما تحتاجه من خلال العديد من الخدمات التي نقدمها لك",
+  "Place your order": "قم بتنفيذ الطلب",
+  "Check your order preferences, payment method,Submit your order in just one click.":
+    "تحقق من تفضيلات الطلب وطريقة الدفع، وأرسل طلبك بنقرة واحدة فقط.",
 
   "You must enter date after yesterday": "لايجب ان تدخل تاريخ في الماضي",
   "Order not Available after 5 dayes": "ممنوع طلب الاوردر بعد 5 ايام",
-  "Deliver To": "توصيل الي",
+  "Deliver To": "يسلم إلى",
   "Restaurant not avilable in this day": "المطعم غير متاح في هذا اليوم",
-  "View Order Details": "اظهار تفاصيل الاوردر",
+  "View Order Details": " عرض تفاصيل الطلب",
   "terms and conditions": "الشروط والاحكام",
   "Other Categories": "الاقسام الاخري",
   "All content and materials on the platform are the property of Otlob or its partners.":
@@ -315,11 +359,11 @@ export const arabic = {
   Price: "السعر",
   "Payment Method": "طريقة الدفع",
   "Online Payment": "الدفع الالكتروني",
-  Summary: "الملخص",
+  Summary: "تفاصيل الدفع",
 
   "Card Number": "رقم البطاقه",
   "We start our delivery process and you will receive your food soon.":
-    "لقد بدانا عمليه التوصيل وسوف تستلم طلبك قريبا",
+    "نبدأ عملية التسليم وسوف تتلقى طعامك قريبا.",
   Cart: "السله",
   "Phone Number": "رقم الجوال",
   "Update Profile": "تحديث الحساب",
@@ -390,7 +434,8 @@ export const arabic = {
   "If Any product is not available": "إذا كان أي منتج غير متوفر",
   "Add More Delivery Instruction": "أضف المزيد من تعليمات التسليم",
   "Search foods": "ابحث عن الأطعمة",
-  Add: "يضيف",
+  Add: "إضافة",
+
   Category: " فئة ",
   "Additional Note": "مذكرة إضافية",
   "Minimum purchase amount": "الحد الأدنى لمبلغ الشراء",
@@ -606,6 +651,8 @@ export const arabic = {
   "Earn money to your wallet by completing the offer & challenged":
     "كسب المال إلى محفظتك من خلال استكمال العرض والتحدي",
   view: "رأي",
+  Item: " القطعة",
+  "No Saved Addresses Found": "لا يوجد عناوين محفوظه",
   "Filter By": "مصنف بواسطة",
   "See more": "شاهد المزيد",
   "How Was Your Experience?": "كيف كانت تجربتك؟",
@@ -699,13 +746,14 @@ export const arabic = {
   "Take Away": "يبعد",
   "Preferable Time": "الوقت المفضل",
   "Already have an account?": "هل لديك حساب؟",
-
+  "Additional Instruction": "تعليمات  اضافيه",
+  "For e.g. Call before delivery": "For e.g. Call before delivery",
   Today: "اليوم",
   Tomorrow: "الغد",
-  Subtotal: "المجموع الفرعي",
+  Subtotal: "الاجمالي",
   Discount: "الخصم",
   "Payment Options": "خيارات الدفع",
-  "Cash on delivery": "الدفع عند الاستلام",
+  "Cash On Delivery": "الدفع عند الاستلام",
   "Digital payment": "الدفع الرقمي",
   "Wallet payment": "دفع المحفظة",
   " I agree that placing the order places me under Terms and Conditions & Privacy Policies":
@@ -838,7 +886,7 @@ export const arabic = {
     "لقد رفضت إذن تحديد الموقع. يرجى السماح بإذن تحديد موقع المستعرضات من جهازك ، وتحديث الموقع والحصول على توصيل أكثر دقة.",
   Variation: "تفاوت",
   Addon: "اضافه",
-  "You place the order successfully.": "تهانينا! لقد قمت بوضع الطلب بنجاح",
+  "You place the order successfully.": "قمت بوضع الطلب بنجاح.",
   "Your order is placed Successfully. We start our delivery process and you will receive your food soon":
     "تم تقديم طلبك بنجاح. نبدأ عملية التوصيل وستتلقى طعامك قريبًا",
   "Congratulations!": "تهانينا!",
@@ -927,9 +975,10 @@ export const arabic = {
 
   "Use Current Location": "انضم كرجل توصيل في",
 
-  "Personal Info": "معلومات شخصية",
+  "Pickup Schedule": "جدول الاستلام",
   "Fast Name": "اسم سريع",
   "Not changeable": "غير قابل للتغيير",
+  "Delivery Schedule": "جدول التسليم",
   "Add New +": "إضافة + جديد",
   "Point History": "تاريخ النقطة",
   "Add new address": "إضافة عنوان جديد",
@@ -939,6 +988,8 @@ export const arabic = {
   point: "نقطة",
   "Your Profile": "ملفك الشخصي",
   Office: "مكتب",
+  Apply: "تفعيل",
+  "Enter Coupon": "أدخل الكوبون",
   "Recommend Products": "المنتجات الموصي بها",
   "To select from saved addresses, you need to sign in.":
     "للاختيار من العناوين المحفوظة ، تحتاج إلى تسجيل الدخول.",
@@ -954,7 +1005,7 @@ export const arabic = {
   "Discount available from": "الخصم متاح من",
   "Search foods in restaurant": "البحث عن الأطعمة في المطعم",
   "foods for you": "أطعمة لك",
-  Off: "عن",
+  Off: "خصم",
   "Only For": "فقط ل",
   "Cart is Empty": "السلة فارغة",
   "in your cart": "في عربة التسوق الخاصة بك",
@@ -965,7 +1016,7 @@ export const arabic = {
   "Selected Address": "العنوان المحدد",
   "Enter Your Coupon..": "أدخل قسيمتك ..",
   "Order Summary": "ملخص الطلب",
-  Total: "المجموع",
+  Total: "الاجمالي الكلي",
   "Restaurant Informations": "معلومات المطعم",
   "Give a review": "قدِّم مراجعة",
   "Cancel Order": "الغاء الطلب",
@@ -973,6 +1024,8 @@ export const arabic = {
   "Preparing Food": "تحضير الطعام",
   "Food is on the way": "الطعام في الطريق",
   Delivered: "تم التوصيل",
+  CheckOut: "اتمام الطلب",
+  "Personal Info": "معلومات شخصية",
   "Give Review": "أعط مراجعة",
   "Are you sure you want to  delete this item?":
     "هل أنت متأكد أنك تريد حذف هذا البند؟",
@@ -1161,11 +1214,13 @@ export const arabic = {
   Street: "الشارع",
   "House number": "رقم الدار",
   Included: "متضمن",
+
   Excluded: "مستبعد",
   "This order can not be reordered as the restaurant is not existing in your current zone.":
     "لا يمكن إعادة ترتيب هذا الطلب لأن المطعم غير موجود في منطقتك الحالية.",
   "ORDER TYPE &": "نوع الطلب &",
   "Delivery fee increased": "زيادة رسوم التوصيل",
+  "Deliver to :":"التوصيل إلى :",
   "due to bad weather.": "بسبب سوء الطقس.",
   "Start date and end date can not be same for subscription orders.":
     "تاريخ البدء وتاريخ الانتهاء لا يمكن أن يكونا متطابقين لأوامر الاشتراك.",
@@ -1173,4 +1228,7 @@ export const arabic = {
   "Your Restaurants": "مطاعمك",
   "You have some foods in your cart. If you change your location, your cart and other data related to with your current delivery location will be reset.":
     "لديك بعض الأطعمة في عربة التسوق الخاصة بك. إذا قمت بتغيير موقعك ، فسيتم إعادة تعيين عربة التسوق الخاصة بك والبيانات الأخرى ذات الصلة بموقع التسليم الحالي الخاص بك.",
+  "Terms and Conditions": "الشروط والاحكام",
+  "Price List": "قائمة الاسعار",
+  "It’s our goal to make premium laundry service work with all budgets.":"إن هدفنا هو أن نجعل خدمة غسيل الملابس المتميزة تتناسب مع جميع الميزانيات.",
 };

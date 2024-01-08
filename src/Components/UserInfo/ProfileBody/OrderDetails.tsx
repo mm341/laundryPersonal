@@ -15,21 +15,23 @@ import rateButtonIcon from "../../../../public/info/RateButtonIcon.svg";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useRouter } from "next/router";
 import OrderRateDiaolg from "./OrderRateDiaolg";
+import { OrdersInterface } from "@/interfaces/OrdersInterface";
+import { useAppSelector } from "@/redux/store";
+import CustomRatings from "@/Components/GlobalComponent/CustomRatings";
 const OrderDetails = ({
   setOrderDetails,
-  productsDetails,
-  setOpenProductsDetails,
+  orderData,
 }: {
   setOrderDetails: (e: boolean) => void;
-  productsDetails: boolean;
-  setOpenProductsDetails: (e: boolean) => void;
+  orderData: OrdersInterface;
 }) => {
   //  hooks
   const { t } = useTranslation();
   const theme = useTheme();
   const { locale } = useRouter();
-
+  const [productsDetails, setOpenProductsDetails] = useState<boolean>(false);
   const [openRateDialog, setOpenRateDialog] = useState(false);
+
   return (
     <>
       <GlobalDisplayFlexColumnBox
@@ -39,7 +41,7 @@ const OrderDetails = ({
       >
         <GlobalDisplayFlexBox
           sx={{ flexDirection: "row", justifyContent: "flex-start" }}
-          style={{flexDirection:"row"}}
+          style={{ flexDirection: "row" }}
           gap={"10px"}
         >
           {/*  top section */}
@@ -69,53 +71,92 @@ const OrderDetails = ({
             <GlobalDisplayFlexColumnBox width={"100%"} gap={"15px"}>
               {/*  top section items */}
               <OrderCardTopSection
-                setOpenProductsDetails={setOpenProductsDetails}
                 openProductsDetails={productsDetails}
+                setOpenProductsDetails={setOpenProductsDetails}
+                order={orderData}
               />
 
               {/*  ordder details and price */}
-              <BottomOrderDetailsSection />
+              <BottomOrderDetailsSection order={orderData} />
             </GlobalDisplayFlexColumnBox>
           </CustomPaperBigCard>
 
           {/*  delivery Details */}
-          <OrderDeliveryDetails />
+          <OrderDeliveryDetails orderData={orderData} />
 
           {/*  rate button case delivered order */}
+
           <Box
-            sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
           >
-            <GlobalButton
-              px={"0"}
-              py={"0"}
-              sx={{
-                backgroundColor: theme.palette.primary.main,
-                width: { md: "320px", xs: "250px" },
-                height: "48px",
-                borderRadius: "5px",
-              }}
-              onClick={() => setOpenRateDialog(true)}
-            >
-              <Box sx={{ display: "flex", gap: "15px", alignItems: "center" }}>
-                <img
-                  src={rateButtonIcon?.src}
-                  loading="lazy"
-                  alt="img"
-                  style={{ width: "20px", height: "20px" }}
-                />
-                <Typography
-                  sx={{ fontSize: "16px", fontWeight: "500", color: "white" }}
+            {orderData?.order_status === "Delivered" &&
+              orderData?.rating === 0 && (
+                <GlobalButton
+                  px={"0"}
+                  py={"0"}
+                  sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    width: { md: "320px", xs: "250px" },
+                    height: "48px",
+                    borderRadius: "5px",
+                  }}
+                  onClick={() => setOpenRateDialog(true)}
                 >
-                  {t("Rate your Experience")}
+                  <Box
+                    sx={{ display: "flex", gap: "15px", alignItems: "center" }}
+                  >
+                    <img
+                      src={rateButtonIcon?.src}
+                      loading="lazy"
+                      alt="img"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: "500",
+                        color: "white",
+                      }}
+                    >
+                      {t("Rate your Experience")}
+                    </Typography>
+                  </Box>
+                </GlobalButton>
+              )}
+
+            {orderData?.order_status === "Delivered" &&
+              orderData?.rating > 0 && (
+                <Typography
+                  sx={{
+                    color: theme.palette.primary.main,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    fontSize: "20px",
+                    fontWeight: "400",
+                  }}
+                >
+                  {t("Your Rating")}{" "}
+                  <CustomRatings
+                    readOnly={true}
+                    ratingValue={orderData?.rating}
+                    handleChangeRatings={function (value: number): void {
+                      throw new Error("Function not implemented.");
+                    }}
+                  />
                 </Typography>
-              </Box>
-            </GlobalButton>
+              )}
           </Box>
         </GlobalDisplayFlexColumnBox>
       </GlobalDisplayFlexColumnBox>
 
       {/*  Order Rate Dialog */}
       <OrderRateDiaolg
+        orderData={orderData}
         setOpenRateDialog={setOpenRateDialog}
         openRateDialog={openRateDialog}
       />

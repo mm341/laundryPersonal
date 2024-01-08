@@ -2,13 +2,14 @@ export const english = {
   "Pick Up at": "Pick Up at",
   "Delivery at": "Delivery at",
   "Delivery Charge": "Delivery Charge",
-  "Sub total":"Sub total",
+  "Sub total": "Sub total",
   "Order Details": "Order Details",
   Completed: "Completed",
   "Remove Address?": "Remove Address?",
   "Are you sure you want to delete the address?":
     "Are you sure you want to delete the address?",
   Street: "Street",
+  "Follow Us":"Follow Us",
   "Save New Address": "Save New Address",
   "Choose Area": "Choose Area",
   "Alternative Phone": "Alternative Phone",
@@ -21,7 +22,9 @@ export const english = {
     "You deserve more time for  really important in your life, where the stressful task of laundry is no longer a time-consuming chore.",
   "Proceed Next": "Proceed Next",
   "Select Service Category": "Select Service Category",
+  "Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.":"Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.",
   "How It Work": "How It Work",
+  "Message":"Message",
   "Our Services": "Our Services",
   "Get the Service": "Get the Service",
   "usability become smooth": "usability become smooth",
@@ -65,9 +68,7 @@ export const english = {
   "Add addresee": "Add addresee",
   Open: "Open",
   "No Prime available in this time": "No Prime available in this time",
-  "Let's talk with us": "Let's talk with us",
-  "Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.":
-    "Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.",
+"Let's talk with us": "Let's talk with us",
   "Download Our App": "Download Our App",
   Send: "Send",
   "Enter your email address": "Enter your email address",
@@ -143,7 +144,7 @@ export const english = {
 
   "1. Acceptance of Terms and Conditions":
     "1. Acceptance of Terms and Conditions",
-
+"Deliver to :":"Deliver to :",
   "Welcome to Otlob, your trusted food delivery service. At Otlob, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, and protect your data when you use our website, mobile application, or any other services provided by Otlob.":
     "Welcome to Otlob, your trusted food delivery service. At Otlob, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, and protect your data when you use our website, mobile application, or any other services provided by Otlob.",
 
@@ -211,6 +212,53 @@ export const english = {
     "Otlob is not liable for any damages or losses arising from the use of our services.",
   "Users use the platform at their own risk.":
     "Users use the platform at their own risk.",
+
+"Creating your account is fast and easy":"Creating your account is fast and easy",
+"Type your full name and phone number to set up your account with us.":"Type your full name and phone number to set up your account with us.",
+"Add Your washing preferences":"Add Your washing preferences",
+"Add what you need through many of the services we provide to you":"Add what you need through many of the services we provide to you",
+"Place your order":"Place your order",
+"Check your order preferences, payment method,Submit your order in just one click.":"Check your order preferences, payment method,Submit your order in just one click.",
+"How Alwan-Elghasil Work":"How Alwan-Elghasil Work",
+"The faster way to do Laundry and all you need so you never have to worry about washing":"The faster way to do Laundry and all you need so you never have to worry about washing",
+
+
+
+
+"About Alwan Elghasil":"About Alwan Elghasil",
+"Welcome to Alwan Elghasil, where we redefine cleanliness and care for your garments with a commitment to quality and excellence. At Alwan Elghasil, we believe that every piece of clothing tells a story, and we are here to ensure that each story is told in pristine condition.":
+"Welcome to Alwan Elghasil, where we redefine cleanliness and care for your garments with a commitment to quality and excellence. At Alwan Elghasil, we believe that every piece of clothing tells a story,and we are here to ensure that each story is told in pristine condition.",
+"Our journey began with a simple yet powerful vision – to provide a laundry service that goes beyond just cleaning clothes a service that understands the importance of preserving the fabric, colors,and memories associated with each garment.":"Our journey began with a simple yet powerful vision – to provide a laundry service that goes beyond just cleaning clothes a service that understands the importance of preserving the fabric, colors,and memories associated with each garment.",
+"Our Commitment":"Our Commitment",
+"At Alwan Elghasil, we are dedicated to delivering the highest standards of cleanliness and care. Our state-of-the-artfacilities are equipped with the latest technology, ensuring that your clothes are impeccably clean and treated with the utmost respect for the environment.":"At Alwan Elghasil, we are dedicated to delivering the highest standards of cleanliness and care. Our state-of-the-artfacilities are equipped with the latest technology, ensuring that your clothes are impeccably clean and treated with the utmost respect for the environment.",
+
+
+
+
+"Do you have a question for us?":"Do you have a question for us?",
+"Get In Touch":"Get In Touch",
+
+
+"What Sets Us Apart":"What Sets Us Apart",
+"Quality Assurance":"Quality Assurance",
+"We take pride in our rigorous quality control measures. Every garment undergoes a meticulous inspection process to guarantee that it meets our stringent standards before being returned to you.":"We take pride in our rigorous quality control measures. Every garment undergoes a meticulous inspection process to guarantee that it meets our stringent standards before being returned to you.",
+
+"Customer-Centric Approach":"Customer-Centric Approach",
+"Your satisfaction is our priority. Our friendly and professional staff is always ready to assist you, whether it's addressing specific concerns, providing expert advice, or ensuring a seamless customer experience.":"Your satisfaction is our priority. Our friendly and professional staff is always ready to assist you, whether it's addressing specific concerns, providing expert advice, or ensuring a seamless customer experience.",
+
+"Eco-Friendly Practices":"Eco-Friendly Practices",
+"We are committed to sustainability. Alwan Elghasil embraces eco-friendly practices, from our choice of detergents to our water and energy-saving initiatives, contributing to a healthier planet for future generations.":"We are committed to sustainability. Alwan Elghasil embraces eco-friendly practices, from our choice of detergents to our water and energy-saving initiatives, contributing to a healthier planet for future generations.",
+
+
+
+
+
+
+
+
+"Our Team":"Our Team",
+"Behind Alwan Elghasil is a team of passionate individuals who share a common goal – to redefine the laundry experience.Our skilled and dedicated staff members are the backbone of our operations, ensuring that your garments receive the care they deserve.":"Behind Alwan Elghasil is a team of passionate individuals who share a common goal – to redefine the laundry experience.Our skilled and dedicated staff members are the backbone of our operations, ensuring that your garments receive the care they deserve.",
+
 
   "9. Governing Law": "9. Governing Law",
   "You must enter date after yesterday": "You must enter date after yesterday",
@@ -345,7 +393,8 @@ export const english = {
   "Payment Method": "Payment Method",
   "Online Payment": "Online Payment",
   Summary: "Summary",
-
+  CheckOut:"CheckOut",
+  "Personal Info":"Personal Info",
   "Card Number": "Card Number",
   "We start our delivery process and you will receive your food soon.":
     "We start our delivery process and you will receive your food soon.",
@@ -678,13 +727,17 @@ export const english = {
   "Take Away": "Take Away",
   "Preferable Time": "Preferable Time",
   "Already have an account?": "Already have an account?",
+"Additional Instruction":"Additional Instruction",
 
+"For e.g. Call before delivery":"For e.g. Call before delivery",
   Today: "Today",
   Tomorrow: "Tomorrow",
-  Subtotal: "Subtotal",
-
+  Subtotal: "Sub Total",
+  "Item":"Item",
+  "Enter Coupon":"Enter Coupon",
+  "No Saved Addresses Found": "No Saved Addresses Found",
   "Payment Options": "Payment Options",
-  "Cash on delivery": "Cash on delivery",
+  "Cash On Delivery": "Cash on Delivery",
   "Digital payment": "Digital payment",
   "Wallet payment": "Wallet payment",
   " I agree that placing the order places me under Terms and Conditions & Privacy Policies":
@@ -692,13 +745,14 @@ export const english = {
   "Have a Coupon?": "Have a Coupon?",
   "Apply Now": "Apply Now",
   "View Saved Address": "View Saved Address",
-  "How Was Your Experience?":"How Was Your Experience?",
-  "Your feedback is valuable to us":"Your feedback is valuable to us",
-  "Write your comments here":"Write your comments here",
-  "Log out?":"Log out?",
-  "Are you sure you want to logout from this account?":"Are you sure you want to logout from this account?",
-  "Yes, Logout":"Yes, Logout",
-  "Rate your Experience":"Rate your Experience",
+  "How Was Your Experience?": "How Was Your Experience?",
+  "Your feedback is valuable to us": "Your feedback is valuable to us",
+  "Write your comments here": "Write your comments here",
+  "Log out?": "Log out?",
+  "Are you sure you want to logout from this account?":
+    "Are you sure you want to logout from this account?",
+  "Yes, Logout": "Yes, Logout",
+  "Rate your Experience": "Rate your Experience",
   "Delivery Address": "Delivery Address",
   " Add new address": " Add new address",
   " Add New +": " Add New +",
@@ -802,6 +856,7 @@ export const english = {
   Variation: "Variation",
   Addon: "Addon",
   "You place the order successfully.": "You place the order successfully.",
+  
   "Your order is placed Successfully. We start our delivery process and you will receive your food soon":
     "Your order is placed Successfully. We start our delivery process and you will receive your food soon",
   "Congratulations!": "Congratulations!",
@@ -913,7 +968,9 @@ export const english = {
   "Stay upto date with restaurants and foods around you. Subscribe with email.":
     "Stay upto date with restaurants and foods around you. Subscribe with email.",
 
-  "Personal Info": "Personal Info",
+  "Pickup Schedule":"Pickup Schedule",
+  "Delivery Schedule":"Delivery Schedule",
+
   "Fast Name": "Fast Name",
   "Not Changeable": "Not Changeable",
   "Add New +": "Add New +",
@@ -1189,4 +1246,6 @@ export const english = {
   "Your Restaurants": "Your Restaurants",
   "You have some foods in your cart. If you change your location, your cart and other data related to with your carrunt delivery location will be reset.":
     "You have some foods in your cart. If you change your location, your cart and other data related to with your carrunt delivery location will be reset.",
+    "Apply":"Apply",
+   
 };

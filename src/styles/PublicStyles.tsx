@@ -10,6 +10,7 @@ import {
   Link as MenuLink,
   Button,
   Rating,
+  Autocomplete,
 } from "@mui/material";
 
 export const HomeParentBox = styled(Box)(() => ({
@@ -83,7 +84,7 @@ export const SideDrawerWrapper = styled(Box)(({ theme }) => ({
 
 export const CustomPaperBigCard = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
-  padding: "15px",
+  padding: "12px",
   width: "100%",
   height: "100%",
 
@@ -266,3 +267,11 @@ export const CustomRating = styled(Rating)(({ theme, color }) => ({
     fontSize: "16px",
   },
 }));
+
+export const PreferableTimeInput = styled(Autocomplete)(({ theme }) => ({
+  // border: '1px solid rgba(251, 222, 201)',
+  borderRadius: '10px',
+  '&.MuiAutocomplete-option': {
+      backgroundColor: theme.palette.primary.main,
+  },
+}))

@@ -11,37 +11,47 @@ import { AccountUpdate } from "@/interfaces/FormUpdateAccountInterface";
 import CustomLoadingSubmitButton from "@/Components/GlobalComponent/CustomLoadingSubmitButton";
 import { CustomStackFullWidth } from "@/styles/PublicStyles";
 import ImageUploaderWithPreview from "@/Components/single-file-uploader-with-preview/ImageUploaderWithPreview";
+import { AccountInfo } from "@/interfaces/AccountInfo";
+import InputImage from "@/Components/GlobalComponent/image.input";
 
 const BasicInformationForm = ({
   formSubmitHandler,
+  accountInfo,
+  isloading,
 }: {
   formSubmitHandler: (values: AccountUpdate) => void;
+  accountInfo: AccountInfo;
+  isloading: boolean;
 }) => {
+  //  hooks
   const { t } = useTranslation();
+
+  //  account form validation and prepare send api request
 
   const profileFormik = useFormik({
     initialValues: {
-      name: "",
-      phone: "",
-      alternative_phone: "",
+      first_name: accountInfo?.name ? accountInfo?.name : "",
+      mobile: accountInfo?.mobile ? accountInfo.mobile : "",
+      alternative_phone: accountInfo?.alternative_phone
+        ? accountInfo?.alternative_phone
+        : "",
       profile_photo: "",
     },
     validationSchema: ValidationSechemaProfile(),
     onSubmit: async (values: AccountUpdate) => {
       try {
         const data: AccountUpdate = {};
-        if (values.phone) {
-          data.phone = values.phone;
+        if (values.mobile !== accountInfo?.mobile) {
+          data.mobile = values.mobile;
         }
-        if (values.name) {
-          data.name = values.name;
+        if (values.first_name !== accountInfo?.name) {
+          data.first_name = values.first_name;
         }
 
-        if (values.alternative_phone) {
+        if (values.alternative_phone !== accountInfo?.alternative_phone) {
           data.alternative_phone = values.alternative_phone;
         }
         if (values.profile_photo) {
-        
           data.profile_photo = values.profile_photo;
         }
 
@@ -57,8 +67,7 @@ const BasicInformationForm = ({
   };
 
   const singleFileUploadHandlerForCoverPhoto = (value: any) => {
-
-    profileFormik.setFieldValue("profile_photo", value.currentTarget.files[0]);
+    profileFormik.setFieldValue("profile_photo", value);
   };
 
   return (
@@ -81,74 +90,66 @@ const BasicInformationForm = ({
               spacing={2}
               mb=".8rem"
             >
-              <ImageUploaderWithPreview
-                file={profileFormik.values.profile_photo}
-                onChange={singleFileUploadHandlerForCoverPhoto}
-                width="1000px"
+              {/*Image*/}
+
+              <InputImage
+                id="engineer_image"
+                init={accountInfo?.profile_photo_path}
                 error={
                   profileFormik.touched.profile_photo &&
                   profileFormik.errors.profile_photo
                 }
+                onImageSubmit={singleFileUploadHandlerForCoverPhoto}
               />
-              {/* { profileFormik.touched.profile_photo &&
-                profileFormik.errors.profile_photo && (
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      ml: "10px",
-                      fontWeight: "inherit",
-                      color: (theme) => theme.palette.error.main,
-                    }}
-                  >
-                    {t("Cover photo is required")}
-                  </Typography>
-                )} */}
             </CustomStackFullWidth>
           </Grid>
+
+          {/* Full Name */}
           <Grid item xs={12} md={6}>
             <TextField
-              //   disabled={isLoading}
+              disabled={isloading}
               sx={{ width: "100%", backgroundColor: "white" }}
               id="outlined-basic"
               variant="outlined"
-              name="name"
-              value={profileFormik.values.name}
+              name="first_name"
+              value={profileFormik.values.first_name}
               onChange={profileFormik.handleChange}
               label={t("Full Name")}
               required
               error={
-                profileFormik.touched.name && Boolean(profileFormik.errors.name)
+                profileFormik.touched.first_name &&
+                Boolean(profileFormik.errors.first_name)
               }
               helperText={
-                profileFormik.touched.name && profileFormik.errors.name
+                profileFormik.touched.first_name &&
+                profileFormik.errors.first_name
               }
-              // touched={profileFormik.touched.f_name}
             />
           </Grid>
-
+          {/* Phone Number*/}
           <Grid item md={6} xs={12}>
             <TextField
-              //   disabled={isLoading}
+              disabled={isloading}
               label={<span>{t("Phone Number")}</span>}
               variant="outlined"
-              name="phone"
-              value={profileFormik.values.phone}
+              name="mobile"
+              value={profileFormik.values.mobile}
               onChange={profileFormik.handleChange}
               sx={{ width: "100%", backgroundColor: "white" }}
               required
               error={
-                profileFormik.touched.phone &&
-                Boolean(profileFormik.errors.phone)
+                profileFormik.touched.mobile &&
+                Boolean(profileFormik.errors.mobile)
               }
               helperText={
-                profileFormik.touched.phone && profileFormik.errors.phone
+                profileFormik.touched.mobile && profileFormik.errors.mobile
               }
-              //   touched={profileFormik.touched.phone}
             />
           </Grid>
+          {/* Alternative Phone*/}
           <Grid item md={6} xs={12}>
             <TextField
-              //   disabled={isLoading}
+              disabled={isloading}
               label={<span>{t("Alternative Phone")}</span>}
               variant="outlined"
               name="alternative_phone"
@@ -164,7 +165,6 @@ const BasicInformationForm = ({
                 profileFormik.touched.alternative_phone &&
                 profileFormik.errors.alternative_phone
               }
-              //   touched={profileFormik.touched.phone}
             />
           </Grid>
 
@@ -178,7 +178,7 @@ const BasicInformationForm = ({
             >
               <CustomLoadingSubmitButton
                 size={25}
-                // loading={isLoading}
+                loading={isloading}
                 word="Update Profile"
               />
             </Grid>

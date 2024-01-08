@@ -16,18 +16,22 @@ import ServicesSlice from "./slices/Services";
 import MasterSlice from "./slices/MasterSlice";
 import { UpdatingProfile } from "./slices/HandelUpdateProfile";
 import { AddressesSlice } from "./slices/AddressesRequests";
+import { OrderSlice } from "./slices/OrderSlice";
+import { ProductsSlice } from "./slices/ProductsSlice";
 
 const persistConfig = {
   key: "Laundry",
   storage: storage,
-  blacklist: ["profile"],
-  wishListSlice: ["services", "master"],
+  blacklist: [""],
+  wishListSlice: ["services", "master", "profile"],
 };
 const reducers = combineReducers({
   services: ServicesSlice,
   master: MasterSlice,
   profile: UpdatingProfile,
   addresse: AddressesSlice,
+  orders: OrderSlice,
+  products: ProductsSlice,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 export const store = configureStore({

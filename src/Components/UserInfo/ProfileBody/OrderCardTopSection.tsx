@@ -8,20 +8,23 @@ import ProductsInOrderCard from "./ProductsInOrderCard";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { useTranslation } from "react-i18next";
+import { OrdersInterface } from "@/interfaces/OrdersInterface";
 const OrderCardTopSection = ({
   openProductsDetails,
   setOpenProductsDetails,
+  order,
 }: {
   openProductsDetails: boolean;
   setOpenProductsDetails: (e: boolean) => void;
+  order: OrdersInterface;
 }) => {
   //  hooks
   const { t } = useTranslation();
   return (
-    <GlobalDisplayFlexColumnBox width={"100%"} gap={"5px"} >
-      <GlobalDisplayFlexBox style={{flexDirection:"row"}} sx={{ p: "18px" }} >
+    <GlobalDisplayFlexColumnBox width={"100%"} gap={"5px"}>
+      <GlobalDisplayFlexBox style={{ flexDirection: "row" }} sx={{ p: "18px" }}>
         <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
-          {t("Items")} (4)
+          {t("Items")} ({order.products?.length})
         </Typography>
         {/*  handel click on arrow */}
         {!openProductsDetails ? (
@@ -43,10 +46,9 @@ const OrderCardTopSection = ({
           display: "flex",
           flexDirection: "column",
           gap: "15px",
-        
         }}
       >
-        <ProductsInOrderCard openProductsDetails={openProductsDetails} />
+        <ProductsInOrderCard order={order} openProductsDetails={openProductsDetails} />
       </Box>
     </GlobalDisplayFlexColumnBox>
   );
