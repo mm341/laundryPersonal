@@ -76,7 +76,6 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
     }
   }, [coords?.latitude, coords?.longitude, isGeolocationEnabled]);
 
- 
   // ///////////////////////////////////////////////////
   //  handel select area
   const handelSelectBox = (
@@ -105,6 +104,15 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
   ];
 
   useEffect(() => {
+    if (currentLocation?.lat && currentLocation?.lng) {
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation?.lat},${currentLocation?.lng}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
+      )
+        .then((res) => res.json())
+        .then((address) => {
+          setAddresseNow(address?.results[0]?.formatted_address);
+        });
+    }
     if (location?.lat && location?.lng) {
       fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location?.lat},${location?.lng}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
@@ -114,7 +122,12 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
           setAddresseNow(address?.results[0]?.formatted_address);
         });
     }
-  }, [location?.lat, location?.lng]);
+  }, [
+    location?.lat,
+    location?.lng,
+    currentLocation?.lat,
+    currentLocation?.lng,
+  ]);
 
   // const addAddressFormik = useFormik({
   //     initialValues: {
