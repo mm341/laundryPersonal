@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useTheme } from "@mui/material/styles";
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import AddressForm from "./AddressForm";
+import { AddresseInterface } from "@/interfaces/AddresseInterface";
 const style = {
   position: "absolute",
   top: "50%",
@@ -25,10 +26,12 @@ const AddNewAddress = ({
   color,
   open,
   setOpen,
+  addresse,
 }: {
   color: string;
   open: boolean;
   setOpen: (e: boolean) => void;
+  addresse?: AddresseInterface | undefined;
 }) => {
   const { t } = useTranslation();
 
@@ -78,7 +81,7 @@ const AddNewAddress = ({
             </button>
 
             <RTL direction={languagedirection}>
-              <AddressForm setOpen={setOpen} />
+              <AddressForm addresse={addresse} setOpen={setOpen} />
             </RTL>
           </Stack>
         </Modal>

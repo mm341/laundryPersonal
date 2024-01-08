@@ -29,12 +29,19 @@ import GoogleMapComponent from "./GoogleMapComponent";
 import { useGeolocated } from "react-geolocated";
 import { useQuery } from "react-query";
 import ValidationSchemaForAddAddress from "./ValidationSchemaForAddAddress";
+import { AddresseInterface } from "@/interfaces/AddresseInterface";
 export interface locationInterface {
   lat: number;
   lng: number;
 }
 
-const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
+const AddressForm = ({
+  setOpen,
+  addresse,
+}: {
+  setOpen: (e: boolean) => void;
+  addresse: AddresseInterface | undefined;
+}) => {
   //  hooks
   const theme = useTheme();
   const [selectValue, setselectValue] = useState<string>("");
@@ -103,6 +110,15 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
   ];
 
   useEffect(() => {
+    if (addresse?.latitude) {
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${addresse?.latitude},${addresse?.longitude}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
+      )
+        .then((res) => res.json())
+        .then((address) => {
+          setAddresseNow(address?.results[0]?.formatted_address);
+        });
+    }
     if (currentLocation?.lat && currentLocation?.lng) {
       fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation?.lat},${currentLocation?.lng}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
@@ -126,6 +142,8 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
     location?.lng,
     currentLocation?.lat,
     currentLocation?.lng,
+    addresse?.latitude,
+    addresse?.longitude,
   ]);
 
   //  validation of add addresse form
@@ -190,6 +208,7 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
       addAddressFormik.setFieldValue("area", selectValue);
     }
   }, [selectValue]);
+
   return (
     <Stack>
       <form onSubmit={addAddressFormik.handleSubmit} noValidate>
@@ -230,6 +249,7 @@ const AddressForm = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
 
           <Grid item xs={12}>
             <GoogleMapComponent
+              addresse={addresse}
               currentLocation={currentLocation}
               addresseNow={addresseNow}
               setLocation={setLocation}

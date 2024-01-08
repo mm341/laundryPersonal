@@ -6,12 +6,7 @@ import {
   Radio,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { useState } from "react";
-
-import { useTheme } from "@mui/material/styles";
-
-import { useTranslation } from "react-i18next";
+import React, { useState } from "react";
 
 import {
   CustomPaperBigCard,
@@ -29,11 +24,16 @@ import NoAddressesFound from "../../../../public/info/noAddresseFound.svg";
 const AddresseMenu = ({
   setOpen,
   setOpenDeleteDialog,
+
+  setAddresse,
 }: {
   setOpen: (e: boolean) => void;
   setOpenDeleteDialog: (e: boolean) => void;
+
+  setAddresse: (e: AddresseInterface) => void;
 }) => {
-  
+  //  hooks
+
   //  selectors
   const { myAddresses, isloading } = useAppSelector((state) => state.addresse);
 
@@ -189,7 +189,10 @@ const AddresseMenu = ({
                             }}
                           >
                             <img
-                              onClick={() => setOpen(true)}
+                              onClick={() => {
+                                setAddresse(addresse);
+                                setOpen(true);
+                              }}
                               src={editIcon?.src}
                               loading="lazy"
                               alt="edit"

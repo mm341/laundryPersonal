@@ -24,6 +24,7 @@ import { useTheme } from "@mui/material/styles";
 import { locationInterface } from "./AddressForm";
 import { CustomStackFullWidth } from "@/styles/PublicStyles";
 import { useTranslation } from "react-i18next";
+import { AddresseInterface } from "@/interfaces/AddresseInterface";
 
 interface map {
   center: {
@@ -43,6 +44,7 @@ interface props {
   height: string;
 
   markerIcon: { src: string };
+  addresse: AddresseInterface | undefined;
 }
 const GoogleMapComponent = ({
   setDisablePickButton,
@@ -55,6 +57,7 @@ const GoogleMapComponent = ({
   height,
   markerIcon,
   currentLocation,
+  addresse,
 }: props) => {
   //  hooks
 
@@ -108,6 +111,15 @@ const GoogleMapComponent = ({
       });
     }
   }, [currentLocation]);
+console.log(addresse)
+  useEffect(() => {
+    if (addresse?.latitude && addresse?.longitude) {
+      setCenterPosition({
+        lat: addresse?.latitude,
+        lng: addresse?.longitude,
+      });
+    }
+  }, [addresse?.latitude, addresse?.longitude]);
 
   useEffect(() => {
     if (location && placeDetailsEnabled) {
@@ -242,7 +254,8 @@ const GoogleMapComponent = ({
         >
           {addresseNow && addresseNow.length < 50
             ? addresseNow
-            : addresseNow?.slice(0, 50)}...
+            : addresseNow?.slice(0, 50)}
+          ...
         </Typography>
       </Box>
     </Stack>
