@@ -615,7 +615,7 @@ export const arabic = {
   "Image Format - JPG, Pong, ZPEG, GIF Image Size - Maximum Size 2Mb Image Ratio - 1: 1":
     " تنسيق الصورة - JPG و Pong و ZPEG و GIF حجم الصورة - أقصى حجم 2 ميجا بايت نسبة الصورة - 1: 1",
 
-  "Order ID": " رقم التعريف الخاص بالطلب ",
+  "Order ID": "رقم الطلب",
   "Order Amount": " كمية الطلب ",
 
   "Food Will Arrive Within": "الاوردر سوف يصل في خلال",

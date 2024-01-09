@@ -4,7 +4,7 @@ import {
 } from "@/styles/PublicStyles";
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
-import photoDumy from "../../../../public/info/61Ebo1dfRiL 1.png";
+
 import { OrdersInterface } from "@/interfaces/OrdersInterface";
 import { productInterface } from "@/interfaces/ProductInterface";
 import Image from "next/image";

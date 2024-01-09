@@ -17,6 +17,7 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
   const { master } = useAppSelector((state) => state.master);
   //  order data
   const orderDetailsData: OrderData[] = [
+    { key: "Order ID", value: `#${order?.id}` },
     { key: "Order Date", value: "28 Nov, 2023 16:04" },
     { key: "Pick Up at", value: order?.pick_date },
     { key: "Delivery at", value: order?.delivery_date },
