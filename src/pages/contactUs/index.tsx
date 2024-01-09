@@ -16,6 +16,9 @@ import MailIcon from "@mui/icons-material/Mail";
 import ContactForm from "@/Components/ContactUs/ContactForm";
 import Meta from "@/Components/GlobalComponent/Meta";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
+import { useAppSelector } from "@/redux/store";
 const ContactUs = () => {
   //  hooks
   const { t } = useTranslation();
@@ -23,6 +26,8 @@ const ContactUs = () => {
   const sm = useMediaQuery(theme.breakpoints.down("md"));
 
   const { locale } = useRouter();
+
+  const { footerLinks } = useAppSelector((state) => state.master);
   return (
     <>
       <Meta
@@ -169,7 +174,7 @@ const ContactUs = () => {
                       flexDirection: "row",
                     }}
                   >
-                    <img
+                    {/* <img
                       src={instgram?.src}
                       style={{ cursor: "pointer" }}
                       loading="lazy"
@@ -186,7 +191,23 @@ const ContactUs = () => {
                       style={{ cursor: "pointer" }}
                       loading="lazy"
                       alt="img"
-                    />
+                    /> */}
+                     {footerLinks?.map((e: FooterSocialLinks, i: number) => (
+                        <a key={i} target="_blank" href={e?.url}>
+                          <Image
+                            src={e?.photo_path}
+                            loading="lazy"
+                            alt="img"
+                            width={"40"}
+                            height={"40"}
+                            style={{
+                              cursor: "pointer",
+                              width: "40px",
+                              height: "40px",
+                            }}
+                          />
+                        </a>
+                      ))}
                   </GlobalDisplayFlexBox>
                 </GlobalDisplayFlexColumnBox>
               </GlobalDisplayFlexColumnBox>
