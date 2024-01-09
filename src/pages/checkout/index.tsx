@@ -41,6 +41,7 @@ import dateIcon from "../../../public/CheckOut/dateIcon.svg";
 import CheckOutProductsSection from "@/Components/ChekoutPage/CheckOutProdcuctsSection";
 import Meta from "@/Components/GlobalComponent/Meta";
 import { toast } from "react-hot-toast";
+import AuthGuard from "@/Components/authentication/AuthGuard";
 const CheckOutPage = () => {
   //  hooks
   const router = useRouter();
@@ -131,6 +132,7 @@ const CheckOutPage = () => {
         title={"CheckOut"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
+      <AuthGuard>
       <PublicContainer>
         <CustomPaperBigCard
           sx={{ backgroundColor: theme.palette.primary.dark }}
@@ -424,7 +426,7 @@ const CheckOutPage = () => {
           </CustomPaperBigCard>
         </CustomPaperBigCard>
       </PublicContainer>
-
+      </AuthGuard>
       {/*  add addresse Dialog */}
       <AddNewAddress open={open} setOpen={setOpen} color={"white"} />
     </>

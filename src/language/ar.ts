@@ -1214,7 +1214,7 @@ export const arabic = {
   Street: "الشارع",
   "House number": "رقم الدار",
   Included: "متضمن",
-
+  "Please Sign In , First":"من فضلك قم بتسجيل الدخول , اولا",
   Excluded: "مستبعد",
   "Enter all required data":"ادخل كل المعلومات المطلوبه",
   "This order can not be reordered as the restaurant is not existing in your current zone.":

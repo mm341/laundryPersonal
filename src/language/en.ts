@@ -141,7 +141,7 @@ export const english = {
   h24: "Yes, you can tip the delivery driver directly through the app or give them cash upon delivery if you prefer.",
   h25: "How do I become a delivery partner for Otlob?",
   h26: "If you're interested in becoming a delivery partner, please visit our 'Become a Partner' section on the website or app for more information and to apply.",
-
+"Please Sign In , First":"Please Sign In , First",
   "1. Acceptance of Terms and Conditions":
     "1. Acceptance of Terms and Conditions",
     "Addresse Type is required":"Addresse Type is required",

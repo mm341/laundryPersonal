@@ -88,7 +88,7 @@ const OrderCard = ({
               <Typography
                 sx={{ fontSize: { sm: "16px", xs: "12px" }, fontWeight: "400" }}
               >
-                {/* 28 Nov, 2023 16:04 */}
+                28 Nov, 2023 16:04
               </Typography>
             </GlobalDisplayFlexBox>
 

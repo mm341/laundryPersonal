@@ -8,6 +8,7 @@ import photoDumy from "../../../../public/info/61Ebo1dfRiL 1.png";
 import { OrdersInterface } from "@/interfaces/OrdersInterface";
 import { productInterface } from "@/interfaces/ProductInterface";
 import Image from "next/image";
+import { useAppSelector } from "@/redux/store";
 const ProductsInOrderCard = ({
   openProductsDetails,
   order,
@@ -15,6 +16,9 @@ const ProductsInOrderCard = ({
   openProductsDetails: boolean;
   order: OrdersInterface;
 }) => {
+
+  //  master data
+  const { master } = useAppSelector((state) => state.master);
   return (
     <Box
       sx={{
@@ -86,10 +90,10 @@ const ProductsInOrderCard = ({
                 }}
               >
                 <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
-                  16.00 SAR
+                  16.00 {master.currency}
                 </Typography>
                 <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-                  2×8.00 SAR
+                  2×8.00 {master.currency}
                 </Typography>
               </Box>
             </GlobalDisplayFlexBox>

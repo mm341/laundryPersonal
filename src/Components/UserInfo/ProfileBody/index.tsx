@@ -5,7 +5,7 @@ import ProfilePage from "../ProfilePage";
 import OrderPage from "../OrderPage";
 import MyAddresses from "./MyAddresses";
 import { useRouter } from "next/router";
-import { useAppSelector } from "@/redux/store";
+
 
 const ProfileBody = ({ page }: { page: string }) => {
   //  hooks

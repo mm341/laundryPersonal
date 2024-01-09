@@ -9,7 +9,6 @@ import { useFormik } from "formik";
 import CustomPhoneInput from "../../CustomPhoneInput";
 import { useTranslation } from "react-i18next";
 
-
 import { useTheme } from "@mui/material/styles";
 import { CustomBoxForModal } from "../auth.style";
 import { toast } from "react-hot-toast";
@@ -65,21 +64,25 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
   // }, [otpData]);
 
   const formSubmitHandler = (values: AccountRegister) => {
+  
     const signUpData: AccountRegister = {
       name: values.name,
 
-      contact: `+${values?.contact.toString()}`,
+      contact: `+${values.contact}`,
     };
 
-    mutate(signUpData, {
-      onSuccess: async (response) => {
-        // if (global?.customer_verification) {
-        //   setOtpData({ phone: `+${values?.phone}` });
-        //   setMainToken(response);
-        // }
-      },
-      onError: PublicHandelingErrors.onErrorResponse,
-    });
+    mutate(
+      signUpData,
+      {
+        onSuccess: async (response) => {
+          // if (global?.customer_verification) {
+          //   setOtpData({ phone: `+${values?.phone}` });
+          //   setMainToken(response);
+          // }
+        },
+        onError: PublicHandelingErrors.onErrorResponse,
+      }
+    );
   };
 
   //   const handelErrorFromOtp = (error) => {
@@ -107,12 +110,12 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
   //     });
   //   };
   const handleOnChange = (value: string) => {
-    signUpFormik.setFieldValue("phone", value);
+    signUpFormik.setFieldValue("contact", value);
   };
 
   const languagedirection = localStorage.getItem("direction");
   return (
-    <CustomBoxForModal sx={{width:{md:"700px",xs:"400px"}}}>
+    <CustomBoxForModal sx={{ width: { md: "700px", xs: "400px" } }}>
       <RTL direction={languagedirection}>
         <GlobalDisplayFlexBox
           sx={{
@@ -137,7 +140,11 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
                 {t("Sign up with phone number")}
               </CustomTypography>
             </CustomStackFullWidth>
-            <form onSubmit={signUpFormik.handleSubmit} noValidate>
+            <form
+              autoComplete="new-password"
+              onSubmit={signUpFormik.handleSubmit}
+              noValidate
+            >
               <CustomStackFullWidth spacing={{ xs: 2, md: 3 }}>
                 <TextField
                   sx={{ backgroundColor: "white" }}
@@ -147,7 +154,7 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
                   id="f_name"
                   label={t("Full Name")}
                   name="name"
-                  autoComplete="name"
+                  autoComplete="new-password"
                   value={signUpFormik.values.name}
                   onChange={signUpFormik.handleChange}
                   error={
@@ -172,7 +179,11 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
                   isLoading={isLoading}
                 />
               </CustomStackFullWidth>
-              <CustomLoadingSubmitButton size={25} loading={isLoading} word="Sign Up" />
+              <CustomLoadingSubmitButton
+                size={25}
+                loading={isLoading}
+                word="Sign Up"
+              />
             </form>
 
             <CustomTypography

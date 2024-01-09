@@ -8,7 +8,7 @@ const SignUpvalidation = () => {
     return Yup.object({
         name:Yup.string().required(t("Full name is required")),
      
-        phone: Yup.string()
+        contact: Yup.string()
             .required(t('Please give a phone number'))
             .min(12, t('number must be 12 digits')),
        

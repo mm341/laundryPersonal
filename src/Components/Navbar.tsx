@@ -175,6 +175,11 @@ const Navbar = () => {
         </GlobalButton>
 
         <img
+          onClick={() => {
+            if (path) {
+              router.push(path);
+            }
+          }}
           style={{ width: "30px", height: "30px", cursor: "pointer" }}
           src={cartIcon?.src}
           loading="lazy"
@@ -208,7 +213,6 @@ const Navbar = () => {
                 {/*  logo side */}
                 <Box
                   onClick={() => {
-                   
                     router.push("/");
                   }}
                   sx={{ width: { md: "12%", xs: "100%" } }}

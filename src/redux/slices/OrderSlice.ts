@@ -77,6 +77,7 @@ const initialState: OrdersModel = {
   schedules: [],
   deliverySchedules: [],
   isloadingAddOrder: false,
+  isLoadingCoupon: false,
 };
 
 export const handelOrders = createSlice({
@@ -150,6 +151,21 @@ export const handelOrders = createSlice({
     );
     builder.addCase(AddOrder.rejected, (state: OrdersModel) => {
       state.isloadingAddOrder = true;
+    });
+
+    //  add coupon
+
+    builder.addCase(AddCoupon.pending, (state: OrdersModel) => {
+      state.isLoadingCoupon = true;
+    });
+    builder.addCase(
+      AddCoupon.fulfilled,
+      (state: OrdersModel, { payload }: any) => {
+        state.isLoadingCoupon = false;
+      }
+    );
+    builder.addCase(AddCoupon.rejected, (state: OrdersModel) => {
+      state.isLoadingCoupon = true;
     });
   },
 });
