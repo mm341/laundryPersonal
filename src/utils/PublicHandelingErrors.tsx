@@ -7,9 +7,10 @@ export default class PublicHandelingErrors {
     error: unknown | any,
     variables?: { contact?: string | undefined,rating?:number|null }|any
   ) => {
+    
     if (error?.response?.data?.errors?.length > 0) {
       error?.response?.data?.errors?.forEach((item: any) => {
-        toast.error(item?.message);
+        toast.error(item);
       });
       this.handleTokenExpire(error?.response?.status);
     } else if (error?.response?.data?.message) {

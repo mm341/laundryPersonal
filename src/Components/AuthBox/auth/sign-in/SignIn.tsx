@@ -68,7 +68,7 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
       try {
         const data: { contact?: string; password?: string } = {};
         // data.contact = `+${values.contact.toString()}`;
-        data.contact = "010613200513";
+        data.contact = "01061320054";
 
         data.password = "Abcdefghij@#123";
         formSubmitHandler(data);

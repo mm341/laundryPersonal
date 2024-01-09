@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
+  CircularProgress,
   Grid,
   SelectChangeEvent,
   Stack,
@@ -17,7 +18,7 @@ import "simplebar-react/dist/simplebar.min.css";
 import { useTheme } from "@mui/material/styles";
 import CustomTextFieldWithFormik from "@/Components/GlobalComponent/form-fields/CustomTextFieldWithFormik";
 import GlobalSelectBox from "@/Components/GlobalSelectBox";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import homeSelectIcon from "../../../../public/info/addresseTitleIcon.svg";
 import officeSelectIcon from "../../../../public/info/officeSelectIcon.svg";
 import OthersSelectIcon from "../../../../public/info/addresse.svg";
@@ -30,6 +31,12 @@ import { useGeolocated } from "react-geolocated";
 import { useQuery } from "react-query";
 import ValidationSchemaForAddAddress from "./ValidationSchemaForAddAddress";
 import { AddresseInterface } from "@/interfaces/AddresseInterface";
+import {
+  AddAddresse,
+  GetAllAdddressses,
+  UpdateAddresse,
+  addAddressePayload,
+} from "@/redux/slices/AddressesRequests";
 export interface locationInterface {
   lat: number;
   lng: number;
@@ -43,11 +50,13 @@ const AddressForm = ({
   addresse: AddresseInterface | undefined;
 }) => {
   //  hooks
+  const dispatch = useAppDispatch();
   const theme = useTheme();
   const [selectValue, setselectValue] = useState<string>("");
   const [addresseType, setAddresseType] = useState<string>(
     addresse?.address_name ?? "Home"
   );
+
   const { t } = useTranslation();
   const { areas } = useAppSelector((state) => state.services);
 
@@ -65,7 +74,7 @@ const AddressForm = ({
     useState<boolean>(false);
   const [locationEnabled, setLocationEnabled] = useState<boolean>(false);
   const [addresseNow, setAddresseNow] = useState<string>("");
-
+  const { isLoadingAddAddresse } = useAppSelector((state) => state.addresse);
   const [isDisablePickButton, setDisablePickButton] = useState<boolean>(false);
 
   const { coords, isGeolocationEnabled } = useGeolocated({
@@ -110,6 +119,16 @@ const AddressForm = ({
       img: OthersSelectIcon,
     },
   ];
+
+  useEffect(() => {
+    if (addresse?.address_name) {
+      setAddresseType(addresse?.address_name);
+    } else {
+      setAddresseType("Home");
+    }
+  }, [addresse?.address_name]);
+
+  //  handel current location with api from google map
 
   useEffect(() => {
     if (addresse?.latitude) {
@@ -161,20 +180,36 @@ const AddressForm = ({
     validationSchema: ValidationSchemaForAddAddress(),
     onSubmit: async (values) => {
       try {
-        // let newData = {
-        //     latitude: lat,
-        //     longitude: lng,
-        //     address: values.address,
-        //     house: values.Building,
-        //     floor: values.floor,
-        //     apartment: values.apartment,
-        //     address_type:
-        //         values.address_label !== ''
-        //             ? values.address_label
-        //             : values.address_type,
-        //     id: item?.id,
-        // }
+        let newData: addAddressePayload = {
+          // latitude: lat,
+          // longitude: lng,
+          // address: values.address,
+          // house: values.Building,
+          // floor: values.floor,
+          // apartment: values.apartment,
+          address_name: values.address_type,
+          // area: values.area,
+          id: addresse?.id,
+        };
         // formSubmitOnSuccess(newData)
+
+        if (addresse?.id) {
+          dispatch(UpdateAddresse(newData)).then((res: any) => {
+            if (res.meta.requestStatus === "fulfilled") {
+              dispatch(GetAllAdddressses());
+
+              setOpen(false);
+            }
+          });
+        } else {
+          dispatch(AddAddresse(newData)).then((res: any) => {
+            if (res.meta.requestStatus === "fulfilled") {
+              dispatch(GetAllAdddressses());
+
+              setOpen(false);
+            }
+          });
+        }
       } catch (err) {}
     },
   });
@@ -265,6 +300,7 @@ const AddressForm = ({
           </Grid>
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik
+              disabled={isLoadingAddAddresse}
               type="number"
               label={t("Apartment")}
               touched={addAddressFormik.touched.apartment}
@@ -276,6 +312,7 @@ const AddressForm = ({
           </Grid>
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik
+              disabled={isLoadingAddAddresse}
               type="number"
               label={t("Building")}
               touched={addAddressFormik.touched.Building}
@@ -288,6 +325,7 @@ const AddressForm = ({
 
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik
+              disabled={isLoadingAddAddresse}
               type="number"
               label={t("Floor")}
               touched={addAddressFormik.touched.floor}
@@ -300,6 +338,7 @@ const AddressForm = ({
 
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik
+              disabled={isLoadingAddAddresse}
               type="text"
               label={t("Street")}
               touched={addAddressFormik.touched.street}
@@ -347,7 +386,7 @@ const AddressForm = ({
                   width: "227px",
                   height: "48px",
                 }}
-                // disabled={loading}
+                disabled={isLoadingAddAddresse}
                 className="bg-[#329CD7]"
                 fullWidth
                 sx={{
@@ -362,14 +401,14 @@ const AddressForm = ({
                 variant="contained"
                 type="submit"
               >
-                {/* {loading ? (
+                {isLoadingAddAddresse ? (
                   <CircularProgress
                     sx={{ color: "white", fontSize: "10px" }}
-                    size={size}
+                    size={25}
                   />
-                ) : ( */}
-                {t("Save New Address")}
-                {/* )} */}
+                ) : (
+                  t("Save New Address")
+                )}
               </Button>
             </Box>
           </Grid>

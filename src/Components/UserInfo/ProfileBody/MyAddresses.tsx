@@ -20,7 +20,10 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { GetAllAdddressses } from "@/redux/slices/AddressesRequests";
 import DeleteDialog from "@/Components/DeleteDialogs";
 import Meta from "@/Components/GlobalComponent/Meta";
-import { AddresseInterface } from "@/interfaces/AddresseInterface";
+import {
+  AddresseInterface,
+  initialAddresse,
+} from "@/interfaces/AddresseInterface";
 
 const MyAddresses = () => {
   //  hooks
@@ -29,7 +32,9 @@ const MyAddresses = () => {
   const dispatch = useAppDispatch();
 
   const [open, setOpen] = useState<boolean>(false);
-  const [addresse, setAddresse] = useState<AddresseInterface>();
+  const [addresse, setAddresse] = useState<AddresseInterface>(
+    initialAddresse()
+  );
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
 
   //  selectors
@@ -39,6 +44,11 @@ const MyAddresses = () => {
     dispatch(GetAllAdddressses());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!open) {
+      setAddresse(initialAddresse());
+    }
+  }, [open]);
   return (
     <>
       <Meta title={"addresses"} description="" keywords="" />
@@ -102,7 +112,12 @@ const MyAddresses = () => {
                 color: "white",
               }}
             >
-              <AddNewAddress addresse={addresse} open={open} setOpen={setOpen} color={"white"} />
+              <AddNewAddress
+                addresse={addresse}
+                open={open}
+                setOpen={setOpen}
+                color={"white"}
+              />
             </Box>
           </Stack>
         </CustomStackFullWidth>
