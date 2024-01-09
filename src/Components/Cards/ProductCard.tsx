@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import discountImg from "../../../public/products/discountImg.png";
 import { useRouter } from "next/router";
+import Image from "next/image";
 const ProductCard = ({
   product,
   setProduct,
@@ -58,7 +59,9 @@ const ProductCard = ({
               borderRadius: "4px",
             }}
           >
-            <img
+            <Image
+            width={400}
+            height={400}
               src={product?.image_path}
               loading="lazy"
               alt="productImg"
