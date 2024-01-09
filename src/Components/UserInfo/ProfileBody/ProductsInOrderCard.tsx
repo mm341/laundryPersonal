@@ -7,6 +7,7 @@ import React from "react";
 import photoDumy from "../../../../public/info/61Ebo1dfRiL 1.png";
 import { OrdersInterface } from "@/interfaces/OrdersInterface";
 import { productInterface } from "@/interfaces/ProductInterface";
+import Image from "next/image";
 const ProductsInOrderCard = ({
   openProductsDetails,
   order,
@@ -53,7 +54,7 @@ const ProductsInOrderCard = ({
                     height: "80px",
                   }}
                 >
-                  <img src={product?.image_path} loading="lazy" alt="img" />
+                  <Image width={"300"} height={"300"} src={product?.image_path} loading="lazy" alt="img" />
                 </Box>
 
                 <Box

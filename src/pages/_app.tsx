@@ -157,6 +157,7 @@ export default function App({
                     mb: "5rem",
                   }}
                 >
+                   <ScrollToTop />
                   {getLayout(<Component {...pageProps} />)}
                 </Box>
               </Box>

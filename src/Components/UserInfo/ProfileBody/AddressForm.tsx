@@ -45,7 +45,9 @@ const AddressForm = ({
   //  hooks
   const theme = useTheme();
   const [selectValue, setselectValue] = useState<string>("");
-  const [addresseType, setAddresseType] = useState<string>("home");
+  const [addresseType, setAddresseType] = useState<string>(
+    addresse?.address_name ?? "Home"
+  );
   const { t } = useTranslation();
   const { areas } = useAppSelector((state) => state.services);
 
@@ -94,7 +96,7 @@ const AddressForm = ({
   const typeData: AddresseType[] = [
     {
       label: t("Home"),
-      value: "home",
+      value: "Home",
       img: homeSelectIcon,
     },
     {
@@ -173,7 +175,6 @@ const AddressForm = ({
         //     id: item?.id,
         // }
         // formSubmitOnSuccess(newData)
-        console.log(values);
       } catch (err) {}
     },
   });
