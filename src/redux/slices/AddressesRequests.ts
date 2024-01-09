@@ -18,6 +18,8 @@ export interface addAddressePayload {
   house_no?: string;
   road_no?: string;
   id?: number;
+  latitude?:number
+  longitude?:number
 }
 
 export const AddAddresse = createAsyncThunk(

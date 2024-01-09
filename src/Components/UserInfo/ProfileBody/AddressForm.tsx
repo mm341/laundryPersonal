@@ -52,7 +52,7 @@ const AddressForm = ({
   //  hooks
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const [selectValue, setselectValue] = useState<string>("");
+  const [selectValue, setselectValue] = useState<string>(addresse?.area??"");
   const [addresseType, setAddresseType] = useState<string>(
     addresse?.address_name ?? "Home"
   );
@@ -87,6 +87,11 @@ const AddressForm = ({
   useEffect(() => {
     if (coords?.latitude && coords?.longitude && isGeolocationEnabled) {
       setCurrentLocation({
+        lat: coords?.latitude,
+        lng: coords?.longitude,
+      });
+
+      setLocation({
         lat: coords?.latitude,
         lng: coords?.longitude,
       });
@@ -171,7 +176,7 @@ const AddressForm = ({
   const addAddressFormik = useFormik({
     initialValues: {
       address_type: "",
-      area: "",
+      area: addresse?.area ?? "",
       Building: "",
       floor: "",
       apartment: "",
@@ -181,14 +186,14 @@ const AddressForm = ({
     onSubmit: async (values) => {
       try {
         let newData: addAddressePayload = {
-          // latitude: lat,
-          // longitude: lng,
+          latitude: location?.lat,
+          longitude: location?.lng,
           // address: values.address,
           // house: values.Building,
           // floor: values.floor,
           // apartment: values.apartment,
-          address_name: values.address_type,
-          // area: values.area,
+          address_name: values?.address_type,
+          area: values?.area,
           id: addresse?.id,
         };
         // formSubmitOnSuccess(newData)
