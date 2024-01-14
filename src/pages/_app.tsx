@@ -10,10 +10,10 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "../theme/index";
 import { Box, CssBaseline } from "@mui/material";
-import { persistStore } from "redux-persist";
-import i18n, { t } from "i18next";
+
+import i18n from "i18next";
 import "../language/i18n";
-import { store } from "../redux/store";
+import { persistor, store } from "../redux/store";
 import { useTranslation } from "react-i18next";
 import Router, { useRouter } from "next/router";
 
@@ -26,7 +26,7 @@ import type {} from "@mui/lab/themeAugmentation";
 import "@mui/lab/themeAugmentation";
 import AOS from "aos";
 import Footer from "@/Components/FooterMiddleLandingPage";
-
+import { PersistGate } from "redux-persist/integration/react";
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import ScrollToTop from "@/Components/GlobalComponent/scroll-top/ScrollToTop";
 import dynamic from "next/dynamic";
@@ -74,7 +74,6 @@ export default function App({
     }
   }, [locale]);
 
-  let persistor = persistStore(store);
 
   //  custom theme
   const theme = useMemo(
@@ -114,57 +113,61 @@ export default function App({
   return (
     <CacheProvider value={emotionCache}>
       <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <RTL direction={languagedirection}>
-              <CssBaseline />
-              <Toaster />
-              <Head>
-                <title>{t("Loading...")}</title>
-              </Head>
-              <Navbar />
-              <Box
-                sx={{
-                  display: !previewLoader ? "none" : "flex",
-                  width: "100vw",
-                  height: "100vh",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Box sx={{ width: { md: "30vw", xs: "80vw" } }}>
-                  <img
-                    src={logoHeader?.src}
-                    style={{ width: "100%" }}
-                    loading="lazy"
-                    alt="logoHeader"
-                  />
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  display: previewLoader ? "none" : "block",
-                }}
-              >
-                <ScrollToTop />
+       
+          <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={theme}>
+              <RTL direction={languagedirection}>
+                <CssBaseline />
+                <Toaster />
+                <Head>
+                  <title>{t("Loading...")}</title>
+                </Head>
+                <Navbar />
                 <Box
                   sx={{
-                    minHeight: "80vh",
-                    mt: {
-                      md: router.pathname !== "/" ? "7rem" : "3.9rem",
-                      xs: router.pathname !== "/" ? "7rem" : "5rem",
-                    },
-                    mb: "5rem",
+                    display: !previewLoader ? "none" : "flex",
+                    width: "100vw",
+                    height: "100vh",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
-                   <ScrollToTop />
-                  {getLayout(<Component {...pageProps} />)}
+                  <Box sx={{ width: { md: "30vw", xs: "80vw" } }}>
+                    <img
+                      src={logoHeader?.src}
+                      style={{ width: "100%" }}
+                      loading="lazy"
+                      alt="logoHeader"
+                    />
+                  </Box>
                 </Box>
-              </Box>
-              <Footer />
-            </RTL>
-          </ThemeProvider>
-        </Provider>
+                <Box
+                  sx={{
+                    display: previewLoader ? "none" : "block",
+                  }}
+                >
+                  <ScrollToTop />
+                  <Box
+                    sx={{
+                      minHeight: "80vh",
+                      mt: {
+                        md: router.pathname !== "/" ? "7rem" : "3.9rem",
+                        xs: router.pathname !== "/" ? "7rem" : "5rem",
+                      },
+                      mb: "5rem",
+                    }}
+                  >
+                    <ScrollToTop />
+                    {getLayout(<Component {...pageProps} />)}
+                  </Box>
+                </Box>
+                <Footer />
+              </RTL>
+            </ThemeProvider>
+            </PersistGate>
+          </Provider>
+       
       </QueryClientProvider>
     </CacheProvider>
   );
