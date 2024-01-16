@@ -23,6 +23,7 @@ interface props {
   data: { mobile: string | undefined };
   formSubmitHandler: (values: {
     otp: string;
+    mobile?:string |undefined
   }) => void;
   isLoading: boolean;
   modalFor?: string;
@@ -50,11 +51,12 @@ const OtpForm = ({
     //here reset_token is otp inputs
     initialValues: {
       otp: "",
+      mobile: data?.mobile,
     },
     validationSchema: Yup.object({
       otp: Yup.string().required(t("field is empty")),
     }),
-    onSubmit: async (values: { otp: string}) => {
+    onSubmit: async (values: { otp: string,mobile?:string|undefined}) => {
       try {
         formSubmitHandler(values);
       } catch (err) {}

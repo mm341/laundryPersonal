@@ -51,7 +51,9 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
   const [isRemember, setIsRemember] = useState<boolean>(false);
   const [openModal, setModalOpen] = useState<boolean>(false);
   const [openOtpModal, setOpenOtpModal] = useState<boolean>(false);
-  const [otpData, setOtpData] = useState<{mobile:string|undefined}>({ mobile: "" });
+  const [otpData, setOtpData] = useState<{ mobile: string | undefined }>({
+    mobile: "",
+  });
   const [mainToken, setMainToken] = useState<null>(null);
 
   //  login action validation and send api request
@@ -68,13 +70,13 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
           t("The phone format is invalid.")
         ),
     }),
-    onSubmit: async (values: { mobile: string|undefined }) => {
+    onSubmit: async (values: { mobile: string | undefined }) => {
       try {
-        const data: { mobile: string|undefined } = { mobile: "" };
-        if(values?.mobile){
+        const data: { mobile: string | undefined } = { mobile: "" };
+        if (values?.mobile) {
           data.mobile = `+${values?.mobile.toString()}`;
         }
-       
+
         formSubmitHandler(data);
       } catch (err) {}
     },
@@ -87,7 +89,7 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
     error,
   } = useMutation("sign-in", AuthApi.signIn);
 
-  const formSubmitHandler = (values: { mobile: string|undefined }) => {
+  const formSubmitHandler = (values: { mobile: string | undefined }) => {
     loginMutation(values, {
       onSuccess: async (response: any) => {
         setOtpData({ mobile: values.mobile });
@@ -110,7 +112,10 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
   };
   const { mutate: otpVerifyMutate, isLoading: isLoadingOtpVerifiyAPi } =
     useMutation("verify_phone", AuthApi.verify_phone);
-  const otpFormSubmitHandler = (values: {otp: string }) => {
+  const otpFormSubmitHandler = (values: {
+    otp: string;
+    mobile?: string | undefined;
+  }) => {
     const onSuccessHandler = (res: any) => {
       dispatch(SaveProfileData(res.data.data.user));
       if (res.data.data.access.token) {

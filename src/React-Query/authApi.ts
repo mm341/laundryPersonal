@@ -7,7 +7,7 @@ export const AuthApi = {
   signIn: (formData: { mobile?: string|undefined }) => {
     return MainApi.post("login", formData);
   },
-  verify_phone: (formData: {  otp: string }) => {
+  verify_phone: (formData: {  otp: string,mobile?:string|undefined }) => {
     return MainApi.post("verify-mobile/otp", formData);
   },
 

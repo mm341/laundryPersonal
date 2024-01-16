@@ -51,14 +51,14 @@ const FormSubmitButton = ({
   const formSubmitHandler = () => {
     let formData = new FormData();
 
-    if (NewInputName && !imgChange && formikName ) {
+    if (NewInputName && !imgChange && formikName) {
       formData.append(formikName, NewInputName);
     } else {
       if (imgValue) {
         formData.append("profile_photo", imgValue);
       }
     }
-    if (NewInputName !== InputName || (imgValue)) {
+    if (NewInputName !== InputName || imgValue) {
       if (token) {
         setLoading(true);
         axios

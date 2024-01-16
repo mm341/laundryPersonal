@@ -41,7 +41,9 @@ const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
   const theme = useTheme();
 
   const [openOtpModal, setOpenOtpModal] = useState(false);
-  const [otpData, setOtpData] = useState<{mobile:string|undefined}>({ mobile: "" });
+  const [otpData, setOtpData] = useState<{ mobile: string | undefined }>({
+    mobile: "",
+  });
 
   const signUpFormik = useFormik({
     initialValues: {
@@ -83,7 +85,10 @@ const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
   };
   const { mutate: otpVerifyMutate, isLoading: isLoadingOtpVerifiyAPi } =
     useMutation("verify_phone", AuthApi.verify_phone);
-  const otpFormSubmitHandler = (values: {  otp: string }) => {
+  const otpFormSubmitHandler = (values: {
+    otp: string;
+    mobile?: string | undefined;
+  }) => {
     const onSuccessHandler = (res: any) => {
       dispatch(SaveProfileData(res.data.data.user));
       if (res.data.data.access.token) {
@@ -109,10 +114,10 @@ const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
     position: "absolute",
     top: "50%",
     left: "50%",
-    height: {md:"386px",xs:"70%"},
+    height: { md: "386px", xs: "70%" },
     oveflowY: "scroll",
     transform: "translate(-50%, -50%)",
-    width: { md: "791px",sm:"70%", xs: "95%", mx: "auto" },
+    width: { md: "791px", sm: "70%", xs: "95%", mx: "auto" },
     bgcolor: "background.paper",
     p: 4,
   };
