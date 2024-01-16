@@ -163,6 +163,7 @@ export default function App({
                   </Box>
                 </Box>
                 <Box
+                  style={{ overflowX: "hidden" }}
                   sx={{
                     display: previewLoader ? "none" : "block",
                   }}
