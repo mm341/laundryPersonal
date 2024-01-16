@@ -110,7 +110,7 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
   };
   const { mutate: otpVerifyMutate, isLoading: isLoadingOtpVerifiyAPi } =
     useMutation("verify_phone", AuthApi.verify_phone);
-  const otpFormSubmitHandler = (values: { mobile: string|undefined; otp: string }) => {
+  const otpFormSubmitHandler = (values: {otp: string }) => {
     const onSuccessHandler = (res: any) => {
       dispatch(SaveProfileData(res.data.data.user));
       if (res.data.data.access.token) {
