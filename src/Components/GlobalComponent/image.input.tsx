@@ -1,27 +1,23 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 
-import ImageIcon from "@mui/icons-material/Image";
 import DefaultAvatar from "../../../public/info/photoUpdate.png";
+import ImgChangeIcon from "../../../public/info/changeImg.svg";
 import ImageCard from "./ImageCard";
+import FormSubmitButton from "../UserInfo/ProfileBody/FormSubmitButton";
 
 type Props = {
   id: string;
   init?: string;
-
+  imgValue?: string;
   error: boolean | undefined | string;
   onImageSubmit: (file: File) => void;
 };
 
-const InputImage = ({
-  id,
-  init,
-
-  error,
-  onImageSubmit,
-}: Props) => {
+const InputImage = ({ id, init, imgValue, error, onImageSubmit }: Props) => {
+  //  hooks
   const [preview, setPreview] = useState<string>(init ?? "");
-
+  //  handel image selected
   const onImageSelected = (e: ChangeEvent<HTMLInputElement>): void => {
     const reader = new FileReader();
 
@@ -44,15 +40,12 @@ const InputImage = ({
   };
 
   return (
-    <Box
-      id={id}
-      
-    >
+    <Box id={id}>
       <label htmlFor="icon-button-photo">
         <ImageCard preview={preview} alt={id} base={DefaultAvatar?.src} />
       </label>
 
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "center", position: "relative" }}>
         <input
           accept="image/*"
           id="icon-button-photo"
@@ -61,6 +54,17 @@ const InputImage = ({
           name="photo"
           hidden
         />
+        <label htmlFor="icon-button-photo">
+          <Box
+            sx={{
+              position: "absolute",
+              left: { md: "15%", sm: "18%", xs: "44%" },
+              top: "-40px",
+            }}
+          >
+            <img src={ImgChangeIcon?.src} loading="lazy" alt="changeicon" />
+          </Box>
+        </label>
       </Box>
 
       {error && (
@@ -68,6 +72,7 @@ const InputImage = ({
           {error}
         </Typography>
       )}
+      {imgValue && <FormSubmitButton imgChange imgValue={imgValue} />}
     </Box>
   );
 };

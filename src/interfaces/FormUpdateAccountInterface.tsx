@@ -1,5 +1,5 @@
 export interface AccountUpdate  { 
-    first_name?:string
+    name?:string
     mobile?:string
     alternative_phone?:string
     profile_photo?:string

@@ -36,9 +36,7 @@ export default function Home({
 
   //  cash services
   useEffect(() => {
-    if (homeServices?.length > 0) {
-      dispatch(CashServices(homeServices));
-    }
+    dispatch(CashServices(homeServices));
   }, [dispatch, homeServices, homeServices?.length]);
   //  cash areas
   useEffect(() => {

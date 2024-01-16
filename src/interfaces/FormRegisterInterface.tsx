@@ -1,5 +1,5 @@
 export interface AccountRegister  { 
     name:string
-    contact:string
+    mobile:string |undefined
    
  }

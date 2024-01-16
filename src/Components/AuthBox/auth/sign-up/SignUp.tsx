@@ -14,7 +14,7 @@ import { CustomBoxForModal } from "../auth.style";
 import { toast } from "react-hot-toast";
 
 import OtpForm from "../forgot-password/OtpForm";
-import { Stack, Typography } from "@mui/material";
+import { Modal, Stack, Typography } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
 import { SignModel } from "../sign-in/SignIn";
@@ -32,21 +32,21 @@ import CustomLoadingSubmitButton from "@/Components/GlobalComponent/CustomLoadin
 import { AuthApi } from "@/React-Query/authApi";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 import SignUpvalidation from "../SignUpValidation";
+import { SaveProfileData } from "@/redux/slices/HandelUpdateProfile";
 
-const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
+const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const theme = useTheme();
 
   const [openOtpModal, setOpenOtpModal] = useState(false);
-  const [otpData, setOtpData] = useState({ phone: "" });
-  const [mainToken, setMainToken] = useState(null);
+  const [otpData, setOtpData] = useState<{mobile:string|undefined}>({ mobile: "" });
 
   const signUpFormik = useFormik({
     initialValues: {
       name: "",
-      contact: "",
+      mobile: "",
     },
     validationSchema: SignUpvalidation(),
     onSubmit: async (values, helpers) => {
@@ -57,60 +57,64 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
   });
 
   const { mutate, isLoading, error } = useMutation("sign-up", AuthApi.signUp);
-  // useEffect(() => {
-  //   if (otpData?.phone) {
-  //     setOpenOtpModal(true);
-  //   }
-  // }, [otpData]);
 
   const formSubmitHandler = (values: AccountRegister) => {
-  
     const signUpData: AccountRegister = {
       name: values.name,
 
-      contact: `+${values.contact}`,
+      mobile: `+${values.mobile}`,
     };
 
-    mutate(
-      signUpData,
-      {
-        onSuccess: async (response) => {
-          // if (global?.customer_verification) {
-          //   setOtpData({ phone: `+${values?.phone}` });
-          //   setMainToken(response);
-          // }
-        },
-        onError: PublicHandelingErrors.onErrorResponse,
-      }
-    );
+    mutate(signUpData, {
+      onSuccess: async (response) => {
+        setOtpData({ mobile: `+${values?.mobile}` });
+        setOpenOtpModal(true);
+      },
+      onError: PublicHandelingErrors.onErrorResponse,
+    });
   };
 
-  //   const handelErrorFromOtp = (error) => {
-  //     if (error?.response?.data?.errors?.length > 0) {
-  //       error?.response?.data?.errors?.map((e) => toast.error(e?.message));
-  //     }
-  //     toast.error(error?.response?.data?.message);
-  //   };
-  //   const { mutate: otpVerifyMutate, isLoading: isLoadingOtpVerifiyAPi } =
-  //     useVerifyPhone();
-  //   const otpFormSubmitHandler = (values) => {
-  //     const onSuccessHandler = (res) => {
-  //       toast.success(res?.message);
-  //       setOpenOtpModal(false);
-  //       dispatch(HandelOrder());
-  //       dispatch(ProfileData());
-  //       localStorage.setItem("token", res?.token);
-  //       dispatch(setToken(res?.token));
+  //  deal with otp
+  const handelErrorFromOtp = (error: any) => {
+    if (error?.response?.data?.errors?.length > 0) {
+      error?.response?.data?.errors?.map((e: any) => toast.error(e?.message));
+    }
+    toast.error(error?.response?.data?.message);
+  };
+  const { mutate: otpVerifyMutate, isLoading: isLoadingOtpVerifiyAPi } =
+    useMutation("verify_phone", AuthApi.verify_phone);
+  const otpFormSubmitHandler = (values: { mobile: string|undefined; otp: string }) => {
+    const onSuccessHandler = (res: any) => {
+      dispatch(SaveProfileData(res.data.data.user));
+      if (res.data.data.access.token) {
+        toast.success(res?.data?.message);
+        localStorage.setItem("token", res?.data?.data?.access?.token);
 
-  //       handleClose?.();
-  //     };
-  //     otpVerifyMutate(values, {
-  //       onSuccess: onSuccessHandler,
-  //       onError: handelErrorFromOtp,
-  //     });
-  //   };
+        handleClose?.();
+      }
+      setOpenOtpModal(false);
+
+      handleClose?.();
+    };
+    otpVerifyMutate(values, {
+      onSuccess: onSuccessHandler,
+      onError: handelErrorFromOtp,
+    });
+  };
   const handleOnChange = (value: string) => {
-    signUpFormik.setFieldValue("contact", value);
+    signUpFormik.setFieldValue("mobile", value);
+  };
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    height: {md:"386px",xs:"70%"},
+    oveflowY: "scroll",
+    transform: "translate(-50%, -50%)",
+    width: { md: "791px",sm:"70%", xs: "95%", mx: "auto" },
+    bgcolor: "background.paper",
+    p: 4,
   };
 
   const languagedirection = localStorage.getItem("direction");
@@ -151,7 +155,7 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
                   disabled={isLoading}
                   required
                   fullWidth
-                  id="f_name"
+                  id="name"
                   label={t("Full Name")}
                   name="name"
                   autoComplete="new-password"
@@ -169,12 +173,12 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
                 />
 
                 <CustomPhoneInput
-                  value={signUpFormik.values.contact}
+                  value={signUpFormik.values.mobile}
                   onHandleChange={handleOnChange}
                   // initCountry={global?.country}
-                  touched={signUpFormik.touched.contact}
-                  errors={signUpFormik.errors.contact}
-                  // rtlChange="true"
+                  touched={signUpFormik.touched.mobile}
+                  errors={signUpFormik.errors.mobile}
+                  // rtlChange="true"mobile
                   rtlChange
                   isLoading={isLoading}
                 />
@@ -222,14 +226,24 @@ const SignUpPage = ({ handleClose, setModalFor }: SignModel) => {
             alt="Logo"
           />
         </GlobalDisplayFlexBox>
-        {/* <CustomModal openModal={openOtpModal} setModalOpen={setOpenOtpModal}>
-          <OtpForm
-            setOpenOtpModal={setOpenOtpModal}
-            data={otpData}
-            formSubmitHandler={otpFormSubmitHandler}
-            isLoading={isLoadingOtpVerifiyAPi}
-          />
-        </CustomModal> */}
+
+        <Modal
+          open={openOtpModal}
+          onClose={() => setOpenOtpModal(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <OtpForm
+              modalFor={modalFor}
+              setModalFor={setModalFor}
+              setOpenOtpModal={setOpenOtpModal}
+              data={otpData}
+              formSubmitHandler={otpFormSubmitHandler}
+              isLoading={isLoadingOtpVerifiyAPi}
+            />
+          </Box>
+        </Modal>
       </RTL>
     </CustomBoxForModal>
   );

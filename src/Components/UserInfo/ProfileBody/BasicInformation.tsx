@@ -7,7 +7,7 @@ import { AccountUpdate } from "@/interfaces/FormUpdateAccountInterface";
 import BasicInformationForm from "./BasicInformationForm";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { SaveProfileData, Updating } from "@/redux/slices/HandelUpdateProfile";
-import MainApi from "@/api/MainApi";
+import MainApi, { baseUrl } from "@/api/MainApi";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
@@ -15,12 +15,12 @@ import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 const BasicInformation = () => {
   //  hooks
 
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const router = useRouter();
+
   const { accountInfo } = useAppSelector((state) => state.profile);
-  const [phoneVerify, setPhoneVerify] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
+
+  //  get token from localstorage
   let token: string | null = "";
 
   if (typeof window !== "undefined") {
@@ -28,13 +28,13 @@ const BasicInformation = () => {
   }
 
   const formSubmitHandler = (values: AccountUpdate) => {
-    const { first_name, mobile, alternative_phone, profile_photo } = values;
+    const { name, mobile, alternative_phone, profile_photo } = values;
 
     // if (first_name || mobile || alternative_phone || profile_photo) {
     let formData = new FormData();
 
-    if (first_name) {
-      formData.append("first_name", first_name);
+    if (name) {
+      formData.append("name", name);
     }
 
     if (mobile) {
@@ -49,20 +49,16 @@ const BasicInformation = () => {
       formData.append("profile_photo", profile_photo);
     }
 
-    if (first_name || mobile || alternative_phone || profile_photo) {
+    if (name || mobile || alternative_phone || profile_photo) {
       if (token) {
         setLoading(true);
         axios
-          .postForm(
-            "http://adminlaundry.razinsoft.com/api/users/update",
-            formData,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "multipart/form-data", // Assuming you are sending form data
-              },
-            }
-          )
+          .postForm(`${baseUrl}users/update`, formData, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data", // Assuming you are sending form data
+            },
+          })
           .then((res) => {
             if (res) {
               setLoading(false);
@@ -83,7 +79,7 @@ const BasicInformation = () => {
       <BasicInformationForm
         isloading={loading}
         accountInfo={accountInfo}
-        formSubmitHandler={formSubmitHandler}
+       
       />
     </Grid>
   );

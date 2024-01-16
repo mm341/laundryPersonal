@@ -7,24 +7,25 @@ const MainApi = axios.create({
 });
 
 MainApi.interceptors.request.use(function (config) {
-  let token = undefined
-  let language = undefined
+  let token = undefined;
+  let language = undefined;
 
-  let device_id = undefined
+  let device_key = undefined;
 
-  if (typeof window !== 'undefined') {
-      token = localStorage.getItem('token')
-      language = localStorage.getItem('language')
-      device_id = localStorage.getItem('MachineId')
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+    language = localStorage.getItem("language");
+    device_key = localStorage.getItem("MachineId");
   }
-  config.headers.AppKey = 'c9579dc0-79ef-4993-83b3-df50388de98e'
+  config.headers.AppKey = "c9579dc0-79ef-4993-83b3-df50388de98e";
 
-  if (device_id) {
-      config.headers.deviceid = device_id
+  if (device_key) {
+    config.headers.deviceKey = device_key;
+    config.headers.deviceType = "web";
   }
 
-  if (token) config.headers.authorization = `Bearer ${token}`
-  if (language) config.headers['Accept-Language'] = language
+  if (token) config.headers.authorization = `Bearer ${token}`;
+  if (language) config.headers["Accept-Language"] = language;
 
   config.headers["Content-Type"] = "application/json;charset=utf-8";
   config.headers["Accept"] = "application/json";

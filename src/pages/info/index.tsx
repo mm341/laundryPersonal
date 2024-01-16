@@ -11,12 +11,10 @@ const Index = () => {
   const { locale } = useRouter();
   const { page }: any = router.query;
 
-  
   const [languagedirection, setLanguagedirection] = useState<string>("ltr");
   useEffect(() => {
     locale === "en" ? setLanguagedirection("ltr") : setLanguagedirection("rtl");
   }, [locale]);
-
 
   return (
     <RTL direction={languagedirection}>

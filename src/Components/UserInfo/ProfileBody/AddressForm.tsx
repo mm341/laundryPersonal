@@ -99,12 +99,7 @@ const AddressForm = ({
   }, [coords?.latitude, coords?.longitude, isGeolocationEnabled]);
 
   // ///////////////////////////////////////////////////
-  //  handel select area
-  const handelSelectBox = (
-    e: React.ChangeEvent<HTMLSelectElement> | SelectChangeEvent<string>
-  ) => {
-    setselectValue(e.target.value);
-  };
+
 
   //  select Addresse Type
   const typeData: AddresseType[] = [
@@ -176,7 +171,7 @@ const AddressForm = ({
   const addAddressFormik = useFormik({
     initialValues: {
       address_type: "",
-      area: addresse?.area ?? "",
+      // area: addresse?.area ?? "",
       Building: "",
       floor: "",
       apartment: "",
@@ -193,7 +188,7 @@ const AddressForm = ({
           // floor: values.floor,
           // apartment: values.apartment,
           address_name: values?.address_type,
-          area: values?.area,
+          // area: values?.area,
           id: addresse?.id,
         };
         // formSubmitOnSuccess(newData)
@@ -244,11 +239,11 @@ const AddressForm = ({
       addAddressFormik.setFieldValue("address_type", addresseType);
     }
   }, [addresseType]);
-  useEffect(() => {
-    if (selectValue) {
-      addAddressFormik.setFieldValue("area", selectValue);
-    }
-  }, [selectValue]);
+  // useEffect(() => {
+  //   if (selectValue) {
+  //     addAddressFormik.setFieldValue("area", selectValue);
+  //   }
+  // }, [selectValue]);
 
   return (
     <Stack>
@@ -277,16 +272,7 @@ const AddressForm = ({
             </GlobalDisplayFlexBox>
           </Grid>
 
-          <Grid item md={8} sm={12} xs={12}>
-            <GlobalSelectBox
-              touched={addAddressFormik.touched.apartment}
-              errors={addAddressFormik.errors.area}
-              area={selectValue}
-              handleChange={handelSelectBox}
-              label={"Choose Area"}
-              homeAreas={areas}
-            />
-          </Grid>
+         
 
           <Grid item xs={12}>
             <GoogleMapComponent

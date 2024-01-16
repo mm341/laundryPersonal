@@ -27,7 +27,7 @@ import {
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
 import CustomImageContainer from "@/Components/Cards/CustomImageContainer";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import CustomPhoneInput from "../../CustomPhoneInput";
 import CustomLoadingSubmitButton from "@/Components/GlobalComponent/CustomLoadingSubmitButton";
 import { AuthApi } from "@/React-Query/authApi";
@@ -38,10 +38,10 @@ import { SaveProfileData } from "@/redux/slices/HandelUpdateProfile";
 export interface SignModel {
   handleClose: () => void;
   signInSuccess?: boolean;
-  modalFor?: string;
+  modalFor: string;
   setModalFor: (e: string) => void;
 }
-const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
+const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
   //  hooks
   const theme = useTheme();
   const { t } = useTranslation();
@@ -51,93 +51,97 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
   const [isRemember, setIsRemember] = useState<boolean>(false);
   const [openModal, setModalOpen] = useState<boolean>(false);
   const [openOtpModal, setOpenOtpModal] = useState<boolean>(false);
-  const [otpData, setOtpData] = useState({ phone: "" });
+  const [otpData, setOtpData] = useState<{mobile:string|undefined}>({ mobile: "" });
   const [mainToken, setMainToken] = useState<null>(null);
 
   //  login action validation and send api request
   const loginFormik = useFormik({
     initialValues: {
-      contact: "",
+      mobile: "",
     },
     validationSchema: Yup.object({
-      contact: Yup.string()
+      mobile: Yup.string()
         .required(t("Please give a phone number"))
-        .min(12, t("number must be 12 digits")),
+        .min(12, t("number must be 12 digits"))
+        .matches(
+          /^(201|01|00201)[0-2,5]{1}[0-9]{8}$|^(009665|9665|9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/,
+          t("The phone format is invalid.")
+        ),
     }),
-    onSubmit: async (values: { contact: string }) => {
+    onSubmit: async (values: { mobile: string|undefined }) => {
       try {
-        const data: { contact?: string; password?: string } = {};
-        // data.contact = `+${values.contact.toString()}`;
-        data.contact = "01061320054";
-
-        data.password = "Abcdefghij@#123";
+        const data: { mobile: string|undefined } = { mobile: "" };
+        if(values?.mobile){
+          data.mobile = `+${values?.mobile.toString()}`;
+        }
+       
         formSubmitHandler(data);
       } catch (err) {}
     },
   });
 
-  //   useEffect(() => {
-  //     if (otpData?.phone) {
-  //       setOpenOtpModal(true);
-  //     }
-  //   }, [otpData]);
-
+  //  send request
   const {
     mutate: loginMutation,
     isLoading,
     error,
   } = useMutation("sign-in", AuthApi.signIn);
 
-  const formSubmitHandler = (values: {
-    contact?: string;
-    password?: string;
-  }) => {
+  const formSubmitHandler = (values: { mobile: string|undefined }) => {
     loginMutation(values, {
       onSuccess: async (response: any) => {
- 
-        dispatch(SaveProfileData(response.data.data.user));
-        // if (response.data.data.access.token) {
-        toast.success(response?.data?.message);
-        localStorage.setItem("token", response?.data?.data?.access?.token);
-        // window.location.reload();
-        handleClose?.();
-        // }
-        // if (global?.customer_verification) {
-        //   setOtpData({ phone: values?.phone });
-        //   setMainToken(response);
-        // }
+        setOtpData({ mobile: values.mobile });
+        setOpenOtpModal(true);
       },
       onError: PublicHandelingErrors.onErrorResponse,
     });
   };
 
   const handleOnChange = (e: string) => {
-    loginFormik.setFieldValue("contact", e);
+    loginFormik.setFieldValue("mobile", e);
   };
 
-  //   const handelErrorFromOtp = (error) => {
-  //     if (error?.response?.data?.errors?.length > 0) {
-  //       error?.response?.data?.errors?.map((e) => toast.error(e?.message));
-  //     }
-  //     toast.error(error?.response?.data?.message);
-  //   };
-  //   const { mutate: otpVerifyMutate, isLoading: isLoadingOtpVerifiyAPi } =
-  //     useVerifyPhone();
-  //   const otpFormSubmitHandler = (values) => {
-  //     const onSuccessHandler = (res) => {
-  //       toast.success(res?.message);
-  //       setOpenOtpModal(false);
-  //       dispatch(HandelOrder());
-  //       dispatch(ProfileData());
-  //       localStorage.setItem("token", res?.token);
+  //  deal with otp
+  const handelErrorFromOtp = (error: any) => {
+    if (error?.response?.data?.errors?.length > 0) {
+      error?.response?.data?.errors?.map((e: any) => toast.error(e?.message));
+    }
+    toast.error(error?.response?.data?.message);
+  };
+  const { mutate: otpVerifyMutate, isLoading: isLoadingOtpVerifiyAPi } =
+    useMutation("verify_phone", AuthApi.verify_phone);
+  const otpFormSubmitHandler = (values: { mobile: string|undefined; otp: string }) => {
+    const onSuccessHandler = (res: any) => {
+      dispatch(SaveProfileData(res.data.data.user));
+      if (res.data.data.access.token) {
+        toast.success(res?.data?.message);
+        localStorage.setItem("token", res?.data?.data?.access?.token);
 
-  //       handleClose?.();
-  //     };
-  //     otpVerifyMutate(values, {
-  //       onSuccess: onSuccessHandler,
-  //       onError: handelErrorFromOtp,
-  //     });
-  //   };
+        handleClose?.();
+      }
+      setOpenOtpModal(false);
+
+      handleClose?.();
+    };
+    otpVerifyMutate(values, {
+      onSuccess: onSuccessHandler,
+      onError: handelErrorFromOtp,
+    });
+  };
+
+  //  style of verifiction modal
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    height: "386px",
+    oveflowY: "scroll",
+    transform: "translate(-50%, -50%)",
+    width: { sm: "791px", xs: "90%", mx: "auto" },
+    bgcolor: "background.paper",
+    p: { md: 4, xs: 0.5 },
+  };
 
   const languagedirection = localStorage.getItem("direction");
   return (
@@ -178,12 +182,12 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
                   spacing={{ xs: 2, md: 2 }}
                 >
                   <CustomPhoneInput
-                    value={loginFormik.values.contact}
+                    value={loginFormik.values.mobile}
                     onHandleChange={handleOnChange}
                     // initCountry={global?.country}
                     rtlChange
-                    touched={loginFormik.touched.contact}
-                    errors={loginFormik.errors.contact}
+                    touched={loginFormik.touched.mobile}
+                    errors={loginFormik.errors.mobile}
                     isLoading={isLoading}
                   />
                 </CustomStackFullWidth>
@@ -231,14 +235,23 @@ const SignInPage = ({ setModalFor, handleClose }: SignModel) => {
           />
         </GlobalDisplayFlexBox>
       </RTL>
-      {/* <CustomModal openModal={openOtpModal} setModalOpen={setOpenOtpModal}>
-        <OtpForm
-          setOpenOtpModal={setOpenOtpModal}
-          data={otpData}
-          formSubmitHandler={otpFormSubmitHandler}
-          isLoading={isLoadingOtpVerifiyAPi}
-        />
-      </CustomModal> */}
+      <Modal
+        open={openOtpModal}
+        onClose={() => setOpenOtpModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <OtpForm
+            modalFor={modalFor}
+            setModalFor={setModalFor}
+            setOpenOtpModal={setOpenOtpModal}
+            data={otpData}
+            formSubmitHandler={otpFormSubmitHandler}
+            isLoading={isLoadingOtpVerifiyAPi}
+          />
+        </Box>
+      </Modal>
     </CustomBoxForModal>
   );
 };

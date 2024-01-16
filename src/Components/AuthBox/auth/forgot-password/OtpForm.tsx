@@ -1,258 +1,264 @@
-import React, { useRef } from 'react'
-import { Box, Stack, Typography, TextField } from '@mui/material'
+import React, { useRef } from "react";
+import { Box, Stack, Typography, TextField } from "@mui/material";
 
-import { useTranslation } from 'react-i18next'
-import { useFormik } from 'formik'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import LoadingButton from '@mui/lab/LoadingButton'
+import { useTranslation } from "react-i18next";
+import { useFormik } from "formik";
 
-import * as Yup from 'yup'
-import { useTheme } from '@mui/material'
-import resendImg from '../../../../public/LogIn/resendCode.svg'
+import * as Yup from "yup";
+import { useTheme } from "@mui/material";
+// import resendImg from '../../../../public/LogIn/resendCode.svg'
+import OtpInput from "react-otp-input";
+import { useState } from "react";
+import { useEffect } from "react";
+import img from "../../../../../public/OtpModal/otp img.png";
+import {
+  CustomStackFullWidth,
+  GlobalDisplayFlexBox,
+  GlobalDisplayFlexColumnBox,
+} from "@/styles/PublicStyles";
+import CustomLoadingSubmitButton from "@/Components/GlobalComponent/CustomLoadingSubmitButton";
+import { useRouter } from "next/router";
 
-import { useState } from 'react'
-import { useEffect } from 'react'
-
-
-const OtpForm = ({
-    // data,
-    // formSubmitHandler,
-    // isLoading,
-    // UpdateProfile,
-    // setPhoneVerify,
-    // setOpenOtpModal,
-}) => {
-    const { t } = useTranslation()
-    const [otp, setOtp] = useState('')
-    const otpFormik = useFormik({
-        //here reset_token is otp inputs
-        initialValues: {
-            reset_token: '',
-            // phone: data?.phone,
-        },
-        validationSchema: Yup.object({
-            reset_token: Yup.string().required(t('field is empty')),
-        }),
-        onSubmit: async (values) => {
-            try {
-                // formSubmitHandler(values)
-            } catch (err) {}
-        },
-    })
-    const [modalFor, setModalFor] = useState('sign-in')
-    const theme = useTheme()
-    const [authModalOpen, setOpen] = useState(false)
-    const handleOpenAuthModal = () => {
-        // setOpenOtpModal(false)
-    }
-    const handleCloseAuthModal = () => {
-        setOpen(false)
-    }
-
-    const [resend, setResend] = useState(59)
-
-    useEffect(() => {
-        const handelTimeOut = setTimeout(() => {
-            // setResend((resend -= 1))
-        }, 1000)
-
-        if (resend === 0 || resend < 0) {
-            clearTimeout(handelTimeOut)
-        }
-    }, [resend])
-
-    useEffect(() => {
-        otpFormik.values.reset_token = otp
-    })
-
-    return (
-        // <CustomPaperBigCard width="auto" noboxshadow="true">
-        //     <CustomStackFullWidth>
-        //         <Stack alignItems="center" justifyContent="center">
-        //             <Typography
-        //                 sx={{
-        //                     fontSize: '16px',
-        //                     fontWeight: '500',
-        //                     color: theme.palette.primary.textLight,
-        //                 }}
-        //             >
-        //                 {t('We send the verification code (OTP) sent to')}
-        //             </Typography>
-        //             <Typography sx={{ fontSize: '16px', fontWeight: '500' }}>
-        //                 {data?.phone}
-        //             </Typography>
-        //         </Stack>
-        //         <form noValidate onSubmit={otpFormik.handleSubmit}>
-        //             <Stack
-        //                 mt="2rem"
-        //                 padding="0 20px"
-        //                 alignItems="center"
-        //                 justifyContent="center"
-        //             >
-        //                 <Box
-        //                     sx={{
-        //                         width: {md:'70%',xs:"95%"},
-        //                         mx:"auto",
-        //                         height: '50px',
-        //                         border: `1px solid #B9B9B9`,
-        //                         borderRadius: '5px',
-        //                         pb: '8px',
-        //                         pt: '5px',
-        //                         display: 'flex',
-        //                         justifyContent: 'center',
-        //                         alignItems: 'center',
-        //                     }}
-        //                 >
-        //                     <OtpInput
-        //                         // value={otpFormik.values.reset_token}
-        //                         onChange={setOtp}
-        //                         name="reset_token"
-        //                         inputType="tel"
-        //                         pattern="[0-9]{4}"
-        //                         inputStyle={{
-        //                             width: '35px',
-        //                             height: '35px',
-        //                             borderBottom: '1px solid #B9B9B9',
-        //                             borderRight: '0px solid #B9B9B9',
-        //                             borderLeft: '0px solid #B9B9B9',
-        //                             borderTop: '0px solid #B9B9B9',
-        //                         }}
-        //                         // InputProps={{
-        //                         //     inputMode: 'numeric',
-        //                         //     pattern: '[0-9]*',
-        //                         //     // readOnly:true
-        //                         // }}
-        //                         value={otp}
-        //                         // onChange={otpFormik.handleChange}
-        //                         numInputs={4}
-        //                         renderSeparator={<span>-</span>}
-        //                         renderInput={(props) => <input {...props} />}
-        //                     />
-        //                 </Box>
-
-        //                 <Box
-        //                     sx={{
-        //                         display: 'flex',
-        //                         gap: '5px',
-        //                         alignItems: 'center',
-        //                         mt: '10px',
-        //                     }}
-        //                 >
-        //                     <img
-        //                         src={resendImg?.src}
-        //                         alt="img"
-        //                         loading="lazy"
-        //                         style={
-        //                             resend === 0
-        //                                 ? { cursor: 'pointer' }
-        //                                 : { cursor: 'default' }
-        //                         }
-        //                     />
-        //                     <Typography
-        //                         sx={{
-        //                             fontSize: '14px',
-        //                             fontWeight: '600',
-        //                             color: theme.palette.primary.textLight,
-        //                             display: 'flex',
-        //                             alignItems: 'center',
-        //                             gap: '2px',
-        //                         }}
-        //                     >
-        //                         Resend code
-        //                         <span
-        //                             style={
-        //                                 resend !== 0
-        //                                     ? {
-        //                                           color: '#D52116',
-        //                                           display: 'flex',
-        //                                           gap: '2px',
-        //                                           alignItems: 'center',
-        //                                       }
-        //                                     : { display: 'none' }
-        //                             }
-        //                         >
-        //                             <Typography
-        //                                 component={'span'}
-        //                                 sx={{
-        //                                     fontSize: '14px',
-        //                                     fontWeight: '600',
-        //                                     color: theme.palette.primary
-        //                                         .textLight,
-        //                                 }}
-        //                             >
-        //                                 {' '}
-        //                                 on
-        //                             </Typography>{' '}
-        //                             {resend}
-        //                         </span>
-        //                     </Typography>
-        //                 </Box>
-        //                 <Box
-        //                     sx={{
-        //                         display: 'flex',
-        //                         flexDirection: 'column',
-        //                         gap: '2px',
-        //                     }}
-        //                 >
-        //                     <LoadingButton
-        //                         type="submit"
-        //                         fullWidth
-        //                         variant="contained"
-        //                         sx={{ mt: 3, mb: 2, color: 'white' }}
-        //                         loading={isLoading}
-        //                     >
-        //                         {t('Verify')}
-        //                     </LoadingButton>
-        //                     {!UpdateProfile && (
-        //                         <Box
-        //                             sx={{
-        //                                 width: '200px',
-        //                                 height: '40px',
-        //                                 display: 'flex',
-        //                                 justifyContent: 'center',
-        //                                 alignItems: 'center',
-        //                                 border: `1px solid ${theme.palette.primary.main}`,
-        //                                 borderRadius: '5px',
-        //                                 color: theme.palette.primary.main,
-        //                                 cursor: 'pointer',
-        //                                 px: '15px',
-        //                             }}
-        //                             onClick={handleOpenAuthModal}
-        //                         >
-        //                             Edit Phone Number
-        //                         </Box>
-        //                     )}
-        //                     {UpdateProfile && (
-        //                         <Box
-        //                             sx={{
-        //                                 width: '200px',
-        //                                 height: '40px',
-        //                                 display: 'flex',
-        //                                 justifyContent: 'center',
-        //                                 alignItems: 'center',
-        //                                 border: `1px solid ${theme.palette.primary.main}`,
-        //                                 borderRadius: '5px',
-        //                                 color: theme.palette.primary.main,
-        //                                 cursor: 'pointer',
-        //                                 px: '15px',
-        //                             }}
-        //                             onClick={() => setPhoneVerify(false)}
-        //                         >
-        //                             {t('Cancel')}
-        //                         </Box>
-        //                     )}
-        //                 </Box>
-        //             </Stack>
-        //             <AuthModal
-        //                 open={authModalOpen}
-        //                 modalFor={modalFor}
-        //                 setModalFor={setModalFor}
-        //                 handleClose={handleCloseAuthModal}
-        //             />
-        //         </form>
-        //     </CustomStackFullWidth>
-        // </CustomPaperBigCard>
-        <p>jjj</p>
-    )
+interface props {
+  data: { mobile: string | undefined };
+  formSubmitHandler: (values: {
+    otp: string;
+  }) => void;
+  isLoading: boolean;
+  modalFor?: string;
+  setModalFor: (e: string) => void;
+  setOpenOtpModal: (e: boolean) => void;
+  updatProfile?: boolean;
 }
-export default OtpForm
+const OtpForm = ({
+  data,
+  formSubmitHandler,
+  isLoading,
+  setOpenOtpModal,
+  setModalFor,
+  modalFor,
+  updatProfile,
+}: props) => {
+  //  hooks
+  const { locale } = useRouter();
+  const { t } = useTranslation();
+  const [otp, setOtp] = useState("");
+  let [resend, setResend] = useState(59);
+
+  //  validation of otp
+  const otpFormik = useFormik({
+    //here reset_token is otp inputs
+    initialValues: {
+      otp: "",
+    },
+    validationSchema: Yup.object({
+      otp: Yup.string().required(t("field is empty")),
+    }),
+    onSubmit: async (values: { otp: string}) => {
+      try {
+        formSubmitHandler(values);
+      } catch (err) {}
+    },
+  });
+  const theme = useTheme();
+
+  const handleOpenAuthModal = () => {
+    setOpenOtpModal(false);
+    if (modalFor === "sign-in") {
+      setModalFor("sign-in");
+    } else {
+      setModalFor("sign-up");
+    }
+  };
+
+  useEffect(() => {
+    const handelTimeOut = setTimeout(() => {
+      setResend((resend -= 1));
+    }, 1000);
+
+    if (resend === 0 || resend < 0) {
+      clearTimeout(handelTimeOut);
+    }
+  }, [resend]);
+
+  useEffect(() => {
+    otpFormik.values.otp = otp;
+  });
+
+  return (
+    <GlobalDisplayFlexBox
+      sx={{
+        width: "100%",
+        flexDirection: { md: "row", xs: "column" },
+        gap: { md: "0", xs: "15px" },
+      }}
+    >
+      <GlobalDisplayFlexColumnBox
+        sx={{ justifyContent: "flex-start", width: { md: "80%", xs: "100%" } }}
+      >
+        <Stack alignItems="flex-start" justifyContent="center">
+          <Typography
+            sx={{
+              fontSize: "16px",
+              fontWeight: "400",
+              // color: theme.palette.primary.textLight,
+            }}
+          >
+            {t("Enter the 4-digit code sent to you at")}
+          </Typography>
+          <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
+            {data?.mobile}
+          </Typography>
+        </Stack>
+        <form noValidate onSubmit={otpFormik.handleSubmit}>
+          <Stack
+            mt="1rem"
+            sx={{
+              direction: "column",
+              gap: "41px",
+              alignItems: "flex-start",
+            }}
+          >
+            <Box
+              dir="ltr"
+              sx={{
+                width: "100%",
+                mx: "auto",
+                height: "30px",
+
+                borderRadius: "5px",
+                pb: "8px",
+                pt: "5px",
+                display: "flex",
+                mt: "14px",
+                justifyContent: locale === "en" ? "flex-start" : "flex-end",
+              }}
+            >
+              <OtpInput
+                onChange={setOtp}
+                inputType="tel"
+                inputStyle={{
+                  width: "56px",
+                  height: "56px",
+                  borderBottom: "1px solid #B9B9B9",
+                  borderRight: "1px solid #B9B9B9",
+                  borderLeft: "1px solid #B9B9B9",
+                  borderTop: "1px solid #B9B9B9",
+                }}
+                value={otp}
+                numInputs={4}
+                renderSeparator={<span>-</span>}
+                renderInput={(props: any) => <input {...props} />}
+              />
+            </Box>
+
+            <GlobalDisplayFlexColumnBox
+              gap={"0px"}
+              sx={{ width: { md: "75%", xs: "100%" } }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "5px",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "14px",
+                    fontWeight: "400",
+                    // color: theme.palette.primary.textLight,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "2px",
+                  }}
+                >
+                  {t("Didn't Receive the Code ? Resend in")}
+                  <span
+                    style={
+                      resend !== 0
+                        ? {
+                            color: "#329CD7",
+                            display: "flex",
+                            gap: "2px",
+                            alignItems: "center",
+                          }
+                        : { display: "none" }
+                    }
+                  >
+                    {resend} <span style={{ color: "black" }}>s</span>
+                  </span>
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
+                  width: "100%",
+                }}
+              >
+                <CustomLoadingSubmitButton
+                  size={25}
+                  loading={isLoading}
+                  word="Verify"
+                />
+
+                {/*  button appear case of sign in and sign up  */}
+                {!updatProfile && (
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: "40px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      border: `1px solid ${theme.palette.primary.main}`,
+                      borderRadius: "8px",
+                      color: theme.palette.primary.main,
+                      cursor: "pointer",
+                      px: "15px",
+                      fontSize: "20px",
+                      fontWeight: "600",
+                    }}
+                    onClick={handleOpenAuthModal}
+                  >
+                    {t("Edit Phone Number")}
+                  </Box>
+                )}
+                {/*  button appear case of  update profile */}
+                {updatProfile && (
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: "40px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      border: `1px solid ${theme.palette.primary.main}`,
+                      borderRadius: "8px",
+                      color: theme.palette.primary.main,
+                      cursor: "pointer",
+                      px: "15px",
+                    }}
+                    onClick={() => setOpenOtpModal(false)}
+                  >
+                    {t("Cancel")}
+                  </Box>
+                )}
+              </Box>
+            </GlobalDisplayFlexColumnBox>
+          </Stack>
+        </form>
+      </GlobalDisplayFlexColumnBox>
+
+      <img
+        src={img?.src}
+        loading="lazy"
+        alt="img"
+        style={{ width: "281px", height: "284px", objectFit: "cover" }}
+      />
+    </GlobalDisplayFlexBox>
+  );
+};
+export default OtpForm;

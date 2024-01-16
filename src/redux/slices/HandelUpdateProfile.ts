@@ -3,8 +3,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import PublicRequest from "@/utils/PublicRequests";
 import { UpdateProfileModel } from "@/models/UpdateProfileSlice";
 import { AccountUpdate } from "@/interfaces/FormUpdateAccountInterface";
-import {  inititalAccountInfo } from "@/interfaces/AccountInfo";
+import { inititalAccountInfo } from "@/interfaces/AccountInfo";
 
+//  get profile data
+export const GetProfileData = createAsyncThunk(
+  "updateProfile/GetProfileData",
+  () => PublicRequest.getData("customer/profile")
+);
+
+//  update account
 export const Updating = createAsyncThunk(
   "updateProfile/UpdateAccount",
   (payload: AccountUpdate) =>
@@ -40,6 +47,22 @@ export const UpdatingAccount = createSlice({
     );
     builder.addCase(Updating.rejected, (state: UpdateProfileModel) => {
       state.isloading = false;
+    });
+
+    builder.addCase(GetProfileData.pending, (state: UpdateProfileModel) => {
+      // state.isloading = true;
+    });
+    builder.addCase(
+      GetProfileData.fulfilled,
+      (state: UpdateProfileModel, { payload }: any) => {
+        // state.isloading = false;
+        if (payload) {
+          state.accountInfo = payload?.data?.customer?.user;
+        }
+      }
+    );
+    builder.addCase(GetProfileData.rejected, (state: UpdateProfileModel) => {
+      // state.isloading = false;
     });
   },
 });

@@ -1,11 +1,18 @@
 import { CustomStackFullWidth } from "@/styles/PublicStyles";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomShimmerForProfile from "../customShimmerForProfile/customShimmerForProfile";
 import EditProfile from "./ProfileBody/EditProfile";
 import Meta from "../GlobalComponent/Meta";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { GetProfileData } from "@/redux/slices/HandelUpdateProfile";
 
 const ProfilePage = () => {
+  //  hooks
+  const dispatch=useAppDispatch()
+
+  useEffect(() => {
+    dispatch(GetProfileData());
+  }, []);
   const { accountInfo } = useAppSelector((state) => state.profile);
  
   return (

@@ -6,7 +6,7 @@ import SignUpPage from "./auth/sign-up/SignUp";
 export interface authModel {
   open: boolean;
   handleClose: () => void;
-  modalFor?: string;
+  modalFor: string;
   setModalFor: (e: string) => void;
 }
 const AuthModal = ({
@@ -25,9 +25,9 @@ const AuthModal = ({
         aria-describedby="modal-modal-description"
       >
         {modalFor === "sign-in" ? (
-          <SignInPage handleClose={handleClose} setModalFor={setModalFor} />
+          <SignInPage modalFor={modalFor} handleClose={handleClose} setModalFor={setModalFor} />
         ) : (
-          <SignUpPage handleClose={handleClose} setModalFor={setModalFor} />
+          <SignUpPage modalFor={modalFor} handleClose={handleClose} setModalFor={setModalFor} />
         )}
       </Modal>
     </Box>

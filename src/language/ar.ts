@@ -14,6 +14,11 @@ export const arabic = {
   "About Us": "عنا",
   "Follow Us": "تابعنا علي",
   Message: "الرسالة",
+
+  "Enter the 4-digit code sent to you at":
+    "أدخل الرمز المكون من 4 أرقام المرسل إليك على",
+  // "Edit Phone Number":"تعديل رقم الجوال",
+
   "Please Select Area": "من فضلك حدد منطقه",
   "Laundry become simple": "الغسيل صار  بسيط",
   "Say goodbye to laundry day": "قل وداعا ليوم الغسيل",
@@ -621,7 +626,7 @@ export const arabic = {
   "Food Will Arrive Within": "الاوردر سوف يصل في خلال",
   "Food Arrived In": "الطعام وصل عند",
   "Order Details": "تفاصيل الطلب",
-  "Edit Phone Number": "تعديل رقم الهاتف",
+  "Edit Phone Number": "تعديل رقم الجوال",
   "Enter referral code": "ادخل كود الدعوه",
   Pending: " قيد الانتظار ",
   Home: "منزل",
@@ -1081,11 +1086,12 @@ export const arabic = {
     "الرجاء إدخال رقم الهاتف المتحرك المسجل الخاص بك",
   Done: "فعله",
   "field is empty": "الحقل فارغ",
-  Verify: "يؤكد",
+  Verify: "تحقق",
+  "Didn't Receive the Code ? Resend in": "إعادة إرسال رمز التحقق",
   take_away: "يبعد",
   Delete: "حذف",
   Now: "حاليا",
-
+  update: "تحديث ",
   Schedule: "برنامج",
   order_place: "مكان الطلب",
   loyalty_point: "نقطة ولاء",
@@ -1214,16 +1220,16 @@ export const arabic = {
   Street: "الشارع",
   "House number": "رقم الدار",
   Included: "متضمن",
-  "Please Sign In , First":"من فضلك قم بتسجيل الدخول , اولا",
+  "Please Sign In , First": "من فضلك قم بتسجيل الدخول , اولا",
   Excluded: "مستبعد",
-  "Enter all required data":"ادخل كل المعلومات المطلوبه",
+  "Enter all required data": "ادخل كل المعلومات المطلوبه",
   "This order can not be reordered as the restaurant is not existing in your current zone.":
     "لا يمكن إعادة ترتيب هذا الطلب لأن المطعم غير موجود في منطقتك الحالية.",
   "ORDER TYPE &": "نوع الطلب &",
   "Delivery fee increased": "زيادة رسوم التوصيل",
-  "Deliver to :":"التوصيل إلى :",
-  "Addresse Type is required":"ادخل نوع العنوان",
-  "area is required":"ادخل المنطقه",
+  "Deliver to :": "التوصيل إلى :",
+  "Addresse Type is required": "ادخل نوع العنوان",
+  "area is required": "ادخل المنطقه",
   "due to bad weather.": "بسبب سوء الطقس.",
   "Start date and end date can not be same for subscription orders.":
     "تاريخ البدء وتاريخ الانتهاء لا يمكن أن يكونا متطابقين لأوامر الاشتراك.",
@@ -1233,5 +1239,6 @@ export const arabic = {
     "لديك بعض الأطعمة في عربة التسوق الخاصة بك. إذا قمت بتغيير موقعك ، فسيتم إعادة تعيين عربة التسوق الخاصة بك والبيانات الأخرى ذات الصلة بموقع التسليم الحالي الخاص بك.",
   "Terms and Conditions": "الشروط والاحكام",
   "Price List": "قائمة الاسعار",
-  "It’s our goal to make premium laundry service work with all budgets.":"إن هدفنا هو أن نجعل خدمة غسيل الملابس المتميزة تتناسب مع جميع الميزانيات.",
+  "It’s our goal to make premium laundry service work with all budgets.":
+    "إن هدفنا هو أن نجعل خدمة غسيل الملابس المتميزة تتناسب مع جميع الميزانيات.",
 };

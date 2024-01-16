@@ -46,6 +46,8 @@ export default function App({
   const { t } = useTranslation();
   const [languagedirection, setlanguagedirection] = useState<string>("");
   const { locale } = useRouter();
+  const [previewLoader, setPreviewLoader] = useState<boolean>(true);
+  const router = useRouter();
   //  handel language direction
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -74,7 +76,6 @@ export default function App({
     }
   }, [locale]);
 
-
   //  custom theme
   const theme = useMemo(
     () =>
@@ -85,7 +86,6 @@ export default function App({
   );
   const getLayout = Component.getLayout ?? ((page: any) => page);
   const queryClient = new QueryClient();
-  const router = useRouter();
 
   //   aos custom
   useEffect(() => {
@@ -98,8 +98,6 @@ export default function App({
     });
   }, []);
 
-  const [previewLoader, setPreviewLoader] = useState<boolean>(true);
-
   useEffect(() => {
     if (previewLoader) {
       setTimeout(() => {
@@ -108,13 +106,35 @@ export default function App({
     }
   }, [previewLoader]);
 
+  //  get machine id for public apis
+  function getMachineId() {
+    let machineId = localStorage.getItem("MachineId");
+
+    if (!machineId) {
+      machineId = crypto.randomUUID();
+      localStorage.setItem("MachineId", machineId);
+    }
+    return machineId;
+  }
+
+  //  save machine id in localstorage
+  let machineId: null | string | undefined = undefined;
+  if (typeof window !== "undefined") {
+    machineId = localStorage.getItem("MachineId");
+  }
+
+  useEffect(() => {
+    if (!machineId) {
+      getMachineId();
+    }
+  }, [machineId]);
+
   //  navbar
   const Navbar = dynamic(() => import("@/Components/Navbar"), { ssr: false });
   return (
     <CacheProvider value={emotionCache}>
       <QueryClientProvider client={queryClient}>
-       
-          <Provider store={store}>
+        <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <ThemeProvider theme={theme}>
               <RTL direction={languagedirection}>
@@ -165,9 +185,8 @@ export default function App({
                 <Footer />
               </RTL>
             </ThemeProvider>
-            </PersistGate>
-          </Provider>
-       
+          </PersistGate>
+        </Provider>
       </QueryClientProvider>
     </CacheProvider>
   );

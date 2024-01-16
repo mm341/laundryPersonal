@@ -9,7 +9,7 @@ import { CustomStackFullWidth, CustomTypography } from "@/styles/PublicStyles";
 import { useRouter } from "next/router";
 
 interface customPhoneInput {
-  value: string;
+  value: string|undefined;
   onHandleChange: (e: string) => void;
 
   touched: boolean | undefined;

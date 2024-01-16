@@ -9,8 +9,6 @@ const ValidationSchemaForAddAddress = () => {
     Building: Yup.string().min(1).max(3),
     floor: Yup.string().min(1).max(3),
     apartment: Yup.string().min(1).max(3),
-    area:Yup.string().required(t("area is required"))
-    // house:Yup.string().required(t('Building is required')),
   });
 };
 export default ValidationSchemaForAddAddress;
