@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Image from "next/image";
+// import Image from "next/image";
 import nofood from "../../assets/gif/no-food.gif";
 import { Stack, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -17,7 +17,7 @@ const CustomEmptyResult = ({ label, image }: EmptyResult) => {
   const theme = useTheme();
   return (
     <CustomStackFullWidth alignItems="center" justifyContent="center">
-      <Image
+      <img
         src={image ? image.src : nofood.src}
         alt="my gif"
         height={150}

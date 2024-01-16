@@ -1,5 +1,5 @@
-import { Divider, Fade, Stack, Typography, useTheme } from "@mui/material";
-import Image from "next/image";
+import {  Stack, Typography, useTheme } from "@mui/material";
+
 import React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";

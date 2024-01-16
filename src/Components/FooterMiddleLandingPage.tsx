@@ -27,7 +27,7 @@ import {
 import { useAppSelector } from "@/redux/store";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
 import { useRouter } from "next/router";
-import Image from "next/image";
+// import Image from "next/image";
 
 const Footer = () => {
   //  hooks
@@ -249,7 +249,7 @@ const Footer = () => {
                     >
                       {footerLinks?.map((e: FooterSocialLinks, i: number) => (
                         <a key={i} target="_blank" href={e?.url}>
-                          <Image
+                          <img
                             src={e?.photo_path}
                             loading="lazy"
                             alt="img"

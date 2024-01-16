@@ -7,7 +7,7 @@ import React from "react";
 
 import { OrdersInterface } from "@/interfaces/OrdersInterface";
 import { productInterface } from "@/interfaces/ProductInterface";
-import Image from "next/image";
+// import Image from "next/image";
 import { useAppSelector } from "@/redux/store";
 const ProductsInOrderCard = ({
   openProductsDetails,
@@ -16,7 +16,6 @@ const ProductsInOrderCard = ({
   openProductsDetails: boolean;
   order: OrdersInterface;
 }) => {
-
   //  master data
   const { master } = useAppSelector((state) => state.master);
   return (
@@ -58,7 +57,7 @@ const ProductsInOrderCard = ({
                     height: "80px",
                   }}
                 >
-                  <Image width={"300"} height={"300"} src={product?.image_path} loading="lazy" alt="img" />
+                  <img width={"300"} height={"300"} src={product?.image_path} loading="lazy" alt="img" />
                 </Box>
 
                 <Box

@@ -16,7 +16,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import ContactForm from "@/Components/ContactUs/ContactForm";
 import Meta from "@/Components/GlobalComponent/Meta";
 import { useRouter } from "next/router";
-import Image from "next/image";
+// import Image from "next/image";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
 import { useAppSelector } from "@/redux/store";
 const ContactUs = () => {
@@ -28,6 +28,7 @@ const ContactUs = () => {
   const { locale } = useRouter();
 
   const { footerLinks } = useAppSelector((state) => state.master);
+ 
   return (
     <>
       <Meta
@@ -194,7 +195,7 @@ const ContactUs = () => {
                     /> */}
                      {footerLinks?.map((e: FooterSocialLinks, i: number) => (
                         <a key={i} target="_blank" href={e?.url}>
-                          <Image
+                          <img
                             src={e?.photo_path}
                             loading="lazy"
                             alt="img"

@@ -6,9 +6,10 @@ import {
 import { Box, Typography, styled, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
+
 import dumyImg from "../../public/navbar/dumyNotificationImg.svg";
 import SimpleBar from "simplebar-react";
+import { useAppDispatch } from "@/redux/store";
 interface Props {
   onClose: () => void;
   open: boolean;
@@ -16,7 +17,6 @@ interface Props {
 const NotificationPoPover = (props: Props) => {
   //    hooks
 
-  const { t } = useTranslation();
   const theme = useTheme();
   const { locale } = useRouter();
 

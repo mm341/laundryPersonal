@@ -9,7 +9,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/router";
-import Image from "next/image";
+// import Image from "next/image";
 const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
   //  hooks
   const { locale } = useRouter();
@@ -48,7 +48,7 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
               borderRadius: "4px",
             }}
           >
-            <Image
+            <img
               width={"100"}
               height={"100"}
               src="http://adminlaundry.razinsoft.com/storage/images/products/QpiDQXTAt3KnmNfOtGEg66sQmU7ndpKigAzzUhBZ.jpg"

@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { Box } from "@mui/material";
+// import Image from "next/image";
+// import { Inter } from "next/font/google";
+// import { Box } from "@mui/material";
 import FirstSection from "@/Components/HomePage/FirstSection";
 import { HomeParentBox } from "@/styles/PublicStyles";
 import ServiceSection from "@/Components/HomePage/ServiceSection";
@@ -44,6 +44,7 @@ export default function Home({
       dispatch(CashAreas(homeAreas));
     }
   }, [dispatch, homeAreas, homeAreas?.length]);
+
   //  cash master
   useEffect(() => {
     if (Object.values(masterData).length > 0) {
@@ -53,7 +54,7 @@ export default function Home({
 
   //  cash footer Social Media Links
   useEffect(() => {
-    if (footerSocialLinks.length > 0) {
+    if (footerSocialLinks?.length > 0) {
       dispatch(CashFooterLinks(footerSocialLinks));
     }
   }, [dispatch, footerSocialLinks]);
@@ -111,7 +112,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     });
     masterData = configRes?.data?.data;
   } catch (e) {
-    masterData = [];
+    masterData = {};
   }
 
   //  footerSocialLinks

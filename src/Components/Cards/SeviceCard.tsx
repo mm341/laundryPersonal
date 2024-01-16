@@ -5,10 +5,10 @@ import {
 import { Box, Fade, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import dumyImg from "../../../public/DumyImg/img-service-2 1.png";
+
 import { useTranslation } from "react-i18next";
 import { HomeServices } from "@/interfaces/HomeServices";
-import Image from "next/image";
+// import Image from "next/image";
 const SeviceCard = ({
   setOpenOrderDialog,
   area,
@@ -32,7 +32,7 @@ const SeviceCard = ({
       onMouseOver={() => setBright(true)}
       onMouseLeave={() => setBright(false)}
     >
-      <Image
+      <img
         width={"300"}
         height={"300"}
         src={element?.image_path}

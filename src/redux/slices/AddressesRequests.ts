@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 
 export const GetAllAdddressses = createAsyncThunk(
   "addresse/GetAllAdddressses",
-  () => PublicRequest.getData("addresses")
+  () => PublicRequest.getData("customer/addresses")
 );
 
 export interface addAddressePayload {
@@ -18,14 +18,14 @@ export interface addAddressePayload {
   house_no?: string;
   road_no?: string;
   id?: number;
-  latitude?:number
-  longitude?:number
+  latitude?: number;
+  longitude?: number;
 }
 
 export const AddAddresse = createAsyncThunk(
   "updateProfile/AddAddresse",
   (payload: addAddressePayload) =>
-    PublicRequest.postData(payload, `addresses`)
+    PublicRequest.postData(payload, `customer/addresses`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
@@ -37,7 +37,7 @@ export const AddAddresse = createAsyncThunk(
 export const UpdateAddresse = createAsyncThunk(
   "updateProfile/UpdateAddresse",
   (payload: addAddressePayload) =>
-    PublicRequest.postData(payload, `addresses/${payload?.id}`)
+    PublicRequest.postData(payload, `customer/addresses/${payload?.id}`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);

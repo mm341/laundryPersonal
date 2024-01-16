@@ -25,13 +25,15 @@ import DrawerMenu from "./DrawerMenu";
 
 import accountphoto from "../../public/navbar/accountPhoto.svg";
 import { AccountPopover } from "./GlobalComponent/AccountPopover";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import AuthModal from "./AuthBox/AuthModel";
 import cartIcon from "../../public/navbar/cart.svg";
 import notificationIcon from "../../public/navbar/notification.svg";
 import NotificationPoPover from "./Notification";
+import { GetAllNotification } from "@/redux/slices/Notifications";
 const Navbar = () => {
   //  hooks
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const { push, locale, pathname, query, asPath } = useRouter();
   const { t } = useTranslation();
@@ -188,6 +190,14 @@ const Navbar = () => {
       </Stack>
     );
   };
+
+  //  call notification api in case of token exist
+
+  useEffect(() => {
+    if (token) {
+      dispatch(GetAllNotification());
+    }
+  }, [token]);
   return (
     <>
       <Box

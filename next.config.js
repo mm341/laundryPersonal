@@ -6,14 +6,14 @@ const nextConfig = {
     defaultLocale: "en",
   },
   images: {
-    domains: ["adminlaundry.razinsoft.com", "localhost"], //Domain of image host
+    domains: ["laundrydashboard.otloob.net", "localhost"], //Domain of image host
   },
   // /app/public
   images: {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "adminlaundry.razinsoft.com",
+        hostname: "laundrydashboard.otloob.net",
         port: "",
         pathname: "/**",
       },

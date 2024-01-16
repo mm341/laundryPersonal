@@ -4,11 +4,19 @@ import PublicRequest from "@/utils/PublicRequests";
 import { UpdateProfileModel } from "@/models/UpdateProfileSlice";
 import { AccountUpdate } from "@/interfaces/FormUpdateAccountInterface";
 import { inititalAccountInfo } from "@/interfaces/AccountInfo";
+import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 
 //  get profile data
 export const GetProfileData = createAsyncThunk(
   "updateProfile/GetProfileData",
-  () => PublicRequest.getData("customer/profile")
+  () =>
+    PublicRequest.getData("customer/profile")
+      .then((res: any) => {
+        if (res) {
+          // toast.success(res?.message);
+        }
+      })
+      .catch((err) => PublicHandelingErrors.onErrorResponse(err))
 );
 
 //  update account
