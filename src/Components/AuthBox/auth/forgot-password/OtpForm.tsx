@@ -18,6 +18,9 @@ import {
 } from "@/styles/PublicStyles";
 import CustomLoadingSubmitButton from "@/Components/GlobalComponent/CustomLoadingSubmitButton";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { ResendCode } from "@/redux/slices/MasterSlice";
+import { useAppDispatch } from "@/redux/store";
 
 interface props {
   data: { mobile: string | undefined };
@@ -46,8 +49,9 @@ const OtpForm = ({
   const { locale } = useRouter();
   const { t } = useTranslation();
   const [otp, setOtp] = useState("");
-  let [resend, setResend] = useState(59);
-
+  let [resendMain, setResendMain] = useState(1);
+  let [resend, setResend] = useState(resendMain * 60);
+  const dispatch = useAppDispatch();
   //  validation of otp
   const otpFormik = useFormik({
     //here reset_token is otp inputs
@@ -180,6 +184,11 @@ const OtpForm = ({
                 }}
               >
                 <Typography
+                  onClick={() => {
+                    setResendMain(resendMain+=1);
+                    setResend(resendMain*60)
+                    dispatch(ResendCode({ mobile: data?.mobile }));
+                  }}
                   sx={{
                     fontSize: "14px",
                     fontWeight: "400",
@@ -187,6 +196,7 @@ const OtpForm = ({
                     display: "flex",
                     alignItems: "center",
                     gap: "2px",
+                    cursor: resend > 0 ? "default" : "pointer",
                   }}
                 >
                   {t("Didn't Receive the Code ? Resend in")}

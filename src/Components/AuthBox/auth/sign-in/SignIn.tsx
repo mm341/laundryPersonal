@@ -140,12 +140,12 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
     position: "absolute",
     top: "50%",
     left: "50%",
-    height: "386px",
+    height: { md: "386px", xs: "70%" },
     oveflowY: "scroll",
     transform: "translate(-50%, -50%)",
     width: { sm: "791px", xs: "90%", mx: "auto" },
     bgcolor: "background.paper",
-    p: { md: 4, xs: 0.5 },
+    p:  4 ,
   };
 
   const languagedirection = localStorage.getItem("direction");

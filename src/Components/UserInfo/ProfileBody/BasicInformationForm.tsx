@@ -38,7 +38,7 @@ const BasicInformationForm = ({
 }) => {
   //  hooks
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
+ 
  
   //  account form validation and prepare send api request
 

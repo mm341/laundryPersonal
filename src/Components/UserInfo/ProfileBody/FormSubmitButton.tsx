@@ -3,9 +3,10 @@ import { AuthApi } from "@/React-Query/authApi";
 import { baseUrl } from "@/api/MainApi";
 
 import {
-  GetProfileData,
+  
   SaveProfileData,
 } from "@/redux/slices/HandelUpdateProfile";
+import { useAppDispatch } from "@/redux/store";
 import { GlobalButton } from "@/styles/PublicStyles";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 import { Box, Button, CircularProgress, Modal, useTheme } from "@mui/material";
@@ -33,7 +34,7 @@ const FormSubmitButton = ({
   //  hooks
   const theme = useTheme();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const [otpmodal, setOpenOtpModal] = useState<boolean>(false);
   const [otbdata, setOtbData] = useState<{ mobile: string | undefined }>({
@@ -118,12 +119,12 @@ const FormSubmitButton = ({
     position: "absolute",
     top: "50%",
     left: "50%",
-    height: "386px",
+    height: { md: "386px", xs: "70%" },
     oveflowY: "scroll",
     transform: "translate(-50%, -50%)",
     width: { sm: "791px", xs: "90%", mx: "auto" },
     bgcolor: "background.paper",
-    p: { md: 4, xs: 0.5 },
+    p:  4 ,
   };
   return (
     <>
