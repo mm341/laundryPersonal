@@ -5,11 +5,6 @@ import { AddressesModel } from "@/models/AddresseSliceModel";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 import { toast } from "react-hot-toast";
 
-export const GetAllAdddressses = createAsyncThunk(
-  "addresse/GetAllAdddressses",
-  () => PublicRequest.getData("customer/addresses")
-);
-
 export interface addAddressePayload {
   address_name?: string;
   // area?: string;
@@ -17,10 +12,15 @@ export interface addAddressePayload {
   floor_no?: string;
   apartment_no?: string;
   street?: string;
-  id?: string|undefined;
+  id?: string | undefined;
   latitude?: number;
   longitude?: number;
 }
+
+export const GetAllAdddressses = createAsyncThunk(
+  "addresse/GetAllAdddressses",
+  () => PublicRequest.getData("customer/addresses")
+);
 
 export const AddAddresse = createAsyncThunk(
   "updateProfile/AddAddresse",
@@ -38,6 +38,18 @@ export const UpdateAddresse = createAsyncThunk(
   "updateProfile/UpdateAddresse",
   (payload: addAddressePayload) =>
     PublicRequest.postData(payload, `customer/addresses/${payload?.id}`)
+      .then((res: any) => {
+        if (res) {
+          toast.success(res?.message);
+        }
+      })
+      .catch((err) => PublicHandelingErrors.onErrorResponse(err))
+);
+
+export const DeleteAddresse = createAsyncThunk(
+  "updateProfile/UpdateAddresse",
+  (payload: addAddressePayload) =>
+    PublicRequest.deleteData(`customer/addresses/${payload?.id}`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);

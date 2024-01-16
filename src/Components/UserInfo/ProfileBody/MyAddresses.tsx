@@ -36,7 +36,7 @@ const MyAddresses = () => {
     initialAddresse()
   );
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
-
+  const [addresseId,setAddresseId]=useState<string>("")
   //  selectors
   const { myAddresses } = useAppSelector((state) => state.addresse);
   //  request with api to get all addresses
