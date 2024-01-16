@@ -13,11 +13,11 @@ export const GetAllAdddressses = createAsyncThunk(
 export interface addAddressePayload {
   address_name?: string;
   // area?: string;
-  block?: string;
-  flat_no?: string;
-  house_no?: string;
-  road_no?: string;
-  id?: number;
+  building_no?: string;
+  floor_no?: string;
+  apartment_no?: string;
+  street?: string;
+  id?: string|undefined;
   latitude?: number;
   longitude?: number;
 }

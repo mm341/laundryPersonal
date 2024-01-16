@@ -42,15 +42,15 @@ const AddresseMenu = ({
   const OrderActionStatus = (addresse: AddresseInterface) => {
     let img;
     switch (addresse?.address_name) {
-      case "Home":
+      case "home":
         img = titleADreesseHomeIcon?.src;
         break;
 
-      case "Office":
+      case "office":
         img = titleADreesseOfficeIcon?.src;
         break;
 
-      case "Others":
+      case "others":
         img = titleADreesseOthersIcon?.src;
         break;
     }
@@ -174,9 +174,9 @@ const AddresseMenu = ({
                                   color: "#999999",
                                 }}
                               >
-                                {addresse?.area} area {addresse?.house_no}{" "}
-                                Apartment, {addresse?.flat_no} Floor,{" "}
-                                {addresse?.block} Building
+                              {addresse?.street} street  {addresse?.apartment_no}{" "}
+                                Apartment, {addresse?.building_no} Building,{" "}
+                                {addresse?.floor_no} Floor 
                               </Typography>
                             </Box>
                           </Box>

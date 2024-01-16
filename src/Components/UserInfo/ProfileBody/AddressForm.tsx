@@ -17,7 +17,6 @@ import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { useTheme } from "@mui/material/styles";
 import CustomTextFieldWithFormik from "@/Components/GlobalComponent/form-fields/CustomTextFieldWithFormik";
-import GlobalSelectBox from "@/Components/GlobalSelectBox";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import homeSelectIcon from "../../../../public/info/addresseTitleIcon.svg";
 import officeSelectIcon from "../../../../public/info/officeSelectIcon.svg";
@@ -28,7 +27,7 @@ import { GlobalDisplayFlexBox } from "@/styles/PublicStyles";
 import markerIcon from "../../../../public/info/markerIcon.svg";
 import GoogleMapComponent from "./GoogleMapComponent";
 import { useGeolocated } from "react-geolocated";
-import { useQuery } from "react-query";
+
 import ValidationSchemaForAddAddress from "./ValidationSchemaForAddAddress";
 import { AddresseInterface } from "@/interfaces/AddresseInterface";
 import {
@@ -52,9 +51,9 @@ const AddressForm = ({
   //  hooks
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const [selectValue, setselectValue] = useState<string>(addresse?.area??"");
+ 
   const [addresseType, setAddresseType] = useState<string>(
-    addresse?.address_name ?? "Home"
+    addresse?.address_name ?? "home"
   );
 
   const { t } = useTranslation();
@@ -100,22 +99,21 @@ const AddressForm = ({
 
   // ///////////////////////////////////////////////////
 
-
   //  select Addresse Type
   const typeData: AddresseType[] = [
     {
       label: t("Home"),
-      value: "Home",
+      value: "home",
       img: homeSelectIcon,
     },
     {
       label: t("Office"),
-      value: "Office",
+      value: "office",
       img: officeSelectIcon,
     },
     {
       label: t("Others"),
-      value: "Others",
+      value: "others",
       img: OthersSelectIcon,
     },
   ];
@@ -124,7 +122,7 @@ const AddressForm = ({
     if (addresse?.address_name) {
       setAddresseType(addresse?.address_name);
     } else {
-      setAddresseType("Home");
+      setAddresseType("home");
     }
   }, [addresse?.address_name]);
 
@@ -172,9 +170,9 @@ const AddressForm = ({
     initialValues: {
       address_type: "",
       // area: addresse?.area ?? "",
-      Building: "",
-      floor: "",
-      apartment: "",
+      building_no: "",
+      floor_no: "",
+      apartment_no: "",
       street: "",
     },
     validationSchema: ValidationSchemaForAddAddress(),
@@ -183,12 +181,11 @@ const AddressForm = ({
         let newData: addAddressePayload = {
           latitude: location?.lat,
           longitude: location?.lng,
-          // address: values.address,
-          // house: values.Building,
-          // floor: values.floor,
-          // apartment: values.apartment,
+          building_no: values.building_no,
+          floor_no: values.floor_no,
+          apartment_no: values.apartment_no,
+          street: values.street,
           address_name: values?.address_type,
-          // area: values?.area,
           id: addresse?.id,
         };
         // formSubmitOnSuccess(newData)
@@ -222,13 +219,13 @@ const AddressForm = ({
   };
 
   const BuildingHandler = (value: string) => {
-    addAddressFormik.setFieldValue("Building", value);
+    addAddressFormik.setFieldValue("building_no", value);
   };
   const floorHandler = (value: string) => {
-    addAddressFormik.setFieldValue("floor", value);
+    addAddressFormik.setFieldValue("floor_no", value);
   };
   const appartmentHandler = (value: string) => {
-    addAddressFormik.setFieldValue("apartment", value);
+    addAddressFormik.setFieldValue("apartment_no", value);
   };
   // useEffect(() => {
   //     addAddressFormik.setFieldValue('address', deliveryAddress)
@@ -272,8 +269,6 @@ const AddressForm = ({
             </GlobalDisplayFlexBox>
           </Grid>
 
-         
-
           <Grid item xs={12}>
             <GoogleMapComponent
               addresse={addresse}
@@ -294,11 +289,11 @@ const AddressForm = ({
               disabled={isLoadingAddAddresse}
               type="number"
               label={t("Apartment")}
-              touched={addAddressFormik.touched.apartment}
-              errors={addAddressFormik.errors.apartment}
-              fieldProps={addAddressFormik.getFieldProps("apartment")}
+              touched={addAddressFormik.touched.apartment_no}
+              errors={addAddressFormik.errors.apartment_no}
+              fieldProps={addAddressFormik.getFieldProps("apartment_no")}
               onChangeHandler={appartmentHandler}
-              value={addAddressFormik.values.apartment}
+              value={addAddressFormik.values.apartment_no}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -306,11 +301,11 @@ const AddressForm = ({
               disabled={isLoadingAddAddresse}
               type="number"
               label={t("Building")}
-              touched={addAddressFormik.touched.Building}
-              errors={addAddressFormik.errors.Building}
-              fieldProps={addAddressFormik.getFieldProps("Building")}
+              touched={addAddressFormik.touched.building_no}
+              errors={addAddressFormik.errors.building_no}
+              fieldProps={addAddressFormik.getFieldProps("building_no")}
               onChangeHandler={BuildingHandler}
-              value={addAddressFormik.values.Building}
+              value={addAddressFormik.values.building_no}
             />
           </Grid>
 
@@ -319,11 +314,11 @@ const AddressForm = ({
               disabled={isLoadingAddAddresse}
               type="number"
               label={t("Floor")}
-              touched={addAddressFormik.touched.floor}
-              errors={addAddressFormik.errors.floor}
-              fieldProps={addAddressFormik.getFieldProps("floor")}
+              touched={addAddressFormik.touched.floor_no}
+              errors={addAddressFormik.errors.floor_no}
+              fieldProps={addAddressFormik.getFieldProps("floor_no")}
               onChangeHandler={floorHandler}
-              value={addAddressFormik.values.floor}
+              value={addAddressFormik.values.floor_no}
             />
           </Grid>
 

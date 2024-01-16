@@ -28,8 +28,8 @@ import { AddresseInterface } from "@/interfaces/AddresseInterface";
 
 interface map {
   center: {
-    lat: number;
-    lng: number;
+    lat: string;
+    lng: string;
   };
 }
 interface props {
@@ -115,8 +115,8 @@ const GoogleMapComponent = ({
   useEffect(() => {
     if (addresse?.latitude && addresse?.longitude) {
       setCenterPosition({
-        lat: addresse?.latitude,
-        lng: addresse?.longitude,
+        lat: +addresse?.latitude,
+        lng: +addresse?.longitude,
       });
     }
   }, [addresse?.latitude, addresse?.longitude]);
@@ -144,6 +144,10 @@ const GoogleMapComponent = ({
     setMap(null);
     // setMapSetup(false)
   }, []);
+
+  useEffect(()=>{
+
+  },[])
   let locationLoading: boolean = false;
   return isLoaded ? (
     <Stack direction={"column"}>
