@@ -22,7 +22,6 @@ const FormSubmitButton = ({
   formikName,
   imgChange,
   imgValue,
-  error,
 }: {
   InputName?: string;
   NewInputName?: string | undefined;
@@ -93,6 +92,7 @@ const FormSubmitButton = ({
 
   //  deal with otp
   const handelErrorFromOtp = (error: any) => {
+    PublicHandelingErrors.onErrorResponse(error);
     if (error?.response?.data?.errors?.length > 0) {
       error?.response?.data?.errors?.map((e: any) => toast.error(e?.message));
     }
@@ -103,7 +103,7 @@ const FormSubmitButton = ({
   const otpFormSubmitHandler = (values: { otp: string }) => {
     const onSuccessHandler = (res: any) => {
       dispatch(SaveProfileData(res?.data?.data.user));
-      // dispatch(GetProfileData())
+
       setOpenOtpModal(false);
     };
     otpVerifyMutate(values, {
@@ -161,6 +161,7 @@ const FormSubmitButton = ({
       >
         <Box sx={style}>
           <OtpForm
+            formikName={formikName}
             updatProfile
             setOpenOtpModal={setOpenOtpModal}
             data={otbdata}

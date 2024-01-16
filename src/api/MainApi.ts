@@ -32,6 +32,7 @@ MainApi.interceptors.request.use(function (config) {
   config.headers["Access-Control-Allow-Origin"] = "*";
   config.headers["Access-Control-Allow-Methods"] = "*";
   config.headers["Access-Control-Allow-Headers"] = "*";
+ 
   return config;
 });
 

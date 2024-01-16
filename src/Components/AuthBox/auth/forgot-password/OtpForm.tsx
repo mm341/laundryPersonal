@@ -23,13 +23,14 @@ interface props {
   data: { mobile: string | undefined };
   formSubmitHandler: (values: {
     otp: string;
-    mobile?:string |undefined
+    mobile?: string | undefined;
   }) => void;
   isLoading: boolean;
   modalFor?: string;
   setModalFor: (e: string) => void;
   setOpenOtpModal: (e: boolean) => void;
   updatProfile?: boolean;
+  formikName?: string;
 }
 const OtpForm = ({
   data,
@@ -39,6 +40,7 @@ const OtpForm = ({
   setModalFor,
   modalFor,
   updatProfile,
+  formikName,
 }: props) => {
   //  hooks
   const { locale } = useRouter();
@@ -51,14 +53,26 @@ const OtpForm = ({
     //here reset_token is otp inputs
     initialValues: {
       otp: "",
-      mobile: data?.mobile,
+      // mobile: data?.mobile,
     },
     validationSchema: Yup.object({
       otp: Yup.string().required(t("field is empty")),
     }),
-    onSubmit: async (values: { otp: string,mobile?:string|undefined}) => {
+    onSubmit: async (values: { otp: string }) => {
       try {
-        formSubmitHandler(values);
+        let SendData: {
+          otp: string;
+          alternative_phone?: string | undefined;
+          mobile?: string | undefined;
+        } = { otp: "" };
+        SendData.otp = values.otp;
+        if (formikName === "alternative_phone") {
+          SendData.alternative_phone = data?.mobile;
+        } else {
+          SendData.mobile = data?.mobile;
+        }
+
+        formSubmitHandler(SendData);
       } catch (err) {}
     },
   });
