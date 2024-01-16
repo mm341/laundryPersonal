@@ -114,7 +114,7 @@ const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
     position: "absolute",
     top: "50%",
     left: "50%",
-    height: { md: "386px", xs: "70%" },
+    height: { md: "386px", xs: "97%" },
     oveflowY: "scroll",
     transform: "translate(-50%, -50%)",
     width: { md: "791px", sm: "70%", xs: "95%", mx: "auto" },

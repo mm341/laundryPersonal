@@ -119,7 +119,7 @@ const FormSubmitButton = ({
     position: "absolute",
     top: "50%",
     left: "50%",
-    height: { md: "386px", xs: "70%" },
+    height: { md: "386px", xs: "97%" },
     oveflowY: "scroll",
     transform: "translate(-50%, -50%)",
     width: { sm: "791px", xs: "90%", mx: "auto" },

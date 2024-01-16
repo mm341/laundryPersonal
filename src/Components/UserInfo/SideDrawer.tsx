@@ -41,7 +41,7 @@ const SideDrawer = ({ page }: { page: string }) => {
               />
             </CustomSideDrawer>
           </Grid>
-          <Grid justifySelf="flex-end" item xs={10} sm={10} md={2}>
+          {/* <Grid justifySelf="flex-end" item xs={10} sm={10} md={2}>
             <Typography
               variant="h3"
               color={theme.palette.primary.main}
@@ -50,7 +50,7 @@ const SideDrawer = ({ page }: { page: string }) => {
             >
               {page}
             </Typography>
-          </Grid>
+          </Grid> */}
         </>
       )}
     </>
