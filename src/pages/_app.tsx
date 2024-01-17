@@ -30,7 +30,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import ScrollToTop from "@/Components/GlobalComponent/scroll-top/ScrollToTop";
 import dynamic from "next/dynamic";
-import logoHeader from "../../public/App/full body.webp";
+import logoHeader from "../../public/App/Disk-1s-200px.gif";
 
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
@@ -153,7 +153,7 @@ export default function App({
                     alignItems: "center",
                   }}
                 >
-                  <Box sx={{ width: { md: "30vw", xs: "80vw" } }}>
+                  <Box sx={{ width: { md: "10vw", xs: "40vw" } }}>
                     <img
                       src={logoHeader?.src}
                       style={{ width: "100%" }}
