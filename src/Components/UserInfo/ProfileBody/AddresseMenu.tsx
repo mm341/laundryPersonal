@@ -24,18 +24,22 @@ import NoAddressesFound from "../../../../public/info/noAddresseFound.svg";
 const AddresseMenu = ({
   setOpen,
   setOpenDeleteDialog,
-
+  setAddresseId,
   setAddresse,
+  addressesData,
+  isLoading,
 }: {
   setOpen: (e: boolean) => void;
   setOpenDeleteDialog: (e: boolean) => void;
-
+  setAddresseId: (e: string) => void;
   setAddresse: (e: AddresseInterface) => void;
+  addressesData: AddresseInterface[];
+  isLoading: boolean;
 }) => {
   //  hooks
 
   //  selectors
-  const { myAddresses, isloading } = useAppSelector((state) => state.addresse);
+  // const { myAddresses, isloading } = useAppSelector((state) => state.addresse);
 
   //  handel addresse title img due to addresse title
 
@@ -57,11 +61,11 @@ const AddresseMenu = ({
 
     return img;
   };
+
   return (
     <Grid container spacing={1.5}>
-      {myAddresses?.length > 0 &&
-        !isloading &&
-        myAddresses?.map((addresse: AddresseInterface, i: number) => (
+      {addressesData?.length > 0 &&
+        addressesData?.map((addresse: AddresseInterface, i: number) => (
           <Grid
             key={i}
             sx={{ paddingRight: "20px", paddingLeft: "10px", mt: "15px" }}
@@ -174,9 +178,10 @@ const AddresseMenu = ({
                                   color: "#999999",
                                 }}
                               >
-                              {addresse?.street} street  {addresse?.apartment_no}{" "}
-                                Apartment, {addresse?.building_no} Building,{" "}
-                                {addresse?.floor_no} Floor 
+                                {addresse?.street} street{" "}
+                                {addresse?.apartment_no} Apartment,{" "}
+                                {addresse?.building_no} Building,{" "}
+                                {addresse?.floor_no} Floor
                               </Typography>
                             </Box>
                           </Box>
@@ -198,7 +203,10 @@ const AddresseMenu = ({
                               alt="edit"
                             />
                             <img
-                              onClick={() => setOpenDeleteDialog(true)}
+                              onClick={() => {
+                                setAddresseId(addresse?.id);
+                                setOpenDeleteDialog(true);
+                              }}
                               src={deleteIcon?.src}
                               loading="lazy"
                               alt="delete"
@@ -214,8 +222,8 @@ const AddresseMenu = ({
           </Grid>
         ))}
       {/*  loading data */}
-      {isloading && myAddresses?.length === 0 && <LoadingComponent />}
-      {!isloading && myAddresses?.length === 0 && (
+      {isLoading && <LoadingComponent />}
+      {!isLoading && addressesData?.length === 0 && (
         <Box
           sx={{
             display: "flex",

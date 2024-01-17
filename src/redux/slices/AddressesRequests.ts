@@ -47,7 +47,7 @@ export const UpdateAddresse = createAsyncThunk(
 );
 
 export const DeleteAddresse = createAsyncThunk(
-  "updateProfile/UpdateAddresse",
+  "updateProfile/DeleteAddresse",
   (payload: addAddressePayload) =>
     PublicRequest.deleteData(`customer/addresses/${payload?.id}`)
       .then((res: any) => {
@@ -62,6 +62,7 @@ const initialState: AddressesModel = {
   isloading: false,
   myAddresses: [],
   isLoadingAddAddresse: false,
+  isloadingDelete: false,
 };
 
 export const AddresseSlice = createSlice({
@@ -79,7 +80,12 @@ export const AddresseSlice = createSlice({
       GetAllAdddressses.fulfilled,
       (state: AddressesModel, { payload }: any) => {
         state.isloading = false;
-        state.myAddresses = payload?.data?.addresses;
+
+        if (payload?.data?.addresses?.length > 0) {
+          state.myAddresses = payload?.data?.addresses;
+        } else {
+          state.myAddresses = [];
+        }
       }
     );
     builder.addCase(GetAllAdddressses.rejected, (state: AddressesModel) => {
@@ -112,6 +118,20 @@ export const AddresseSlice = createSlice({
     );
     builder.addCase(UpdateAddresse.rejected, (state: AddressesModel) => {
       state.isLoadingAddAddresse = false;
+    });
+
+    //  delete address
+    builder.addCase(DeleteAddresse.pending, (state: AddressesModel) => {
+      state.isloadingDelete = true;
+    });
+    builder.addCase(
+      DeleteAddresse.fulfilled,
+      (state: AddressesModel, { payload }: any) => {
+        state.isloadingDelete = false;
+      }
+    );
+    builder.addCase(DeleteAddresse.rejected, (state: AddressesModel) => {
+      state.isloadingDelete = false;
     });
   },
 });

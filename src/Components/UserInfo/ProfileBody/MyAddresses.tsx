@@ -17,13 +17,20 @@ import CustomEmptyResult from "@/Components/GlobalComponent/empty-view/CustomEmp
 import AddresseMenu from "./AddresseMenu";
 import AddNewAddress from "./AddNewAddress";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { GetAllAdddressses } from "@/redux/slices/AddressesRequests";
+import {
+  DeleteAddresse,
+  GetAllAdddressses,
+} from "@/redux/slices/AddressesRequests";
 import DeleteDialog from "@/Components/DeleteDialogs";
 import Meta from "@/Components/GlobalComponent/Meta";
 import {
   AddresseInterface,
   initialAddresse,
 } from "@/interfaces/AddresseInterface";
+import { useQuery } from "react-query";
+import PublicRequest from "@/utils/PublicRequests";
+import MainApi from "@/api/MainApi";
+import { Addresse } from "@/React-Query/addresses";
 
 const MyAddresses = () => {
   //  hooks
@@ -36,19 +43,33 @@ const MyAddresses = () => {
     initialAddresse()
   );
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
-  const [addresseId,setAddresseId]=useState<string>("")
+  const [addresseId, setAddresseId] = useState<string>("");
   //  selectors
-  const { myAddresses } = useAppSelector((state) => state.addresse);
+  const { isloadingDelete } = useAppSelector((state) => state.addresse);
   //  request with api to get all addresses
-  useEffect(() => {
-    dispatch(GetAllAdddressses());
-  }, [dispatch]);
+  const {
+    isLoading,
+    data: myAddresses,
+    isError,
+    error,
+    refetch,
+  } = useQuery(["addresse"], Addresse.GetAddreesse);
 
   useEffect(() => {
     if (!open) {
       setAddresse(initialAddresse());
     }
   }, [open]);
+
+  //  function delete addresse
+  const RemoveAddresse = () => {
+    dispatch(DeleteAddresse({ id: addresseId })).then((res) => {
+      if (res.meta.requestStatus === "fulfilled") {
+        refetch();
+        setOpenDeleteDialog(false);
+      }
+    });
+  };
   return (
     <>
       <Meta title={"addresses"} description="" keywords="" />
@@ -61,9 +82,12 @@ const MyAddresses = () => {
       >
         <CustomStackFullWidth spacing={5}>
           <AddresseMenu
+            addressesData={myAddresses?.data?.data?.addresses}
+            isLoading={isLoading}
             setAddresse={setAddresse}
             setOpenDeleteDialog={setOpenDeleteDialog}
             setOpen={setOpen}
+            setAddresseId={setAddresseId}
           />
 
           <Stack
@@ -74,7 +98,7 @@ const MyAddresses = () => {
             gap={"30px"}
             alignItems={"center"}
           >
-            {myAddresses?.length > 0 && (
+            {myAddresses?.data?.addresses?.length > 0 && (
               <Box
                 sx={{
                   width: "170px",
@@ -113,6 +137,7 @@ const MyAddresses = () => {
               }}
             >
               <AddNewAddress
+                refetch={refetch}
                 addresse={addresse}
                 open={open}
                 setOpen={setOpen}
@@ -131,6 +156,8 @@ const MyAddresses = () => {
           setOpenDeleteDialog={setOpenDeleteDialog}
           text={"Are you sure you want to delete the address?"}
           primaryButtonText={"Yes, Delete"}
+          handelAction={RemoveAddresse}
+          loading={isloadingDelete}
         />
       )}
     </>

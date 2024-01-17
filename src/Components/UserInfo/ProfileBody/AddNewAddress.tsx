@@ -27,11 +27,13 @@ const AddNewAddress = ({
   open,
   setOpen,
   addresse,
+  refetch
 }: {
   color: string;
   open: boolean;
   setOpen: (e: boolean) => void;
   addresse?: AddresseInterface | undefined;
+  refetch:()=>void
 }) => {
   const { t } = useTranslation();
 
@@ -81,7 +83,7 @@ const AddNewAddress = ({
             </button>
 
             <RTL direction={languagedirection}>
-              <AddressForm addresse={addresse} setOpen={setOpen} />
+              <AddressForm refetch={refetch} addresse={addresse} setOpen={setOpen} />
             </RTL>
           </Stack>
         </Modal>

@@ -44,20 +44,21 @@ export interface locationInterface {
 const AddressForm = ({
   setOpen,
   addresse,
+  refetch,
 }: {
   setOpen: (e: boolean) => void;
   addresse: AddresseInterface | undefined;
+  refetch: () => void;
 }) => {
   //  hooks
   const dispatch = useAppDispatch();
   const theme = useTheme();
- 
+
   const [addresseType, setAddresseType] = useState<string>(
     addresse?.address_name ?? "home"
   );
 
   const { t } = useTranslation();
-  const { areas } = useAppSelector((state) => state.services);
 
   //   handel google map componenet
   // /////////////////////////////////////////////////
@@ -170,10 +171,10 @@ const AddressForm = ({
     initialValues: {
       address_type: "",
       // area: addresse?.area ?? "",
-      building_no: "",
-      floor_no: "",
-      apartment_no: "",
-      street: "",
+      building_no: addresse?.building_no ?? "",
+      floor_no: addresse?.floor_no ?? "",
+      apartment_no: addresse?.apartment_no ?? "",
+      street: addresse?.street ?? "",
     },
     validationSchema: ValidationSchemaForAddAddress(),
     onSubmit: async (values) => {
@@ -193,7 +194,7 @@ const AddressForm = ({
         if (addresse?.id) {
           dispatch(UpdateAddresse(newData)).then((res: any) => {
             if (res.meta.requestStatus === "fulfilled") {
-              dispatch(GetAllAdddressses());
+              refetch();
 
               setOpen(false);
             }
@@ -201,7 +202,7 @@ const AddressForm = ({
         } else {
           dispatch(AddAddresse(newData)).then((res: any) => {
             if (res.meta.requestStatus === "fulfilled") {
-              dispatch(GetAllAdddressses());
+              refetch();
 
               setOpen(false);
             }

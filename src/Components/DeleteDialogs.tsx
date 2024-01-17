@@ -5,6 +5,7 @@ import {
 } from "@/styles/PublicStyles";
 import {
   Button,
+  CircularProgress,
   Modal,
   Stack,
   Typography,
@@ -22,6 +23,8 @@ const DeleteDialog = ({
   Cancel,
   primaryButtonText,
   handelAction,
+  size,
+  loading
 }: {
   setOpenDeleteDialog: (e: boolean) => void;
   openDeleteDialog: boolean;
@@ -30,6 +33,8 @@ const DeleteDialog = ({
   Cancel: string;
   primaryButtonText: string;
   handelAction?: () => void;
+  size?:number
+  loading?:boolean
 }) => {
   //  hooks
   const theme = useTheme();
@@ -118,14 +123,14 @@ const DeleteDialog = ({
                 variant="contained"
                 type="submit"
               >
-                {/* {loading ? (
+                {loading ? (
                   <CircularProgress
                     sx={{ color: "white", fontSize: "10px" }}
                     size={size}
                   />
-                ) : ( */}
-                {t(primaryButtonText)}
-                {/* )} */}
+                ) : (
+                t(primaryButtonText)
+               )} 
               </Button>
             </GlobalDisplayFlexBox>
           </GlobalDisplayFlexColumnBox>
