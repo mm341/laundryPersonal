@@ -15,7 +15,12 @@ import MainApi from "@/api/MainApi";
 import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { CashAreas, CashServices } from "@/redux/slices/Services";
+import {
+  CashAreas,
+  CashServices,
+  GetAllAreas,
+  GetAllServices,
+} from "@/redux/slices/Services";
 import { Master } from "@/interfaces/MasterInterface";
 import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
@@ -33,16 +38,21 @@ export default function Home({
 }) {
   //  hooks
   const dispatch = useAppDispatch();
-
+  //  selectors
+console.log(homeServices)
+  // const { services, areas } = useAppSelector((state) => state.services);
   //  cash services
   useEffect(() => {
     dispatch(CashServices(homeServices));
   }, [dispatch, homeServices, homeServices?.length]);
+
+  useEffect(() => {
+    // dispatch(GetAllServices());
+    // dispatch(GetAllAreas());
+  }, []);
   //  cash areas
   useEffect(() => {
-    if (homeAreas?.length > 0) {
-      dispatch(CashAreas(homeAreas));
-    }
+    dispatch(CashAreas(homeAreas));
   }, [dispatch, homeAreas, homeAreas?.length]);
 
   //  cash master
@@ -99,6 +109,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
         "Accept-Language": locale,
       },
     });
+
     homeAreas = Res?.data?.data?.areas;
   } catch (e) {
     homeAreas = [];

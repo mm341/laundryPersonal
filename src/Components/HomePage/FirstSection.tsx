@@ -32,6 +32,7 @@ const FirstSection = ({
   homeServices: HomeServices[];
   homeAreas: HomeAreas[];
 }) => {
+  //  hooks
   const { t } = useTranslation();
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
