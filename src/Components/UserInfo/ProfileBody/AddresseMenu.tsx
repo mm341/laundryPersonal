@@ -5,6 +5,7 @@ import {
   ListItemText,
   Radio,
   Typography,
+  styled,
 } from "@mui/material";
 import React, { useState } from "react";
 
@@ -21,6 +22,7 @@ import { useAppSelector } from "@/redux/store";
 import { AddresseInterface } from "@/interfaces/AddresseInterface";
 import LoadingComponent from "@/Components/GlobalComponent/LoadingComponent";
 import NoAddressesFound from "../../../../public/info/noAddresseFound.svg";
+import SimpleBar from "simplebar-react";
 const AddresseMenu = ({
   setOpen,
   setOpenDeleteDialog,
@@ -62,9 +64,22 @@ const AddresseMenu = ({
 
     return img;
   };
+  //  custom design of scrollbar
+  const ScrollbarRoot = styled(SimpleBar)`
+    .simplebar-scrollbar::before {
+      width: 6px;
 
+      background-color: #d9d9d9;
+    }
+  `;
   return (
     <Grid container spacing={1.5}>
+       <ScrollbarRoot
+        style={{
+          maxHeight: "500px",
+          width:"100%"
+        }}
+      >
       {addressesData?.length > 0 &&
         addressesData?.map((addresse: AddresseInterface, i: number) => (
           <Grid
@@ -225,6 +240,7 @@ const AddresseMenu = ({
             </CustomPaperBigCard>
           </Grid>
         ))}
+        </ScrollbarRoot>
       {/*  loading data */}
       {isLoading && <LoadingComponent />}
       {!isLoading && addressesData?.length === 0 && (

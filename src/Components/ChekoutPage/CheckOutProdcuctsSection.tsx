@@ -11,11 +11,10 @@ import {
   alpha,
   styled,
   useTheme,
-  useThemeProps,
 } from "@mui/material";
 import SimpleBar from "simplebar-react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+
 import { useAppSelector } from "@/redux/store";
 
 const CheckOutProductsSection = ({
