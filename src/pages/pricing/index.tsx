@@ -1,3 +1,4 @@
+import Meta from "@/Components/GlobalComponent/Meta";
 import GlobalTypography from "@/Components/HomePage/GlobalTypography";
 import FilterProductsWithService from "@/Components/Pricing/FilterProductsWithService";
 import PublicContainer from "@/Components/PublicContainer";
@@ -14,6 +15,11 @@ const Pricing = () => {
   const { t } = useTranslation();
 
   return (
+    <>
+    <Meta
+        title={"pricing"}
+        // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
+      />
     <PublicContainer>
       <GlobalDisplayFlexColumnBox gap={"64px"}>
         <GlobalDisplayFlexColumnBox gap={"32px"}>
@@ -30,6 +36,7 @@ const Pricing = () => {
         <FilterProductsWithService/>
       </GlobalDisplayFlexColumnBox>
     </PublicContainer>
+    </>
   );
 };
 

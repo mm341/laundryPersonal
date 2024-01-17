@@ -13,7 +13,7 @@ const OrderDeliveryDetails = ({
   orderData: OrdersInterface;
 }) => {
   //  hooks
-  
+
   const { t } = useTranslation();
   return (
     <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
@@ -45,9 +45,10 @@ const OrderDeliveryDetails = ({
                 color: alpha("#272727", 0.6),
               }}
             >
-              {orderData?.address?.area} area {orderData?.address?.house_no}{" "}
-              Apartment, {orderData?.address?.flat_no} Floor,{" "}
-              {orderData?.address?.block} Building
+              {orderData?.address?.street} street{" "}
+              {orderData?.address?.apartment_no} Apartment,{" "}
+              {orderData?.address?.building_no} Building,{" "}
+              {orderData?.address?.floor_no} Floor
             </Typography>
           </GlobalDisplayFlexColumnBox>
         </Box>

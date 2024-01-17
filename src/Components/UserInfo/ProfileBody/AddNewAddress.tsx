@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Modal, Stack } from "@mui/material";
+import { Box, Modal, Stack, useTheme } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 import { useTranslation } from "react-i18next";
@@ -32,15 +32,20 @@ const AddNewAddress = ({
   color: string;
   open: boolean;
   setOpen: (e: boolean) => void;
-  addresse?: AddresseInterface |undefined;
+  addresse?: AddresseInterface | undefined;
   refetch: () => void;
 }) => {
+  //  hooks
+
+  const theme = useTheme();
   const { t } = useTranslation();
 
+  //  open add addresse dialog
   const clickAddNew = () => {
     setOpen(true);
   };
 
+  //  get languagedirection from localstorage
   let languagedirection;
 
   if (typeof window !== "undefined") {
@@ -55,8 +60,8 @@ const AddNewAddress = ({
           fontSize: "16px",
           fontWeight: "600",
         }}
-        onClick={clickAddNew}
         padding="5px 10px"
+        onClick={clickAddNew}
       >
         <Stack direction="row" spacing={0.5} alignItems="center">
           <Typography fontWeight="500" fontSize={"16px"} color={color}>

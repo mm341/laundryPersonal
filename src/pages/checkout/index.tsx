@@ -42,6 +42,9 @@ import CheckOutProductsSection from "@/Components/ChekoutPage/CheckOutProdcuctsS
 import Meta from "@/Components/GlobalComponent/Meta";
 import { toast } from "react-hot-toast";
 import AuthGuard from "@/Components/authentication/AuthGuard";
+import { useQuery } from "react-query";
+import { Addresse } from "@/React-Query/addresses";
+import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 const CheckOutPage = () => {
   //  hooks
   const router = useRouter();
@@ -60,8 +63,8 @@ const CheckOutPage = () => {
   const [pickupHour, setPickupHour] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
   const [payment, setPayment] = useState<string>("cash");
-  const [onlineMethod,setOnlineMethod]=useState<string>("")
-  const { myAddresses } = useAppSelector((state) => state.addresse);
+  const [onlineMethod, setOnlineMethod] = useState<string>("");
+  // const { myAddresses } = useAppSelector((state) => state.addresse);
   const { schedules, deliverySchedules } = useAppSelector(
     (state) => state.orders
   );
@@ -72,14 +75,24 @@ const CheckOutPage = () => {
       setPhoneNumber(accountInfo?.mobile);
     }
   }, [accountInfo?.first_name, accountInfo?.mobile]);
-  useEffect(() => {
-    if (myAddresses?.length > 0) {
-      setAddressevalue(myAddresses[0]?.id);
+
+  //  request with api to get all addresses
+  const {
+    isLoading,
+    data: myAddresses,
+    isError,
+    error,
+    refetch,
+  } = useQuery(
+    ["addresse"],
+    Addresse.GetAddreesse,
+
+    {
+      onError: () => {
+        PublicHandelingErrors.onErrorResponse;
+      },
     }
-  }, [myAddresses]);
-  useEffect(() => {
-    dispatch(GetAllAdddressses());
-  }, [dispatch]);
+  );
 
   useEffect(() => {
     if (pickupDate) {
@@ -118,7 +131,6 @@ const CheckOutPage = () => {
           pick_hour: pickupHour,
           products: [],
           instruction: addtionalInformation,
-          
         })
       );
     } else {
@@ -133,302 +145,327 @@ const CheckOutPage = () => {
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
       <AuthGuard>
-      <PublicContainer>
-        <CustomPaperBigCard
-          sx={{ backgroundColor: theme.palette.primary.dark }}
-        >
-          <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
-            <Grid container spacing={3} sx={{ alignItems: "flex-start" }}>
-              {/*  left section customer details */}
-              <Grid item md={8} xs={12}>
-                <GlobalDisplayFlexColumnBox
-                  px={"10px"}
-                  width={"100%"}
-                  gap={"45px"}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      gap: "10px",
-                      alignItems: "center",
-                      transform: "translateX(-3px)",
-                    }}
+        <PublicContainer>
+          <CustomPaperBigCard
+            sx={{ backgroundColor: theme.palette.primary.dark }}
+          >
+            <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+              <Grid container spacing={3} sx={{ alignItems: "flex-start" }}>
+                {/*  left section customer details */}
+                <Grid item md={8} xs={12}>
+                  <GlobalDisplayFlexColumnBox
+                    px={"10px"}
+                    width={"100%"}
+                    gap={"45px"}
                   >
-                    {locale === "en" ? (
-                      <ArrowBackIcon
-                        sx={{ cursor: "pointer" }}
-                        onClick={() => router.back()}
-                        color="primary"
-                      />
-                    ) : (
-                      <ArrowForwardIcon
-                        sx={{ cursor: "pointer" }}
-                        onClick={() => router.back()}
-                        color="primary"
-                      />
-                    )}
-                    <Typography>{t("CheckOut")}</Typography>
-                  </Box>
-
-                  {/* Personal Info */}
-                  <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
-                    <ChekOutTitle title="Personal Info" />
-
-                    <Grid container spacing={3}>
-                      <Grid item sm={6} xs={12}>
-                        <TextField
-                          required
-                          sx={{ width: "100%" }}
-                          value={fullName}
-                          onChange={(e) => setFullName(e.target.value)}
-                          label={t("Full Name")}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        gap: "10px",
+                        alignItems: "center",
+                        transform: "translateX(-3px)",
+                      }}
+                    >
+                      {locale === "en" ? (
+                        <ArrowBackIcon
+                          sx={{ cursor: "pointer" }}
+                          onClick={() => router.back()}
+                          color="primary"
                         />
-                      </Grid>
-                      <Grid item sm={6} xs={12}>
-                        <TextField
-                          required
-                          sx={{ width: "100%" }}
-                          value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(e.target.value)}
-                          label={t("Phone Number")}
+                      ) : (
+                        <ArrowForwardIcon
+                          sx={{ cursor: "pointer" }}
+                          onClick={() => router.back()}
+                          color="primary"
                         />
-                      </Grid>
-                    </Grid>
-                  </GlobalDisplayFlexColumnBox>
+                      )}
+                      <Typography>{t("CheckOut")}</Typography>
+                    </Box>
 
-                  {/* Pickup Schedule */}
-                  <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
-                    <ChekOutTitle title="Pickup Schedule" />
+                    {/* Personal Info */}
+                    <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                      <ChekOutTitle title="Personal Info" />
 
-                    <Grid container spacing={3}>
-                      <Grid item sm={6} xs={12}>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DatePicker
-                            maxDate={dayjs().add(4, "day")}
-                            disablePast
-                            label={t("Date")}
-                            onChange={(e) => {
-                              setPickupData(CommonUtil.formatDate2(e));
-                            }}
+                      <Grid container spacing={3}>
+                        <Grid item sm={6} xs={12}>
+                          <TextField
+                            required
                             sx={{ width: "100%" }}
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            label={t("Full Name")}
                           />
-                        </LocalizationProvider>
-                      </Grid>
-                      <Grid item sm={6} xs={12}>
-                        {pickupDate ? (
-                          <PreferableTimeInput
-                            disablePortal
-                            id="combo-box-demo"
+                        </Grid>
+                        <Grid item sm={6} xs={12}>
+                          <TextField
+                            required
                             sx={{ width: "100%" }}
-                            options={schedules}
-                            getOptionLabel={(option: any) => option?.title}
-                            onChange={(e, option: any) => {
-                              setPickupHour(option?.hour);
-                            }}
-                            renderInput={(params) => (
-                              <TextField {...params} label={t("Time")} />
-                            )}
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            label={t("Phone Number")}
                           />
-                        ) : (
-                          <Stack
-                            sx={{
-                              width: "100%",
-                              height: "55px",
-                              borderRadius: "6px",
-                              border: "1px solid #999999",
-                              backgroundColor: "#ECEFF1",
-                              color: "#999999",
-                            }}
-                            alignItems={"center"}
-                            px={"12px"}
-                            direction={"row"}
-                            gap={"10px"}
-                          >
-                            <img src={timeIcon?.src} loading="lazy" alt="img" />
-                            {t("Time")}
-                          </Stack>
-                        )}
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </GlobalDisplayFlexColumnBox>
+                    </GlobalDisplayFlexColumnBox>
 
-                  {/* Delivery Schedule */}
-                  <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
-                    <ChekOutTitle title="Delivery Schedule" />
+                    {/* Pickup Schedule */}
+                    <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                      <ChekOutTitle title="Pickup Schedule" />
 
-                    <Grid container spacing={3}>
-                      <Grid item sm={6} xs={12}>
-                        {pickupHour ? (
+                      <Grid container spacing={3}>
+                        <Grid item sm={6} xs={12}>
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
-                              minDate={dayjs(pickupDate).add(1, "day")}
-                              onChange={(e) => {
-                                setDeliveryDate(CommonUtil.formatDate2(e));
-                              }}
+                              maxDate={dayjs().add(4, "day")}
                               disablePast
                               label={t("Date")}
+                              onChange={(e) => {
+                                setPickupData(CommonUtil.formatDate2(e));
+                              }}
                               sx={{ width: "100%" }}
                             />
                           </LocalizationProvider>
-                        ) : (
-                          <Stack
-                            sx={{
-                              width: "100%",
-                              height: "55px",
-                              borderRadius: "6px",
-                              border: "1px solid #999999",
-                              backgroundColor: "#ECEFF1",
-                              color: "#999999",
-                            }}
-                            gap={"10px"}
-                            alignItems={"center"}
-                            px={"12px"}
-                            direction={"row"}
-                          >
-                            <img src={dateIcon?.src} loading="lazy" alt="img" />
-                            {t("Date")}
-                          </Stack>
-                        )}
+                        </Grid>
+                        <Grid item sm={6} xs={12}>
+                          {pickupDate ? (
+                            <PreferableTimeInput
+                              disablePortal
+                              id="combo-box-demo"
+                              sx={{ width: "100%" }}
+                              options={schedules}
+                              getOptionLabel={(option: any) => option?.title}
+                              onChange={(e, option: any) => {
+                                setPickupHour(option?.hour);
+                              }}
+                              renderInput={(params) => (
+                                <TextField {...params} label={t("Time")} />
+                              )}
+                            />
+                          ) : (
+                            <Stack
+                              sx={{
+                                width: "100%",
+                                height: "55px",
+                                borderRadius: "6px",
+                                border: "1px solid #999999",
+                                backgroundColor: "#ECEFF1",
+                                color: "#999999",
+                              }}
+                              alignItems={"center"}
+                              px={"12px"}
+                              direction={"row"}
+                              gap={"10px"}
+                            >
+                              <img
+                                src={timeIcon?.src}
+                                loading="lazy"
+                                alt="img"
+                              />
+                              {t("Time")}
+                            </Stack>
+                          )}
+                        </Grid>
                       </Grid>
-                      <Grid item sm={6} xs={12}>
-                        {deliveryDate ? (
-                          <PreferableTimeInput
-                            disablePortal
-                            id="combo-box-demo"
-                            sx={{ width: "100%" }}
-                            options={deliverySchedules}
-                            getOptionLabel={(option: any) => option?.title}
-                            onChange={(e, option: any) => {
-                              setDeliveryHour(option?.hour);
-                            }}
-                            renderInput={(params) => (
-                              <TextField {...params} label={t("Time")} />
-                            )}
-                          />
-                        ) : (
-                          <Stack
-                            sx={{
-                              width: "100%",
-                              height: "55px",
-                              borderRadius: "6px",
-                              border: "1px solid #999999",
-                              backgroundColor: "#ECEFF1",
-                              color: "#999999",
-                            }}
-                            alignItems={"center"}
-                            px={"12px"}
-                            direction={"row"}
-                            gap={"10px"}
-                          >
-                            <img src={timeIcon?.src} loading="lazy" alt="img" />
-                            {t("Time")}
-                          </Stack>
-                        )}
+                    </GlobalDisplayFlexColumnBox>
+
+                    {/* Delivery Schedule */}
+                    <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                      <ChekOutTitle title="Delivery Schedule" />
+
+                      <Grid container spacing={3}>
+                        <Grid item sm={6} xs={12}>
+                          {pickupHour ? (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DatePicker
+                                minDate={dayjs(pickupDate).add(1, "day")}
+                                onChange={(e) => {
+                                  setDeliveryDate(CommonUtil.formatDate2(e));
+                                }}
+                                disablePast
+                                label={t("Date")}
+                                sx={{ width: "100%" }}
+                              />
+                            </LocalizationProvider>
+                          ) : (
+                            <Stack
+                              sx={{
+                                width: "100%",
+                                height: "55px",
+                                borderRadius: "6px",
+                                border: "1px solid #999999",
+                                backgroundColor: "#ECEFF1",
+                                color: "#999999",
+                              }}
+                              gap={"10px"}
+                              alignItems={"center"}
+                              px={"12px"}
+                              direction={"row"}
+                            >
+                              <img
+                                src={dateIcon?.src}
+                                loading="lazy"
+                                alt="img"
+                              />
+                              {t("Date")}
+                            </Stack>
+                          )}
+                        </Grid>
+                        <Grid item sm={6} xs={12}>
+                          {deliveryDate ? (
+                            <PreferableTimeInput
+                              disablePortal
+                              id="combo-box-demo"
+                              sx={{ width: "100%" }}
+                              options={deliverySchedules}
+                              getOptionLabel={(option: any) => option?.title}
+                              onChange={(e, option: any) => {
+                                setDeliveryHour(option?.hour);
+                              }}
+                              renderInput={(params) => (
+                                <TextField {...params} label={t("Time")} />
+                              )}
+                            />
+                          ) : (
+                            <Stack
+                              sx={{
+                                width: "100%",
+                                height: "55px",
+                                borderRadius: "6px",
+                                border: "1px solid #999999",
+                                backgroundColor: "#ECEFF1",
+                                color: "#999999",
+                              }}
+                              alignItems={"center"}
+                              px={"12px"}
+                              direction={"row"}
+                              gap={"10px"}
+                            >
+                              <img
+                                src={timeIcon?.src}
+                                loading="lazy"
+                                alt="img"
+                              />
+                              {t("Time")}
+                            </Stack>
+                          )}
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </GlobalDisplayFlexColumnBox>
+                    </GlobalDisplayFlexColumnBox>
 
-                  {/*  delivery addresse */}
-                  <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
-                    <ChekOutTitle title="Deliver To" />
+                    {/*  delivery addresse */}
+                    <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                      <ChekOutTitle title="Deliver To" />
 
-                    {myAddresses?.length > 0 && (
-                      <Select
-                        required
+                      {myAddresses?.data?.data?.addresses > 0 && (
+                        <Select
+                          required
+                          sx={{ width: "100%" }}
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          label="Age"
+                          value={addresseValue}
+                          onChange={(e) => setAddressevalue(e.target.value)}
+                        >
+                          {myAddresses?.data?.data?.addresses?.map(
+                            (addresse: AddresseInterface, i: number) => (
+                              <MenuItem key={i} value={addresse?.id}>
+                                {` ${addresse?.address_name} ${addresse?.street} street
+              ${addresse?.apartment_no} Apartment,
+              ${addresse?.building_no} Building,
+              ${addresse?.floor_no} Floor`}
+                              </MenuItem>
+                            )
+                          )}
+                        </Select>
+                      )}
+
+                      {myAddresses?.data?.data?.addresses === 0 && (
+                        <Box
+                          onClick={() => setOpen(true)}
+                          sx={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            width: "100%",
+                            height: "48px",
+                            border: `1px solid #999999`,
+                            px: "30px",
+                            fontSize: "16px",
+                            fontWeight: "400",
+                            alignItems: "center",
+                            borderRadius: "4px",
+                            color: theme.palette.secondary.contrastText,
+                            cursor: "pointer",
+                          }}
+                        >
+                          {t("Add New Address")}
+                        </Box>
+                      )}
+                    </GlobalDisplayFlexColumnBox>
+
+                    {/* { Additional Instruction} */}
+                    <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                      <ChekOutTitle title="Additional Instruction" />
+
+                      <TextField
+                        minRows={2}
+                        multiline
                         sx={{ width: "100%" }}
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="Age"
-                        value={addresseValue}
-                        onChange={(e) => setAddressevalue(e.target.value)}
-                      >
-                        {myAddresses?.map(
-                          (addresse: AddresseInterface, i: number) => (
-                            <MenuItem key={i} value={addresse?.id}>
-                              {` ${addresse?.address_name} ${addresse?.area} area ${addresse?.house_no}
-                        Apartment, ${addresse?.flat_no} Floor,
-                        ${addresse?.block} Building`}
-                            </MenuItem>
-                          )
-                        )}
-                      </Select>
-                    )}
+                        value={addtionalInformation}
+                        onChange={(e) =>
+                          setAdditionalInformation(e.target.value)
+                        }
+                        placeholder={t("For e.g. Call before delivery")}
+                      />
+                    </GlobalDisplayFlexColumnBox>
+                    {/* { payment methods} */}
+                    <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                      <ChekOutTitle title="Payment Method" />
 
-                    {myAddresses?.length === 0 && (
+                      <PaymentMethods
+                        onlineMethod={onlineMethod}
+                        setOnlineMethod={setOnlineMethod}
+                        setPayment={setPayment}
+                        payment={payment}
+                      />
+                    </GlobalDisplayFlexColumnBox>
+
+                    {/* Summary Checkout */}
+                    <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                      <ChekOutTitle title="Summary" />
                       <Box
-                        onClick={() => setOpen(true)}
                         sx={{
-                          display: "flex",
-                          justifyContent: "flex-start",
-                          width: "100%",
-                          height: "48px",
-                          border: `1px solid #999999`,
-                          px: "30px",
-                          fontSize: "16px",
-                          fontWeight: "400",
-                          alignItems: "center",
+                          width: { md: "50%", xs: "100%" },
+                          border: "1px solid ",
+                          p: "15px",
                           borderRadius: "4px",
-                          color: theme.palette.secondary.contrastText,
-                          cursor: "pointer",
                         }}
                       >
-                        {t("Add New Address")}
+                        <SummaryCheckout />
                       </Box>
-                    )}
+                    </GlobalDisplayFlexColumnBox>
                   </GlobalDisplayFlexColumnBox>
+                </Grid>
 
-                  {/* { Additional Instruction} */}
-                  <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
-                    <ChekOutTitle title="Additional Instruction" />
-
-                    <TextField
-                      minRows={2}
-                      multiline
-                      sx={{ width: "100%" }}
-                      value={addtionalInformation}
-                      onChange={(e) => setAdditionalInformation(e.target.value)}
-                      placeholder={t("For e.g. Call before delivery")}
-                    />
-                  </GlobalDisplayFlexColumnBox>
-                  {/* { payment methods} */}
-                  <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
-                    <ChekOutTitle title="Payment Method" />
-
-                    <PaymentMethods onlineMethod={onlineMethod} setOnlineMethod={setOnlineMethod} setPayment={setPayment} payment={payment} />
-                  </GlobalDisplayFlexColumnBox>
-
-                  {/* Summary Checkout */}
-                  <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
-                    <ChekOutTitle title="Summary" />
-                    <Box
-                      sx={{
-                        width: { md: "50%", xs: "100%" },
-                        border: "1px solid ",
-                        p: "15px",
-                        borderRadius: "4px",
-                      }}
-                    >
-                      <SummaryCheckout />
-                    </Box>
-                  </GlobalDisplayFlexColumnBox>
-                </GlobalDisplayFlexColumnBox>
+                {/*  right section products */}
+                <Grid item md={4} xs={12}>
+                  <CheckOutProductsSection
+                    handelAddOrder={handelAddOrder}
+                    checkOut
+                  />
+                </Grid>
               </Grid>
-
-              {/*  right section products */}
-              <Grid item md={4} xs={12}>
-                <CheckOutProductsSection
-                  handelAddOrder={handelAddOrder}
-                  checkOut
-                />
-              </Grid>
-            </Grid>
+            </CustomPaperBigCard>
           </CustomPaperBigCard>
-        </CustomPaperBigCard>
-      </PublicContainer>
+        </PublicContainer>
       </AuthGuard>
       {/*  add addresse Dialog */}
-      <AddNewAddress open={open} setOpen={setOpen} color={"white"} />
+      <AddNewAddress
+        refetch={refetch}
+        open={open}
+        setOpen={setOpen}
+        color={"white"}
+      />
     </>
   );
 };

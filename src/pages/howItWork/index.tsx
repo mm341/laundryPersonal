@@ -11,6 +11,7 @@ import img1 from "../../../public/HowItWork/photosection1.png";
 import img2 from "../../../public/HowItWork/photosection2.png";
 import img3 from "../../../public/HowItWork/photosection3.png";
 import WorkCard from "@/Components/HowItWork/WorkCard";
+import Meta from "@/Components/GlobalComponent/Meta";
 export interface data {
   title: string;
   describtion: string;
@@ -43,32 +44,54 @@ const HowItWork = () => {
     },
   ];
   return (
-    <PublicContainer>
-      <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
-        <GlobalDisplayFlexColumnBox
-          width={"100%"}
-          gap={"140px"}
-          sx={{ py: "50px" }}
-        >
-          <GlobalDisplayFlexColumnBox width={"100%"} gap={"48px"}>
-            <GlobalTypography FirstSection clearBg text={"How Alwan-Elghasil Work"} />
-            <Typography
-              sx={{ fontSize: "20px", fontWeight: "400", textAlign: "center" }}
-            >
-              {t(
-                "The faster way to do Laundry and all you need so you never have to worry about washing"
-              )}
-            </Typography>
-          </GlobalDisplayFlexColumnBox>
+    <>
+      <Meta
+        title={"How It Work"}
+        // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
+      />
+      <PublicContainer>
+        <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+          <GlobalDisplayFlexColumnBox
+            width={"100%"}
+            gap={"140px"}
+            sx={{ py: "50px" }}
+          >
+            <GlobalDisplayFlexColumnBox width={"100%"} gap={"48px"}>
+              <GlobalTypography
+                FirstSection
+                clearBg
+                text={"How Alwan-Elghasil Work"}
+              />
+              <Typography
+                sx={{
+                  fontSize: "20px",
+                  fontWeight: "400",
+                  textAlign: "center",
+                }}
+              >
+                {t(
+                  "The faster way to do Laundry and all you need so you never have to worry about washing"
+                )}
+              </Typography>
+            </GlobalDisplayFlexColumnBox>
 
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "160px",width:"85%",mx:"auto" }}>
-            {dataArray?.map((e: data, i) => (
-              <WorkCard key={i} element={e} />
-            ))}
-          </Box>
-        </GlobalDisplayFlexColumnBox>
-      </CustomPaperBigCard>
-    </PublicContainer>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "160px",
+                width: "85%",
+                mx: "auto",
+              }}
+            >
+              {dataArray?.map((e: data, i) => (
+                <WorkCard key={i} element={e} />
+              ))}
+            </Box>
+          </GlobalDisplayFlexColumnBox>
+        </CustomPaperBigCard>
+      </PublicContainer>
+    </>
   );
 };
 

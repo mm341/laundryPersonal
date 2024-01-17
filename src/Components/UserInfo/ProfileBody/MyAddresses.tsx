@@ -44,6 +44,7 @@ const MyAddresses = () => {
   const [addresse, setAddresse] = useState<AddresseInterface>(
     initialAddresse()
   );
+  const [addresseDefaultId, setAddresseDefaultId] = useState<string>("");
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
   const [openDefalultDialog, setOpenDefalultDialog] = useState<boolean>(false);
   const [addresseId, setAddresseId] = useState<string>("");
@@ -64,26 +65,23 @@ const MyAddresses = () => {
     Addresse.GetAddreesse,
 
     {
-      onSuccess: (response) => {},
-      onError: (error) => {
-        PublicHandelingErrors.onErrorResponse(error);
+      onError: () => {
+        PublicHandelingErrors.onErrorResponse;
       },
     }
   );
 
+  //  default addresse
   const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
-  // let id = "";
 
-  // defaultAddresse?.length > 0 ? (id = defaultAddresse[0]?.id) : "";
-
-  const [addresseDefaultId, setAddresseDefaultId] = useState<string>("");
-
+  //  handel initial vaue of addresse form
   useEffect(() => {
     if (!open) {
       setAddresse(initialAddresse());
     }
   }, [open]);
 
+  //  handel initial value of default addresse
   useEffect(() => {
     if (defaultAddresse) {
       setAddresseDefaultId(defaultAddresse);
@@ -110,7 +108,7 @@ const MyAddresses = () => {
   };
   return (
     <>
-      <Meta title={"addresses"} description="" keywords="" />
+      <Meta title={"addresses"} description="addresses" keywords="addresses" />
       <CustomPaperBigCard
         sx={{
           boxShadow: "box-shadow: 0px 0px 6px 0px #00000026",
@@ -119,6 +117,7 @@ const MyAddresses = () => {
         }}
       >
         <CustomStackFullWidth spacing={5}>
+          {/*  all addresses */}
           <AddresseMenu
             addresseDefaultId={addresseDefaultId}
             setAddresseDefaultId={setAddresseDefaultId}
@@ -154,19 +153,21 @@ const MyAddresses = () => {
                   border: `1px solid ${theme.palette.primary.main}`,
                   fontSize: "16px",
                   fontWeight: "600",
+                  cursor: "pointer",
                 }}
               >
                 <Typography
                   sx={{
                     fontSize: "16px",
                     fontWeight: "600",
-                    cursor: "pointer",
                   }}
                 >
                   {t("Save As Default")}
                 </Typography>
               </Box>
             )}
+
+            {/*  add addresse form */}
             <Box
               sx={{
                 width: "190px",
@@ -177,6 +178,7 @@ const MyAddresses = () => {
                 backgroundColor: theme.palette.primary.main,
                 borderRadius: "8px",
                 color: "white",
+                cursor: "pointer",
               }}
             >
               <AddNewAddress
@@ -190,7 +192,7 @@ const MyAddresses = () => {
           </Stack>
         </CustomStackFullWidth>
       </CustomPaperBigCard>
-
+      {/*  open deltete addresse dialog */}
       {openDeleteDialog && (
         <DeleteDialog
           Cancel={"Cancel"}
@@ -204,15 +206,14 @@ const MyAddresses = () => {
         />
       )}
 
+      {/*  open change default addresse dialog */}
       {openDefalultDialog && (
         <DeleteDialog
           Cancel={"Cancel"}
           header={""}
           openDeleteDialog={openDefalultDialog}
           setOpenDeleteDialog={setOpenDefalultDialog}
-          text={
-            "Are you sure you want to set another default?"
-          }
+          text={"Are you sure you want to set another default?"}
           primaryButtonText={"Yes, Confirm"}
           handelAction={DefaultAddresse}
           loading={isloadingDefault}
