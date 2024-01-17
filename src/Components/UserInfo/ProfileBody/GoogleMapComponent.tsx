@@ -36,7 +36,7 @@ interface props {
   setDisablePickButton: (e: boolean) => void;
   setLocationEnabled: (e: boolean) => void;
   setLocation: (e: locationInterface) => void;
-  currentLocation: locationInterface | undefined;
+  // currentLocation: locationInterface | undefined;
   location: locationInterface;
   setPlaceDetailsEnabled: (e: boolean) => void;
   placeDetailsEnabled: boolean;
@@ -44,7 +44,7 @@ interface props {
   height: string;
 
   markerIcon: { src: string };
-  addresse: AddresseInterface | undefined;
+  addresse: AddresseInterface | undefined | any;
 }
 const GoogleMapComponent = ({
   setDisablePickButton,
@@ -56,7 +56,7 @@ const GoogleMapComponent = ({
   addresseNow,
   height,
   markerIcon,
-  currentLocation,
+  // currentLocation,
   addresse,
 }: props) => {
   //  hooks
@@ -83,17 +83,24 @@ const GoogleMapComponent = ({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY ?? "",
   });
   const [isMounted, setIsMounted] = useState(false);
-  const [openInfoWindow, setOpenInfoWindow] = useState(false);
+  // const [openInfoWindow, setOpenInfoWindow] = useState(false);
   const [mapSetup, setMapSetup] = useState(false);
+
+  // const center = useMemo(
+  //   () => ({
+  //     lat: +addresse.latitude ?? location?.lat,
+  //     lng: +addresse?.longitude ?? location?.lng,
+  //   }),
+  //   [location?.lat, location?.lng]
+  // );
 
   const center = useMemo(
     () => ({
-      lat: location?.lat,
-      lng: location?.lng,
+      lat: addresse?.latitude > 0 ? addresse?.latitude : location?.lat,
+      lng: addresse?.longitude > 0 ? addresse?.longitude : location?.lng,
     }),
-    [location?.lat, location?.lng]
+    []
   );
-
   const [map, setMap] = useState<any>({});
   const [zoom, setZoom] = useState<number>(10);
   const [centerPosition, setCenterPosition] = useState(center);
@@ -103,28 +110,30 @@ const GoogleMapComponent = ({
     setMap(map);
   }, []);
 
-  useEffect(() => {
-    if (currentLocation?.lat) {
-      setCenterPosition({
-        lat: currentLocation?.lat,
-        lng: currentLocation?.lng,
-      });
-    }
-  }, [currentLocation]);
+  // useEffect(() => {
+  //   if (currentLocation?.lat) {
+  //     setCenterPosition({
+  //       lat: currentLocation?.lat,
+  //       lng: currentLocation?.lng,
+  //     });
+  //   }
+  // }, [currentLocation]);
+
+  // useEffect(() => {
+  //   if (addresse?.latitude && addresse?.longitude) {
+  //     setCenterPosition({
+  //       lat: +addresse?.latitude,
+  //       lng: +addresse?.longitude,
+  //     });
+  //   } else {
+  //     setCenterPosition(location);
+  //   }
+  // }, [addresse?.latitude, addresse?.longitude, location]);
 
   useEffect(() => {
-    if (addresse?.latitude && addresse?.longitude) {
-      setCenterPosition({
-        lat: +addresse?.latitude,
-        lng: +addresse?.longitude,
-      });
-    }
-  }, [addresse?.latitude, addresse?.longitude]);
-
-  useEffect(() => {
-    if (location && placeDetailsEnabled) {
-      setCenterPosition(location);
-    }
+    // if (location) {
+    //   setCenterPosition(location);
+    // }
     if (map?.center && mapSetup && map.center.lat && map.center.lng) {
       setCenterPosition({
         lat: map.center.lat(),
@@ -145,9 +154,7 @@ const GoogleMapComponent = ({
     // setMapSetup(false)
   }, []);
 
-  useEffect(()=>{
-
-  },[])
+  useEffect(() => {}, []);
   let locationLoading: boolean = false;
   return isLoaded ? (
     <Stack direction={"column"}>

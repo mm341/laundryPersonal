@@ -28,6 +28,8 @@ const AddresseMenu = ({
   setAddresse,
   addressesData,
   isLoading,
+  addresseDefaultId,
+  setAddresseDefaultId,
 }: {
   setOpen: (e: boolean) => void;
   setOpenDeleteDialog: (e: boolean) => void;
@@ -35,11 +37,10 @@ const AddresseMenu = ({
   setAddresse: (e: AddresseInterface) => void;
   addressesData: AddresseInterface[];
   isLoading: boolean;
+  addresseDefaultId: string;
+  setAddresseDefaultId: (e: string) => void;
 }) => {
   //  hooks
-
-  //  selectors
-  // const { myAddresses, isloading } = useAppSelector((state) => state.addresse);
 
   //  handel addresse title img due to addresse title
 
@@ -89,7 +90,7 @@ const AddresseMenu = ({
                     backgroundColor: "white",
                     my: "10px",
                   }}
-                  // selected={adres.id === id}
+                  selected={addresse?.id === addresseDefaultId}
                 >
                   <CustomStackFullWidth
                     sx={{
@@ -102,10 +103,11 @@ const AddresseMenu = ({
                     alignItems="center"
                   >
                     <Radio
-                      //   checked={Number(adres.id) === Number(id)}
+                      checked={addresse?.id === addresseDefaultId}
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
                       color={"success"}
+                      onClick={() => setAddresseDefaultId(addresse?.id)}
                     />
                     <ListItemText
                       secondary={
@@ -117,17 +119,19 @@ const AddresseMenu = ({
                             justifyContent: "space-between",
                             alignItems: "center",
                             flexDirection: {
-                              sm: "row",
+                              md: "row",
                               xs: "column",
                             },
                             gap: { sm: "", xs: "10px" },
                           }}
                         >
                           <Box
+                            onClick={() => setAddresseDefaultId(addresse?.id)}
                             sx={{
                               display: "flex",
                               gap: "15px",
                               alignItems: "center",
+                              flexDirection: { md: "row", xs: "column" },
                             }}
                           >
                             <Box
@@ -169,7 +173,7 @@ const AddresseMenu = ({
                                   color: "black",
                                 }}
                               >
-                                location from map
+                                {addresse?.address_location}
                               </Typography>
                               <Typography
                                 sx={{

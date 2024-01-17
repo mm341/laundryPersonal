@@ -47,7 +47,7 @@ const AddressForm = ({
   refetch,
 }: {
   setOpen: (e: boolean) => void;
-  addresse: AddresseInterface | undefined;
+  addresse: AddresseInterface |undefined;
   refetch: () => void;
 }) => {
   //  hooks
@@ -62,41 +62,41 @@ const AddressForm = ({
 
   //   handel google map componenet
   // /////////////////////////////////////////////////
-  const [currentLocation, setCurrentLocation] = useState<
-    locationInterface | undefined
-  >();
+  // const [currentLocation, setCurrentLocation] = useState<
+  //   locationInterface | undefined
+  // >();
   const [location, setLocation] = useState<locationInterface>({
-    lat: currentLocation?.lat ?? 30,
-    lng: currentLocation?.lng ?? 30,
+    lat: 30.00758635247977,
+    lng: 31.459522247314453,
   });
 
   const [placeDetailsEnabled, setPlaceDetailsEnabled] =
     useState<boolean>(false);
   const [locationEnabled, setLocationEnabled] = useState<boolean>(false);
-  const [addresseNow, setAddresseNow] = useState<string>("");
+  const [addresseNow, setAddresseNow] = useState<string>( addresse?.address_location??"");
   const { isLoadingAddAddresse } = useAppSelector((state) => state.addresse);
   const [isDisablePickButton, setDisablePickButton] = useState<boolean>(false);
 
-  const { coords, isGeolocationEnabled } = useGeolocated({
-    positionOptions: {
-      enableHighAccuracy: false,
-    },
-    userDecisionTimeout: 1000,
-  });
+  // const { coords, isGeolocationEnabled } = useGeolocated({
+  //   positionOptions: {
+  //     enableHighAccuracy: false,
+  //   },
+  //   userDecisionTimeout: 1000,
+  // });
 
-  useEffect(() => {
-    if (coords?.latitude && coords?.longitude && isGeolocationEnabled) {
-      setCurrentLocation({
-        lat: coords?.latitude,
-        lng: coords?.longitude,
-      });
+  // useEffect(() => {
+  //   if (coords?.latitude && coords?.longitude && isGeolocationEnabled) {
+  //     setCurrentLocation({
+  //       lat: coords?.latitude,
+  //       lng: coords?.longitude,
+  //     });
 
-      setLocation({
-        lat: coords?.latitude,
-        lng: coords?.longitude,
-      });
-    }
-  }, [coords?.latitude, coords?.longitude, isGeolocationEnabled]);
+  //     setLocation({
+  //       lat: coords?.latitude,
+  //       lng: coords?.longitude,
+  //     });
+  //   }
+  // }, [coords?.latitude, coords?.longitude, isGeolocationEnabled]);
 
   // ///////////////////////////////////////////////////
 
@@ -139,15 +139,15 @@ const AddressForm = ({
           setAddresseNow(address?.results[0]?.formatted_address);
         });
     }
-    if (currentLocation?.lat && currentLocation?.lng) {
-      fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation?.lat},${currentLocation?.lng}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
-      )
-        .then((res) => res.json())
-        .then((address) => {
-          setAddresseNow(address?.results[0]?.formatted_address);
-        });
-    }
+    // if (currentLocation?.lat && currentLocation?.lng) {
+    //   fetch(
+    //     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation?.lat},${currentLocation?.lng}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
+    //   )
+    //     .then((res) => res.json())
+    //     .then((address) => {
+    //       setAddresseNow(address?.results[0]?.formatted_address);
+    //     });
+    // }
     if (location?.lat && location?.lng) {
       fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location?.lat},${location?.lng}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
@@ -160,8 +160,8 @@ const AddressForm = ({
   }, [
     location?.lat,
     location?.lng,
-    currentLocation?.lat,
-    currentLocation?.lng,
+    // currentLocation?.lat,
+    // currentLocation?.lng,
     addresse?.latitude,
     addresse?.longitude,
   ]);
@@ -170,6 +170,7 @@ const AddressForm = ({
   const addAddressFormik = useFormik({
     initialValues: {
       address_type: "",
+      address_location:addresse?.address_location ??"",
       // area: addresse?.area ?? "",
       building_no: addresse?.building_no ?? "",
       floor_no: addresse?.floor_no ?? "",
@@ -188,6 +189,7 @@ const AddressForm = ({
           street: values.street,
           address_name: values?.address_type,
           id: addresse?.id,
+          address_location:addresseNow
         };
         // formSubmitOnSuccess(newData)
 
@@ -211,6 +213,8 @@ const AddressForm = ({
       } catch (err) {}
     },
   });
+
+  
   // const formSubmitOnSuccess = (values) => {
   //     formSubmit(values)
   // }
@@ -243,6 +247,20 @@ const AddressForm = ({
   //   }
   // }, [selectValue]);
 
+  useEffect(() => {
+    if (addresse?.latitude && addresse?.longitude) {
+      setLocation({
+        lat:addresse?.latitude,
+        lng: addresse?.longitude,
+      });
+    } else {
+      setLocation({
+        lat: 30,
+        lng: 30,
+      });
+    }
+  }, [addresse?.latitude, addresse?.longitude]);
+
   return (
     <Stack>
       <form onSubmit={addAddressFormik.handleSubmit} noValidate>
@@ -273,7 +291,7 @@ const AddressForm = ({
           <Grid item xs={12}>
             <GoogleMapComponent
               addresse={addresse}
-              currentLocation={currentLocation}
+              // currentLocation={currentLocation}
               addresseNow={addresseNow}
               setLocation={setLocation}
               location={location}

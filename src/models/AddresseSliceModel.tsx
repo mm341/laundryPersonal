@@ -6,4 +6,5 @@ export type AddressesModel={
     myAddresses: AddresseInterface[],
     isLoadingAddAddresse:boolean
     isloadingDelete:boolean
+    isloadingDefault:boolean
 }

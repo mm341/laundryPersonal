@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   DeleteAddresse,
   GetAllAdddressses,
+  handelDefaultAddresse,
 } from "@/redux/slices/AddressesRequests";
 import DeleteDialog from "@/Components/DeleteDialogs";
 import Meta from "@/Components/GlobalComponent/Meta";
@@ -31,6 +32,7 @@ import { useQuery } from "react-query";
 import PublicRequest from "@/utils/PublicRequests";
 import MainApi from "@/api/MainApi";
 import { Addresse } from "@/React-Query/addresses";
+import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 
 const MyAddresses = () => {
   //  hooks
@@ -43,9 +45,13 @@ const MyAddresses = () => {
     initialAddresse()
   );
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
+  const [openDefalultDialog, setOpenDefalultDialog] = useState<boolean>(false);
   const [addresseId, setAddresseId] = useState<string>("");
+
   //  selectors
-  const { isloadingDelete } = useAppSelector((state) => state.addresse);
+  const { isloadingDelete, isloadingDefault } = useAppSelector(
+    (state) => state.addresse
+  );
   //  request with api to get all addresses
   const {
     isLoading,
@@ -53,7 +59,24 @@ const MyAddresses = () => {
     isError,
     error,
     refetch,
-  } = useQuery(["addresse"], Addresse.GetAddreesse);
+  } = useQuery(
+    ["addresse"],
+    Addresse.GetAddreesse,
+
+    {
+      onSuccess: (response) => {},
+      onError: (error) => {
+        PublicHandelingErrors.onErrorResponse(error);
+      },
+    }
+  );
+
+  const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
+  // let id = "";
+
+  // defaultAddresse?.length > 0 ? (id = defaultAddresse[0]?.id) : "";
+
+  const [addresseDefaultId, setAddresseDefaultId] = useState<string>("");
 
   useEffect(() => {
     if (!open) {
@@ -61,12 +84,27 @@ const MyAddresses = () => {
     }
   }, [open]);
 
+  useEffect(() => {
+    if (defaultAddresse) {
+      setAddresseDefaultId(defaultAddresse);
+    }
+  }, [defaultAddresse]);
   //  function delete addresse
   const RemoveAddresse = () => {
     dispatch(DeleteAddresse({ id: addresseId })).then((res) => {
       if (res.meta.requestStatus === "fulfilled") {
         refetch();
         setOpenDeleteDialog(false);
+      }
+    });
+  };
+
+  //  function default addresse
+  const DefaultAddresse = () => {
+    dispatch(handelDefaultAddresse({ id: addresseDefaultId })).then((res) => {
+      if (res.meta.requestStatus === "fulfilled") {
+        refetch();
+        setOpenDefalultDialog(false);
       }
     });
   };
@@ -82,6 +120,8 @@ const MyAddresses = () => {
       >
         <CustomStackFullWidth spacing={5}>
           <AddresseMenu
+            addresseDefaultId={addresseDefaultId}
+            setAddresseDefaultId={setAddresseDefaultId}
             addressesData={myAddresses?.data?.data?.addresses}
             isLoading={isLoading}
             setAddresse={setAddresse}
@@ -98,8 +138,11 @@ const MyAddresses = () => {
             gap={"30px"}
             alignItems={"center"}
           >
-            {myAddresses?.data?.addresses?.length > 0 && (
+            {myAddresses?.data?.data?.addresses?.length > 0 && (
               <Box
+                onClick={() => {
+                  setOpenDefalultDialog(true);
+                }}
                 sx={{
                   width: "170px",
                   height: "40px",
@@ -158,6 +201,21 @@ const MyAddresses = () => {
           primaryButtonText={"Yes, Delete"}
           handelAction={RemoveAddresse}
           loading={isloadingDelete}
+        />
+      )}
+
+      {openDefalultDialog && (
+        <DeleteDialog
+          Cancel={"Cancel"}
+          header={""}
+          openDeleteDialog={openDefalultDialog}
+          setOpenDeleteDialog={setOpenDefalultDialog}
+          text={
+            "Are you sure you want to set another default?"
+          }
+          primaryButtonText={"Yes, Confirm"}
+          handelAction={DefaultAddresse}
+          loading={isloadingDefault}
         />
       )}
     </>

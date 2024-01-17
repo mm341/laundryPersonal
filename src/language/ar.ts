@@ -1091,6 +1091,8 @@ export const arabic = {
   take_away: "يبعد",
   Delete: "حذف",
   Now: "حاليا",
+  "Are you sure you want to set another default?":"هل تريد تغير العنوان الافتراضي ؟",
+  "Yes, Confirm":"نعم , تأكيد",
   update: "تحديث ",
   Schedule: "برنامج",
   order_place: "مكان الطلب",

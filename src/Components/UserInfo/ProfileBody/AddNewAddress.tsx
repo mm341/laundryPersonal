@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Modal, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { useDispatch, useSelector } from "react-redux";
+
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
-import { useTheme } from "@mui/material/styles";
+
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import AddressForm from "./AddressForm";
 import { AddresseInterface } from "@/interfaces/AddresseInterface";
@@ -14,11 +14,11 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   maxWidth: 800,
-  width: "80%",
+  width: { md: "80%", xs: "95%" },
   bgcolor: "white",
   borderRadius: "10px",
   boxShadow: 24,
-  height: "70vh",
+  height: { md: "70vh", xs: "95vh" },
   overflowY: "auto",
   p: 3,
 };
@@ -27,13 +27,13 @@ const AddNewAddress = ({
   open,
   setOpen,
   addresse,
-  refetch
+  refetch,
 }: {
   color: string;
   open: boolean;
   setOpen: (e: boolean) => void;
-  addresse?: AddresseInterface | undefined;
-  refetch:()=>void
+  addresse?: AddresseInterface |undefined;
+  refetch: () => void;
 }) => {
   const { t } = useTranslation();
 
@@ -83,7 +83,11 @@ const AddNewAddress = ({
             </button>
 
             <RTL direction={languagedirection}>
-              <AddressForm refetch={refetch} addresse={addresse} setOpen={setOpen} />
+              <AddressForm
+                refetch={refetch}
+                addresse={addresse}
+                setOpen={setOpen}
+              />
             </RTL>
           </Stack>
         </Modal>

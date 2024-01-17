@@ -15,6 +15,7 @@ export interface addAddressePayload {
   id?: string | undefined;
   latitude?: number;
   longitude?: number;
+  address_location: string;
 }
 
 export const GetAllAdddressses = createAsyncThunk(
@@ -48,8 +49,23 @@ export const UpdateAddresse = createAsyncThunk(
 
 export const DeleteAddresse = createAsyncThunk(
   "updateProfile/DeleteAddresse",
-  (payload: addAddressePayload) =>
+  (payload: { id: string }) =>
     PublicRequest.deleteData(`customer/addresses/${payload?.id}`)
+      .then((res: any) => {
+        if (res) {
+          toast.success(res?.message);
+        }
+      })
+      .catch((err) => PublicHandelingErrors.onErrorResponse(err))
+);
+
+export const handelDefaultAddresse = createAsyncThunk(
+  "updateProfile/handelDefaultAddresse",
+  (payload: { id: string }) =>
+    PublicRequest.postData(
+      payload,
+      `customer/addresses/set-default/${payload?.id}`
+    )
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
@@ -63,6 +79,7 @@ const initialState: AddressesModel = {
   myAddresses: [],
   isLoadingAddAddresse: false,
   isloadingDelete: false,
+  isloadingDefault: false,
 };
 
 export const AddresseSlice = createSlice({
@@ -132,6 +149,20 @@ export const AddresseSlice = createSlice({
     );
     builder.addCase(DeleteAddresse.rejected, (state: AddressesModel) => {
       state.isloadingDelete = false;
+    });
+
+    //  default address
+    builder.addCase(handelDefaultAddresse.pending, (state: AddressesModel) => {
+      state.isloadingDefault = true;
+    });
+    builder.addCase(
+      handelDefaultAddresse.fulfilled,
+      (state: AddressesModel, { payload }: any) => {
+        state.isloadingDefault = false;
+      }
+    );
+    builder.addCase(handelDefaultAddresse.rejected, (state: AddressesModel) => {
+      state.isloadingDefault = false;
     });
   },
 });

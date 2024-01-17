@@ -5,9 +5,11 @@ export const initialAddresse = () => {
     apartment_no: "",
     floor_no: "",
     id: "",
-    latitude: "",
-    longitude: "",
+    latitude: 0,
+    longitude: 0,
     street: "",
+    is_default: 0,
+    address_location: "",
   };
 };
 
@@ -17,7 +19,9 @@ export interface AddresseInterface {
   apartment_no: string;
   floor_no: string;
   id: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   street: string;
+  is_default: number;
+  address_location: string;
 }
