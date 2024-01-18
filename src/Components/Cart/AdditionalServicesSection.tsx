@@ -11,23 +11,24 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 const AdditionalServicesSection = ({
   additionalSercvices,
+  choicesIds,
+  setChoicesIds,
 }: {
+  choicesIds: number[];
+  setChoicesIds: any;
   additionalSercvices: AdditionalServicesInterface[];
 }) => {
   //  hooks
   const { t } = useTranslation();
   const theme = useTheme();
-  const [choicesIds, setChoicesIds] = useState<number[]>([]);
+
   //  master data
   const { master } = useAppSelector((state) => state.master);
-  const [choice, setChoice] = useState("no");
-
-  console.log(choicesIds);
   return (
     <GlobalDisplayFlexColumnBox width={"100%"} gap={"25px"} sx={{ px: "18px" }}>
       <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
@@ -60,32 +61,23 @@ const AdditionalServicesSection = ({
               >
                 <FormControlLabel
                   value={e?.id}
-                  // onClick={() => {
-                  //   // const { value, checked } = e.target;
-                  //   if (choicesIds?.includes(e?.id)) {
-                  //     setChoicesIds((pre) => [
-                  //       ...pre.filter((skill) => skill !== e?.id),
-                  //     ]);
-                  //   } else {
-                  //     setChoicesIds((pre) => [...pre, e?.id]);
-                  //   }
-                  // }}
+                 
                   onClick={() => {
                     if (choicesIds?.includes(e?.id)) {
-                      setChoicesIds((pre) => [
-                        ...pre.filter((skill) => skill !== e?.id),
+                      setChoicesIds((pre: number[]) => [
+                        ...pre.filter((skill:number) => skill !== e?.id),
                       ]);
                     }
                   }}
                   control={<Radio checked={!choicesIds?.includes(e?.id)} />}
                   label={t("No")}
-                  // checked={choice === "no"}
+                  
                 />
                 <FormControlLabel
                   value={e?.id}
                   onClick={() => {
                     if (!choicesIds?.includes(e?.id)) {
-                      setChoicesIds((pre) => [...pre, e?.id]);
+                      setChoicesIds((pre:number[]) => [...pre, e?.id]);
                     }
                   }}
                   control={<Radio checked={choicesIds?.includes(e?.id)} />}

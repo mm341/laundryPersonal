@@ -53,12 +53,13 @@ const ProductsPage = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   let [loading, setLoading] = useState<boolean>(false);
+  const [choicesIds, setChoicesIds] = useState<number[]>([]);
   const [Product, setProduct] = useState<productInterface>(
     initialProductData()
   );
   //  selectors
 
-  const { products, variants, isloading,additionalSercvices } = useAppSelector(
+  const { products, variants, isloading, additionalSercvices } = useAppSelector(
     (state) => state.products
   );
 
@@ -67,8 +68,9 @@ const ProductsPage = () => {
   useEffect(() => {
     if (router.query.service_id) {
       dispatch(GetVariants({ serviceId: Number(router.query.service_id) }));
-      dispatch(GetAddtionalServices({ serviceId: Number(router.query.service_id) }));
-
+      dispatch(
+        GetAddtionalServices({ serviceId: Number(router.query.service_id) })
+      );
     }
   }, [dispatch, router.query.service_id]);
 
@@ -153,15 +155,13 @@ const ProductsPage = () => {
     }, 700);
   }, []);
 
-  if(typeof window !=="undefined"){
+  if (typeof window !== "undefined") {
     localStorage.setItem("path", router.asPath);
   }
-    
-  
 
   return (
     <>
-     <Meta title={"services"} description="" keywords="" />
+      <Meta title={"services"} description="" keywords="" />
       {loading ? (
         <CustomLoaderPage loading={loading} />
       ) : (
@@ -276,7 +276,11 @@ const ProductsPage = () => {
                 </GlobalDisplayFlexColumnBox>
               </Grid>
               <Grid item md={4} xs={12}>
-                <Cartsection additionalSercvices={additionalSercvices} />
+                <Cartsection
+                  choicesIds={choicesIds}
+                  setChoicesIds={setChoicesIds}
+                  additionalSercvices={additionalSercvices}
+                />
               </Grid>
             </Grid>
           </CustomPaperBigCard>

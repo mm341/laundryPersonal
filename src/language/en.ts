@@ -28,7 +28,7 @@ export const english = {
   "Proceed Next": "Proceed Next",
   "Select Service Category": "Select Service Category",
   "Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.":"Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.",
-  "How It Work": "How It Work",
+  "How It Work": "How It Works",
   "Message":"Message",
   "Our Services": "Our Services",
   "Get the Service": "Get the Service",

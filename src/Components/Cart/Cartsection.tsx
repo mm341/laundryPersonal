@@ -21,11 +21,16 @@ import { useRouter } from "next/router";
 import AuthModal from "../AuthBox/AuthModel";
 import { AdditionalServicesInterface } from "@/interfaces/AddtionalServicesInterface";
 import AdditionalServicesSection from "./AdditionalServicesSection";
+import { number } from "yup";
 
 const Cartsection = ({
   additionalSercvices,
+  choicesIds,
+  setChoicesIds,
 }: {
   additionalSercvices: AdditionalServicesInterface[];
+  choicesIds: number[];
+  setChoicesIds: (e: number[]) => void;
 }) => {
   // hooks
   const theme = useTheme();
@@ -36,6 +41,7 @@ const Cartsection = ({
   const [couponValue, setCouponValue] = useState<string>("");
   const [modalFor, setModalFor] = useState<string>("sign-in");
   const { master } = useAppSelector((state) => state.master);
+
   const array = [...Array(8)];
 
   //  get token from localstorage
@@ -100,7 +106,10 @@ const Cartsection = ({
 
           <Divider orientation="horizontal" />
 
-          <AdditionalServicesSection additionalSercvices={additionalSercvices}/>
+          <AdditionalServicesSection
+          choicesIds={choicesIds} setChoicesIds={setChoicesIds}
+            additionalSercvices={additionalSercvices}
+          />
 
           {/*  coupon section */}
           <CouponSection
