@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
-  Box,
-  Button,
   Grid,
   TextField,
   Typography,
-  useTheme,
+  
 } from "@mui/material";
 
 import { useFormik } from "formik";
@@ -14,18 +12,14 @@ import ValidationSechemaProfile from "./Validation";
 import { useTranslation } from "react-i18next";
 
 import { AccountUpdate } from "@/interfaces/FormUpdateAccountInterface";
-
-import CustomLoadingSubmitButton from "@/Components/GlobalComponent/CustomLoadingSubmitButton";
 import {
   CustomStackFullWidth,
-  GlobalButton,
   GlobalDisplayFlexBox,
 } from "@/styles/PublicStyles";
-import ImageUploaderWithPreview from "@/Components/single-file-uploader-with-preview/ImageUploaderWithPreview";
+
 import { AccountInfo } from "@/interfaces/AccountInfo";
 import InputImage from "@/Components/GlobalComponent/image.input";
-import { useAppDispatch } from "@/redux/store";
-import { GetProfileData } from "@/redux/slices/HandelUpdateProfile";
+
 import FormSubmitButton from "./FormSubmitButton";
 
 const BasicInformationForm = ({
