@@ -62,10 +62,12 @@ export const AccountPopover = (props: Props) => {
 
   //  logout function
   const handleLogout = async () => {
-    localStorage.clear();
-    router.push("/");
+    router.push("/", locale);
+    // onClose?.();
+    // localStorage.clear();
+    localStorage.removeItem("token");
     toast.success(t("Logout Successfully"));
-    onClose?.();
+
     // window.location.reload();
   };
 

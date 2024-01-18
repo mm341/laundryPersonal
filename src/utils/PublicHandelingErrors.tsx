@@ -5,9 +5,8 @@ import Router from "next/router";
 export default class PublicHandelingErrors {
   public static onErrorResponse = (
     error: unknown | any,
-    variables?: { contact?: string | undefined,rating?:number|null }|any
+    variables?: { contact?: string | undefined; rating?: number | null } | any
   ) => {
-   
     if (error?.response?.data?.errors?.length > 0) {
       error?.response?.data?.errors?.forEach((item: any) => {
         toast.error(item);
@@ -27,10 +26,11 @@ export default class PublicHandelingErrors {
       if (window?.localStorage.getItem("token")) {
         toast.error(t("Your token has been expired. Please sign in again"));
         Router.push("/");
-        localStorage.clear();
+        // onClose?.();
+        // localStorage.clear();
+        localStorage.removeItem("token");
+        toast.success(t("Logout Successfully"));
       }
     }
   };
-
-  
 }

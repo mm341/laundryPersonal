@@ -18,7 +18,7 @@ interface menubar {
 const MenuBar = ({ tabData, onClose, sidedrawer, page }: menubar) => {
   //  hooks
   const theme = useTheme();
-  const router=useRouter()
+  const router = useRouter();
   const { locale } = useRouter();
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
 
@@ -37,10 +37,10 @@ const MenuBar = ({ tabData, onClose, sidedrawer, page }: menubar) => {
 
   const handellogout = () => {
     // setOpenDeleteDialog(false)
-    
-    localStorage.clear();
-    router.push("/");
-    // window.location.reload();
+    router.push("/", locale);
+    // onClose?.();
+    // localStorage.clear();
+    localStorage.removeItem("token");
     toast.success(t("Logout Successfully"));
   };
 
