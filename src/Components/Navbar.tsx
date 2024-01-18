@@ -201,7 +201,7 @@ const Navbar = () => {
   }, [token]);
 
   useEffect(() => {
-    if (token && Object.values(accountInfo)?.length === 0) {
+    if (token && (!accountInfo || Object.values(accountInfo)?.length === 0 )) {
       dispatch(GetProfileData());
     }
   }, [token, accountInfo]);
