@@ -52,7 +52,7 @@ const CheckOutPage = () => {
   const { locale } = useRouter();
   const theme = useTheme();
   const dispatch: any = useAppDispatch();
-  const [addresseValue, setAddressevalue] = useState<any>(0);
+  const [addresseValue, setAddressevalue] = useState<any>();
   const [pickupDate, setPickupData] = useState<string>("");
   const { accountInfo } = useAppSelector((state) => state.profile);
   const [fullName, setFullName] = useState<string>("");
@@ -76,7 +76,7 @@ const CheckOutPage = () => {
     }
   }, [accountInfo?.first_name, accountInfo?.mobile]);
 
-  //  request with api to get all addresses
+  //  default addresse
   const {
     isLoading,
     data: myAddresses,
@@ -93,7 +93,17 @@ const CheckOutPage = () => {
       },
     }
   );
-
+//  default addresse
+const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
+ //  handel initial value of default addresse
+ 
+useEffect(() => {
+  if (defaultAddresse) {
+    setAddressevalue(defaultAddresse);
+  }
+}, [defaultAddresse]);
+console.log(defaultAddresse)
+console.log(addresseValue)
   useEffect(() => {
     if (pickupDate) {
       dispatch(GetPickUpDuration({ date: pickupDate }));
@@ -137,7 +147,7 @@ const CheckOutPage = () => {
       toast.error(t("Enter all required data"));
     }
   };
-
+console.log(addresseValue)
   return (
     <>
       <Meta
@@ -357,7 +367,7 @@ const CheckOutPage = () => {
                     <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                       <ChekOutTitle title="Deliver To" />
 
-                      {myAddresses?.data?.data?.addresses > 0 && (
+                      {myAddresses?.data?.data?.addresses?.length> 0 && (
                         <Select
                           required
                           sx={{ width: "100%" }}
@@ -380,7 +390,7 @@ const CheckOutPage = () => {
                         </Select>
                       )}
 
-                      {myAddresses?.data?.data?.addresses === 0 && (
+                      {myAddresses?.data?.data?.addresses?.length === 0 && (
                         <Box
                           onClick={() => setOpen(true)}
                           sx={{

@@ -22,7 +22,7 @@ const GroupButtonsVariants = ({
     .simplebar-scrollbar::before {
       height: 6px;
       color: #329cd7;
-      background-color: #dcf3ff;
+      background-color: #B3E6FF;
     }
   `;
 
