@@ -28,12 +28,14 @@ const AddNewAddress = ({
   setOpen,
   addresse,
   refetch,
+  checkout,
 }: {
   color: string;
   open: boolean;
   setOpen: (e: boolean) => void;
   addresse?: AddresseInterface | undefined;
   refetch: () => void;
+  checkout?: boolean;
 }) => {
   //  hooks
 
@@ -54,6 +56,7 @@ const AddNewAddress = ({
 
   return (
     <>
+    {!checkout && (
       <Box
         sx={{
           cursor: "pointer",
@@ -64,20 +67,22 @@ const AddNewAddress = ({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: !checkout ? theme.palette.primary.main : "white",
           borderRadius: "8px",
           color: "white",
-         
         }}
         padding="5px 10px"
         onClick={clickAddNew}
       >
-        <Stack direction="row" spacing={0.5} alignItems="center">
-          <Typography fontWeight="500" fontSize={"16px"} color={color}>
-            {t("Add New Address")}
-          </Typography>
-        </Stack>
+        
+          <Stack direction="row" spacing={0.5} alignItems="center">
+            <Typography fontWeight="500" fontSize={"16px"} color={color}>
+              {t("Add New Address")}
+            </Typography>
+          </Stack>
+        
       </Box>
+    )}
       {open && (
         <Modal
           open={open}

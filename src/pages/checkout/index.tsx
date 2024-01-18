@@ -102,8 +102,7 @@ useEffect(() => {
     setAddressevalue(defaultAddresse);
   }
 }, [defaultAddresse]);
-console.log(defaultAddresse)
-console.log(addresseValue)
+
   useEffect(() => {
     if (pickupDate) {
       dispatch(GetPickUpDuration({ date: pickupDate }));
@@ -147,7 +146,7 @@ console.log(addresseValue)
       toast.error(t("Enter all required data"));
     }
   };
-console.log(addresseValue)
+
   return (
     <>
       <Meta
@@ -470,7 +469,11 @@ console.log(addresseValue)
         </PublicContainer>
       </AuthGuard>
       {/*  add addresse Dialog */}
+      
+
+      
       <AddNewAddress
+checkout
         refetch={refetch}
         open={open}
         setOpen={setOpen}
