@@ -21,7 +21,7 @@ const ContactForm = () => {
     validationSchema: ValidationSchemaForContact(),
     onSubmit: async (values) => {
       try {
-        // console.log(values);
+       
       } catch (err) {}
     },
   });

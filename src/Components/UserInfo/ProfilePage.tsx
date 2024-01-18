@@ -1,6 +1,5 @@
 import { CustomStackFullWidth } from "@/styles/PublicStyles";
 import React, { useEffect } from "react";
-import CustomShimmerForProfile from "../customShimmerForProfile/customShimmerForProfile";
 import EditProfile from "./ProfileBody/EditProfile";
 import Meta from "../GlobalComponent/Meta";
 import { useAppDispatch, useAppSelector } from "@/redux/store";

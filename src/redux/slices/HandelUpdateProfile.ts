@@ -14,6 +14,7 @@ export const GetProfileData = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           // toast.success(res?.message);
+          return res
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
@@ -62,11 +63,12 @@ export const UpdatingAccount = createSlice({
     });
     builder.addCase(
       GetProfileData.fulfilled,
-      (state: UpdateProfileModel, { payload }: any) => {
-        // state.isloading = false;
+      (state: UpdateProfileModel, {payload}:any) => {
+       
         if (payload) {
           state.accountInfo = payload?.data?.customer?.user;
         }
+        
       }
     );
     builder.addCase(GetProfileData.rejected, (state: UpdateProfileModel) => {
