@@ -39,17 +39,21 @@ export default function Home({
   //  hooks
   const dispatch = useAppDispatch();
   //  selectors
-console.log(homeServices)
-  // const { services, areas } = useAppSelector((state) => state.services);
+
+  const { services, areas } = useAppSelector((state) => state.services);
   //  cash services
   useEffect(() => {
     dispatch(CashServices(homeServices));
   }, [dispatch, homeServices, homeServices?.length]);
 
   useEffect(() => {
-    // dispatch(GetAllServices());
+    homeServices?.length === 0 && dispatch(GetAllServices());
     // dispatch(GetAllAreas());
-  }, []);
+  }, [homeServices]);
+  useEffect(() => {
+    homeAreas?.length === 0 && dispatch(GetAllAreas());
+    // dispatch(GetAllAreas());
+  }, [homeAreas]);
   //  cash areas
   useEffect(() => {
     dispatch(CashAreas(homeAreas));
@@ -75,9 +79,15 @@ console.log(homeServices)
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
       <HomeParentBox>
-        <FirstSection homeAreas={homeAreas} homeServices={homeServices} />
+        <FirstSection
+          homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
+          homeServices={homeServices?.length > 0 ? homeServices : services}
+        />
         <WorkLaundry />
-        <ServiceSection homeAreas={homeAreas} homeServices={homeServices} />
+        <ServiceSection
+          homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
+          homeServices={homeServices?.length > 0 ? homeServices : services}
+        />
         <LaundrySimpleSection />
         <AppSection />
         <LaundryFaqs />
