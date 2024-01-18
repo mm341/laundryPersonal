@@ -200,11 +200,11 @@ const Navbar = () => {
     }
   }, [token]);
 
-  // useEffect(() => {
-  //   if (token && (!accountInfo || Object.values(accountInfo)?.length === 0 )) {
-  //     dispatch(GetProfileData());
-  //   }
-  // }, [token, accountInfo]);
+  useEffect(() => {
+    if (token && (!accountInfo || Object.values(accountInfo)?.length === 0 )) {
+      dispatch(GetProfileData());
+    }
+  }, [token, accountInfo]);
 
   return (
     <>
