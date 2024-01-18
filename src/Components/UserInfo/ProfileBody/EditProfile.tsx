@@ -9,6 +9,7 @@ import {
 import BasicInformation from "./BasicInformation";
 
 const EditProfile = () => {
+  //  hooks
   const theme = useTheme();
   return (
     <CustomPaperBigCard
