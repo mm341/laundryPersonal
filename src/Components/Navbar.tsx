@@ -31,6 +31,7 @@ import cartIcon from "../../public/navbar/cart.svg";
 import notificationIcon from "../../public/navbar/notification.svg";
 import NotificationPoPover from "./Notification";
 import { GetAllNotification } from "@/redux/slices/Notifications";
+import { GetProfileData } from "@/redux/slices/HandelUpdateProfile";
 const Navbar = () => {
   //  hooks
   const dispatch = useAppDispatch();
@@ -198,6 +199,13 @@ const Navbar = () => {
       dispatch(GetAllNotification());
     }
   }, [token]);
+
+  useEffect(() => {
+    if (token && Object.values(accountInfo)?.length === 0) {
+      dispatch(GetProfileData());
+    }
+  }, [token, accountInfo]);
+
   return (
     <>
       <Box
