@@ -52,7 +52,7 @@ const CheckOutPage = () => {
   const { locale } = useRouter();
   const theme = useTheme();
   const dispatch: any = useAppDispatch();
-  const [addresseValue, setAddressevalue] = useState<any>();
+
   const [pickupDate, setPickupData] = useState<string>("");
   const { accountInfo } = useAppSelector((state) => state.profile);
   const [fullName, setFullName] = useState<string>("");
@@ -93,16 +93,24 @@ const CheckOutPage = () => {
       },
     }
   );
-//  default addresse
-const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
- //  handel initial value of default addresse
- 
-useEffect(() => {
-  if (defaultAddresse) {
-    setAddressevalue(defaultAddresse);
-  }
-}, [defaultAddresse]);
+  //  default addresse
+  const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
+  //  handel initial value of default addresse
 
+  // useEffect(() => {
+  //   if (defaultAddresse) {
+  //     setAddressevalue(defaultAddresse);
+  //   }
+  // }, [defaultAddresse]);
+  const [addresseValue, setAddressevalue] = useState<string>(
+    myAddresses?.data?.data?.addresses[0]?.id
+  );
+  console.log(myAddresses?.data?.data?.addresses[0]?.id);
+  console.log(addresseValue);
+
+  useEffect(() => {
+    setAddressevalue(myAddresses?.data?.data?.addresses[0]?.id);
+  }, [myAddresses]);
   useEffect(() => {
     if (pickupDate) {
       dispatch(GetPickUpDuration({ date: pickupDate }));
@@ -366,7 +374,7 @@ useEffect(() => {
                     <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                       <ChekOutTitle title="Deliver To" />
 
-                      {myAddresses?.data?.data?.addresses?.length> 0 && (
+                      {myAddresses?.data?.data?.addresses?.length > 0 && (
                         <Select
                           required
                           sx={{ width: "100%" }}
@@ -469,11 +477,9 @@ useEffect(() => {
         </PublicContainer>
       </AuthGuard>
       {/*  add addresse Dialog */}
-      
 
-      
       <AddNewAddress
-checkout
+        checkout
         refetch={refetch}
         open={open}
         setOpen={setOpen}

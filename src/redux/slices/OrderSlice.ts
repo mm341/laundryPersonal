@@ -49,7 +49,7 @@ export const GetDeliveryDuration = createAsyncThunk(
 
 interface OrderPayload {
   additional_service_id?: [];
-  address_id: number;
+  address_id: string;
   coupon_id?: string;
   delivery_date: string;
   delivery_hour: string;

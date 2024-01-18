@@ -14,15 +14,26 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+};
+.mui-style-17rwaj.Mui-selected {
+  background-color: blue !important;
+  color:blue !important
+};
+.mui-style-1ynlm0l-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: blue !important;
+  color:blue !important
 }
-
+.mui-style-1ynlm0l-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
+  background-color: blue !important;
+  color:blue !important
+}
 .mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
-  background-color: transparent !important;
+  background-color: blue !important;
   color:blue !important
 };
 
 .mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
-  background-color: transparent !important;
+  background-color: blue !important;
   color:blue !important
 }
 
