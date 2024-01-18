@@ -185,13 +185,17 @@ const OtpForm = ({
               >
                 <Typography
                   onClick={() => {
-                    if (resendMain === 3) {
-                      setResendMain(5);
-                    } else {
-                      setResendMain((resendMain += 1));
-                      setResend(resendMain * 60);
-                    }
+                    // if (resendMain === 3) {
+                    //   setResendMain(5);
+                    // } else {
+                    //   setResendMain((resendMain += 1));
+                    //   setResend(resendMain * 60);
+                    // }
                     dispatch(ResendCode({ mobile: data?.mobile }));
+                    if(resend===0){
+                      setResend(60);
+                    }
+                    
                   }}
                   sx={{
                     fontSize: "14px",
