@@ -137,7 +137,7 @@ const AddresseMenu = ({
                               md: "row",
                               xs: "column",
                             },
-                            gap: { sm: "", xs: "10px" },
+                            gap: { sm: "", xs: "20px" },
                           }}
                         >
                           <Box
@@ -147,6 +147,7 @@ const AddresseMenu = ({
                               gap: "15px",
                               alignItems: "center",
                               flexDirection: { md: "row", xs: "column" },
+                              width:{md:"80%",xs:"100%"}
                             }}
                           >
                             <Box
@@ -210,6 +211,9 @@ const AddresseMenu = ({
                               display: "flex",
                               alignItems: "center",
                               gap: "20px",
+                              width:{md:"20%",xs:"100%"},
+                              justifyContent:{md:"flex-end",xs:"center"}
+                              
                             }}
                           >
                             <img

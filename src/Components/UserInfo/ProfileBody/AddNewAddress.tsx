@@ -59,6 +59,15 @@ const AddNewAddress = ({
           cursor: "pointer",
           fontSize: "16px",
           fontWeight: "600",
+          width: "190px",
+          height: "40px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: theme.palette.primary.main,
+          borderRadius: "8px",
+          color: "white",
+         
         }}
         padding="5px 10px"
         onClick={clickAddNew}

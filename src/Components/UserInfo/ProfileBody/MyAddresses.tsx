@@ -168,27 +168,14 @@ const MyAddresses = () => {
             )}
 
             {/*  add addresse form */}
-            <Box
-              sx={{
-                width: "190px",
-                height: "40px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: theme.palette.primary.main,
-                borderRadius: "8px",
-                color: "white",
-                cursor: "pointer",
-              }}
-            >
-              <AddNewAddress
-                refetch={refetch}
-                addresse={addresse}
-                open={open}
-                setOpen={setOpen}
-                color={"white"}
-              />
-            </Box>
+
+            <AddNewAddress
+              refetch={refetch}
+              addresse={addresse}
+              open={open}
+              setOpen={setOpen}
+              color={"white"}
+            />
           </Stack>
         </CustomStackFullWidth>
       </CustomPaperBigCard>
