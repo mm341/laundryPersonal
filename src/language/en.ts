@@ -15,6 +15,7 @@ export const english = {
   // "Edit Phone Number":"Edit Phone Number",
   "Are you sure you want to set another default?":"Are you sure you want to set another default?",
   "Yes, Confirm":"Yes, Confirm",
+  "Additional Service":"Additional Service",
   "Choose Area": "Choose Area",
   "Alternative Phone": "Alternative Phone",
   "Full name is required": "Full name is required",

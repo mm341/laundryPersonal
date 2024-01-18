@@ -9,6 +9,15 @@ export type Paylod = {
   variantId: number;
   searchText?: string;
 };
+
+// Get Addtional Services
+export const GetAddtionalServices = createAsyncThunk(
+  "products/GetAddtionalServices",
+  (payload: { serviceId: number }) =>
+    PublicRequest.getData(`additional-services?service_id=${payload.serviceId}`)
+);
+
+// Get Products
 export const GetProducts = createAsyncThunk(
   "products/GetProducts",
   (payload: Paylod) =>
@@ -17,6 +26,7 @@ export const GetProducts = createAsyncThunk(
     )
 );
 
+// Get Products WithSearch
 export const GetProductsWithSearch = createAsyncThunk(
   "products/GetProductsWithSearch",
   (payload: Paylod) =>
@@ -25,6 +35,7 @@ export const GetProductsWithSearch = createAsyncThunk(
     )
 );
 
+// Get Variants
 export const GetVariants = createAsyncThunk(
   "variants/GetVariants",
   (payload: { serviceId: number }) =>
@@ -35,6 +46,7 @@ const initialState: ProductsModel = {
   isloading: false,
   products: [],
   variants: [],
+  additionalSercvices: [],
 };
 
 export const handelProducts = createSlice({
@@ -43,6 +55,7 @@ export const handelProducts = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
+    // GetProducts
     builder.addCase(GetProducts.pending, (state: ProductsModel) => {
       state.isloading = true;
       state.products = [];
@@ -60,6 +73,7 @@ export const handelProducts = createSlice({
       state.products = [];
     });
 
+    // GetProductsWithSearch
     builder.addCase(GetProductsWithSearch.pending, (state: ProductsModel) => {
       state.isloading = true;
       state.products = [];
@@ -77,6 +91,7 @@ export const handelProducts = createSlice({
       state.products = [];
     });
 
+    // GetVariants
     builder.addCase(GetVariants.pending, (state: ProductsModel) => {
       state.variants = [];
     });
@@ -91,6 +106,22 @@ export const handelProducts = createSlice({
     builder.addCase(GetVariants.rejected, (state: ProductsModel) => {
       state.isloading = false;
       state.products = [];
+    });
+
+    // GetVariants
+    builder.addCase(GetAddtionalServices.pending, (state: ProductsModel) => {
+      state.additionalSercvices = [];
+    });
+    builder.addCase(
+      GetAddtionalServices.fulfilled,
+      (state: ProductsModel, { payload }: any) => {
+        if (payload) {
+          state.additionalSercvices = payload.data.additional_services;
+        }
+      }
+    );
+    builder.addCase(GetAddtionalServices.rejected, (state: ProductsModel) => {
+      state.additionalSercvices = [];
     });
   },
 });

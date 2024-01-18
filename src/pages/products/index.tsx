@@ -1,6 +1,7 @@
 import GroupButtonsVariants from "@/Components/GlobalComponent/GroupButtonsVariants";
 import PublicContainer from "@/Components/PublicContainer";
 import {
+  GetAddtionalServices,
   GetProducts,
   GetProductsWithSearch,
   GetVariants,
@@ -57,7 +58,7 @@ const ProductsPage = () => {
   );
   //  selectors
 
-  const { products, variants, isloading } = useAppSelector(
+  const { products, variants, isloading,additionalSercvices } = useAppSelector(
     (state) => state.products
   );
 
@@ -66,6 +67,8 @@ const ProductsPage = () => {
   useEffect(() => {
     if (router.query.service_id) {
       dispatch(GetVariants({ serviceId: Number(router.query.service_id) }));
+      dispatch(GetAddtionalServices({ serviceId: Number(router.query.service_id) }));
+
     }
   }, [dispatch, router.query.service_id]);
 
@@ -273,7 +276,7 @@ const ProductsPage = () => {
                 </GlobalDisplayFlexColumnBox>
               </Grid>
               <Grid item md={4} xs={12}>
-                <Cartsection />
+                <Cartsection additionalSercvices={additionalSercvices} />
               </Grid>
             </Grid>
           </CustomPaperBigCard>

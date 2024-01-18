@@ -18,10 +18,15 @@ import CouponSection from "./CouponSection";
 import SummarySection from "./SummarySection";
 import { useAppSelector } from "@/redux/store";
 import { useRouter } from "next/router";
-import { toast } from "react-hot-toast";
 import AuthModal from "../AuthBox/AuthModel";
+import { AdditionalServicesInterface } from "@/interfaces/AddtionalServicesInterface";
+import AdditionalServicesSection from "./AdditionalServicesSection";
 
-const Cartsection = () => {
+const Cartsection = ({
+  additionalSercvices,
+}: {
+  additionalSercvices: AdditionalServicesInterface[];
+}) => {
   // hooks
   const theme = useTheme();
   const { t } = useTranslation();
@@ -94,6 +99,8 @@ const Cartsection = () => {
           </ScrollbarRoot>
 
           <Divider orientation="horizontal" />
+
+          <AdditionalServicesSection additionalSercvices={additionalSercvices}/>
 
           {/*  coupon section */}
           <CouponSection

@@ -1079,6 +1079,7 @@ export const arabic = {
   "Identity Image": "صورة الهوية",
   "Password is required": "كلمة المرور مطلوبة",
   Passport: "جواز سفر",
+  "Additional Service":"خدمة اضافية",
   Nid: "لا",
   FreeLancer: "مستقل",
   Salary: "مرتب",

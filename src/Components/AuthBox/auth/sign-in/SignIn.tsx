@@ -118,6 +118,7 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
   }) => {
     const onSuccessHandler = (res: any) => {
       dispatch(SaveProfileData(res.data.data.user));
+
       if (res.data.data.access.token) {
         toast.success(res?.data?.message);
         localStorage.setItem("token", res?.data?.data?.access?.token);
@@ -145,7 +146,7 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
     transform: "translate(-50%, -50%)",
     width: { sm: "791px", xs: "90%", mx: "auto" },
     bgcolor: "background.paper",
-    p:  4 ,
+    p: 4,
   };
 
   const languagedirection = localStorage.getItem("direction");
