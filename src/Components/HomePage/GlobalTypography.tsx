@@ -21,7 +21,7 @@ const GlobalTypography = ({
       data-aos="fade-up"
       sx={{
         display: "flex",
-        flexDirection: !FirstSection ? "row" : "row-reverse",
+        flexDirection: "row-reverse",
         alignItems: "center",
         gap: "7px",
         justifyContent: !homePage ? "center" : "flex-end",

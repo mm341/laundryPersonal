@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 const SignUpvalidation = () => {
   const { t } = useTranslation();
   return Yup.object({
-    name: Yup.string().required(t("Full name is required")),
+    name: Yup.string().required(t("Full name is required")).min(3).max(35),
 
     mobile: Yup.string()
       .required(t("Please give a phone number"))
