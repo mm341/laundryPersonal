@@ -131,7 +131,7 @@ const Navbar = () => {
                   color: "#636363",
                 }}
               >
-                Hello, {accountInfo?.name}
+               {t("Hello")}, {accountInfo?.name}
               </Typography>
               <KeyboardArrowDownIcon />
             </GlobalDisplayFlexBox>
@@ -317,7 +317,7 @@ const Navbar = () => {
                       color: "#636363",
                     }}
                   >
-                    Hello, {accountInfo?.name}
+                    {t("Hello")}, {accountInfo?.name}
                   </Typography>
                 </Stack>
               </Box>
