@@ -46,7 +46,7 @@ const HowItWork = () => {
   return (
     <>
       <Meta
-        title={"How It Work"}
+        title={"How It Works"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
       <PublicContainer>

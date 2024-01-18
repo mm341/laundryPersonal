@@ -228,7 +228,7 @@ export const english = {
 "Add what you need through many of the services we provide to you":"Add what you need through many of the services we provide to you",
 "Place your order":"Place your order",
 "Check your order preferences, payment method,Submit your order in just one click.":"Check your order preferences, payment method,Submit your order in just one click.",
-"How Alwan-Elghasil Work":"How Alwan-Elghasil Work",
+"How Alwan-Elghasil Work":"How Alwan-Elghasil Works",
 "The faster way to do Laundry and all you need so you never have to worry about washing":"The faster way to do Laundry and all you need so you never have to worry about washing",
 
 
