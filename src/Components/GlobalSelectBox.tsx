@@ -27,12 +27,11 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "label + &": {
     // marginBottom: theme.spacing(1),
     // paddingBottom:theme.spacing(1)
-    transform:"translateY(5px)",
-   
+    transform: "translateY(5px)",
   },
   "& .MuiInputBase-input": {
     borderRadius: 4,
-    height:"36px",
+    height: "36px",
     position: "relative",
     backgroundColor: theme.palette.background.paper,
     border: "1px solid #ced4da",
@@ -78,7 +77,7 @@ const GlobalSelectBox = ({
         </InputLabel>
         <NativeSelect
           size="medium"
-          sx={{height:"48px"}}
+          sx={{ height: "48px" }}
           // sx={{
           //   "&.mui-style-hfutr2-MuiSvgIcon-root-MuiSelect-icon": {
           //     right: "50px !important",
@@ -93,6 +92,7 @@ const GlobalSelectBox = ({
           onChange={handleChange}
           input={<BootstrapInput />}
         >
+          <option aria-label="None" value="" />
           {homeAreas?.map((e: HomeAreas, i: number) => (
             <option key={e?.id} value={e?.id}>
               {e?.name}

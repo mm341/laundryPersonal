@@ -49,8 +49,8 @@ const OtpForm = ({
   const { locale } = useRouter();
   const { t } = useTranslation();
   const [otp, setOtp] = useState("");
-  let [resendMain, setResendMain] = useState(1);
-  let [resend, setResend] = useState(resendMain * 60);
+  
+  let [resend, setResend] = useState(60);
   const dispatch = useAppDispatch();
   //  validation of otp
   const otpFormik = useFormik({
