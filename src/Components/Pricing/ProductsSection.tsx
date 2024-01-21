@@ -1,7 +1,7 @@
 import { productInterface } from "@/interfaces/ProductInterface";
 import { useAppSelector } from "@/redux/store";
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
-import { Box,  Typography, styled, useTheme } from "@mui/material";
+import { Box, Typography, styled, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import SimpleBar from "simplebar-react";
@@ -12,16 +12,14 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
   //  hooks
 
   const { t } = useTranslation();
-  
+
   //  master data
   const { master } = useAppSelector((state) => state.master);
 
-    //  selectors
+  //  selectors
 
-    const { isloading } = useAppSelector(
-      (state) => state.products
-    );
-  
+  const { isloading } = useAppSelector((state) => state.products);
+
   //  custom design of scrollbar
   const ScrollbarRoot = styled(SimpleBar)`
     .simplebar-scrollbar::before {
@@ -45,16 +43,15 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-          justifyContent:"space-between",
+            justifyContent: "space-between",
             p: "12px",
-            
           }}
         >
           <Typography
             sx={{
               fontSize: "20px",
               fontWeight: "600",
-              width:{sm:"45%",xs:"100%"}
+              width: { sm: "45%", xs: "100%" },
             }}
           >
             {t("Items")}
@@ -63,7 +60,7 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
             sx={{
               fontSize: "20px",
               fontWeight: "600",
-              width:{sm:"55%",xs:"100%"}
+              width: { sm: "55%", xs: "100%" },
             }}
           >
             {t("Price")}
@@ -74,52 +71,50 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
             maxHeight: "500px",
           }}
         >
-          {products?.length > 0 &&products?.map((e: productInterface, i) => (
-            <Box
-              key={i}
-              sx={{ backgroundColor: i % 2 === 0 ? "#ECEFF1" : "white" }}
-            >
+          {products?.length > 0 &&
+            products?.map((e: productInterface, i) => (
               <Box
                 key={i}
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  // gap: { sm: "320px", xs: "110px" },
-                  justifyContent:"space-between",
-                  p: "12px",
-                
-                }}
+                sx={{ backgroundColor: i % 2 === 0 ? "#ECEFF1" : "white" }}
               >
-                <Typography
+                <Box
+                  key={i}
                   sx={{
-                    fontSize: "18px",
-                    fontWeight: "400",
-                    width:{sm:"45%",xs:"100%"}
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    // gap: { sm: "320px", xs: "110px" },
+                    justifyContent: "space-between",
+                    p: "12px",
                   }}
                 >
-                  {e?.name}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "18px",
-                    fontWeight: "400",
-                    width:{sm:"55%",xs:"100%"}
-                  }}
-                >
-                  {e?.current_price} {master?.currency}
-                </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      fontWeight: "400",
+                      width: { sm: "45%", xs: "100%" },
+                    }}
+                  >
+                    {e?.name}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      fontWeight: "400",
+                      width: { sm: "55%", xs: "100%" },
+                    }}
+                  >
+                    {e?.current_price} {master?.currency}
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
-          ))}
-           {/*  case of loading data */}
-           {isloading && products?.length === 0 && (
-                        <LoadingComponent />
-                      )}
-                      {/*  case of empty products data */}
-                      {!isloading && products?.length === 0 && (
-                        <EmptyData img={emptyProductsImg?.src} />
-                      )}
+            ))}
+          {/*  case of loading data */}
+          {isloading && products?.length === 0 && <LoadingComponent />}
+          {/*  case of empty products data */}
+          {!isloading && products?.length === 0 && (
+            <EmptyData img={emptyProductsImg?.src} />
+          )}
         </ScrollbarRoot>
       </GlobalDisplayFlexColumnBox>
     </Box>

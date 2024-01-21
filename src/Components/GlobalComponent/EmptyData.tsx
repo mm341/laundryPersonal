@@ -10,6 +10,7 @@ const EmptyData = ({ img }: { img: string }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        mt:"15px"
       }}
     >
       <img src={img} loading="lazy" alt="img" />

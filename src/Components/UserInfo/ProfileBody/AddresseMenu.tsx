@@ -147,7 +147,8 @@ const AddresseMenu = ({
                                 gap: "15px",
                                 alignItems: "center",
                                 flexDirection: { md: "row", xs: "column" },
-                                width: { md: "80%", xs: "100%" },
+                                width: { md: "78%", xs: "100%" },
+                                // flexWrap: "wrap",
                               }}
                             >
                               <Box
@@ -187,38 +188,27 @@ const AddresseMenu = ({
                                     fontSize: "16px",
                                     fontWeight: "700",
                                     color: "black",
+                                    textAlign: { md: "left", xs: "center" },
                                   }}
                                 >
                                   {addresse?.address_location}
                                 </Typography>
-                                {addresse?.street?.length < 50 && (
-                                  <Typography
-                                    sx={{
-                                      fontSize: "16px",
-                                      fontWeight: "400",
-                                      color: "#999999",
-                                    }}
-                                  >
-                                    {addresse?.street} street{" "}
-                                    {addresse?.apartment_no} Apartment,{" "}
-                                    {addresse?.building_no} Building,{" "}
-                                    {addresse?.floor_no} Floor
-                                  </Typography>
-                                )}
-                                {addresse?.street?.length > 50 && (
-                                  <Typography
-                                    sx={{
-                                      fontSize: "16px",
-                                      fontWeight: "400",
-                                      color: "#999999",
-                                    }}
-                                  >
-                                    {addresse?.street}... street{" "}
-                                    {addresse?.apartment_no} Apartment,{" "}
-                                    {addresse?.building_no} Building,{" "}
-                                    {addresse?.floor_no} Floor
-                                  </Typography>
-                                )}
+                                <Box
+                                  sx={{
+                                    fontSize: "16px",
+                                    fontWeight: "400",
+                                    color: "#999999",
+                                    display: "flex",
+                                    textAlign: { md: "left", xs: "center" },
+                                    gap: "4px",
+                                    lineBreak: "anywhere",
+                                  }}
+                                >
+                                  {addresse?.street} street{" "}
+                                  {addresse?.apartment_no} Apartment{" "}
+                                  {addresse?.building_no} Building{" "}
+                                  {addresse?.floor_no} Floor
+                                </Box>
                               </Box>
                             </Box>
 
@@ -227,7 +217,7 @@ const AddresseMenu = ({
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "20px",
-                                width: { md: "20%", xs: "100%" },
+                                width: { md: "22%", xs: "100%" },
                                 justifyContent: {
                                   md: "flex-end",
                                   xs: "center",
