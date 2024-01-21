@@ -25,6 +25,7 @@ import { useRouter } from "next/router";
 import profile from "../../../public/navbar/profileImg.svg";
 import order from "../../../public/navbar/orderImg.svg";
 import addresseIcon from "../../../public/navbar/addresseImg.svg";
+import DeleteDialog from "../DeleteDialogs";
 
 interface Props {
   anchorEl: Element | PopoverVirtualElement | null;
@@ -59,12 +60,14 @@ export const AccountPopover = (props: Props) => {
     },
   ];
   const [languagedirection, setlanguagedirection] = useState("ltr");
+  const [logout, setLogout] = useState<boolean>(false);
 
   //  logout function
   const handleLogout = async () => {
     router.push("/", locale);
     // onClose?.();
     // localStorage.clear();
+    setLogout(false);
     localStorage.removeItem("token");
     toast.success(t("Logout Successfully"));
 
@@ -107,85 +110,100 @@ export const AccountPopover = (props: Props) => {
   }, []);
 
   return (
-    <Box
-      ref={menuRef}
-      sx={{
-        display: open ? "flex" : "none",
-        position: "absolute",
-        top: { md: "40px", xs: "65px" },
-        right: locale === "en" ? "18%" : "21%",
-        backgroundColor: "#F3F6FF",
-        zIndex: "99999",
-        borderRadius: "5px",
-        flexDirection: "column",
-      }}
-    >
+    <>
       <Box
+        ref={menuRef}
         sx={{
-          // alignItems:languagedirection === 'rtl' ? 'end' : 'start',
-          width: "100%",
-          p: 1,
-          cursor: "pointer",
-          display: "flex",
+          display: open ? "flex" : "none",
+          position: "absolute",
+          top: { md: "40px", xs: "65px" },
+          right: locale === "en" ? "18%" : "21%",
+          backgroundColor: "#F3F6FF",
+          zIndex: "99999",
+          borderRadius: "5px",
+          flexDirection: "column",
         }}
       >
-        <MenuList sx={{ width: "100%" }}>
-          {menuData?.map((menu, index) => (
-            <MenuItem
-              onClick={() => handleClick(menu)}
-              key={index}
-              sx={{
-                justifyContent: `${
-                  languagedirection === "rtl" && "flex-start"
-                }`,
-                gap: "10px",
-                width: "100%",
-                my: "2px",
-                "&:hover": {
-                  backgroundColor: (theme) =>
-                    alpha(theme.palette.primary.main, 0.3),
-                },
-              }}
-            >
-              <img src={menu?.img?.src} loading="lazy" alt="accountIMg" />
-              <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
-                {t(menu?.label)}
-              </Typography>
-            </MenuItem>
-          ))}
-        </MenuList>
-      </Box>
-      <Divider />
-      <Box
-        sx={{ my: 1, cursor: "pointer" }}
-        alignItems={languagedirection === "rtl" ? "end" : "start"}
-        width="100%"
-      >
-        <MenuItem
-          onClick={() => setOpenModal(true)}
+        <Box
           sx={{
-            justifyContent: `${
-              languagedirection === "rtl" ? "flex-end" : "flex-start"
-            }`,
-            "&:hover": {
-              backgroundColor: (theme) =>
-                alpha(theme.palette.primary.main, 0.3),
-            },
+            // alignItems:languagedirection === 'rtl' ? 'end' : 'start',
+            width: "100%",
+            p: 1,
+            cursor: "pointer",
+            display: "flex",
           }}
         >
-          <ListItemIcon>
-            <LogoutIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText
-            onClick={handleLogout}
-            primary={
-              <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
-                {t("Logout")}
-              </Typography>
-            }
-          />
-        </MenuItem>
+          <MenuList sx={{ width: "100%" }}>
+            {menuData?.map((menu, index) => (
+              <MenuItem
+                onClick={() => handleClick(menu)}
+                key={index}
+                sx={{
+                  justifyContent: `${
+                    languagedirection === "rtl" && "flex-start"
+                  }`,
+                  gap: "10px",
+                  width: "100%",
+                  my: "2px",
+                  "&:hover": {
+                    backgroundColor: (theme) =>
+                      alpha(theme.palette.primary.main, 0.3),
+                  },
+                }}
+              >
+                <img src={menu?.img?.src} loading="lazy" alt="accountIMg" />
+                <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
+                  {t(menu?.label)}
+                </Typography>
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Box>
+        <Divider />
+        <Box
+          sx={{ my: 1, cursor: "pointer" }}
+          alignItems={languagedirection === "rtl" ? "end" : "start"}
+          width="100%"
+        >
+          <MenuItem
+            onClick={() => setOpenModal(true)}
+            sx={{
+              justifyContent: `${
+                languagedirection === "rtl" ? "flex-end" : "flex-start"
+              }`,
+              "&:hover": {
+                backgroundColor: (theme) =>
+                  alpha(theme.palette.primary.main, 0.3),
+              },
+            }}
+          >
+            <ListItemIcon>
+              <LogoutIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText
+              onClick={() => setLogout(true)}
+              primary={
+                <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
+                  {t("Logout")}
+                </Typography>
+              }
+            />
+          </MenuItem>
+        </Box>
       </Box>
-    </Box>
+
+      {/* //  logOut Dialog */}
+      {logout && (
+        <DeleteDialog
+          handelAction={handleLogout}
+          Cancel={"Cancel"}
+          header={"Log out?"}
+          openDeleteDialog={logout}
+          setOpenDeleteDialog={setLogout}
+          text={"Are you sure you want to logout from this account?"}
+          primaryButtonText={"Yes, Logout"}
+        />
+      )}
+    </>
   );
 };

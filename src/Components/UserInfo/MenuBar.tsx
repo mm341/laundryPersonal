@@ -36,7 +36,7 @@ const MenuBar = ({ tabData, onClose, sidedrawer, page }: menubar) => {
   };
 
   const handellogout = () => {
-    // setOpenDeleteDialog(false)
+    setOpenDeleteDialog(false);
     router.push("/", locale);
     // onClose?.();
     // localStorage.clear();
@@ -85,7 +85,7 @@ const MenuBar = ({ tabData, onClose, sidedrawer, page }: menubar) => {
           </MenuItem>
         ))}
         <CustomStackFullWidth
-          onClick={handellogout}
+          onClick={() => setOpenDeleteDialog(true)}
           direction="row"
           spacing={1.6}
           sx={{

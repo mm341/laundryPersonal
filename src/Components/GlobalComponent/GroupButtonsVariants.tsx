@@ -12,8 +12,8 @@ const GroupButtonsVariants = ({
   data,
   setSearchText,
 }: {
-  type: number;
-  setType: (e: number) => void;
+  type: string;
+  setType: (e: string) => void;
   data: VariantInterface[];
   setSearchText: (e: string) => void;
 }) => {

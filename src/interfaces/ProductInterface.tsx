@@ -14,7 +14,7 @@ export const initialProductData = () => {
     service: initialServiceData(),
     slug: null,
     sub_products: [],
-    variant: { id: 0, name: "", name_bn: "" },
+    variant: { id: "", name: "", name_bn: "" },
   };
 };
 

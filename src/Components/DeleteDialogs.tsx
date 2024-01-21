@@ -24,7 +24,7 @@ const DeleteDialog = ({
   primaryButtonText,
   handelAction,
   size,
-  loading
+  loading,
 }: {
   setOpenDeleteDialog: (e: boolean) => void;
   openDeleteDialog: boolean;
@@ -33,8 +33,8 @@ const DeleteDialog = ({
   Cancel: string;
   primaryButtonText: string;
   handelAction?: () => void;
-  size?:number
-  loading?:boolean
+  size?: number;
+  loading?: boolean;
 }) => {
   //  hooks
   const theme = useTheme();
@@ -129,8 +129,8 @@ const DeleteDialog = ({
                     size={size}
                   />
                 ) : (
-                t(primaryButtonText)
-               )} 
+                  t(primaryButtonText)
+                )}
               </Button>
             </GlobalDisplayFlexBox>
           </GlobalDisplayFlexColumnBox>

@@ -159,6 +159,8 @@ const FirstSection = ({
                 </Carousel>
               </GlobalDisplayFlexColumnBox>
 
+
+{/*  sleect area box */}
               <Box
                 sx={{
                   width: { md: "85%", xs: "90%" },
@@ -186,7 +188,7 @@ const FirstSection = ({
                   sx={{
                     width: "97px",
                     transform: {
-                      sm: "translateX(-6px)",
+                      sm: "translate(-6px,5px)",
                       xs: "translateX(0px)",
                     },
                   }}

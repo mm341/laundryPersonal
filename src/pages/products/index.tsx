@@ -64,30 +64,28 @@ const ProductsPage = () => {
   );
 
   //     complete hooks
-  const [type, setType] = useState<number>(0);
+  const [type, setType] = useState<string>("0");
   useEffect(() => {
     if (router.query.service_id) {
-      dispatch(GetVariants({ serviceId: Number(router.query.service_id) }));
-      dispatch(
-        GetAddtionalServices({ serviceId: Number(router.query.service_id) })
-      );
+      dispatch(GetVariants({ serviceId: router.query.service_id }));
+      dispatch(GetAddtionalServices({ serviceId: router.query.service_id }));
     }
   }, [dispatch, router.query.service_id]);
 
   //    handel initial value of variant type
   useEffect(() => {
     if (variants?.length > 0) {
-      setType(Number(variants[0]?.id));
+      setType(variants[0]?.id);
     }
   }, [variants]);
 
   //  get products with request api
   useEffect(() => {
-    if (Number(type) > 0 && router.query.service_id) {
+    if (type && router.query.service_id) {
       dispatch(
         GetProducts({
-          serviceId: Number(router.query.service_id),
-          variantId: Number(type),
+          serviceId: router.query.service_id,
+          variantId: type,
         })
       );
     }
@@ -99,8 +97,8 @@ const ProductsPage = () => {
     if (searchText) {
       dispatch(
         GetProductsWithSearch({
-          serviceId: Number(router.query.service_id),
-          variantId: Number(type),
+          serviceId: router.query.service_id,
+          variantId: type,
           searchText: searchText,
         })
       );
@@ -112,16 +110,16 @@ const ProductsPage = () => {
     if (e.target.value) {
       dispatch(
         GetProductsWithSearch({
-          serviceId: Number(router.query.service_id),
-          variantId: Number(type),
+          serviceId: router.query.service_id,
+          variantId: type,
           searchText: e.target.value,
         })
       );
     } else {
       dispatch(
         GetProducts({
-          serviceId: Number(router.query.service_id),
-          variantId: Number(type),
+          serviceId: router.query.service_id,
+          variantId: type,
         })
       );
     }
@@ -217,10 +215,8 @@ const ProductsPage = () => {
 
                                         dispatch(
                                           GetProducts({
-                                            serviceId: Number(
-                                              router.query.service_id
-                                            ),
-                                            variantId: Number(type),
+                                            serviceId: router.query.service_id,
+                                            variantId: type,
                                           })
                                         );
                                       }}

@@ -5,15 +5,15 @@ import PublicRequest from "@/utils/PublicRequests";
 import { ProductsModel } from "@/models/ProductsModel";
 
 export type Paylod = {
-  serviceId: number;
-  variantId: number;
+  serviceId: string | string[] |undefined;
+  variantId: string;
   searchText?: string;
 };
 
 // Get Addtional Services
 export const GetAddtionalServices = createAsyncThunk(
   "products/GetAddtionalServices",
-  (payload: { serviceId: number }) =>
+  (payload: { serviceId: string | string[] }) =>
     PublicRequest.getData(`additional-services?service_id=${payload.serviceId}`)
 );
 
@@ -38,7 +38,7 @@ export const GetProductsWithSearch = createAsyncThunk(
 // Get Variants
 export const GetVariants = createAsyncThunk(
   "variants/GetVariants",
-  (payload: { serviceId: number }) =>
+  (payload: { serviceId: string|string[] }) =>
     PublicRequest.getData(`variants?service_id=${payload.serviceId}`)
 );
 

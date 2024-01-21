@@ -1,13 +1,13 @@
 export const initialVariantData = () => {
   return {
-    id: 0,
+    id: "",
     name: "",
     name_bn: "",
   };
 };
 
 export interface VariantInterface {
-  id: number;
+  id: string;
   name: string;
   name_bn: string;
 }

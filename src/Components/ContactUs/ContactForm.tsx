@@ -21,7 +21,6 @@ const ContactForm = () => {
     validationSchema: ValidationSchemaForContact(),
     onSubmit: async (values) => {
       try {
-       
       } catch (err) {}
     },
   });
@@ -38,7 +37,7 @@ const ContactForm = () => {
       {/* Full Name */}
 
       <TextField
-       autoComplete="new-password"
+        autoComplete="new-password"
         type="text"
         onChange={addAddressFormik.handleChange}
         name="FullName"
@@ -49,11 +48,11 @@ const ContactForm = () => {
         error={Boolean(
           addAddressFormik.errors.FullName && addAddressFormik.touched.FullName
         )}
-        // required
+        required
       />
       {/* Email */}
       <TextField
-       autoComplete="new-password"
+        autoComplete="new-password"
         type="mail"
         onChange={addAddressFormik.handleChange}
         name="Email"
@@ -64,12 +63,12 @@ const ContactForm = () => {
         error={Boolean(
           addAddressFormik.errors.Email && addAddressFormik.touched.Email
         )}
-        // required
+        required
       />
       {/* Phone Number */}
       <TextField
-       autoComplete="new-password"
-        type="number"
+        autoComplete="new-password"
+        type="text"
         onChange={addAddressFormik.handleChange}
         name="PhoneNumber"
         label={t("Phone Number")}
@@ -80,13 +79,13 @@ const ContactForm = () => {
           addAddressFormik.errors.PhoneNumber &&
             addAddressFormik.touched.PhoneNumber
         )}
-        // required
+        required
       />
 
       {/* Message */}
 
       <TextField
-       autoComplete="new-password"
+        autoComplete="new-password"
         type="text"
         onChange={addAddressFormik.handleChange}
         multiline
@@ -99,7 +98,7 @@ const ContactForm = () => {
         error={Boolean(
           addAddressFormik.errors.message && addAddressFormik.touched.message
         )}
-        // required
+        required
       />
 
       <Button type="submit">

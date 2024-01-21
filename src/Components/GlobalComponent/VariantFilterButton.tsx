@@ -11,8 +11,8 @@ const VariantFilterButton = ({
   FilterType,
   setSearchText,
 }: {
-  setType: (e: number) => void;
-  type: number;
+  setType: (e: string) => void;
+  type: string;
   FilterType: VariantInterface;
   setSearchText: (e: string) => void;
 }) => {
