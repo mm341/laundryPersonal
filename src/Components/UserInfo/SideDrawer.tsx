@@ -20,11 +20,18 @@ const SideDrawer = ({ page }: { page: string }) => {
     <>
       {languagedirection && (
         <>
-          <Grid item xs={2} sm={2} md={2} >
+          <Grid
+          
+            item
+            xs={2}
+            sm={2}
+            md={2}
+          >
             <IconButton
               onClick={() => setOpen(true)}
               sx={{
                 color: (theme) => theme.palette.primary.main,
+                
               }}
             >
               <MenuOpenIcon />

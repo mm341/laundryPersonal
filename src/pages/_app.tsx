@@ -139,7 +139,25 @@ export default function App({
             <ThemeProvider theme={theme}>
               <RTL direction={languagedirection}>
                 <CssBaseline />
-                <Toaster />
+                <Toaster
+                  toastOptions={{
+                    className: "",
+                    // style: {
+                    //   // border: "1px solid #713200",
+                    //   // padding: "16px",
+                    //   // color: "#713200",
+                    //   position:"relative",
+                    //   zIndex:1000000,
+                    //   top:"200"
+                    // },
+                  }}
+                  containerStyle={{
+                  
+                    // top: "100px",
+                    zIndex:1000000,
+                    position: 'relative',
+                  }}
+                />
                 <Head>
                   <title>{t("Loading...")}</title>
                 </Head>
