@@ -66,7 +66,7 @@ const ServicesDialog = ({
                 <SeviceCard
                   area
                   element={e}
-                  setServiceId={function (action: number | undefined): void {
+                  setServiceId={function (action: string | undefined): void {
                     throw new Error("Function not implemented.");
                   }}
                 />
