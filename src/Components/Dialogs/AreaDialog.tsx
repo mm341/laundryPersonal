@@ -14,7 +14,7 @@ interface Props {
   openAreaDialog: boolean;
   handleClose: () => void;
   homeAreas: HomeAreas[];
-  ServiceId:number|undefined
+  ServiceId:string|undefined
 }
 const AreaDialog = ({ openAreaDialog, handleClose, homeAreas,ServiceId }: Props) => {
   //    hooks

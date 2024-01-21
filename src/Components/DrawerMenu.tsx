@@ -54,7 +54,7 @@ const DrawerMenu = ({
   const [languagedirection, setLanguagedirection] = useState<string>("ltr");
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [authModalOpen, setOpen] = useState<boolean>(false);
-  const [ServiceId, setServiceId] = useState<number | undefined>();
+  const [ServiceId, setServiceId] = useState<string | undefined>();
   //  change route function
   const changeLocale = (locale: string) => {
     router.push(router.pathname, router.asPath, { locale });
