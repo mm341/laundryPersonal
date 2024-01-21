@@ -116,7 +116,7 @@ export const AccountPopover = (props: Props) => {
         sx={{
           display: open ? "flex" : "none",
           position: "absolute",
-          top: { md: "40px", xs: "65px" },
+          top: { md: "40px", xs: "50px" },
           right: locale === "en" ? "18%" : "21%",
           backgroundColor: "#F3F6FF",
           zIndex: "99999",

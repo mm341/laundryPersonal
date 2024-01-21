@@ -295,10 +295,10 @@ const Navbar = () => {
               >
                 <Stack
                   sx={{
-                    gap: "0px",
+                    gap: "8px",
                     justifyContent: "center",
                     display: "flex",
-                    flexDirection: "column",
+                    flexDirection: "row-reverse",
                     cursor: "pointer",
                     alignItems: "center",
                   }}
