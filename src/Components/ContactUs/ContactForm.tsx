@@ -46,12 +46,6 @@ const ContactForm = () => {
             ContactFormik.setFieldValue("phone_number", "+20");
           }
         });
-
-        // ContactFormik.resetForm()
-        // ContactFormik.setFieldValue("name", "");
-        // ContactFormik.setFieldValue("email", "");
-        // ContactFormik.setFieldValue("phone_number", "");
-        // ContactFormik.setFieldValue("message", "");
       } catch (err) {}
     },
   });
