@@ -155,7 +155,7 @@ export default function App({
                   
                     // top: "100px",
                     zIndex:1000000,
-                    position: 'relative',
+                    position: 'sticky',
                   }}
                 />
                 <Head>
