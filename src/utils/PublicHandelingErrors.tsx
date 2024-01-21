@@ -7,18 +7,22 @@ export default class PublicHandelingErrors {
     error: unknown | any,
     variables?: { contact?: string | undefined; rating?: number | null } | any
   ) => {
-    if (error?.response?.data?.errors?.length > 0) {
-      error?.response?.data?.errors?.forEach((item: any) => {
-        toast.error(item);
-      });
-      this.handleTokenExpire(error?.response?.status);
-    } else if (error?.response?.data?.message) {
-      toast.error(error?.response?.data?.message);
-      this.handleTokenExpire(error?.response?.status);
-    } else if (error?.response?.data?.error) {
-      toast.error(error?.response?.data?.error);
-      this.handleTokenExpire(error?.response?.status);
-    }
+    Object.values(error?.response?.data?.errors)?.map((e: any) =>
+      toast.error(e)
+    );
+
+    // if (error?.response?.data?.errors?.length > 0) {
+    //   error?.response?.data?.errors?.forEach((item: any) => {
+    //     toast.error(item);
+    //   });
+    this.handleTokenExpire(error?.response?.status);
+    // } else if (error?.response?.data?.message) {
+    //   toast.error(error?.response?.data?.message);
+    //   this.handleTokenExpire(error?.response?.status);
+    // } else if (error?.response?.data?.error) {
+    //   toast.error(error?.response?.data?.error);
+    //   this.handleTokenExpire(error?.response?.status);
+    // }
   };
 
   public static handleTokenExpire = (status: number) => {
