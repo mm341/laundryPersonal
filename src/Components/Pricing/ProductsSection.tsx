@@ -45,7 +45,7 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            gap: { sm: "320px", xs: "110px" },
+          justifyContent:"space-between",
             p: "12px",
             
           }}
@@ -54,6 +54,7 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
             sx={{
               fontSize: "20px",
               fontWeight: "600",
+              width:{sm:"45%",xs:"100%"}
             }}
           >
             {t("Items")}
@@ -62,6 +63,7 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
             sx={{
               fontSize: "20px",
               fontWeight: "600",
+              width:{sm:"55%",xs:"100%"}
             }}
           >
             {t("Price")}
@@ -83,15 +85,17 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
-                  gap: { sm: "320px", xs: "110px" },
+                  // gap: { sm: "320px", xs: "110px" },
+                  justifyContent:"space-between",
                   p: "12px",
-                  cursor: "pointer",
+                
                 }}
               >
                 <Typography
                   sx={{
                     fontSize: "18px",
                     fontWeight: "400",
+                    width:{sm:"45%",xs:"100%"}
                   }}
                 >
                   {e?.name}
@@ -100,6 +104,7 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
                   sx={{
                     fontSize: "18px",
                     fontWeight: "400",
+                    width:{sm:"55%",xs:"100%"}
                   }}
                 >
                   {e?.current_price} {master?.currency}
