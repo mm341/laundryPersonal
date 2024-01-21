@@ -8,7 +8,7 @@ const ScrollbarRoot = styled(SimpleBar)`
   .simplebar-scrollbar::before {
     width: 6px;
 
-    background-color: #d9d9d9;
+    background-color: #c9edff;
   }
 `;
 
