@@ -97,16 +97,11 @@ const CheckOutPage = () => {
   const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
   //  handel initial value of default addresse
 
-  // useEffect(() => {
-  //   if (defaultAddresse) {
-  //     setAddressevalue(defaultAddresse);
-  //   }
-  // }, [defaultAddresse]);
+ 
   const [addresseValue, setAddressevalue] = useState<string>(
     myAddresses?.data?.data?.addresses[0]?.id
   );
-  console.log(myAddresses?.data?.data?.addresses[0]?.id);
-  console.log(addresseValue);
+
 
   useEffect(() => {
     setAddressevalue(myAddresses?.data?.data?.addresses[0]?.id);

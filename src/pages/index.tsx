@@ -66,6 +66,8 @@ export default function Home({
     }
   }, [dispatch, masterData]);
 
+
+
   //  cash footer Social Media Links
   useEffect(() => {
     if (footerSocialLinks?.length > 0) {
