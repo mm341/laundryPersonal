@@ -31,6 +31,7 @@ import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import ScrollToTop from "@/Components/GlobalComponent/scroll-top/ScrollToTop";
 import dynamic from "next/dynamic";
 import logoHeader from "../../public/App/Disk-1s-200px.gif";
+import DynamicFavicon from "@/Components/GlobalComponent/favicon/DynamicFavicon";
 
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
@@ -198,6 +199,7 @@ export default function App({
                     }}
                   >
                     <ScrollToTop />
+                    <DynamicFavicon/>
                     {getLayout(<Component {...pageProps} />)}
                   </Box>
                 </Box>

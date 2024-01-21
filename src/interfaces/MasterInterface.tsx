@@ -6,4 +6,5 @@ export interface Master {
   ios_url: string;
   minimum_cost: number;
   post_code: string[];
+  fav_icon: string;
 }

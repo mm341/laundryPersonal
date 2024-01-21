@@ -19,6 +19,7 @@ const initialState: MasterModel = {
     ios_url: "",
     minimum_cost: 0,
     post_code: [],
+    fav_icon:""
   },
   footerLinks: [],
 };
