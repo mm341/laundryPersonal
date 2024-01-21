@@ -16,9 +16,9 @@ export const ContactingRequest = createAsyncThunk(
   (payload: ContactInterface) =>
     PublicRequest.postData(payload, "contacts")
       .then((res: any) => {
-        console.log(res);
         if (res) {
           toast.success(res?.message);
+          return res;
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))

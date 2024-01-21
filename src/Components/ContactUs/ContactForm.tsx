@@ -40,8 +40,18 @@ const ContactForm = () => {
             email: values.email,
             message: values.message,
           })
-        );
-        ContactFormik.resetForm()
+        ).then((res: any) => {
+          if (res.payload.message === "Message sent successfully") {
+            ContactFormik?.handleReset(res);
+            ContactFormik.setFieldValue("phone_number", "+20");
+          }
+        });
+
+        // ContactFormik.resetForm()
+        // ContactFormik.setFieldValue("name", "");
+        // ContactFormik.setFieldValue("email", "");
+        // ContactFormik.setFieldValue("phone_number", "");
+        // ContactFormik.setFieldValue("message", "");
       } catch (err) {}
     },
   });
@@ -123,7 +133,7 @@ const ContactForm = () => {
         required
       />
 
-      <Button type={!isloading?"submit":"button"}>
+      <Button type={!isloading ? "submit" : "button"}>
         <GlobalButton
           sx={{
             width: "155px",
