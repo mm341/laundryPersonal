@@ -1,26 +1,42 @@
+import Meta from "@/Components/GlobalComponent/Meta";
 import GlobalTypography from "@/Components/HomePage/GlobalTypography";
 import PublicContainer from "@/Components/PublicContainer";
+import MainApi from "@/api/MainApi";
 import {
   CustomPaperBigCard,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-import { Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const About = () => {
-  //  hooks
-
-  const { t } = useTranslation();
-  const theme = useTheme();
+const About = ({
+  aboutUsData,
+}: {
+  aboutUsData: { title: string; content: string };
+}) => {
   return (
-    <PublicContainer>
-      <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
-        <GlobalDisplayFlexColumnBox sx={{ py: "80px" }}>
-          <GlobalDisplayFlexColumnBox gap={"128px"}>
-            <GlobalDisplayFlexColumnBox width={"100%"} gap={"56px"}>
-              <GlobalTypography text={"About Alwan Elghasil"} />
-              <Typography
+    <>
+      <Meta
+        title={aboutUsData?.title}
+        // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
+      />
+      <PublicContainer>
+        <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+          <GlobalDisplayFlexColumnBox sx={{ py: "80px" }}>
+            <GlobalDisplayFlexColumnBox gap={"128px"}>
+              <GlobalDisplayFlexColumnBox width={"100%"} gap={"56px"}>
+                <GlobalTypography
+                  FirstSection
+                  clearBg
+                  text={aboutUsData?.title}
+                />
+                <Box
+                  dangerouslySetInnerHTML={{
+                    __html: aboutUsData?.content,
+                  }}
+                ></Box>
+                {/* <Typography
                 sx={{
                   textAlign: "center",
                   fontSize: "20px",
@@ -32,10 +48,10 @@ const About = () => {
                 {t(
                   "Welcome to Alwan Elghasil, where we redefine cleanliness and care for your garments with a commitment to quality and excellence. At Alwan Elghasil, we believe that every piece of clothing tells a story, and we are here to ensure that each story is told in pristine condition."
                 )}
-              </Typography>
-            </GlobalDisplayFlexColumnBox>
+              </Typography> */}
+              </GlobalDisplayFlexColumnBox>
 
-            <GlobalDisplayFlexColumnBox
+              {/* <GlobalDisplayFlexColumnBox
               width={"100%"}
               gap={"96px"}
               sx={{ px: { md: "40px", xs: "10px" } }}
@@ -182,12 +198,35 @@ const About = () => {
                   )}
                 </Typography>
               </GlobalDisplayFlexColumnBox>
+            </GlobalDisplayFlexColumnBox> */}
             </GlobalDisplayFlexColumnBox>
           </GlobalDisplayFlexColumnBox>
-        </GlobalDisplayFlexColumnBox>
-      </CustomPaperBigCard>
-    </PublicContainer>
+        </CustomPaperBigCard>
+      </PublicContainer>
+    </>
   );
 };
 
 export default About;
+
+export const getServerSideProps = async ({ locale }: { locale: string }) => {
+  let aboutUsData = {};
+
+  //  masterData
+  try {
+    const configRes = await MainApi.get("legal-pages/about-us", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+    aboutUsData = configRes?.data?.data?.setting;
+  } catch (e) {
+    aboutUsData = {};
+  }
+
+  return {
+    props: {
+      aboutUsData,
+    },
+  };
+};

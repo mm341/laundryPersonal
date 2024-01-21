@@ -1,21 +1,32 @@
+import Meta from "@/Components/GlobalComponent/Meta";
 import GlobalTypography from "@/Components/HomePage/GlobalTypography";
 import PublicContainer from "@/Components/PublicContainer";
+import MainApi from "@/api/MainApi";
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
 import { Box, Stack, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const Privacy = () => {
-  //  hooks
-
-  const { t } = useTranslation();
-  const theme = useTheme();
+const Privacy = ({
+  privacyData,
+}: {
+  privacyData: { title: string; content: string };
+}) => {
   return (
-    <PublicContainer>
-      <GlobalDisplayFlexColumnBox gap={"32px"}>
-        <GlobalTypography FirstSection clearBg text={"Privacy Policy"} />
-
-        <Typography sx={{ fontSize: "16px", fontWeight: "400", mt: "30px" }}>
+    <>
+      <Meta
+        title={privacyData?.title}
+        // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
+      />
+      <PublicContainer>
+        <GlobalDisplayFlexColumnBox gap={"32px"}>
+          <GlobalTypography FirstSection clearBg text={privacyData?.title} />
+          <Box
+            dangerouslySetInnerHTML={{
+              __html: privacyData?.content,
+            }}
+          ></Box>
+          {/* <Typography sx={{ fontSize: "16px", fontWeight: "400", mt: "30px" }}>
           {t("Last updated: January 01, 2022")}
         </Typography>
         <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
@@ -368,10 +379,33 @@ const Privacy = () => {
             Application may also be subject to other local, state, national, or
             international laws.
           </Typography>
+        </GlobalDisplayFlexColumnBox> */}
         </GlobalDisplayFlexColumnBox>
-      </GlobalDisplayFlexColumnBox>
-    </PublicContainer>
+      </PublicContainer>
+    </>
   );
 };
 
 export default Privacy;
+
+export const getServerSideProps = async ({ locale }: { locale: string }) => {
+  let privacyData = {};
+
+  //  masterData
+  try {
+    const configRes = await MainApi.get("legal-pages/privacy-policy", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+    privacyData = configRes?.data?.data?.setting;
+  } catch (e) {
+    privacyData = {};
+  }
+
+  return {
+    props: {
+      privacyData,
+    },
+  };
+};
