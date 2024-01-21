@@ -22,6 +22,7 @@ import AuthModal from "../AuthBox/AuthModel";
 import { AdditionalServicesInterface } from "@/interfaces/AddtionalServicesInterface";
 import AdditionalServicesSection from "./AdditionalServicesSection";
 import { number } from "yup";
+import { Scrollbar } from "../GlobalComponent/Scrollbar";
 
 const Cartsection = ({
   additionalSercvices,
@@ -50,14 +51,7 @@ const Cartsection = ({
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token");
   }
-  //  custom design of scrollbar
-  const ScrollbarRoot = styled(SimpleBar)`
-    .simplebar-scrollbar::before {
-      width: 6px;
 
-      background-color: #d9d9d9;
-    }
-  `;
   //  open auth model
   const handleOpenAuthModal = () => {
     setOpen(true);
@@ -88,7 +82,7 @@ const Cartsection = ({
 
           {/*  products */}
 
-          <ScrollbarRoot
+          <Scrollbar
             style={{
               maxHeight: "500px",
             }}
@@ -102,7 +96,7 @@ const Cartsection = ({
                 <ProductCardInCart key={i} />
               ))}
             </GlobalDisplayFlexColumnBox>
-          </ScrollbarRoot>
+          </Scrollbar>
 
           <Divider orientation="horizontal" />
           {/*  additional services section */}

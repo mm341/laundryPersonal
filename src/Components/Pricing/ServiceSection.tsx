@@ -4,6 +4,7 @@ import { Box, Divider, Typography, styled, useTheme } from "@mui/material";
 // import Image from "next/image";
 import React from "react";
 import SimpleBar from "simplebar-react";
+import { Scrollbar } from "../GlobalComponent/Scrollbar";
 
 const ServiceSection = ({
   setServiceId,
@@ -18,14 +19,7 @@ const ServiceSection = ({
   const theme = useTheme();
   const { services } = useAppSelector((state) => state.services);
 
-  //  custom design of scrollbar
-  const ScrollbarRoot = styled(SimpleBar)`
-    .simplebar-scrollbar::before {
-      width: 6px;
-
-      background-color: #d9d9d9;
-    }
-  `;
+ 
   return (
     <Box
       sx={{
@@ -36,7 +30,7 @@ const ServiceSection = ({
       }}
     >
       <GlobalDisplayFlexColumnBox gap={"0px"}>
-        <ScrollbarRoot
+        <Scrollbar
           style={{
             maxHeight: "650px",
           }}
@@ -85,7 +79,7 @@ const ServiceSection = ({
               <Divider orientation="horizontal" />
             </Box>
           ))}
-        </ScrollbarRoot>
+        </Scrollbar>
       </GlobalDisplayFlexColumnBox>
     </Box>
   );

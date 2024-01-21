@@ -16,6 +16,7 @@ import SimpleBar from "simplebar-react";
 import { useTranslation } from "react-i18next";
 
 import { useAppSelector } from "@/redux/store";
+import { Scrollbar } from "../GlobalComponent/Scrollbar";
 
 const CheckOutProductsSection = ({
   checkOut,
@@ -29,20 +30,14 @@ const CheckOutProductsSection = ({
   const { t } = useTranslation();
   const { isloadingAddOrder } = useAppSelector((state) => state.orders);
   //  custom design of scrollbar
-  const ScrollbarRoot = styled(SimpleBar)`
-    .simplebar-scrollbar::before {
-      width: 6px;
-
-      background-color: #d9d9d9;
-    }
-  `;
+  
   const array = [...Array(10)];
   return (
     <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
       <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
         {t("Items")} (2)
       </Typography>
-      <ScrollbarRoot
+      <Scrollbar
         style={{
           maxHeight: "700px",
         }}
@@ -56,7 +51,7 @@ const CheckOutProductsSection = ({
             <ProductCardInCart key={i} checkOut />
           ))}
         </GlobalDisplayFlexColumnBox>
-      </ScrollbarRoot>
+      </Scrollbar>
       {isloadingAddOrder ? (
         <GlobalButton
           sx={{

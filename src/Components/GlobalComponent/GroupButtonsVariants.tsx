@@ -19,14 +19,7 @@ const GroupButtonsVariants = ({
   data: VariantInterface[];
   setSearchText: (e: string) => void;
 }) => {
-  //    custom design of scrollbar
-  const ScrollbarRoot = styled(SimpleBar)`
-    .simplebar-scrollbar::before {
-      height: 6px;
-      color: #329cd7;
-      background-color: #b3e6ff;
-    }
-  `;
+
 
   return (
     <Box

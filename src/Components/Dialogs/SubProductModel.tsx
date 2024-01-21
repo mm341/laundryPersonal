@@ -21,6 +21,7 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 import SimpleBar from "simplebar-react";
+import { Scrollbar } from "../GlobalComponent/Scrollbar";
 
 const SubProductModel = ({
   openDialog,
@@ -52,14 +53,7 @@ const SubProductModel = ({
     borderRadius: "10px",
     p: 3,
   };
-  //  custom design of scrollbar
-  const ScrollbarRoot = styled(SimpleBar)`
-    .simplebar-scrollbar::before {
-      width: 6px;
-
-      background-color: #d9d9d9;
-    }
-  `;
+  
   return (
     <Modal
       open={openDialog}
@@ -75,7 +69,7 @@ const SubProductModel = ({
             </Typography>
             <Divider orientation="horizontal" />
           </GlobalDisplayFlexColumnBox>
-          <ScrollbarRoot
+          <Scrollbar
             style={{
               maxHeight: "270px",
             }}
@@ -130,7 +124,7 @@ const SubProductModel = ({
                 </ListItem>
               ))}
             </GlobalDisplayFlexColumnBox>
-          </ScrollbarRoot>
+          </Scrollbar>
           <GlobalDisplayFlexBox
             sx={{ justifyContent: "flex-end" }}
             gap={"40px"}

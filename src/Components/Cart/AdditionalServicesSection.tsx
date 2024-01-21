@@ -15,6 +15,7 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 import SimpleBar from "simplebar-react";
+import { Scrollbar } from "../GlobalComponent/Scrollbar";
 
 const AdditionalServicesSection = ({
   additionalSercvices,
@@ -32,15 +33,6 @@ const AdditionalServicesSection = ({
   //  master data
   const { master } = useAppSelector((state) => state.master);
 
-  //  custom design of scrollbar
-  const ScrollbarRoot = styled(SimpleBar)`
-    .simplebar-scrollbar::before {
-      width: 6px;
-
-      background-color: #d9d9d9;
-    }
-  `;
-
   return (
     additionalSercvices?.length > 0 && (
       <GlobalDisplayFlexColumnBox
@@ -51,7 +43,7 @@ const AdditionalServicesSection = ({
         <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
           {t("Additional Service")}
         </Typography>
-        <ScrollbarRoot
+        <Scrollbar
           style={{
             maxHeight: "200px",
           }}
@@ -112,7 +104,7 @@ const AdditionalServicesSection = ({
               </GlobalDisplayFlexColumnBox>
             ))}
           </GlobalDisplayFlexColumnBox>
-        </ScrollbarRoot>
+        </Scrollbar>
       </GlobalDisplayFlexColumnBox>
     )
   );

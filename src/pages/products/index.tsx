@@ -44,6 +44,7 @@ import SubProductModel from "@/Components/Dialogs/SubProductModel";
 import dynamic from "next/dynamic";
 import CustomLoaderPage from "@/Components/GlobalComponent/CustomLoaderPage";
 import Meta from "@/Components/GlobalComponent/Meta";
+import { Scrollbar } from "@/Components/GlobalComponent/Scrollbar";
 const ProductsPage = () => {
   //  hooks
   const { t } = useTranslation();
@@ -123,14 +124,6 @@ const ProductsPage = () => {
       );
     }
   }, [router.query.service_id, type]);
-  //  custom design of scrollbar
-  const ScrollbarRoot = styled(SimpleBar)`
-    .simplebar-scrollbar::before {
-      width: 6px;
-
-      background-color: #d9d9d9;
-    }
-  `;
 
   //  function close subProduct modal
 
@@ -234,7 +227,8 @@ const ProductsPage = () => {
                       </GlobalDisplayFlexBox>
 
                       {/*  products card */}
-                      <ScrollbarRoot
+
+                      <Scrollbar
                         style={{
                           maxHeight: "600px",
                         }}
@@ -256,7 +250,7 @@ const ProductsPage = () => {
                               )
                             )}
                         </GlobalDisplayFlexColumnBox>
-                      </ScrollbarRoot>
+                      </Scrollbar>
                       {/*  case of loading data */}
                       {isloading && products?.length === 0 && (
                         <LoadingComponent />

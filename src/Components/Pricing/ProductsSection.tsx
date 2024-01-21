@@ -8,6 +8,7 @@ import SimpleBar from "simplebar-react";
 import LoadingComponent from "../GlobalComponent/LoadingComponent";
 import EmptyData from "../GlobalComponent/EmptyData";
 import emptyProductsImg from "../../../public/products/empty products.png";
+import { Scrollbar } from "../GlobalComponent/Scrollbar";
 const ProductsSection = ({ products }: { products: productInterface[] }) => {
   //  hooks
 
@@ -20,14 +21,7 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
 
   const { isloading } = useAppSelector((state) => state.products);
 
-  //  custom design of scrollbar
-  const ScrollbarRoot = styled(SimpleBar)`
-    .simplebar-scrollbar::before {
-      width: 6px;
 
-      background-color: #d9d9d9;
-    }
-  `;
   return (
     <Box
       sx={{
@@ -66,7 +60,7 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
             {t("Price")}
           </Typography>
         </Box>
-        <ScrollbarRoot
+        <Scrollbar
           style={{
             maxHeight: "500px",
           }}
@@ -115,7 +109,7 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
           {!isloading && products?.length === 0 && (
             <EmptyData img={emptyProductsImg?.src} />
           )}
-        </ScrollbarRoot>
+        </Scrollbar>
       </GlobalDisplayFlexColumnBox>
     </Box>
   );
