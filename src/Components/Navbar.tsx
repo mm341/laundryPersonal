@@ -41,7 +41,7 @@ const Navbar = () => {
   const theme = useTheme();
   const anchorRef = useRef<Element | PopoverVirtualElement | null>(null);
   const [openAreaDialog, setOpenAreaDialog] = useState<boolean>(false);
-  const [ServiceId, setServiceId] = useState<number | undefined>();
+  const [ServiceId, setServiceId] = useState<string | undefined>();
   const [modalFor, setModalFor] = useState<string>("sign-in");
 
   const [authModalOpen, setOpen] = useState<boolean>(false);

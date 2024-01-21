@@ -14,7 +14,7 @@ const NavServices = ({
   setOpenAreaDialog: (e: boolean) => void;
   responsiveNavbar?: boolean;
   services: HomeServices[];
-  setServiceId: (e: number | undefined) => void;
+  setServiceId: (e: string | undefined) => void;
 }) => {
   //   hooks
   const { t } = useTranslation();

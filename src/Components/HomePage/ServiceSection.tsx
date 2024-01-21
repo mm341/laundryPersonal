@@ -18,7 +18,7 @@ const ServiceSection = ({
   //  hooks
   const theme = useTheme();
   const [openAreaDialog, setOpenAreaDialog] = useState<boolean>(false);
-  const [ServiceId, setServiceId] = useState<number | undefined>();
+  const [ServiceId, setServiceId] = useState<string | undefined>();
 
   //  close area dialog
   const CloseDialog = () => {
