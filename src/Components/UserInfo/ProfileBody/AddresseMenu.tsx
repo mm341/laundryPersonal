@@ -74,177 +74,195 @@ const AddresseMenu = ({
   `;
   return (
     <Grid container spacing={1.5}>
-       <ScrollbarRoot
+      <ScrollbarRoot
         style={{
           maxHeight: "500px",
-          width:"100%"
+          width: "100%",
         }}
       >
-      {addressesData?.length > 0 &&
-        addressesData?.map((addresse: AddresseInterface, i: number) => (
-          <Grid
-            key={i}
-            sx={{ paddingRight: "20px", paddingLeft: "10px", mt: "15px" }}
-            item
-            xs={12}
-            md={12}
-          >
-            <CustomPaperBigCard
-              sx={{
-                backgroundColor: "white",
-                border: "1px solid black",
-                paddingTop: "1px",
-                paddingBottom: "1px",
-              }}
+        {addressesData?.length > 0 &&
+          addressesData?.map((addresse: AddresseInterface, i: number) => (
+            <Grid
+              key={i}
+              sx={{ paddingRight: "20px", paddingLeft: "10px", mt: "15px" }}
+              item
+              xs={12}
+              md={12}
             >
-              <React.Fragment>
-                <ListItem
-                  alignItems="flex-start"
-                  sx={{
-                    cursor: "pointer",
-                    backgroundColor: "white",
-                    my: "10px",
-                  }}
-                  selected={addresse?.id === addresseDefaultId}
-                >
-                  <CustomStackFullWidth
+              <CustomPaperBigCard
+                sx={{
+                  backgroundColor: "white",
+                  border: "1px solid black",
+                  paddingTop: "1px",
+                  paddingBottom: "1px",
+                }}
+              >
+                <React.Fragment>
+                  <ListItem
+                    alignItems="flex-start"
                     sx={{
-                      display: "flex",
-                      flexDirection: {
-                        sm: "row",
-                        xs: "column",
-                      },
+                      cursor: "pointer",
+                      backgroundColor: "white",
+                      my: "10px",
                     }}
-                    alignItems="center"
+                    selected={addresse?.id === addresseDefaultId}
                   >
-                    <Radio
-                      checked={addresse?.id === addresseDefaultId}
-                      aria-labelledby="demo-row-radio-buttons-group-label"
-                      name="row-radio-buttons-group"
-                      color={"success"}
-                      onClick={() => setAddresseDefaultId(addresse?.id)}
-                    />
-                    <ListItemText
-                      secondary={
-                        <Box
-                          sx={{
-                            width: "100%",
-                            display: "flex",
-
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            flexDirection: {
-                              md: "row",
-                              xs: "column",
-                            },
-                            gap: { sm: "", xs: "20px" },
-                          }}
-                        >
+                    <CustomStackFullWidth
+                      sx={{
+                        display: "flex",
+                        flexDirection: {
+                          sm: "row",
+                          xs: "column",
+                        },
+                      }}
+                      alignItems="center"
+                    >
+                      <Radio
+                        checked={addresse?.id === addresseDefaultId}
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                        color={"success"}
+                        onClick={() => setAddresseDefaultId(addresse?.id)}
+                      />
+                      <ListItemText
+                        secondary={
                           <Box
-                            onClick={() => setAddresseDefaultId(addresse?.id)}
                             sx={{
+                              width: "100%",
                               display: "flex",
-                              gap: "15px",
+
+                              justifyContent: "space-between",
                               alignItems: "center",
-                              flexDirection: { md: "row", xs: "column" },
-                              width:{md:"80%",xs:"100%"}
+                              flexDirection: {
+                                md: "row",
+                                xs: "column",
+                              },
+                              gap: { sm: "", xs: "20px" },
                             }}
                           >
                             <Box
+                              onClick={() => setAddresseDefaultId(addresse?.id)}
                               sx={{
                                 display: "flex",
-                                flexDirection: "column",
-                                gap: "5px",
+                                gap: "15px",
                                 alignItems: "center",
+                                flexDirection: { md: "row", xs: "column" },
+                                width: { md: "80%", xs: "100%" },
+                              }}
+                            >
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  gap: "5px",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <img
+                                  style={{ width: "20px", height: "20px" }}
+                                  src={OrderActionStatus(addresse)}
+                                  loading="lazy"
+                                  alt="img"
+                                />
+                                <Typography
+                                  component={"span"}
+                                  sx={{
+                                    fontWeight: "700",
+                                    fontSize: "14px",
+                                  }}
+                                >
+                                  {addresse?.address_name}
+                                </Typography>
+                              </Box>
+
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  gap: "3px",
+                                }}
+                              >
+                                <Typography
+                                  sx={{
+                                    fontSize: "16px",
+                                    fontWeight: "700",
+                                    color: "black",
+                                  }}
+                                >
+                                  {addresse?.address_location}
+                                </Typography>
+                                {addresse?.street?.length < 50 && (
+                                  <Typography
+                                    sx={{
+                                      fontSize: "16px",
+                                      fontWeight: "400",
+                                      color: "#999999",
+                                    }}
+                                  >
+                                    {addresse?.street} street{" "}
+                                    {addresse?.apartment_no} Apartment,{" "}
+                                    {addresse?.building_no} Building,{" "}
+                                    {addresse?.floor_no} Floor
+                                  </Typography>
+                                )}
+                                {addresse?.street?.length > 50 && (
+                                  <Typography
+                                    sx={{
+                                      fontSize: "16px",
+                                      fontWeight: "400",
+                                      color: "#999999",
+                                    }}
+                                  >
+                                    {addresse?.street}... street{" "}
+                                    {addresse?.apartment_no} Apartment,{" "}
+                                    {addresse?.building_no} Building,{" "}
+                                    {addresse?.floor_no} Floor
+                                  </Typography>
+                                )}
+                              </Box>
+                            </Box>
+
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "20px",
+                                width: { md: "20%", xs: "100%" },
+                                justifyContent: {
+                                  md: "flex-end",
+                                  xs: "center",
+                                },
                               }}
                             >
                               <img
-                                style={{ width: "20px", height: "20px" }}
-                                src={OrderActionStatus(addresse)}
+                                onClick={() => {
+                                  setAddresse(addresse);
+                                  setOpen(true);
+                                }}
+                                src={editIcon?.src}
                                 loading="lazy"
-                                alt="img"
+                                alt="edit"
                               />
-                              <Typography
-                                component={"span"}
-                                sx={{
-                                  fontWeight: "700",
-                                  fontSize: "14px",
+                              <img
+                                onClick={() => {
+                                  setAddresseId(addresse?.id);
+                                  setOpenDeleteDialog(true);
                                 }}
-                              >
-                                {addresse?.address_name}
-                              </Typography>
-                            </Box>
-
-                            <Box
-                              sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "3px",
-                              }}
-                            >
-                              <Typography
-                                sx={{
-                                  fontSize: "16px",
-                                  fontWeight: "700",
-                                  color: "black",
-                                }}
-                              >
-                                {addresse?.address_location}
-                              </Typography>
-                              <Typography
-                                sx={{
-                                  fontSize: "16px",
-                                  fontWeight: "400",
-                                  color: "#999999",
-                                }}
-                              >
-                                {addresse?.street} street{" "}
-                                {addresse?.apartment_no} Apartment,{" "}
-                                {addresse?.building_no} Building,{" "}
-                                {addresse?.floor_no} Floor
-                              </Typography>
+                                src={deleteIcon?.src}
+                                loading="lazy"
+                                alt="delete"
+                              />
                             </Box>
                           </Box>
-
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "20px",
-                              width:{md:"20%",xs:"100%"},
-                              justifyContent:{md:"flex-end",xs:"center"}
-                              
-                            }}
-                          >
-                            <img
-                              onClick={() => {
-                                setAddresse(addresse);
-                                setOpen(true);
-                              }}
-                              src={editIcon?.src}
-                              loading="lazy"
-                              alt="edit"
-                            />
-                            <img
-                              onClick={() => {
-                                setAddresseId(addresse?.id);
-                                setOpenDeleteDialog(true);
-                              }}
-                              src={deleteIcon?.src}
-                              loading="lazy"
-                              alt="delete"
-                            />
-                          </Box>
-                        </Box>
-                      }
-                    />
-                  </CustomStackFullWidth>
-                </ListItem>
-              </React.Fragment>
-            </CustomPaperBigCard>
-          </Grid>
-        ))}
-        </ScrollbarRoot>
+                        }
+                      />
+                    </CustomStackFullWidth>
+                  </ListItem>
+                </React.Fragment>
+              </CustomPaperBigCard>
+            </Grid>
+          ))}
+      </ScrollbarRoot>
       {/*  loading data */}
       {isLoading && <LoadingComponent />}
       {!isLoading && addressesData?.length === 0 && (

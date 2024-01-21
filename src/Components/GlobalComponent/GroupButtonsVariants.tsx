@@ -22,9 +22,11 @@ const GroupButtonsVariants = ({
     .simplebar-scrollbar::before {
       height: 6px;
       color: #329cd7;
-      background-color: #B3E6FF;
+      background-color: #b3e6ff;
     }
   `;
+
+  const scrollableNodeRef = React.createRef();
 
   return (
     <Box
@@ -35,7 +37,7 @@ const GroupButtonsVariants = ({
         // overflowX: "auto",
       }}
     >
-      <ScrollbarRoot forceVisible="x" autoHide={false}>
+      <ScrollbarRoot  forceVisible="x" autoHide={false}>
         <ButtonGroup
           sx={{ borderTopLeftRadius: "30px", height: "100%", mb: "15px" }}
         >

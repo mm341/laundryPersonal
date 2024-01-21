@@ -75,8 +75,8 @@ const GlobalSelectBox = ({
 
   return (
     <Box>
-      <FormControl fullWidth>
-        <InputLabel htmlFor="demo-customized-select-native">
+      <FormControl fullWidth >
+        <InputLabel htmlFor="demo-customized-select-native" sx={{position:"absolute",top:"-7px"}}>
           {t(label)}
         </InputLabel>
         <NativeSelect
