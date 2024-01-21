@@ -1,9 +1,10 @@
-import { GlobalButton } from "@/styles/PublicStyles";
+import { CustomStackFullWidth, GlobalButton } from "@/styles/PublicStyles";
 import { Button, Stack, TextField, useTheme } from "@mui/material";
 import { useFormik } from "formik";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ValidationSchemaForContact from "./ValidationschemaforContactUs";
+import CustomPhoneInput from "../AuthBox/CustomPhoneInput";
 
 const ContactForm = () => {
   //  hooks
@@ -11,7 +12,7 @@ const ContactForm = () => {
   const theme = useTheme();
 
   //  validation of add addresse form
-  const addAddressFormik = useFormik({
+  const ContactFormik = useFormik({
     initialValues: {
       FullName: "",
       Email: "",
@@ -24,11 +25,13 @@ const ContactForm = () => {
       } catch (err) {}
     },
   });
-
+  const handleOnChange = (e: string) => {
+    ContactFormik.setFieldValue("PhoneNumber", e);
+  };
   return (
     <Stack
       component={"form"}
-      onSubmit={addAddressFormik.handleSubmit}
+      onSubmit={ContactFormik.handleSubmit}
       direction={"column"}
       gap={"28px"}
       p={"20px"}
@@ -39,14 +42,14 @@ const ContactForm = () => {
       <TextField
         autoComplete="new-password"
         type="text"
-        onChange={addAddressFormik.handleChange}
+        onChange={ContactFormik.handleChange}
         name="FullName"
         label={t("Full Name")}
-        value={addAddressFormik.values.FullName}
-        helperText={addAddressFormik.errors.FullName}
-        onBlur={addAddressFormik.handleBlur}
+        value={ContactFormik.values.FullName}
+        helperText={ContactFormik.errors.FullName}
+        onBlur={ContactFormik.handleBlur}
         error={Boolean(
-          addAddressFormik.errors.FullName && addAddressFormik.touched.FullName
+          ContactFormik.errors.FullName && ContactFormik.touched.FullName
         )}
         required
       />
@@ -54,49 +57,60 @@ const ContactForm = () => {
       <TextField
         autoComplete="new-password"
         type="mail"
-        onChange={addAddressFormik.handleChange}
+        onChange={ContactFormik.handleChange}
         name="Email"
         label={t("Email")}
-        value={addAddressFormik.values.Email}
-        helperText={addAddressFormik.errors.Email}
-        onBlur={addAddressFormik.handleBlur}
+        value={ContactFormik.values.Email}
+        helperText={ContactFormik.errors.Email}
+        onBlur={ContactFormik.handleBlur}
         error={Boolean(
-          addAddressFormik.errors.Email && addAddressFormik.touched.Email
+          ContactFormik.errors.Email && ContactFormik.touched.Email
         )}
         required
       />
       {/* Phone Number */}
-      <TextField
+      {/* <TextField
         autoComplete="new-password"
         type="text"
-        onChange={addAddressFormik.handleChange}
+        onChange={ContactFormik.handleChange}
         name="PhoneNumber"
         label={t("Phone Number")}
-        value={addAddressFormik.values.PhoneNumber}
-        helperText={addAddressFormik.errors.PhoneNumber}
-        onBlur={addAddressFormik.handleBlur}
+        value={ContactFormik.values.PhoneNumber}
+        helperText={ContactFormik.errors.PhoneNumber}
+        onBlur={ContactFormik.handleBlur}
         error={Boolean(
-          addAddressFormik.errors.PhoneNumber &&
-            addAddressFormik.touched.PhoneNumber
+          ContactFormik.errors.PhoneNumber && ContactFormik.touched.PhoneNumber
         )}
         required
-      />
+      /> */}
+
+      <CustomStackFullWidth alignItems="center" spacing={{ xs: 2, md: 2 }}>
+        <CustomPhoneInput
+          value={ContactFormik.values.PhoneNumber}
+          onHandleChange={handleOnChange}
+          // initCountry={global?.country}
+          rtlChange
+          touched={ContactFormik.touched.PhoneNumber}
+          errors={ContactFormik.errors.PhoneNumber}
+          // isLoading={ContactFormik}
+        />
+      </CustomStackFullWidth>
 
       {/* Message */}
 
       <TextField
         autoComplete="new-password"
         type="text"
-        onChange={addAddressFormik.handleChange}
+        onChange={ContactFormik.handleChange}
         multiline
         minRows={5}
         name="message"
         label={t("Message")}
-        value={addAddressFormik.values.message}
-        helperText={addAddressFormik.errors.message}
-        onBlur={addAddressFormik.handleBlur}
+        value={ContactFormik.values.message}
+        helperText={ContactFormik.errors.message}
+        onBlur={ContactFormik.handleBlur}
         error={Boolean(
-          addAddressFormik.errors.message && addAddressFormik.touched.message
+          ContactFormik.errors.message && ContactFormik.touched.message
         )}
         required
       />
