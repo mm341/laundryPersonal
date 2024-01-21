@@ -50,6 +50,7 @@
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "sharp": "^0.33.1",
+    "simplebar": "^6.2.5",
     "simplebar-react": "^3.2.4",
     "smooth-scrollbar": "^8.8.4",
     "smooth-scrollbar-react": "^2.4.1",

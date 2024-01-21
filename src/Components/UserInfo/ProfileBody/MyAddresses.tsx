@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 
 import noData from "../../../../public/static/nodata.png";
-import { useTheme } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import {
@@ -33,6 +33,8 @@ import PublicRequest from "@/utils/PublicRequests";
 import MainApi from "@/api/MainApi";
 import { Addresse } from "@/React-Query/addresses";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
+import SimpleBar from "simplebar-react";
+import { Scrollbar } from "@/Components/GlobalComponent/Scrollbar";
 
 const MyAddresses = () => {
   //  hooks
@@ -106,6 +108,9 @@ const MyAddresses = () => {
       }
     });
   };
+  //  custom design of scrollbar
+  
+
   return (
     <>
       <Meta title={"addresses"} description="addresses" keywords="addresses" />
@@ -118,16 +123,25 @@ const MyAddresses = () => {
       >
         <CustomStackFullWidth spacing={5}>
           {/*  all addresses */}
-          <AddresseMenu
-            addresseDefaultId={addresseDefaultId}
-            setAddresseDefaultId={setAddresseDefaultId}
-            addressesData={myAddresses?.data?.data?.addresses}
-            isLoading={isLoading}
-            setAddresse={setAddresse}
-            setOpenDeleteDialog={setOpenDeleteDialog}
-            setOpen={setOpen}
-            setAddresseId={setAddresseId}
-          />
+
+          <div>
+            <Scrollbar
+              style={{
+                maxHeight: "50vh",
+              }}
+            >
+              <AddresseMenu
+                addresseDefaultId={addresseDefaultId}
+                setAddresseDefaultId={setAddresseDefaultId}
+                addressesData={myAddresses?.data?.data?.addresses}
+                isLoading={isLoading}
+                setAddresse={setAddresse}
+                setOpenDeleteDialog={setOpenDeleteDialog}
+                setOpen={setOpen}
+                setAddresseId={setAddresseId}
+              />
+            </Scrollbar>
+          </div>
 
           <Stack
             sx={{

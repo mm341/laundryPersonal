@@ -5,6 +5,8 @@ import { Box, ButtonGroup, styled } from "@mui/material";
 import { VariantInterface } from "@/interfaces/VariantInterface";
 import VariantFilterButton from "./VariantFilterButton";
 import SimpleBar from "simplebar-react";
+import { Scrollbar } from "./Scrollbar";
+import { ScrollbarHorizontal } from "./ScrollbarHorizontal";
 
 const GroupButtonsVariants = ({
   setType,
@@ -35,7 +37,7 @@ const GroupButtonsVariants = ({
         // overflowX: "auto",
       }}
     >
-      <ScrollbarRoot forceVisible="x" autoHide={false}>
+      <ScrollbarHorizontal forceVisible="x" autoHide={false}>
         <ButtonGroup
           sx={{ borderTopLeftRadius: "30px", height: "100%", mb: "15px" }}
         >
@@ -49,7 +51,7 @@ const GroupButtonsVariants = ({
             />
           ))}
         </ButtonGroup>
-      </ScrollbarRoot>
+      </ScrollbarHorizontal>
     </Box>
   );
 };

@@ -64,195 +64,182 @@ const AddresseMenu = ({
 
     return img;
   };
-  //  custom design of scrollbar
-  const ScrollbarRoot = styled(SimpleBar)`
-    .simplebar-scrollbar::before {
-      width: 6px;
 
-      background-color: #d9d9d9;
-    }
-  `;
   return (
     <Grid container spacing={1.5}>
-      <ScrollbarRoot
-        style={{
-          maxHeight: "500px",
-          width: "100%",
-        }}
-      >
-        {addressesData?.length > 0 &&
-          addressesData?.map((addresse: AddresseInterface, i: number) => (
-            <Grid
-              key={i}
-              sx={{ paddingRight: "20px", paddingLeft: "10px", mt: "15px" }}
-              item
-              xs={12}
-              md={12}
+      {addressesData?.length > 0 &&
+        addressesData?.map((addresse: AddresseInterface, i: number) => (
+          <Grid
+            key={i}
+            sx={{ paddingRight: "20px", paddingLeft: "10px", mt: "15px" }}
+            item
+            xs={12}
+            md={12}
+          >
+            <CustomPaperBigCard
+              sx={{
+                backgroundColor: "white",
+                border: "1px solid black",
+                paddingTop: "1px",
+                paddingBottom: "1px",
+              }}
             >
-              <CustomPaperBigCard
-                sx={{
-                  backgroundColor: "white",
-                  border: "1px solid black",
-                  paddingTop: "1px",
-                  paddingBottom: "1px",
-                }}
-              >
-                <React.Fragment>
-                  <ListItem
-                    alignItems="flex-start"
+              <React.Fragment>
+                <ListItem
+                  alignItems="flex-start"
+                  sx={{
+                    cursor: "pointer",
+                    backgroundColor: "white",
+                    my: "10px",
+                  }}
+                  selected={addresse?.id === addresseDefaultId}
+                >
+                  <CustomStackFullWidth
                     sx={{
-                      cursor: "pointer",
-                      backgroundColor: "white",
-                      my: "10px",
+                      display: "flex",
+                      flexDirection: {
+                        sm: "row",
+                        xs: "column",
+                      },
                     }}
-                    selected={addresse?.id === addresseDefaultId}
+                    alignItems="center"
                   >
-                    <CustomStackFullWidth
-                      sx={{
-                        display: "flex",
-                        flexDirection: {
-                          sm: "row",
-                          xs: "column",
-                        },
-                      }}
-                      alignItems="center"
-                    >
-                      <Radio
-                        checked={addresse?.id === addresseDefaultId}
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                        color={"success"}
-                        onClick={() => setAddresseDefaultId(addresse?.id)}
-                      />
-                      <ListItemText
-                        secondary={
-                          <Box
-                            sx={{
-                              width: "100%",
-                              display: "flex",
+                    <Radio
+                      checked={addresse?.id === addresseDefaultId}
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                      color={"success"}
+                      onClick={() => setAddresseDefaultId(addresse?.id)}
+                    />
+                    <ListItemText
+                      secondary={
+                        <Box
+                          sx={{
+                            width: "100%",
+                            display: "flex",
 
-                              justifyContent: "space-between",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            flexDirection: {
+                              md: "row",
+                              xs: "column",
+                            },
+                            gap: { sm: "", xs: "20px" },
+                          }}
+                        >
+                          <Box
+                            onClick={() => setAddresseDefaultId(addresse?.id)}
+                            sx={{
+                              display: "flex",
+                              gap: "15px",
                               alignItems: "center",
-                              flexDirection: {
-                                md: "row",
-                                xs: "column",
-                              },
-                              gap: { sm: "", xs: "20px" },
+                              flexDirection: { md: "row", xs: "column" },
+                              width: { md: "78%", xs: "100%" },
+                              // flexWrap: "wrap",
                             }}
                           >
                             <Box
-                              onClick={() => setAddresseDefaultId(addresse?.id)}
                               sx={{
                                 display: "flex",
-                                gap: "15px",
+                                flexDirection: "column",
+                                gap: "5px",
                                 alignItems: "center",
-                                flexDirection: { md: "row", xs: "column" },
-                                width: { md: "78%", xs: "100%" },
-                                // flexWrap: "wrap",
                               }}
                             >
-                              <Box
+                              <img
+                                style={{ width: "20px", height: "20px" }}
+                                src={OrderActionStatus(addresse)}
+                                loading="lazy"
+                                alt="img"
+                              />
+                              <Typography
+                                component={"span"}
                                 sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  gap: "5px",
-                                  alignItems: "center",
+                                  fontWeight: "700",
+                                  fontSize: "14px",
                                 }}
                               >
-                                <img
-                                  style={{ width: "20px", height: "20px" }}
-                                  src={OrderActionStatus(addresse)}
-                                  loading="lazy"
-                                  alt="img"
-                                />
-                                <Typography
-                                  component={"span"}
-                                  sx={{
-                                    fontWeight: "700",
-                                    fontSize: "14px",
-                                  }}
-                                >
-                                  {addresse?.address_name}
-                                </Typography>
-                              </Box>
-
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  gap: "3px",
-                                }}
-                              >
-                                <Typography
-                                  sx={{
-                                    fontSize: "16px",
-                                    fontWeight: "700",
-                                    color: "black",
-                                    textAlign: { md: "left", xs: "center" },
-                                  }}
-                                >
-                                  {addresse?.address_location}
-                                </Typography>
-                                <Box
-                                  sx={{
-                                    fontSize: "16px",
-                                    fontWeight: "400",
-                                    color: "#999999",
-                                    display: "flex",
-                                    textAlign: { md: "left", xs: "center" },
-                                    gap: "4px",
-                                    lineBreak: "anywhere",
-                                  }}
-                                >
-                                  {addresse?.street} street{" "}
-                                  {addresse?.apartment_no} Apartment{" "}
-                                  {addresse?.building_no} Building{" "}
-                                  {addresse?.floor_no} Floor
-                                </Box>
-                              </Box>
+                                {addresse?.address_name}
+                              </Typography>
                             </Box>
 
                             <Box
                               sx={{
                                 display: "flex",
-                                alignItems: "center",
-                                gap: "20px",
-                                width: { md: "22%", xs: "100%" },
-                                justifyContent: {
-                                  md: "flex-end",
-                                  xs: "center",
-                                },
+                                flexDirection: "column",
+                                gap: "3px",
                               }}
                             >
-                              <img
-                                onClick={() => {
-                                  setAddresse(addresse);
-                                  setOpen(true);
+                              <Typography
+                                sx={{
+                                  fontSize: "16px",
+                                  fontWeight: "700",
+                                  color: "black",
+                                  textAlign: { md: "left", xs: "center" },
                                 }}
-                                src={editIcon?.src}
-                                loading="lazy"
-                                alt="edit"
-                              />
-                              <img
-                                onClick={() => {
-                                  setAddresseId(addresse?.id);
-                                  setOpenDeleteDialog(true);
+                              >
+                                {addresse?.address_location}
+                              </Typography>
+                              <Box
+                                sx={{
+                                  fontSize: "16px",
+                                  fontWeight: "400",
+                                  color: "#999999",
+                                  display: "flex",
+                                  textAlign: { md: "left", xs: "center" },
+                                  gap: "4px",
+                                  lineBreak: "anywhere",
                                 }}
-                                src={deleteIcon?.src}
-                                loading="lazy"
-                                alt="delete"
-                              />
+                              >
+                                {addresse?.street} street{" "}
+                                {addresse?.apartment_no} Apartment{" "}
+                                {addresse?.building_no} Building{" "}
+                                {addresse?.floor_no} Floor
+                              </Box>
                             </Box>
                           </Box>
-                        }
-                      />
-                    </CustomStackFullWidth>
-                  </ListItem>
-                </React.Fragment>
-              </CustomPaperBigCard>
-            </Grid>
-          ))}
-      </ScrollbarRoot>
+
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "20px",
+                              width: { md: "22%", xs: "100%" },
+                              justifyContent: {
+                                md: "flex-end",
+                                xs: "center",
+                              },
+                            }}
+                          >
+                            <img
+                              onClick={() => {
+                                setAddresse(addresse);
+                                setOpen(true);
+                              }}
+                              src={editIcon?.src}
+                              loading="lazy"
+                              alt="edit"
+                            />
+                            <img
+                              onClick={() => {
+                                setAddresseId(addresse?.id);
+                                setOpenDeleteDialog(true);
+                              }}
+                              src={deleteIcon?.src}
+                              loading="lazy"
+                              alt="delete"
+                            />
+                          </Box>
+                        </Box>
+                      }
+                    />
+                  </CustomStackFullWidth>
+                </ListItem>
+              </React.Fragment>
+            </CustomPaperBigCard>
+          </Grid>
+        ))}
+
       {/*  loading data */}
       {isLoading && <LoadingComponent />}
       {!isLoading && addressesData?.length === 0 && (
