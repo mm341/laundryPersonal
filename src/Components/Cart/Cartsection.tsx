@@ -105,7 +105,7 @@ const Cartsection = ({
           </ScrollbarRoot>
 
           <Divider orientation="horizontal" />
-{/*  additional services section */}
+          {/*  additional services section */}
           <AdditionalServicesSection
             choicesIds={choicesIds}
             setChoicesIds={setChoicesIds}
