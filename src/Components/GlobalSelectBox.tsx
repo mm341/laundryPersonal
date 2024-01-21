@@ -92,7 +92,7 @@ const GlobalSelectBox = ({
           onChange={handleChange}
           input={<BootstrapInput />}
         >
-          <option aria-label="None" value="" />
+          {/* <option aria-label="None" value="" /> */}
           {homeAreas?.map((e: HomeAreas, i: number) => (
             <option key={e?.id} value={e?.id}>
               {e?.name}
