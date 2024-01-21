@@ -18,7 +18,7 @@ interface Props {
 }
 const AreaDialog = ({ openAreaDialog, handleClose, homeAreas,ServiceId }: Props) => {
   //    hooks
-  const [selectValue, setselectValue] = useState<string>("");
+  const [selectValue, setselectValue] = useState<string>(homeAreas[0]?.id);
   const theme = useTheme();
   const router = useRouter();
   

@@ -24,10 +24,14 @@ interface props {
   touched?: boolean | undefined;
 }
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  "& .MuiInputLabel-root":{
+    top:"-50px !important"
+  },
   "label + &": {
     // marginBottom: theme.spacing(1),
     // paddingBottom:theme.spacing(1)
     transform: "translateY(5px)",
+    
   },
   "& .MuiInputBase-input": {
     borderRadius: 4,
