@@ -2,7 +2,7 @@ import {
   GlobalButton,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-import { Box, Grid, Modal, useTheme } from "@mui/material";
+import { Box, Grid, Modal, useMediaQuery, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import GlobalSelectBox from "../GlobalSelectBox";
 import { useRouter } from "next/router";
@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import GlobalTypography from "../HomePage/GlobalTypography";
 import SeviceCard from "../Cards/SeviceCard";
 import { HomeServices } from "@/interfaces/HomeServices";
+import { Scrollbar } from "../GlobalComponent/Scrollbar";
 
 interface Props {
   openOrderDialog: boolean;
@@ -25,18 +26,20 @@ const ServicesDialog = ({
   //  style for model
   const styleDialog = {
     position: "absolute",
-    top: "50%",
+    top: {md:"53%",xs:"56%"},
     left: "50%",
     height: "83%",
     // oveflowY: "auto",
     transform: "translate(-50%, -50%)",
     width: { md: "60%", xs: "85%" },
     bgcolor: "background.paper",
-    p: 4,
+    p: {md:4,xs:1},
     borderRadius: "10px",
   };
 
 
+  const theme=useTheme()
+  const issmall = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Modal
@@ -60,7 +63,8 @@ const ServicesDialog = ({
         >
           <GlobalTypography text={"Select Service Category"} />
 
-          <Grid sx={{ my: "40px",height:"100%",overflowY:"auto" }} container spacing={3} >
+<Scrollbar style={{maxHeight:issmall?"400px":"700px"}}>
+          <Grid sx={{ my: "40px",height:"100%" }} container spacing={3} >
             {homeServices?.map((e: HomeServices, i: number) => (
               <Grid key={i} item md={4} sm={6} xs={12}>
                 <SeviceCard
@@ -73,6 +77,7 @@ const ServicesDialog = ({
               </Grid>
             ))}
           </Grid>
+          </Scrollbar>
         </Box>
       </Box>
     </Modal>
