@@ -79,18 +79,6 @@ const ProductsPage = () => {
     }
   }, [variants]);
 
-  //  get products with request api
-  // useEffect(() => {
-  //   if (type && router.query.service_id) {
-  //     dispatch(
-  //       GetProducts({
-  //         serviceId: router.query.service_id,
-  //         variantId: type,
-  //       })
-  //     );
-  //   }
-  // }, [dispatch, router.query.service_id, type]);
-
   //  search action submit
   const handelSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -125,6 +113,16 @@ const ProductsPage = () => {
     }
   };
 
+  useEffect(() => {
+    if (router.query.service_id) {
+      dispatch(
+        GetProducts({
+          serviceId: router.query.service_id,
+          variantId: type,
+        })
+      );
+    }
+  }, [router.query.service_id, type]);
   //  custom design of scrollbar
   const ScrollbarRoot = styled(SimpleBar)`
     .simplebar-scrollbar::before {

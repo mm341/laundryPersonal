@@ -5,8 +5,8 @@ import PublicRequest from "@/utils/PublicRequests";
 import { ProductsModel } from "@/models/ProductsModel";
 
 export type Paylod = {
-  serviceId: string | string[] |undefined;
-  variantId: string;
+  serviceId?: string | string[] | undefined;
+  variantId?: string;
   searchText?: string;
 };
 
@@ -26,6 +26,12 @@ export const GetProducts = createAsyncThunk(
     )
 );
 
+export const GetProductsWithServiceOnly = createAsyncThunk(
+  "products/GetProductsWithServiceOnly",
+  (payload: Paylod) =>
+    PublicRequest.getData(`products?service_id=${payload.serviceId}`)
+);
+
 // Get Products WithSearch
 export const GetProductsWithSearch = createAsyncThunk(
   "products/GetProductsWithSearch",
@@ -35,10 +41,19 @@ export const GetProductsWithSearch = createAsyncThunk(
     )
 );
 
+// Get Products WithSearch and service
+export const GetProductsWithSearchAndService = createAsyncThunk(
+  "products/GetProductsWithSearchAndService",
+  (payload: Paylod) =>
+    PublicRequest.getData(
+      `products?search=${payload.searchText}`
+    )
+);
+
 // Get Variants
 export const GetVariants = createAsyncThunk(
   "variants/GetVariants",
-  (payload: { serviceId: string|string[] }) =>
+  (payload: { serviceId: string | string[] }) =>
     PublicRequest.getData(`variants?service_id=${payload.serviceId}`)
 );
 
@@ -73,8 +88,52 @@ export const handelProducts = createSlice({
       state.products = [];
     });
 
+    // GetProducts with service only
+    builder.addCase(
+      GetProductsWithServiceOnly.pending,
+      (state: ProductsModel) => {
+        state.isloading = true;
+        state.products = [];
+      }
+    );
+    builder.addCase(
+      GetProductsWithServiceOnly.fulfilled,
+      (state: ProductsModel, { payload }: any) => {
+        if (payload) {
+          state.products = payload.data.products;
+          state.isloading = false;
+        }
+      }
+    );
+    builder.addCase(
+      GetProductsWithServiceOnly.rejected,
+      (state: ProductsModel) => {
+        state.products = [];
+      }
+    );
+
     // GetProductsWithSearch
-    builder.addCase(GetProductsWithSearch.pending, (state: ProductsModel) => {
+    builder.addCase(GetProductsWithSearchAndService.pending, (state: ProductsModel) => {
+      state.isloading = true;
+      state.products = [];
+    });
+    builder.addCase(
+      GetProductsWithSearchAndService.fulfilled,
+      (state: ProductsModel, { payload }: any) => {
+        if (payload) {
+          state.products = payload.data.products;
+          state.isloading = false;
+        }
+      }
+    );
+    
+    builder.addCase(GetProductsWithSearchAndService.rejected, (state: ProductsModel) => {
+      state.products = [];
+    });
+
+
+     // GetProductsWithSearch
+     builder.addCase(GetProductsWithSearch.pending, (state: ProductsModel) => {
       state.isloading = true;
       state.products = [];
     });
@@ -87,9 +146,28 @@ export const handelProducts = createSlice({
         }
       }
     );
+    
     builder.addCase(GetProductsWithSearch.rejected, (state: ProductsModel) => {
       state.products = [];
     });
+
+     /// GetProductsWithSearchAndService
+    //  builder.addCase(GetProductsWithSearchAndService.pending, (state: ProductsModel) => {
+    //   state.isloading = true;
+    //   state.products = [];
+    // });
+    // builder.addCase(
+    //   GetProductsWithSearchAndService.fulfilled,
+    //   (state: ProductsModel, { payload }: any) => {
+    //     if (payload) {
+    //       state.products = payload.data.products;
+    //       state.isloading = false;
+    //     }
+    //   }
+    // );
+    // builder.addCase(GetProductsWithSearchAndService.rejected, (state: ProductsModel) => {
+    //   state.products = [];
+    // });
 
     // GetVariants
     builder.addCase(GetVariants.pending, (state: ProductsModel) => {

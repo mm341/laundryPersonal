@@ -11,19 +11,26 @@ import {
   OutlinedInput,
   useTheme,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import ServiceSection from "./ServiceSection";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import ProductsSection from "./ProductsSection";
 import { CloseOutlined } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
+import {
+  GetProducts,
+  GetProductsWithSearchAndService,
+  GetProductsWithServiceOnly,
+} from "@/redux/slices/ProductsSlice";
 const FilterProductsWithService = () => {
   //  hooks
   const { t } = useTranslation();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
   const { services } = useAppSelector((state) => state.services);
-  const [serviceId, setServiceId] = useState<number>(0);
+  const { products } = useAppSelector((state) => state.products);
+  const [serviceId, setServiceId] = useState<string | string[] | undefined>("");
   const [searchText, setSearchText] = useState<string>("");
   useEffect(() => {
     if (services?.length > 0) {
@@ -31,6 +38,50 @@ const FilterProductsWithService = () => {
     }
   }, [services]);
 
+  //  get products with servic eid
+  useEffect(() => {
+    if (serviceId) {
+      dispatch(
+        GetProductsWithServiceOnly({
+          serviceId: serviceId,
+        })
+      );
+    }
+  }, [serviceId]);
+
+  //  search action submit
+  const handelSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (searchText) {
+      setServiceId("");
+      dispatch(
+        GetProductsWithSearchAndService({
+          searchText: searchText,
+        })
+      );
+    }
+  };
+
+  //  search action onChange
+  const handelChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+
+    if (e.target.value) {
+      setServiceId("");
+      dispatch(
+        GetProductsWithSearchAndService({
+          searchText: e.target.value,
+        })
+      );
+    } else {
+      setServiceId(services[0]?.id);
+      dispatch(
+        GetProductsWithServiceOnly({
+          serviceId: services[0]?.id,
+        })
+      );
+    }
+  };
   return (
     <CustomPaperBigCard sx={{ backgroundColor: theme.palette.primary.dark }}>
       <GlobalDisplayFlexColumnBox gap={"40px"} sx={{ py: "30px", px: "15px" }}>
@@ -38,8 +89,7 @@ const FilterProductsWithService = () => {
         <Box
           sx={{ display: "flex", justifyContent: "flex-end" }}
           component={"form"}
-
-          // onSubmit={handelSubmit}
+          onSubmit={handelSubmit}
         >
           <FormControl
             sx={{
@@ -50,8 +100,8 @@ const FilterProductsWithService = () => {
           >
             <OutlinedInput
               size="small"
-              // onChange={handelChange}
-              // value={searchText}
+              onChange={handelChange}
+              value={searchText}
               id="header-search"
               endAdornment={
                 <InputAdornment position="end" sx={{ cursor: "pointer" }}>
@@ -59,21 +109,18 @@ const FilterProductsWithService = () => {
                     <CloseOutlined
                       onClick={() => {
                         setSearchText("");
-
-                        // dispatch(
-                        //   GetProducts({
-                        //     serviceId: Number(
-                        //       router.query.service_id
-                        //     ),
-                        //     variantId: Number(type),
-                        //   })
-                        // );
+                        setServiceId(services[0]?.id)
+                        dispatch(
+                          GetProductsWithServiceOnly({
+                            serviceId: services[0]?.id,
+                          })
+                        );
                       }}
                       color="primary"
                     />
                   </Fade>
 
-                  <SearchIcon />
+                  <SearchIcon onClick={handelSubmit} />
                 </InputAdornment>
               }
               aria-describedby="header-search-text"
@@ -85,10 +132,10 @@ const FilterProductsWithService = () => {
         <Grid container spacing={3}>
           {/*  services section */}
           <Grid item md={4} xs={12}>
-            <ServiceSection setServiceId={setServiceId} serviceId={serviceId} />
+            <ServiceSection  setSearchText={setSearchText} setServiceId={setServiceId} serviceId={serviceId} />
           </Grid>
           <Grid item md={8} xs={12}>
-            <ProductsSection />
+            <ProductsSection products={products} />
           </Grid>
         </Grid>
       </GlobalDisplayFlexColumnBox>
