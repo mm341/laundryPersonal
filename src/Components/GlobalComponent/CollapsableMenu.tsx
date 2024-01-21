@@ -22,7 +22,7 @@ const CollapsableMenu = ({
   setOpenDrawer: (e: boolean) => void;
   setOpenAreaDialog: (e: boolean) => void;
   services: HomeServices[];
-  setServiceId: (e: number | undefined) => void;
+  setServiceId: (e: string | undefined) => void;
 }) => {
   const [open, setOpen] = useState(false);
   const handleClick = () => setOpen(!open);
