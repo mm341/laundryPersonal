@@ -18,7 +18,7 @@ const SeviceCard = ({
   setOpenOrderDialog?: ((action: boolean) => void) | any;
   area?: boolean;
   element: HomeServices;
-  setServiceId: (action: number | undefined) => void;
+  setServiceId: (action: string | undefined) => void;
 }) => {
   const [bright, setBright] = useState<boolean>(false);
   const { t } = useTranslation();
