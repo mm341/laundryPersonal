@@ -159,8 +159,7 @@ const FirstSection = ({
                 </Carousel>
               </GlobalDisplayFlexColumnBox>
 
-
-{/*  sleect area box */}
+              {/*  sleect area box */}
               <Box
                 sx={{
                   width: { md: "85%", xs: "90%" },
@@ -195,11 +194,12 @@ const FirstSection = ({
                 >
                   <GlobalButton
                     onClick={handelSubmit}
-                    py={"16px"}
+                    py={"16.5px"}
                     px={"12px"}
                     sx={{
                       backgroundColor: theme.palette.primary.main,
-                      borderRadius: "5px",
+                      borderTopRightRadius: "5px",
+                      borderBottomRightRadius: "5px",
                     }}
                     color={"white"}
                   >

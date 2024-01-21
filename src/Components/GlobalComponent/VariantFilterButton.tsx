@@ -1,5 +1,7 @@
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import { VariantInterface } from "@/interfaces/VariantInterface";
+import { GetProducts } from "@/redux/slices/ProductsSlice";
+import { useAppDispatch } from "@/redux/store";
 import { Button, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -18,7 +20,9 @@ const VariantFilterButton = ({
 }) => {
   //  hooks
   const theme = useTheme();
-  const { t } = useTranslation();
+
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
   return (
     <Button
@@ -41,6 +45,12 @@ const VariantFilterButton = ({
       onClick={() => {
         setType(FilterType?.id);
         setSearchText("");
+        dispatch(
+          GetProducts({
+            serviceId: router.query.service_id,
+            variantId: FilterType?.id,
+          })
+        );
       }}
     >
       {FilterType?.name}
