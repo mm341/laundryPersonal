@@ -1,11 +1,11 @@
-import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
+
 import { VariantInterface } from "@/interfaces/VariantInterface";
 import { GetProducts } from "@/redux/slices/ProductsSlice";
 import { useAppDispatch } from "@/redux/store";
 import { Button, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React from "react";
+
 
 const VariantFilterButton = ({
   setType,

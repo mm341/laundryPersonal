@@ -215,7 +215,7 @@ const Navbar = () => {
           position: "fixed",
           top: "0",
           width: "100%",
-          zIndex: 10010,
+          zIndex: 1009,
           boxShadow: "0px 4px 4px 0px #0000000F",
         }}
       >

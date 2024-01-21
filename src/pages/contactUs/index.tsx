@@ -28,7 +28,7 @@ const ContactUs = () => {
   const { locale } = useRouter();
 
   const { footerLinks } = useAppSelector((state) => state.master);
- 
+
   return (
     <>
       <Meta
@@ -193,22 +193,22 @@ const ContactUs = () => {
                       loading="lazy"
                       alt="img"
                     /> */}
-                     {footerLinks?.map((e: FooterSocialLinks, i: number) => (
-                        <a key={i} target="_blank" href={e?.url}>
-                          <img
-                            src={e?.photo_path}
-                            loading="lazy"
-                            alt="img"
-                            width={"40"}
-                            height={"40"}
-                            style={{
-                              cursor: "pointer",
-                              width: "40px",
-                              height: "40px",
-                            }}
-                          />
-                        </a>
-                      ))}
+                    {footerLinks?.map((e: FooterSocialLinks, i: number) => (
+                      <a key={i} target="_blank" href={e?.url}>
+                        <img
+                          src={e?.photo_path}
+                          loading="lazy"
+                          alt="img"
+                          width={"40"}
+                          height={"40"}
+                          style={{
+                            cursor: "pointer",
+                            width: "40px",
+                            height: "40px",
+                          }}
+                        />
+                      </a>
+                    ))}
                   </GlobalDisplayFlexBox>
                 </GlobalDisplayFlexColumnBox>
               </GlobalDisplayFlexColumnBox>

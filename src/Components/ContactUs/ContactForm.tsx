@@ -1,33 +1,54 @@
 import { CustomStackFullWidth, GlobalButton } from "@/styles/PublicStyles";
-import { Button, Stack, TextField, useTheme } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Stack,
+  TextField,
+  useTheme,
+} from "@mui/material";
 import { useFormik } from "formik";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import ValidationSchemaForContact from "./ValidationschemaforContactUs";
 import CustomPhoneInput from "../AuthBox/CustomPhoneInput";
 
+import { ContactingRequest } from "@/redux/slices/ContactingUs";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+
 const ContactForm = () => {
   //  hooks
   const { t } = useTranslation();
   const theme = useTheme();
-
+  const dispatch = useAppDispatch();
+  // const {isloading}=useAppSelector((state)=>state.contact)
   //  validation of add addresse form
   const ContactFormik = useFormik({
     initialValues: {
-      FullName: "",
-      Email: "",
-      PhoneNumber: "",
+      name: "",
+      email: "",
+      phone_number: "",
       message: "",
     },
     validationSchema: ValidationSchemaForContact(),
     onSubmit: async (values) => {
+      let phone_number = `+${values.phone_number}`;
       try {
+        dispatch(
+          ContactingRequest({
+            name: values.name,
+            phone_number,
+            email: values.email,
+            message: values.message,
+          })
+        );
+        ContactFormik.resetForm()
       } catch (err) {}
     },
   });
   const handleOnChange = (e: string) => {
-    ContactFormik.setFieldValue("PhoneNumber", e);
+    ContactFormik.setFieldValue("phone_number", e);
   };
+  const { isloading } = useAppSelector((state) => state.contact);
   return (
     <Stack
       component={"form"}
@@ -40,45 +61,44 @@ const ContactForm = () => {
       {/* Full Name */}
 
       <TextField
+        disabled={isloading}
         autoComplete="new-password"
         type="text"
         onChange={ContactFormik.handleChange}
-        name="FullName"
+        name="name"
         label={t("Full Name")}
-        value={ContactFormik.values.FullName}
-        helperText={ContactFormik.errors.FullName}
+        value={ContactFormik.values.name}
+        helperText={ContactFormik.errors.name}
         onBlur={ContactFormik.handleBlur}
-        error={Boolean(
-          ContactFormik.errors.FullName && ContactFormik.touched.FullName
-        )}
+        error={Boolean(ContactFormik.errors.name && ContactFormik.touched.name)}
         required
       />
       {/* Email */}
       <TextField
+        disabled={isloading}
         autoComplete="new-password"
         type="mail"
         onChange={ContactFormik.handleChange}
-        name="Email"
+        name="email"
         label={t("Email")}
-        value={ContactFormik.values.Email}
-        helperText={ContactFormik.errors.Email}
+        value={ContactFormik.values.email}
+        helperText={ContactFormik.errors.email}
         onBlur={ContactFormik.handleBlur}
         error={Boolean(
-          ContactFormik.errors.Email && ContactFormik.touched.Email
+          ContactFormik.errors.email && ContactFormik.touched.email
         )}
         required
       />
       {/* Phone Number */}
-    
 
       <CustomStackFullWidth alignItems="center" spacing={{ xs: 2, md: 2 }}>
         <CustomPhoneInput
-          value={ContactFormik.values.PhoneNumber}
+          value={ContactFormik.values.phone_number}
           onHandleChange={handleOnChange}
           // initCountry={global?.country}
           rtlChange
-          touched={ContactFormik.touched.PhoneNumber}
-          errors={ContactFormik.errors.PhoneNumber}
+          touched={ContactFormik.touched.phone_number}
+          errors={ContactFormik.errors.phone_number}
           // isLoading={ContactFormik}
         />
       </CustomStackFullWidth>
@@ -86,6 +106,7 @@ const ContactForm = () => {
       {/* Message */}
 
       <TextField
+        disabled={isloading}
         autoComplete="new-password"
         type="text"
         onChange={ContactFormik.handleChange}
@@ -102,7 +123,7 @@ const ContactForm = () => {
         required
       />
 
-      <Button type="submit">
+      <Button type={!isloading?"submit":"button"}>
         <GlobalButton
           sx={{
             width: "155px",
@@ -116,7 +137,14 @@ const ContactForm = () => {
           py={"0"}
           px={"0"}
         >
-          {t("Send")}
+          {isloading ? (
+            <CircularProgress
+              sx={{ color: "white", fontSize: "10px" }}
+              size={25}
+            />
+          ) : (
+            t("Send")
+          )}
         </GlobalButton>
       </Button>
     </Stack>

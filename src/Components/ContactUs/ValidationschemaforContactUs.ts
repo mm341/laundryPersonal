@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 const ValidationSchemaForContact = () => {
   const { t } = useTranslation();
   return Yup.object({
-    FullName: Yup.string().min(3).max(25).required(),
-    Email: Yup.string().email().min(6).max(50).required(),
-    PhoneNumber: Yup.string()
+    name: Yup.string().min(3).max(25).required(),
+    email: Yup.string().email().min(6).max(50).required(),
+    phone_number: Yup.string()
       .required(t("Please give a phone number"))
       .min(12, t("number must be 12 digits"))
       .max(15)

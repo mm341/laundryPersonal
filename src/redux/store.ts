@@ -11,6 +11,7 @@ import { AddressesSlice } from "./slices/AddressesRequests";
 import { OrderSlice } from "./slices/OrderSlice";
 import { ProductsSlice } from "./slices/ProductsSlice";
 import { NotificationsSlice } from "./slices/Notifications";
+import { ContactingSlice } from "./slices/ContactingUs";
 
 const persistConfig = {
   key: "Laundry",
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   orders: OrderSlice,
   products: ProductsSlice,
   notification: NotificationsSlice,
+  contact: ContactingSlice,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 

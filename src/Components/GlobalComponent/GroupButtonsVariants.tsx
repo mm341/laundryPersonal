@@ -26,8 +26,6 @@ const GroupButtonsVariants = ({
     }
   `;
 
-  const scrollableNodeRef = React.createRef();
-
   return (
     <Box
       sx={{
@@ -37,7 +35,7 @@ const GroupButtonsVariants = ({
         // overflowX: "auto",
       }}
     >
-      <ScrollbarRoot  forceVisible="x" autoHide={false}>
+      <ScrollbarRoot forceVisible="x" autoHide={false}>
         <ButtonGroup
           sx={{ borderTopLeftRadius: "30px", height: "100%", mb: "15px" }}
         >
