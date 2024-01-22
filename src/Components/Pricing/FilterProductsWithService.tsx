@@ -32,6 +32,9 @@ const FilterProductsWithService = () => {
   const { products } = useAppSelector((state) => state.products);
   const [serviceId, setServiceId] = useState<string | string[] | undefined>("");
   const [searchText, setSearchText] = useState<string>("");
+
+
+  //  get initial value of service id
   useEffect(() => {
     if (services?.length > 0) {
       setServiceId(services[0]?.id);

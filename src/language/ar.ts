@@ -981,6 +981,7 @@ export const arabic = {
   "Use Current Location": "انضم كرجل توصيل في",
 
   "Pickup Schedule": "جدول الاستلام",
+  "No":"لا",
   "Fast Name": "اسم سريع",
   "Not changeable": "غير قابل للتغيير",
   "Delivery Schedule": "جدول التسليم",
