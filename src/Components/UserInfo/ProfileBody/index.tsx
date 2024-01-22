@@ -5,18 +5,12 @@ import ProfilePage from "../ProfilePage";
 import OrderPage from "../OrderPage";
 import MyAddresses from "./MyAddresses";
 import { useRouter } from "next/router";
-import MainApi from "@/api/MainApi";
-import { AccountInfo } from "@/interfaces/AccountInfo";
 
-const ProfileBody = ({
-  page,
-}: {
-  page: string;
-}) => {
+const ProfileBody = ({ page }: { page: string }) => {
   //  hooks
   const { locale } = useRouter();
   const [languagedirection, setLanguagedirection] = useState<string>("ltr");
-  
+
   //  handel language direction due to langauge
   useEffect(() => {
     locale === "en" ? setLanguagedirection("ltr") : setLanguagedirection("rtl");
@@ -39,5 +33,3 @@ const ProfileBody = ({
 };
 
 export default ProfileBody;
-
-

@@ -445,6 +445,8 @@ const CheckOutPage = ({
                     <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                       <ChekOutTitle title="Deliver To" />
 
+
+{myAddresses?.data?.data?.addresses?.length>0 &&
                       <FormControl fullWidth>
                         <NativeSelect
                           size="medium"
@@ -502,6 +504,7 @@ const CheckOutPage = ({
                           )}
                         </NativeSelect>
                       </FormControl>
+}
 
                       {myAddresses?.data?.data?.addresses?.length === 0 && (
                         <Box

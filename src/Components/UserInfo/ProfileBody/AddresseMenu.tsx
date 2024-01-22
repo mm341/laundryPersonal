@@ -5,9 +5,8 @@ import {
   ListItemText,
   Radio,
   Typography,
-  styled,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
 import {
   CustomPaperBigCard,
@@ -18,11 +17,12 @@ import deleteIcon from "../../../../public/info/delete.svg";
 import titleADreesseHomeIcon from "../../../../public/info/addresseTitleIcon.svg";
 import titleADreesseOfficeIcon from "../../../../public/info/titleAddresseOfficeIcon.svg";
 import titleADreesseOthersIcon from "../../../../public/info/titleAddresseOthersIcon.svg";
-import { useAppSelector } from "@/redux/store";
+
 import { AddresseInterface } from "@/interfaces/AddresseInterface";
 import LoadingComponent from "@/Components/GlobalComponent/LoadingComponent";
 import NoAddressesFound from "../../../../public/info/noAddresseFound.svg";
-import SimpleBar from "simplebar-react";
+import NoAddressesFoundArabic from "../../../../public/info/noAddresseFoundArabic.png";
+
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 const AddresseMenu = ({
@@ -89,12 +89,16 @@ const AddresseMenu = ({
   };
 
   return (
-    <Grid container spacing={1.5} >
+    <Grid container spacing={1.5}>
       {addressesData?.length > 0 &&
         addressesData?.map((addresse: AddresseInterface, i: number) => (
           <Grid
             key={i}
-            sx={{ paddingRight: {md:"20px",xs:"0"}, paddingLeft: "10px", mt: "15px" }}
+            sx={{
+              paddingRight: { md: "20px", xs: "0" },
+              paddingLeft: "10px",
+              mt: "15px",
+            }}
             item
             xs={12}
             md={12}
@@ -281,7 +285,15 @@ const AddresseMenu = ({
             minHeight: "300px",
           }}
         >
-          <img src={NoAddressesFound?.src} loading="lazy" alt="img" />
+          <img
+            src={
+              locale === "en"
+                ? NoAddressesFound?.src
+                : NoAddressesFoundArabic?.src
+            }
+            loading="lazy"
+            alt="img"
+          />
         </Box>
       )}
     </Grid>

@@ -15,12 +15,15 @@ import {
   inititalOrdersInterface,
 } from "@/interfaces/OrdersInterface";
 import noOrdersFound from "../../../public/info/noOrders.png";
+import noOrdersFoundArabic from "../../../public/info/noOrderFoundArabic.png";
 import CircularProgress from "@mui/material/CircularProgress";
 import Meta from "../GlobalComponent/Meta";
+import { useRouter } from "next/router";
 const OrderPage = () => {
   // hooks
   const theme = useTheme();
   const dispatch = useAppDispatch();
+  const {locale}=useRouter()
   const { orders, isloading } = useAppSelector((state) => state.orders);
   const [orderType, setOrderType] = useState<string>("Ongoing");
   const [orderData, setOrderData] = useState<OrdersInterface>(
@@ -95,7 +98,7 @@ const OrderPage = () => {
                     minHeight: "300px",
                   }}
                 >
-                  <img src={noOrdersFound?.src} loading="lazy" alt="img" />
+                  <img src={locale==="en"?noOrdersFound?.src:noOrdersFoundArabic?.src} loading="lazy" alt="img" />
                 </Box>
               )}
             </Grid>
