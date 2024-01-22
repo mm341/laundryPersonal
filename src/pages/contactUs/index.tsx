@@ -5,7 +5,7 @@ import {
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
 import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import instgram from "../../../public/contactUs/instagram.svg";
 import facebook from "../../../public/contactUs/facebook.svg";
@@ -18,16 +18,55 @@ import Meta from "@/Components/GlobalComponent/Meta";
 import { useRouter } from "next/router";
 // import Image from "next/image";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
-import { useAppSelector } from "@/redux/store";
-const ContactUs = () => {
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import MainApi from "@/api/MainApi";
+import { HomeServices } from "@/interfaces/HomeServices";
+import { HomeAreas } from "@/interfaces/HomeAreas";
+import { Master } from "@/interfaces/MasterInterface";
+import { CashAreas, CashServices } from "@/redux/slices/Services";
+import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
+const ContactUs = ({
+  homeServices,
+  homeAreas,
+  masterData,
+  footerSocialLinks,
+}: {
+  homeServices: HomeServices[];
+  homeAreas: HomeAreas[];
+  masterData: Master;
+  footerSocialLinks: FooterSocialLinks[];
+}) => {
   //  hooks
   const { t } = useTranslation();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
   const sm = useMediaQuery(theme.breakpoints.down("md"));
 
   const { locale } = useRouter();
 
   const { footerLinks } = useAppSelector((state) => state.master);
+
+  //  cash areas
+  useEffect(() => {
+    dispatch(CashAreas(homeAreas));
+  }, [dispatch, homeAreas]);
+
+  //  cash services
+  useEffect(() => {
+    dispatch(CashServices(homeServices));
+  }, [dispatch, homeServices, homeServices?.length]);
+
+  //  cash master
+  useEffect(() => {
+    dispatch(CashMasterData(masterData));
+  }, [dispatch, masterData]);
+
+  //  cash footer Social Media Links
+  useEffect(() => {
+    if (footerSocialLinks?.length > 0) {
+      dispatch(CashFooterLinks(footerSocialLinks));
+    }
+  }, [dispatch, footerSocialLinks]);
 
   return (
     <>
@@ -221,3 +260,64 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+
+export const getServerSideProps = async ({ locale }: { locale: string }) => {
+  let homeServices = [];
+  let homeAreas = [];
+  let masterData = {};
+  let footerSocialLinks = [];
+  try {
+    const configRes = await MainApi.get("services", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+    homeServices = configRes?.data?.data?.services;
+  } catch (e) {
+    homeServices = [];
+  }
+  //  areas
+  try {
+    const Res = await MainApi.get("areas", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+
+    homeAreas = Res?.data?.data?.areas;
+  } catch (e) {
+    homeAreas = [];
+  }
+  //  masterData
+  try {
+    const configRes = await MainApi.get("master", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+    masterData = configRes?.data?.data;
+  } catch (e) {
+    masterData = {};
+  }
+
+  //  footerSocialLinks
+  try {
+    const configRes = await MainApi.get("social-link", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+    footerSocialLinks = configRes?.data?.data?.socialLink;
+  } catch (e) {
+    footerSocialLinks = [];
+  }
+
+  return {
+    props: {
+      homeServices,
+      homeAreas,
+      masterData,
+      footerSocialLinks,
+    },
+  };
+};

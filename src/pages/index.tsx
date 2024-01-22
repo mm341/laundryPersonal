@@ -41,32 +41,27 @@ export default function Home({
   //  selectors
 
   const { services, areas } = useAppSelector((state) => state.services);
+
+  useEffect(() => {
+    homeServices?.length === 0 && dispatch(GetAllServices());
+  }, [homeServices]);
+  useEffect(() => {
+    homeAreas?.length === 0 && dispatch(GetAllAreas());
+  }, [homeAreas]);
+  //  cash areas
+  useEffect(() => {
+    dispatch(CashAreas(homeAreas));
+  }, [dispatch, homeAreas]);
+
   //  cash services
   useEffect(() => {
     dispatch(CashServices(homeServices));
   }, [dispatch, homeServices, homeServices?.length]);
 
-  useEffect(() => {
-    homeServices?.length === 0 && dispatch(GetAllServices());
-    // dispatch(GetAllAreas());
-  }, [homeServices]);
-  useEffect(() => {
-    homeAreas?.length === 0 && dispatch(GetAllAreas());
-    // dispatch(GetAllAreas());
-  }, [homeAreas]);
-  //  cash areas
-  useEffect(() => {
-    dispatch(CashAreas(homeAreas));
-  }, [dispatch, homeAreas, homeAreas?.length]);
-
   //  cash master
   useEffect(() => {
-    if (Object.values(masterData).length > 0) {
-      dispatch(CashMasterData(masterData));
-    }
+    dispatch(CashMasterData(masterData));
   }, [dispatch, masterData]);
-
-
 
   //  cash footer Social Media Links
   useEffect(() => {
@@ -103,7 +98,6 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
   let homeAreas = [];
   let masterData = {};
   let footerSocialLinks = [];
-  //  servcies
   try {
     const configRes = await MainApi.get("services", {
       headers: {

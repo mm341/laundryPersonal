@@ -26,19 +26,18 @@ const ServicesDialog = ({
   //  style for model
   const styleDialog = {
     position: "absolute",
-    top: {md:"53%",xs:"56%"},
+    top: { md: "53%", xs: "56%" },
     left: "50%",
     height: "83%",
     // oveflowY: "auto",
     transform: "translate(-50%, -50%)",
     width: { md: "60%", xs: "85%" },
     bgcolor: "background.paper",
-    p: {md:4,xs:1},
+    p: { md: 4, xs: 1 },
     borderRadius: "10px",
   };
 
-
-  const theme=useTheme()
+  const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
@@ -58,25 +57,24 @@ const ServicesDialog = ({
             display: "flex",
             flexDirection: "column",
             gap: "25px",
-          
           }}
         >
           <GlobalTypography text={"Select Service Category"} />
 
-<Scrollbar style={{maxHeight:issmall?"400px":"700px"}}>
-          <Grid sx={{ my: "40px",height:"100%" }} container spacing={3} >
-            {homeServices?.map((e: HomeServices, i: number) => (
-              <Grid key={i} item md={4} sm={6} xs={12}>
-                <SeviceCard
-                  area
-                  element={e}
-                  setServiceId={function (action: string | undefined): void {
-                    throw new Error("Function not implemented.");
-                  }}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          <Scrollbar style={{ maxHeight: issmall ? "400px" : "700px" }}>
+            <Grid sx={{ my: "40px", height: "100%" }} container spacing={3}>
+              {homeServices?.map((e: HomeServices, i: number) => (
+                <Grid key={i} item md={4} sm={6} xs={12}>
+                  <SeviceCard
+                    area
+                    element={e}
+                    setServiceId={function (action: string | undefined): void {
+                      throw new Error("Function not implemented.");
+                    }}
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </Scrollbar>
         </Box>
       </Box>

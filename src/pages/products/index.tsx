@@ -45,7 +45,24 @@ import dynamic from "next/dynamic";
 import CustomLoaderPage from "@/Components/GlobalComponent/CustomLoaderPage";
 import Meta from "@/Components/GlobalComponent/Meta";
 import { Scrollbar } from "@/Components/GlobalComponent/Scrollbar";
-const ProductsPage = () => {
+import MainApi from "@/api/MainApi";
+import { HomeServices } from "@/interfaces/HomeServices";
+import { HomeAreas } from "@/interfaces/HomeAreas";
+import { Master } from "@/interfaces/MasterInterface";
+import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
+import { CashAreas, CashServices } from "@/redux/slices/Services";
+import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
+const ProductsPage = ({
+  homeServices,
+  homeAreas,
+  masterData,
+  footerSocialLinks,
+}: {
+  homeServices: HomeServices[];
+  homeAreas: HomeAreas[];
+  masterData: Master;
+  footerSocialLinks: FooterSocialLinks[];
+}) => {
   //  hooks
   const { t } = useTranslation();
   const router = useRouter();
@@ -147,6 +164,28 @@ const ProductsPage = () => {
   if (typeof window !== "undefined") {
     localStorage.setItem("path", router.asPath);
   }
+
+  //  cash areas
+  useEffect(() => {
+    dispatch(CashAreas(homeAreas));
+  }, [dispatch, homeAreas]);
+
+  //  cash services
+  useEffect(() => {
+    dispatch(CashServices(homeServices));
+  }, [dispatch, homeServices, homeServices?.length]);
+
+  //  cash master
+  useEffect(() => {
+    dispatch(CashMasterData(masterData));
+  }, [dispatch, masterData]);
+
+  //  cash footer Social Media Links
+  useEffect(() => {
+    if (footerSocialLinks?.length > 0) {
+      dispatch(CashFooterLinks(footerSocialLinks));
+    }
+  }, [dispatch, footerSocialLinks]);
 
   return (
     <>
@@ -285,3 +324,64 @@ const ProductsPage = () => {
 };
 
 export default ProductsPage;
+
+export const getServerSideProps = async ({ locale }: { locale: string }) => {
+  let homeServices = [];
+  let homeAreas = [];
+  let masterData = {};
+  let footerSocialLinks = [];
+  try {
+    const configRes = await MainApi.get("services", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+    homeServices = configRes?.data?.data?.services;
+  } catch (e) {
+    homeServices = [];
+  }
+  //  areas
+  try {
+    const Res = await MainApi.get("areas", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+
+    homeAreas = Res?.data?.data?.areas;
+  } catch (e) {
+    homeAreas = [];
+  }
+  //  masterData
+  try {
+    const configRes = await MainApi.get("master", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+    masterData = configRes?.data?.data;
+  } catch (e) {
+    masterData = {};
+  }
+
+  //  footerSocialLinks
+  try {
+    const configRes = await MainApi.get("social-link", {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+    footerSocialLinks = configRes?.data?.data?.socialLink;
+  } catch (e) {
+    footerSocialLinks = [];
+  }
+
+  return {
+    props: {
+      homeServices,
+      homeAreas,
+      masterData,
+      footerSocialLinks,
+    },
+  };
+};
