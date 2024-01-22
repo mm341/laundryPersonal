@@ -1,26 +1,26 @@
 import { productInterface } from "@/interfaces/ProductInterface";
 import { useAppSelector } from "@/redux/store";
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
-import { Box, Typography, styled, useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import SimpleBar from "simplebar-react";
 import LoadingComponent from "../GlobalComponent/LoadingComponent";
 import EmptyData from "../GlobalComponent/EmptyData";
 import emptyProductsImg from "../../../public/products/empty products.png";
+import emptyProductsArabicImg from "../../../public/products/empty productsArabic.png";
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
+import { useRouter } from "next/router";
 const ProductsSection = ({ products }: { products: productInterface[] }) => {
   //  hooks
 
   const { t } = useTranslation();
-
+  const { locale } = useRouter();
   //  master data
   const { master } = useAppSelector((state) => state.master);
 
   //  selectors
 
   const { isloading } = useAppSelector((state) => state.products);
-
 
   return (
     <Box
@@ -107,7 +107,13 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
           {isloading && products?.length === 0 && <LoadingComponent />}
           {/*  case of empty products data */}
           {!isloading && products?.length === 0 && (
-            <EmptyData img={emptyProductsImg?.src} />
+            <EmptyData
+              img={
+                locale === "en"
+                  ? emptyProductsImg?.src
+                  : emptyProductsArabicImg?.src
+              }
+            />
           )}
         </Scrollbar>
       </GlobalDisplayFlexColumnBox>

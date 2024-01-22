@@ -15,20 +15,17 @@ import {
 import {
   Box,
   CssBaseline,
-  Fab,
   Fade,
   FormControl,
   Grid,
   InputAdornment,
   OutlinedInput,
-  TextField,
-  Typography,
-  styled,
   useTheme,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import emptyProductsImg from "../../../public/products/empty products.png";
+import emptyProductsArabicImg from "../../../public/products/empty productsArabic.png";
 import EmptyData from "@/Components/GlobalComponent/EmptyData";
 import LoadingComponent from "@/Components/GlobalComponent/LoadingComponent";
 import {
@@ -40,7 +37,7 @@ import { CloseOutlined } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
 import Cartsection from "@/Components/Cart/Cartsection";
-import SimpleBar from "simplebar-react";
+
 import SubProductModel from "@/Components/Dialogs/SubProductModel";
 import dynamic from "next/dynamic";
 import CustomLoaderPage from "@/Components/GlobalComponent/CustomLoaderPage";
@@ -67,6 +64,7 @@ const ProductsPage = ({
   //  hooks
   const { t } = useTranslation();
   const router = useRouter();
+  const { locale } = useRouter();
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const [searchText, setSearchText] = useState<string>("");
@@ -298,7 +296,13 @@ const ProductsPage = ({
                       )}
                       {/*  case of empty products data */}
                       {!isloading && products?.length === 0 && (
-                        <EmptyData img={emptyProductsImg?.src} />
+                        <EmptyData
+                          img={
+                            locale === "en"
+                              ? emptyProductsImg?.src
+                              : emptyProductsArabicImg?.src
+                          }
+                        />
                       )}
                     </GlobalDisplayFlexColumnBox>
                   </CustomPaperBigCard>
