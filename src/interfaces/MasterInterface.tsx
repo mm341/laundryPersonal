@@ -7,4 +7,7 @@ export interface Master {
   minimum_cost: number;
   post_code: string[];
   fav_icon: string;
+  address:string
+  mobile:string
+  email:string
 }

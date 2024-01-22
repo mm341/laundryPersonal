@@ -36,6 +36,9 @@ const Footer = () => {
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
   const { footerLinks } = useAppSelector((state) => state.master);
+  //  master data
+  const { master } = useAppSelector((state) => state.master);
+
 
   return (
     <>
@@ -199,7 +202,7 @@ const Footer = () => {
                           color: "white",
                         }}
                       >
-                        alwan-elghasil@company.com
+                        {master?.email}
                       </Typography>
                     </Stack>
                     <Stack direction={"row"} gap={"10px"} alignItems={"center"}>
@@ -216,7 +219,7 @@ const Footer = () => {
                           color: "white",
                         }}
                       >
-                        (+966) 56 781 2386
+                        {master?.mobile}
                       </Typography>
                     </Stack>
 
@@ -237,7 +240,7 @@ const Footer = () => {
                           color: "white",
                         }}
                       >
-                        King Fahd Road, Al Salamiya, Hotat Bani Tamim 16511, KSA
+                        {master?.address}
                       </Typography>
                     </Stack>
 

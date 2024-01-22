@@ -457,13 +457,18 @@ const CheckOutPage = ({
                           onChange={(e) => setAddressevalue(e.target.value)}
                           input={<BootstrapInput />}
                         >
-                          {/* <option aria-label="None" value="" /> */}
-
                           {myAddresses?.data?.data?.addresses?.map(
                             (addresse: AddresseInterface, i: number) => {
                               if (addresse?.street?.length > 30) {
                                 return (
-                                  <option key={i} value={addresse?.id}>
+                                  <option
+                                    style={{
+                                      marginTop: "2px",
+                                      marginBottom: "2px",
+                                    }}
+                                    key={i}
+                                    value={addresse?.id}
+                                  >
                                     {` ${
                                       addresse?.address_name
                                     } ${addresse?.street?.slice(0, 30)}... ${t(
@@ -476,7 +481,14 @@ const CheckOutPage = ({
                                 );
                               } else {
                                 return (
-                                  <option key={i} value={addresse?.id}>
+                                  <option
+                                    style={{
+                                      marginTop: "2px",
+                                      marginBottom: "2px",
+                                    }}
+                                    key={i}
+                                    value={addresse?.id}
+                                  >
                                     {` ${addresse?.address_name} ${
                                       addresse?.street
                                     } ${t("Street")}
