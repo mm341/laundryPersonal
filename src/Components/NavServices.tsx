@@ -73,13 +73,14 @@ const NavServices = ({
               p: "20px  ",
             }}
           >
-            {services?.map((e: HomeServices, i: number) => (
+            {services?.slice(0, 6)?.map((e: HomeServices, i: number) => (
               <Box key={e?.id}>
                 <Typography
                   onClick={() => {
                     localStorage.setItem("service", e?.name);
                     setOpenAreaDialog(true);
                     setServiceId(e?.id);
+                    setResdropdown(false);
                   }}
                   sx={{
                     fontSize: "16px",

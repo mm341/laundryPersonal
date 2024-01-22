@@ -48,7 +48,7 @@ const CollapsableMenu = ({
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {services?.map((e: HomeServices, i: number) => (
+          {services?.slice(0, 6)?.map((e: HomeServices, i: number) => (
             <ListItemButton
               sx={{
                 pl: 4,

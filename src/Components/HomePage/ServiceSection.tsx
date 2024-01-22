@@ -30,7 +30,7 @@ const ServiceSection = ({
         <GlobalDisplayFlexColumnBox width={"100%"} gap={"72px"}>
           <GlobalTypography text={"Our Services"} />
           <Grid container spacing={3}>
-            {homeServices?.map((e: HomeServices, i: number) => (
+            {homeServices?.slice(0,6)?.map((e: HomeServices, i: number) => (
               <Grid key={e?.id} item md={4} sm={6} xs={12}>
                 <SeviceCard
                   setServiceId={setServiceId}
