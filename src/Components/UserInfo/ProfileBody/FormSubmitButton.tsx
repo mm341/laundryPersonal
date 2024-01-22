@@ -72,7 +72,7 @@ const FormSubmitButton = ({
           .then((res: any) => {
             if (res) {
               setLoading(false);
-              toast.success(res.data.message);
+              toast.success(res?.data?.message);
               dispatch(SaveProfileData(res?.data?.data?.user));
 
               if (
@@ -104,6 +104,7 @@ const FormSubmitButton = ({
     useMutation("verify_phone", AuthApi.verify_phoneUpdate);
   const otpFormSubmitHandler = (values: { otp: string }) => {
     const onSuccessHandler = (res: any) => {
+      toast.success(res?.data?.message);
       dispatch(SaveProfileData(res?.data?.data.user));
 
       setOpenOtpModal(false);
