@@ -40,15 +40,15 @@ const SubProductModel = ({
   //  style of modal
   const style = {
     position: "absolute",
-    top: "50%",
+    top: {md:"50%",xs:"56%"},
     left: "50%",
     transform: "translate(-50%, -50%)",
 
-    width: { md: "467px", xs: "340px" },
+    width: { md: "467px", xs: "90%" },
     bgcolor: "background.paper",
     border: "1px solid white",
     boxShadow: 24,
-    height: { md: "430px", xs: "480px" },
+    height: { md: "430px", xs: "80%" },
 
     borderRadius: "10px",
     p: 3,
