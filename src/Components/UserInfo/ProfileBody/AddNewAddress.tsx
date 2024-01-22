@@ -18,7 +18,7 @@ const style = {
   bgcolor: "white",
   borderRadius: "10px",
   boxShadow: 24,
-  height: { md: "70vh", xs: "85vh" },
+  height: { md: "70vh", xs: "80vh" },
   overflowY: "auto",
   p: 3,
 };
