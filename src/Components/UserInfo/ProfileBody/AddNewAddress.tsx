@@ -10,7 +10,7 @@ import AddressForm from "./AddressForm";
 import { AddresseInterface } from "@/interfaces/AddresseInterface";
 const style = {
   position: "absolute",
-  top: {md:"50%",xs:"55%"},
+  top: {md:"50%",xs:"56%"},
   left: "50%",
   transform: "translate(-50%, -50%)",
   maxWidth: 800,
@@ -18,7 +18,7 @@ const style = {
   bgcolor: "white",
   borderRadius: "10px",
   boxShadow: 24,
-  height: { md: "70vh", xs: "80vh" },
+  height: { md: "70vh", xs: "78vh" },
   overflowY: "auto",
   p: 3,
 };
