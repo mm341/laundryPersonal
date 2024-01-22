@@ -6,12 +6,17 @@ import {
 } from "@/styles/PublicStyles";
 import {
   Box,
+  FormControl,
   Grid,
+  InputBase,
+  InputLabel,
   MenuItem,
+  NativeSelect,
   Select,
   Stack,
   TextField,
   Typography,
+  styled,
   useTheme,
 } from "@mui/material";
 import React, { SetStateAction, useEffect, useMemo, useState } from "react";
@@ -110,6 +115,45 @@ const CheckOutPage = ({
       },
     }
   );
+
+  const BootstrapInput = styled(InputBase)(({ theme }) => ({
+    "& .MuiInputLabel-root": {
+      top: "-50px !important",
+    },
+    "label + &": {
+      // marginBottom: theme.spacing(1),
+      // paddingBottom:theme.spacing(1)
+      transform: "translateY(5px)",
+    },
+    "& .MuiInputBase-input": {
+      borderRadius: 4,
+      height: "36px",
+      position: "relative",
+      backgroundColor: theme.palette.background.paper,
+      border: "1px solid #ced4da",
+      fontSize: 16,
+      padding: "10px 26px 10px 12px",
+      transition: theme.transitions.create(["border-color", "box-shadow"]),
+      // Use the system font instead of the default Roboto font.
+      fontFamily: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+      "&:focus": {
+        borderRadius: 4,
+        // borderColor: "#80bdff",
+        // boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+      },
+    },
+  }));
   //  default addresse
   const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
   //  handel initial value of default addresse
@@ -236,8 +280,10 @@ const CheckOutPage = ({
                       <ChekOutTitle title="Personal Info" />
 
                       <Grid container spacing={3}>
+                        {/*  full name */}
                         <Grid item sm={6} xs={12}>
                           <TextField
+                            InputProps={{ readOnly: true }}
                             required
                             sx={{ width: "100%" }}
                             value={fullName}
@@ -246,7 +292,9 @@ const CheckOutPage = ({
                           />
                         </Grid>
                         <Grid item sm={6} xs={12}>
+                          {/*  phone number */}
                           <TextField
+                            InputProps={{ readOnly: true }}
                             required
                             sx={{ width: "100%" }}
                             value={phoneNumber}
@@ -405,28 +453,50 @@ const CheckOutPage = ({
                     <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                       <ChekOutTitle title="Deliver To" />
 
-                      {myAddresses?.data?.data?.addresses?.length > 0 && (
-                        <Select
+                      <FormControl fullWidth>
+                        <NativeSelect
+                          size="medium"
+                          sx={{ height: "48px" }}
+                          fullWidth
                           required
-                          sx={{ width: "100%" }}
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          label="Age"
+                          id="demo-customized-select-native"
                           value={addresseValue}
+                          // label="Select"
                           onChange={(e) => setAddressevalue(e.target.value)}
+                          input={<BootstrapInput />}
                         >
+                          {/* <option aria-label="None" value="" /> */}
+
                           {myAddresses?.data?.data?.addresses?.map(
-                            (addresse: AddresseInterface, i: number) => (
-                              <MenuItem key={i} value={addresse?.id}>
-                                {` ${addresse?.address_name} ${addresse?.street} street
-              ${addresse?.apartment_no} Apartment,
-              ${addresse?.building_no} Building,
-              ${addresse?.floor_no} Floor`}
-                              </MenuItem>
-                            )
+                            (addresse: AddresseInterface, i: number) => {
+                              if (addresse?.street?.length > 30) {
+                                return (
+                                  <option key={i} value={addresse?.id}>
+                                    {` ${
+                                      addresse?.address_name
+                                    } ${addresse?.street?.slice(
+                                      0,
+                                      30
+                                    )}... street
+                                ${addresse?.apartment_no} Apartment,
+                                  ${addresse?.building_no} Building,
+                                      ${addresse?.floor_no} Floor`}
+                                  </option>
+                                );
+                              } else {
+                                return (
+                                  <option key={i} value={addresse?.id}>
+                                    {` ${addresse?.address_name} ${addresse?.street} street
+                                ${addresse?.apartment_no} Apartment,
+                                  ${addresse?.building_no} Building,
+                                      ${addresse?.floor_no} Floor`}
+                                  </option>
+                                );
+                              }
+                            }
                           )}
-                        </Select>
-                      )}
+                        </NativeSelect>
+                      </FormControl>
 
                       {myAddresses?.data?.data?.addresses?.length === 0 && (
                         <Box
