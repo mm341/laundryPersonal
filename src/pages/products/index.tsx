@@ -81,7 +81,7 @@ const ProductsPage = ({
   );
 
   //     complete hooks
-  const [type, setType] = useState<string>("0");
+  const [type, setType] = useState<string>(variants[0]?.id);
   useEffect(() => {
     if (router.query.service_id) {
       dispatch(GetVariants({ serviceId: router.query.service_id }));
@@ -130,8 +130,9 @@ const ProductsPage = ({
     }
   };
 
+ 
   useEffect(() => {
-    if (router.query.service_id) {
+    if (router.query.service_id && type) {
       dispatch(
         GetProducts({
           serviceId: router.query.service_id,
