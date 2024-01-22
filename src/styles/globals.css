@@ -80,16 +80,16 @@
   color:white !important
 }
 
-body {
+/* body {
   background-color: #ffffff;
   color: #333333;
-}
+} */
 
 /* Dark mode styles when the user prefers dark mode */
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #333333;
-    color: #ffffff;
+    background-color: white !important;
+    color: black !important;
   }
 }
 
