@@ -56,6 +56,15 @@
   background-color: #329CD7 !important;
   color:white !important
 }
+.mui-style-1t51e6o:focus.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+
+.rtl-1t51e6o:focus.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
 
 /* .mui-style-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
 right: 16px !important;
