@@ -89,12 +89,12 @@ const AddresseMenu = ({
   };
 
   return (
-    <Grid container spacing={1.5}>
+    <Grid container spacing={1.5} >
       {addressesData?.length > 0 &&
         addressesData?.map((addresse: AddresseInterface, i: number) => (
           <Grid
             key={i}
-            sx={{ paddingRight: "20px", paddingLeft: "10px", mt: "15px" }}
+            sx={{ paddingRight: {md:"20px",xs:"0"}, paddingLeft: "10px", mt: "15px" }}
             item
             xs={12}
             md={12}
