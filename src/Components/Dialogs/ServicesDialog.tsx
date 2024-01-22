@@ -61,7 +61,7 @@ const ServicesDialog = ({
         >
           <GlobalTypography text={"Select Service Category"} />
 
-          <Scrollbar style={{ maxHeight: issmall ? "400px" : "700px" }}>
+          <Scrollbar style={{ maxHeight: issmall ? "430px" : "90%" }}>
             <Grid sx={{ my: "40px", height: "100%" }} container spacing={3}>
               {homeServices?.map((e: HomeServices, i: number) => (
                 <Grid key={i} item md={4} sm={6} xs={12}>
