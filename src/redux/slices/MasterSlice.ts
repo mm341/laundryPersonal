@@ -8,7 +8,8 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 //  update account
 export const ResendCode = createAsyncThunk(
   "updateProfile/UpdateAccount",
-  (payload: { mobile: string|undefined }) => PublicRequest.postData(payload, "resend/otp")
+  (payload: { mobile: string | undefined }) =>
+    PublicRequest.postData(payload, "resend/otp")
 );
 const initialState: MasterModel = {
   master: {
@@ -19,7 +20,10 @@ const initialState: MasterModel = {
     ios_url: "",
     minimum_cost: 0,
     post_code: [],
-    fav_icon:""
+    fav_icon: "",
+    address: "",
+    mobile: "",
+    email: "",
   },
   footerLinks: [],
 };
