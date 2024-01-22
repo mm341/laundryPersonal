@@ -4,7 +4,14 @@ import {
   GlobalDisplayFlexBox,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  CssBaseline,
+  Grid,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import instgram from "../../../public/contactUs/instagram.svg";
@@ -74,6 +81,7 @@ const ContactUs = ({
         title={"ContactUs"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
+      <CssBaseline />
       <PublicContainer>
         <CustomPaperBigCard
           sx={{ backgroundColor: theme.palette.primary.dark }}

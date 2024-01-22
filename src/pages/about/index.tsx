@@ -6,7 +6,7 @@ import {
   CustomPaperBigCard,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, CssBaseline, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -21,6 +21,7 @@ const About = ({
         title={aboutUsData?.title}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
+       <CssBaseline />
       <PublicContainer>
         <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
           <GlobalDisplayFlexColumnBox sx={{ py: "80px" }}>

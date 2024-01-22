@@ -3,7 +3,7 @@ import GlobalTypography from "@/Components/HomePage/GlobalTypography";
 import PublicContainer from "@/Components/PublicContainer";
 import MainApi from "@/api/MainApi";
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
-import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { Box, CssBaseline, Stack, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -18,6 +18,7 @@ const Privacy = ({
         title={privacyData?.title}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
+       <CssBaseline />
       <PublicContainer>
         <GlobalDisplayFlexColumnBox gap={"32px"}>
           <GlobalTypography FirstSection clearBg text={privacyData?.title} />

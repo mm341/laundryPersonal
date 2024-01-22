@@ -6,6 +6,7 @@ import {
 } from "@/styles/PublicStyles";
 import {
   Box,
+  CssBaseline,
   FormControl,
   Grid,
   InputBase,
@@ -230,6 +231,7 @@ const CheckOutPage = ({
         title={"CheckOut"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
+       <CssBaseline />
       <AuthGuard>
         <PublicContainer>
           <CustomPaperBigCard

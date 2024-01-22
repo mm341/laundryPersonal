@@ -12,7 +12,7 @@ import { CashAreas, CashServices } from "@/redux/slices/Services";
 import { useAppDispatch } from "@/redux/store";
 
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
-import { Typography } from "@mui/material";
+import { CssBaseline, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -59,6 +59,7 @@ const Pricing = ({
         title={"pricing"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
+       <CssBaseline />
       <PublicContainer>
         <GlobalDisplayFlexColumnBox gap={"64px"}>
           <GlobalDisplayFlexColumnBox gap={"32px"}>

@@ -188,6 +188,7 @@ export default function App({
                   }}
                 >
                   <ScrollToTop />
+                  <CssBaseline />
                   <Box
                     sx={{
                       minHeight: "80vh",
@@ -198,6 +199,7 @@ export default function App({
                       mb: "5rem",
                     }}
                   >
+                     <CssBaseline />
                     <ScrollToTop />
                     <DynamicFavicon/>
                     {getLayout(<Component {...pageProps} />)}

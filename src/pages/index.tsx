@@ -24,6 +24,7 @@ import {
 import { Master } from "@/interfaces/MasterInterface";
 import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
+import { CssBaseline } from "@mui/material";
 
 export default function Home({
   homeServices,
@@ -75,6 +76,7 @@ export default function Home({
         title={"Alwain Elqhasel"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
+      <CssBaseline />
       <HomeParentBox>
         <FirstSection
           homeAreas={homeAreas?.length > 0 ? homeAreas : areas}

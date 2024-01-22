@@ -14,6 +14,7 @@ import {
 } from "@/styles/PublicStyles";
 import {
   Box,
+  CssBaseline,
   Fab,
   Fade,
   FormControl,
@@ -190,6 +191,7 @@ const ProductsPage = ({
   return (
     <>
       <Meta title={"services"} description="" keywords="" />
+      <CssBaseline />
       {loading ? (
         <CustomLoaderPage loading={loading} />
       ) : (
