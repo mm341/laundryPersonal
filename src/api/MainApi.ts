@@ -27,7 +27,8 @@ MainApi.interceptors.request.use(
     }
 
     if (token) config.headers.authorization = `Bearer ${token}`;
-    if (language) config.headers["Accept-Language"] = language;
+    if (language) config.headers["accept-Language"] = language;
+    if (language) config.headers["locale"] = language;
 
     config.headers["Content-Type"] = "application/json;charset=utf-8";
     config.headers["Accept"] = "application/json";

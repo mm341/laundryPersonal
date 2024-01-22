@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Box, Stack, Typography, TextField, useMediaQuery } from "@mui/material";
 
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
@@ -49,7 +49,8 @@ const OtpForm = ({
   const { locale } = useRouter();
   const { t } = useTranslation();
   const [otp, setOtp] = useState("");
-  
+  const theme = useTheme();
+  const issmall = useMediaQuery(theme.breakpoints.down("md"));
   let [resend, setResend] = useState(60);
   const dispatch = useAppDispatch();
   //  validation of otp
@@ -80,8 +81,7 @@ const OtpForm = ({
       } catch (err) {}
     },
   });
-  const theme = useTheme();
-
+  
   const handleOpenAuthModal = () => {
     setOpenOtpModal(false);
     if (modalFor === "sign-in") {
@@ -290,7 +290,7 @@ const OtpForm = ({
         src={img?.src}
         loading="lazy"
         alt="img"
-        style={{ width: "281px", height: "284px", objectFit: "cover" }}
+        style={{ width: "281px", height: "284px", objectFit: "cover",display:issmall?"none":"block" }}
       />
     </GlobalDisplayFlexBox>
   );
