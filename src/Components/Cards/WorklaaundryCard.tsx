@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 const GlobalLaundryCard = ({ element }: { element: work }) => {
   //  hooks
-  const theme=useTheme()
+  const theme = useTheme();
   const { locale } = useRouter();
   const [title, setTitle] = useState<string>("");
   const [desribtion, setDesribtion] = useState<string>("");
@@ -28,12 +28,16 @@ const GlobalLaundryCard = ({ element }: { element: work }) => {
     <GlobalDisplayFlexColumnBox
       width={"90%"}
       sx={{ mx: "auto" }}
-      gap={!issmall?"24px":"10px"}
+      gap={!issmall ? "24px" : "10px"}
       alignItems={"Center"}
     >
       <img
         // data-aos="fade-down"
-        style={{ width: "200px", height: "200px", borderRadius: "100%" }}
+        style={{
+          width: !issmall ? "200px" : "150px",
+          height: !issmall ? "200px" : "150px",
+          borderRadius: "100%",
+        }}
         loading="lazy"
         alt="img"
         src={element?.img?.src}
@@ -42,7 +46,7 @@ const GlobalLaundryCard = ({ element }: { element: work }) => {
       <Typography
         sx={{
           textAlign: "center",
-          fontSize: { sm: "20px", xs: "17px" },
+          fontSize: { sm: "20px", xs: "16px" },
           fontWeight: "600",
         }}
       >
@@ -53,7 +57,7 @@ const GlobalLaundryCard = ({ element }: { element: work }) => {
         data-aos="fade-up"
         sx={{
           textAlign: "center",
-          fontSize: { sm: "18px", xs: "15px" },
+          fontSize: { sm: "18px", xs: "14px" },
           fontWeight: "400",
         }}
       >

@@ -4,6 +4,8 @@ import React from "react";
 import GlobalTypography from "./GlobalTypography";
 import PublicContainer from "../PublicContainer";
 import GlobalLaundryCard from "../Cards/WorklaaundryCard";
+import stepPhotoSm from "../../../public/HomePage/stepPhotoSm.png";
+import stepPhotoSmAr from "../../../public/HomePage/stepPhotoSmAr.png";
 import stepPhoto from "../../../public/HomePage/stepPhoto.png";
 import stepPhotoArabic from "../../../public/HomePage/WorkLaundery/stepArabic.png";
 import Photo1 from "../../../public/HomePage/WorkLaundery/photo1.svg";
@@ -49,7 +51,10 @@ const WorkLaundry = () => {
   ];
   return (
     <PublicContainer>
-      <GlobalDisplayFlexColumnBox width={"100%"} gap={!issmall?"72px":"30px"}>
+      <GlobalDisplayFlexColumnBox
+        width={"100%"}
+        gap={!issmall ? "72px" : "30px"}
+      >
         <GlobalTypography text={"How It Work"} />
         <Box
           sx={{
@@ -57,8 +62,21 @@ const WorkLaundry = () => {
             display: "flex",
             justifyContent: "center",
             mx: "auto",
+            position: "relative",
           }}
         >
+          {issmall && (
+            <img
+              src={locale === "en" ? stepPhotoSm?.src : stepPhotoSmAr?.src}
+              loading="lazy"
+              alt="img"
+              style={{
+                position: "absolute",
+                left: locale === "en" ? "-27%" : "110%",
+                top: "75px",
+              }}
+            />
+          )}
           {!issmall && (
             <img
               src={locale === "en" ? stepPhoto?.src : stepPhotoArabic?.src}
@@ -67,7 +85,7 @@ const WorkLaundry = () => {
             />
           )}
         </Box>
-        <Grid container spacing={!issmall ? 3 : 5}>
+        <Grid container spacing={!issmall ? 3 : 8}>
           {array?.map((e: work, i: number) => (
             <Grid key={i} item md={4} sm={6} xs={12}>
               <GlobalLaundryCard element={e} />

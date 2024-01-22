@@ -11,6 +11,7 @@ const AppSmallSection = ({ firstSection }: { firstSection?: boolean }) => {
         justifyContent: "flex-start",
         flexDirection: "row",
         mb: firstSection ? "50px" : "0",
+        transform: firstSection ? {sm:"translateX(0px)",xs:"translateX(-10px)"} : "translateX(0px)",
       }}
     >
       <img
