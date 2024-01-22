@@ -397,6 +397,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("legal-pages/privacy-policy", {
       headers: {
         "Accept-Language": locale,
+        locale: locale,
       },
     });
     privacyData = configRes?.data?.data?.setting;

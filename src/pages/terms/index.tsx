@@ -397,6 +397,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("legal-pages/terms-of-service", {
       headers: {
         "Accept-Language": locale,
+        locale: locale,
       },
     });
     termsData = configRes?.data?.data?.setting;

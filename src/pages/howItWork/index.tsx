@@ -5,24 +5,42 @@ import {
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
 import { Box, CssBaseline, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import img1 from "../../../public/HowItWork/photosection1.png";
 import img2 from "../../../public/HowItWork/photosection2.png";
 import img3 from "../../../public/HowItWork/photosection3.png";
 import WorkCard from "@/Components/HowItWork/WorkCard";
 import Meta from "@/Components/GlobalComponent/Meta";
+import MainApi from "@/api/MainApi";
+import { useAppDispatch } from "@/redux/store";
+import { CashAreas, CashServices } from "@/redux/slices/Services";
+import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
+import { HomeServices } from "@/interfaces/HomeServices";
+import { HomeAreas } from "@/interfaces/HomeAreas";
+import { Master } from "@/interfaces/MasterInterface";
+import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
 export interface data {
   title: string;
   describtion: string;
   img: { src: string };
 }
 // efeef
-const HowItWork = () => {
+const HowItWork = ({
+  homeServices,
+  homeAreas,
+  masterData,
+  footerSocialLinks,
+}: {
+  homeServices: HomeServices[];
+  homeAreas: HomeAreas[];
+  masterData: Master;
+  footerSocialLinks: FooterSocialLinks[];
+}) => {
   //  hooks
 
   const { t } = useTranslation();
-
+  const dispatch = useAppDispatch();
   const dataArray: data[] = [
     {
       title: "Creating your account is fast and easy",
@@ -43,13 +61,35 @@ const HowItWork = () => {
       img: img3,
     },
   ];
+
+  //  cash areas
+  useEffect(() => {
+    dispatch(CashAreas(homeAreas));
+  }, [dispatch, homeAreas]);
+
+  //  cash services
+  useEffect(() => {
+    dispatch(CashServices(homeServices));
+  }, [dispatch, homeServices, homeServices?.length]);
+
+  //  cash master
+  useEffect(() => {
+    dispatch(CashMasterData(masterData));
+  }, [dispatch, masterData]);
+
+  //  cash footer Social Media Links
+  useEffect(() => {
+    if (footerSocialLinks?.length > 0) {
+      dispatch(CashFooterLinks(footerSocialLinks));
+    }
+  }, [dispatch, footerSocialLinks]);
   return (
     <>
       <Meta
         title={"How It Works"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
-       <CssBaseline />
+      <CssBaseline />
       <PublicContainer>
         <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
           <GlobalDisplayFlexColumnBox
@@ -97,3 +137,68 @@ const HowItWork = () => {
 };
 
 export default HowItWork;
+
+export const getServerSideProps = async ({ locale }: { locale: string }) => {
+  let homeServices = [];
+  let homeAreas = [];
+  let masterData = {};
+  let footerSocialLinks = [];
+  try {
+    const configRes = await MainApi.get("services", {
+      headers: {
+        "Accept-Language": locale,
+        locale: locale,
+      },
+    });
+    homeServices = configRes?.data?.data?.services;
+  } catch (e) {
+    homeServices = [];
+  }
+  //  areas
+  try {
+    const Res = await MainApi.get("areas", {
+      headers: {
+        "Accept-Language": locale,
+        locale: locale,
+      },
+    });
+
+    homeAreas = Res?.data?.data?.areas;
+  } catch (e) {
+    homeAreas = [];
+  }
+  //  masterData
+  try {
+    const configRes = await MainApi.get("master", {
+      headers: {
+        "Accept-Language": locale,
+        locale: locale,
+      },
+    });
+    masterData = configRes?.data?.data;
+  } catch (e) {
+    masterData = {};
+  }
+
+  //  footerSocialLinks
+  try {
+    const configRes = await MainApi.get("social-link", {
+      headers: {
+        "Accept-Language": locale,
+        locale: locale,
+      },
+    });
+    footerSocialLinks = configRes?.data?.data?.socialLink;
+  } catch (e) {
+    footerSocialLinks = [];
+  }
+
+  return {
+    props: {
+      homeServices,
+      homeAreas,
+      masterData,
+      footerSocialLinks,
+    },
+  };
+};

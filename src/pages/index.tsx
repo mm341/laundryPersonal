@@ -104,6 +104,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("services", {
       headers: {
         "Accept-Language": locale,
+        "locale": locale,
       },
     });
     homeServices = configRes?.data?.data?.services;
@@ -115,6 +116,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const Res = await MainApi.get("areas", {
       headers: {
         "Accept-Language": locale,
+        "locale": locale,
       },
     });
 
@@ -127,6 +129,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("master", {
       headers: {
         "Accept-Language": locale,
+        "locale": locale,
       },
     });
     masterData = configRes?.data?.data;
@@ -139,6 +142,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("social-link", {
       headers: {
         "Accept-Language": locale,
+        "locale": locale,
       },
     });
     footerSocialLinks = configRes?.data?.data?.socialLink;

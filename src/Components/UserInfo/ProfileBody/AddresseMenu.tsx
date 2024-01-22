@@ -49,16 +49,17 @@ const AddresseMenu = ({
 
   const OrderActionStatus = (addresse: AddresseInterface) => {
     let img;
+    console.log(addresse?.address_name)
     switch (addresse?.address_name) {
-      case "home":
+      case "home" || "المنزل":
         img = titleADreesseHomeIcon?.src;
         break;
 
-      case "office":
+      case "office" || "المكتب":
         img = titleADreesseOfficeIcon?.src;
         break;
 
-      case "others":
+      case "اخري":
         img = titleADreesseOthersIcon?.src;
         break;
     }

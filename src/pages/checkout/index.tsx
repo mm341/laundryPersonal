@@ -594,6 +594,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("services", {
       headers: {
         "Accept-Language": locale,
+        locale: locale,
       },
     });
     homeServices = configRes?.data?.data?.services;

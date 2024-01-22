@@ -21,7 +21,7 @@ const About = ({
         title={aboutUsData?.title}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
-       <CssBaseline />
+      <CssBaseline />
       <PublicContainer>
         <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
           <GlobalDisplayFlexColumnBox sx={{ py: "80px" }}>
@@ -218,6 +218,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("legal-pages/about-us", {
       headers: {
         "Accept-Language": locale,
+        locale: locale,
       },
     });
     aboutUsData = configRes?.data?.data?.setting;
