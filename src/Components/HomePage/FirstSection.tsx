@@ -200,6 +200,8 @@ const FirstSection = ({
                       backgroundColor: theme.palette.primary.main,
                       borderTopRightRadius: "5px",
                       borderBottomRightRadius: "5px",
+                      borderTopLeftRadius: {md:"0",xs:"5px"},
+                      borderBottomLeftRadius: {md:"0",xs:"5px"},
                     }}
                     color={"white"}
                   >
