@@ -162,13 +162,13 @@ const FirstSection = ({
               {/*  sleect area box */}
               <Box
                 sx={{
-                  width: { md: "85%", xs: "90%" },
+                  width: { md: "85%", xs: "100%" },
                   mr: "auto",
                   transform: { sm: "translateX(-15px)", xs: "translateX(0px)" },
                   display: "flex",
                   flexDirection: { sm: "row", xs: "column" },
 
-                  justifyContent: "flex-start",
+                  justifyContent: {md:"flex-start",xs:"center"},
                   alignItems: "center",
                   gap: { sm: "0px", xs: "15px" },
                   p: { sm: "15px", xs: "0" },

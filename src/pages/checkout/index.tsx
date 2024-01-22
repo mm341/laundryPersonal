@@ -445,66 +445,66 @@ const CheckOutPage = ({
                     <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                       <ChekOutTitle title="Deliver To" />
 
-
-{myAddresses?.data?.data?.addresses?.length>0 &&
-                      <FormControl fullWidth>
-                        <NativeSelect
-                          size="medium"
-                          sx={{ height: "48px" }}
-                          fullWidth
-                          required
-                          id="demo-customized-select-native"
-                          value={addresseValue}
-                          // label="Select"
-                          onChange={(e) => setAddressevalue(e.target.value)}
-                          input={<BootstrapInput />}
-                        >
-                          {myAddresses?.data?.data?.addresses?.map(
-                            (addresse: AddresseInterface, i: number) => {
-                              if (addresse?.street?.length > 30) {
-                                return (
-                                  <option
-                                    style={{
-                                      marginTop: "2px",
-                                      marginBottom: "2px",
-                                    }}
-                                    key={i}
-                                    value={addresse?.id}
-                                  >
-                                    {` ${
-                                      addresse?.address_name
-                                    } ${addresse?.street?.slice(0, 30)}... ${t(
-                                      "Street"
-                                    )}
+                      {myAddresses?.data?.data?.addresses?.length > 0 && (
+                        <FormControl fullWidth>
+                          <NativeSelect
+                            size="medium"
+                            sx={{ height: "48px" }}
+                            fullWidth
+                            required
+                            id="demo-customized-select-native"
+                            value={addresseValue}
+                            // label="Select"
+                            onChange={(e) => setAddressevalue(e.target.value)}
+                            input={<BootstrapInput />}
+                          >
+                            {myAddresses?.data?.data?.addresses?.map(
+                              (addresse: AddresseInterface, i: number) => {
+                                if (addresse?.street?.length > 30) {
+                                  return (
+                                    <option
+                                      style={{
+                                        marginTop: "2px",
+                                        marginBottom: "2px",
+                                      }}
+                                      key={i}
+                                      value={addresse?.id}
+                                    >
+                                      {` ${
+                                        addresse?.address_name
+                                      } ${addresse?.street?.slice(
+                                        0,
+                                        30
+                                      )}... ${t("Street")}
                                 ${addresse?.apartment_no} ${t("Apartment")},
                                   ${addresse?.building_no} ${t("Building")},
                                       ${addresse?.floor_no} ${t("Floor")}`}
-                                  </option>
-                                );
-                              } else {
-                                return (
-                                  <option
-                                    style={{
-                                      marginTop: "2px",
-                                      marginBottom: "2px",
-                                    }}
-                                    key={i}
-                                    value={addresse?.id}
-                                  >
-                                    {` ${addresse?.address_name} ${
-                                      addresse?.street
-                                    } ${t("Street")}
+                                    </option>
+                                  );
+                                } else {
+                                  return (
+                                    <option
+                                      style={{
+                                        marginTop: "2px",
+                                        marginBottom: "2px",
+                                      }}
+                                      key={i}
+                                      value={addresse?.id}
+                                    >
+                                      {` ${addresse?.address_name} ${
+                                        addresse?.street
+                                      } ${t("Street")}
                               ${addresse?.apartment_no} ${t("Apartment")},
                                 ${addresse?.building_no} ${t("Building")},
                                     ${addresse?.floor_no} ${t("Floor")}`}
-                                  </option>
-                                );
+                                    </option>
+                                  );
+                                }
                               }
-                            }
-                          )}
-                        </NativeSelect>
-                      </FormControl>
-}
+                            )}
+                          </NativeSelect>
+                        </FormControl>
+                      )}
 
                       {myAddresses?.data?.data?.addresses?.length === 0 && (
                         <Box
