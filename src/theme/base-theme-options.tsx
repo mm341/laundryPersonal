@@ -138,7 +138,7 @@ export const baseThemeOptions: options = {
           display: "flex",
           flexDirection: "column",
           minHeight: "100%",
-          width: "100%",
+          width: "100vw",
         },
         body: {
           display: "flex",

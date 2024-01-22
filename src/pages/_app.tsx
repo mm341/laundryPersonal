@@ -130,11 +130,6 @@ export default function App({
     }
   }, [machineId]);
 
-  const darkModeStyles = {
-    backgroundColor: '#333333',
-    color: '#ffffff',
-  };
-
   //  navbar
   const Navbar = dynamic(() => import("@/Components/Navbar"), { ssr: false });
   return (
@@ -148,26 +143,17 @@ export default function App({
                 <Toaster
                   toastOptions={{
                     className: "",
-                    // style: {
-                    //   // border: "1px solid #713200",
-                    //   // padding: "16px",
-                    //   // color: "#713200",
-                    //   position:"relative",
-                    //   zIndex:1000000,
-                    //   top:"200"
-                    // },
                   }}
                   containerStyle={{
-                  
-                    // top: "100px",
-                    zIndex:1000000,
-                    position: 'sticky',
+                    zIndex: 1000000,
+                    position: "sticky",
                   }}
                 />
                 <Head>
                   <title>{t("Loading...")}</title>
                 </Head>
                 <Navbar />
+
                 <Box
                   sx={{
                     display: !previewLoader ? "none" : "flex",
@@ -193,9 +179,8 @@ export default function App({
                   }}
                 >
                   <ScrollToTop />
-                  <CssBaseline />
+
                   <Box
-                  
                     sx={{
                       minHeight: "80vh",
                       mt: {
@@ -205,9 +190,8 @@ export default function App({
                       mb: "5rem",
                     }}
                   >
-                     <CssBaseline />
                     <ScrollToTop />
-                    <DynamicFavicon/>
+                    <DynamicFavicon />
                     {getLayout(<Component {...pageProps} />)}
                   </Box>
                 </Box>
