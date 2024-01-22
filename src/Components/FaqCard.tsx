@@ -1,4 +1,4 @@
-import {  Stack, Typography, useTheme } from "@mui/material";
+import { Stack, Typography, useTheme } from "@mui/material";
 
 import React from "react";
 import { useState } from "react";
@@ -60,17 +60,18 @@ const FaqCard = ({
           width={"100%"}
           gap={"15px"}
         >
-          
-            <Typography
-              sx={{
-                fontSize: { md: "24px", xs: "16px" },
-                fontWeight: "600",
-                textAlign: "left",
-              }}
-            >
-              {t(e?.question)}
-            </Typography>
-          
+          <Typography
+            sx={{
+              fontSize: { md: "24px", xs: "16px" },
+              fontWeight: "600",
+              textAlign: "left",
+              cursor:"pointer"
+            }}
+            onClick={() => setPreviewAnswer(!previewAnswer)}
+          >
+            {t(e?.question)}
+          </Typography>
+
           {previewAnswer && (
             <Typography
               sx={{

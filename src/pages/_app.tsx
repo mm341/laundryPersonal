@@ -130,6 +130,11 @@ export default function App({
     }
   }, [machineId]);
 
+  const darkModeStyles = {
+    backgroundColor: '#333333',
+    color: '#ffffff',
+  };
+
   //  navbar
   const Navbar = dynamic(() => import("@/Components/Navbar"), { ssr: false });
   return (
@@ -190,6 +195,7 @@ export default function App({
                   <ScrollToTop />
                   <CssBaseline />
                   <Box
+                  
                     sx={{
                       minHeight: "80vh",
                       mt: {

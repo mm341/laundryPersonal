@@ -80,6 +80,19 @@
   color:white !important
 }
 
+body {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+/* Dark mode styles when the user prefers dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #333333;
+    color: #ffffff;
+  }
+}
+
 /* .mui-style-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
 right: 16px !important;
 } */
