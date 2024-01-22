@@ -2,10 +2,7 @@ import OtpForm from "@/Components/AuthBox/auth/forgot-password/OtpForm";
 import { AuthApi } from "@/React-Query/authApi";
 import { baseUrl } from "@/api/MainApi";
 
-import {
-  
-  SaveProfileData,
-} from "@/redux/slices/HandelUpdateProfile";
+import { SaveProfileData } from "@/redux/slices/HandelUpdateProfile";
 import { useAppDispatch } from "@/redux/store";
 import { GlobalButton } from "@/styles/PublicStyles";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
@@ -42,9 +39,11 @@ const FormSubmitButton = ({
   });
   //  get token from localstorage
   let token: string | null = "";
+  let language: string | null = "";
 
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token");
+    language = localStorage.getItem("language");
   }
   //  custom Action for send api
 
@@ -66,6 +65,8 @@ const FormSubmitButton = ({
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "multipart/form-data", // Assuming you are sending form data
+              "Accept-Language": language,
+              locale: language,
             },
           })
           .then((res: any) => {
@@ -125,7 +126,7 @@ const FormSubmitButton = ({
     width: { sm: "791px", xs: "90%", mx: "auto" },
     bgcolor: "background.paper",
     p: 4,
-    borderRadius:"6px"
+    borderRadius: "6px",
   };
   return (
     <>
