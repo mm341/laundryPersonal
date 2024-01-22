@@ -2,16 +2,18 @@ import {
   GlobalButton,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-import { Typography, useTheme } from "@mui/material";
+import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { work } from "../HomePage/LaundryWork";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 const GlobalLaundryCard = ({ element }: { element: work }) => {
   //  hooks
+  const theme=useTheme()
   const { locale } = useRouter();
   const [title, setTitle] = useState<string>("");
   const [desribtion, setDesribtion] = useState<string>("");
+  const issmall = useMediaQuery(theme.breakpoints.down("md"));
   //  translate title and describtion due to language
   useEffect(() => {
     if (locale === "en") {
@@ -26,7 +28,7 @@ const GlobalLaundryCard = ({ element }: { element: work }) => {
     <GlobalDisplayFlexColumnBox
       width={"90%"}
       sx={{ mx: "auto" }}
-      gap={"24px"}
+      gap={!issmall?"24px":"10px"}
       alignItems={"Center"}
     >
       <img

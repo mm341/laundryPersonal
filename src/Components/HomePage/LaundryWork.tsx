@@ -1,5 +1,5 @@
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import GlobalTypography from "./GlobalTypography";
 import PublicContainer from "../PublicContainer";
@@ -17,8 +17,9 @@ export interface work {
 }
 const WorkLaundry = () => {
   //  hook
-
+  const theme = useTheme();
   const { locale } = useRouter();
+  const issmall = useMediaQuery(theme.breakpoints.down("md"));
   //  work section data
   const array: work[] = [
     {
@@ -48,7 +49,7 @@ const WorkLaundry = () => {
   ];
   return (
     <PublicContainer>
-      <GlobalDisplayFlexColumnBox width={"100%"} gap={"72px"}>
+      <GlobalDisplayFlexColumnBox width={"100%"} gap={!issmall?"72px":"30px"}>
         <GlobalTypography text={"How It Work"} />
         <Box
           sx={{
@@ -58,13 +59,15 @@ const WorkLaundry = () => {
             mx: "auto",
           }}
         >
-          <img
-            src={locale === "en" ? stepPhoto?.src : stepPhotoArabic?.src}
-            loading="lazy"
-            alt="stepImg"
-          />
+          {!issmall && (
+            <img
+              src={locale === "en" ? stepPhoto?.src : stepPhotoArabic?.src}
+              loading="lazy"
+              alt="stepImg"
+            />
+          )}
         </Box>
-        <Grid container spacing={3}>
+        <Grid container spacing={!issmall ? 3 : 5}>
           {array?.map((e: work, i: number) => (
             <Grid key={i} item md={4} sm={6} xs={12}>
               <GlobalLaundryCard element={e} />
