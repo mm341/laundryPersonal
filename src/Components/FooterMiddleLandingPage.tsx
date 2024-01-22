@@ -209,6 +209,7 @@ const Footer = () => {
                         alt="footerPhone"
                       />
                       <Typography
+                        dir="ltr"
                         sx={{
                           fontWeight: "500",
                           fontSize: !issmall ? "16px" : "12px",

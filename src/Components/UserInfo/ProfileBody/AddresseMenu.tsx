@@ -23,6 +23,7 @@ import { AddresseInterface } from "@/interfaces/AddresseInterface";
 import LoadingComponent from "@/Components/GlobalComponent/LoadingComponent";
 import NoAddressesFound from "../../../../public/info/noAddresseFound.svg";
 import SimpleBar from "simplebar-react";
+import { useTranslation } from "react-i18next";
 const AddresseMenu = ({
   setOpen,
   setOpenDeleteDialog,
@@ -43,7 +44,7 @@ const AddresseMenu = ({
   setAddresseDefaultId: (e: string) => void;
 }) => {
   //  hooks
-
+  const { t } = useTranslation();
   //  handel addresse title img due to addresse title
 
   const OrderActionStatus = (addresse: AddresseInterface) => {
@@ -191,10 +192,12 @@ const AddresseMenu = ({
                                   lineBreak: "anywhere",
                                 }}
                               >
-                                {addresse?.street} street{" "}
-                                {addresse?.apartment_no} Apartment{" "}
-                                {addresse?.building_no} Building{" "}
-                                {addresse?.floor_no} Floor
+                                {` ${addresse?.address_name} ${
+                                  addresse?.street
+                                } ${t("Street")}
+                              ${addresse?.apartment_no} ${t("Apartment")},
+                                ${addresse?.building_no} ${t("Building")},
+                                    ${addresse?.floor_no} ${t("Floor")}`}
                               </Box>
                             </Box>
                           </Box>

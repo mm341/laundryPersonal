@@ -90,7 +90,6 @@ const CheckOutPage = ({
     (state) => state.orders
   );
 
-
   //  default addresse
   const {
     isLoading,
@@ -224,14 +223,13 @@ const CheckOutPage = ({
     }
   }, [dispatch, footerSocialLinks]);
 
- 
   return (
     <>
       <Meta
         title={"CheckOut"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
-       <CssBaseline />
+      <CssBaseline />
       <AuthGuard>
         <PublicContainer>
           <CustomPaperBigCard
@@ -283,7 +281,6 @@ const CheckOutPage = ({
                             required
                             sx={{ width: "100%" }}
                             value={accountInfo?.first_name}
-                           
                             label={t("Full Name")}
                           />
                         </Grid>
@@ -469,22 +466,23 @@ const CheckOutPage = ({
                                   <option key={i} value={addresse?.id}>
                                     {` ${
                                       addresse?.address_name
-                                    } ${addresse?.street?.slice(
-                                      0,
-                                      30
-                                    )}... street
-                                ${addresse?.apartment_no} Apartment,
-                                  ${addresse?.building_no} Building,
-                                      ${addresse?.floor_no} Floor`}
+                                    } ${addresse?.street?.slice(0, 30)}... ${t(
+                                      "Street"
+                                    )}
+                                ${addresse?.apartment_no} ${t("Apartment")},
+                                  ${addresse?.building_no} ${t("Building")},
+                                      ${addresse?.floor_no} ${t("Floor")}`}
                                   </option>
                                 );
                               } else {
                                 return (
                                   <option key={i} value={addresse?.id}>
-                                    {` ${addresse?.address_name} ${addresse?.street} street
-                                ${addresse?.apartment_no} Apartment,
-                                  ${addresse?.building_no} Building,
-                                      ${addresse?.floor_no} Floor`}
+                                    {` ${addresse?.address_name} ${
+                                      addresse?.street
+                                    } ${t("Street")}
+                              ${addresse?.apartment_no} ${t("Apartment")},
+                                ${addresse?.building_no} ${t("Building")},
+                                    ${addresse?.floor_no} ${t("Floor")}`}
                                   </option>
                                 );
                               }
