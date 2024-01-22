@@ -131,7 +131,7 @@ const Navbar = () => {
                   color: "#636363",
                 }}
               >
-               {t("Hello")}, {accountInfo?.name}
+                {t("Hello")}, {accountInfo?.name}
               </Typography>
               <KeyboardArrowDownIcon />
             </GlobalDisplayFlexBox>
@@ -201,7 +201,7 @@ const Navbar = () => {
   }, [token]);
 
   useEffect(() => {
-    if (token && (!accountInfo || Object.values(accountInfo)?.length === 0 )) {
+    if (token && (!accountInfo || Object.values(accountInfo)?.length === 0)) {
       dispatch(GetProfileData());
     }
   }, [token, accountInfo]);

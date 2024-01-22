@@ -16,25 +16,28 @@
   }
 };
 .mui-style-17rwaj.Mui-selected {
-  background-color: blue !important;
-  color:blue !important
+  background-color: #329CD7 !important;
+  color:white !important
 };
 .mui-style-1ynlm0l-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
-  background-color: blue !important;
-  color:blue !important
+  background-color: #329CD7 !important;
+  color:white !important
 }
 .mui-style-1ynlm0l-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
-  background-color: blue !important;
-  color:blue !important
+  background-color: #329CD7 !important;
+  color:white!important
 }
 .mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
-  background-color: blue !important;
-  color:blue !important
+  background-color: #329CD7 !important;
+  color:white !important
 };
-
+.mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root:focus{
+  background-color: #329CD7 !important;
+  color:white !important
+}
 .mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
-  background-color: blue !important;
-  color:blue !important
+  background-color: #329CD7 !important;
+  color:white !important
 }
 
 /* .mui-style-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
