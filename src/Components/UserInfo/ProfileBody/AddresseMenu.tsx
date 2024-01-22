@@ -24,6 +24,7 @@ import LoadingComponent from "@/Components/GlobalComponent/LoadingComponent";
 import NoAddressesFound from "../../../../public/info/noAddresseFound.svg";
 import SimpleBar from "simplebar-react";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 const AddresseMenu = ({
   setOpen,
   setOpenDeleteDialog,
@@ -46,16 +47,36 @@ const AddresseMenu = ({
   //  hooks
   const { t } = useTranslation();
   //  handel addresse title img due to addresse title
-
+  const { locale } = useRouter();
   const OrderActionStatus = (addresse: AddresseInterface) => {
     let img;
-    console.log(addresse?.address_name)
+
     switch (addresse?.address_name) {
-      case "home" || "المنزل":
+      case "home" ?? "المنزل":
         img = titleADreesseHomeIcon?.src;
         break;
 
-      case "office" || "المكتب":
+      case "office" ?? "المكتب":
+        img = titleADreesseOfficeIcon?.src;
+        break;
+
+      case "others" ?? "اخري":
+        img = titleADreesseOthersIcon?.src;
+        break;
+    }
+
+    return img;
+  };
+
+  const OrderActionStatusArabic = (addresse: AddresseInterface) => {
+    let img;
+
+    switch (addresse?.address_name) {
+      case "المنزل":
+        img = titleADreesseHomeIcon?.src;
+        break;
+
+      case "المكتب":
         img = titleADreesseOfficeIcon?.src;
         break;
 
@@ -150,7 +171,11 @@ const AddresseMenu = ({
                             >
                               <img
                                 style={{ width: "20px", height: "20px" }}
-                                src={OrderActionStatus(addresse)}
+                                src={
+                                  locale === "en"
+                                    ? OrderActionStatus(addresse)
+                                    : OrderActionStatusArabic(addresse)
+                                }
                                 loading="lazy"
                                 alt="img"
                               />
