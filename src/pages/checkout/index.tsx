@@ -77,8 +77,6 @@ const CheckOutPage = ({
 
   const [pickupDate, setPickupData] = useState<string>("");
   const { accountInfo } = useAppSelector((state) => state.profile);
-  const [fullName, setFullName] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [addtionalInformation, setAdditionalInformation] = useState<string>("");
   const [deliveryDate, setDeliveryDate] = useState<string>("");
   const [deliveryHour, setDeliveryHour] = useState<string>("");
@@ -91,12 +89,6 @@ const CheckOutPage = ({
     (state) => state.orders
   );
 
-  useEffect(() => {
-    if (accountInfo?.first_name && accountInfo?.mobile) {
-      setFullName(accountInfo?.first_name);
-      setPhoneNumber(accountInfo?.mobile);
-    }
-  }, [accountInfo?.first_name, accountInfo?.mobile]);
 
   //  default addresse
   const {
@@ -230,6 +222,8 @@ const CheckOutPage = ({
       dispatch(CashFooterLinks(footerSocialLinks));
     }
   }, [dispatch, footerSocialLinks]);
+
+ 
   return (
     <>
       <Meta
@@ -286,8 +280,8 @@ const CheckOutPage = ({
                             InputProps={{ readOnly: true }}
                             required
                             sx={{ width: "100%" }}
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
+                            value={accountInfo?.first_name}
+                           
                             label={t("Full Name")}
                           />
                         </Grid>
@@ -297,8 +291,7 @@ const CheckOutPage = ({
                             InputProps={{ readOnly: true }}
                             required
                             sx={{ width: "100%" }}
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            value={accountInfo?.mobile}
                             label={t("Phone Number")}
                           />
                         </Grid>
