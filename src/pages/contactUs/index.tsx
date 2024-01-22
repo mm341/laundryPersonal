@@ -50,7 +50,7 @@ const ContactUs = ({
   const sm = useMediaQuery(theme.breakpoints.down("md"));
 
   const { locale } = useRouter();
-
+  const { master } = useAppSelector((state) => state.master);
   const { footerLinks } = useAppSelector((state) => state.master);
 
   //  cash areas
@@ -157,8 +157,7 @@ const ContactUs = ({
                             <Typography
                               sx={{ fontSize: "16px", fontWeight: "400" }}
                             >
-                              King Fahd Road, Al Salamiya, Hotat Bani Tamim
-                              16511, KSA
+                              {master?.address}
                             </Typography>
                           </GlobalDisplayFlexBox>
                           <GlobalDisplayFlexBox
@@ -171,9 +170,10 @@ const ContactUs = ({
                           >
                             <LocalPhoneIcon />
                             <Typography
+                              dir="ltr"
                               sx={{ fontSize: "16px", fontWeight: "400" }}
                             >
-                              (+966)56638538
+                              {master?.mobile}
                             </Typography>
                           </GlobalDisplayFlexBox>
                           <GlobalDisplayFlexBox
@@ -188,7 +188,7 @@ const ContactUs = ({
                             <Typography
                               sx={{ fontSize: "16px", fontWeight: "400" }}
                             >
-                              alwan-elghasil@company.com
+                              {master?.email}
                             </Typography>
                           </GlobalDisplayFlexBox>
                         </GlobalDisplayFlexColumnBox>
