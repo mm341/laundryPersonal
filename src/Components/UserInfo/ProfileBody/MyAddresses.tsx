@@ -151,7 +151,7 @@ const MyAddresses = () => {
             gap={"30px"}
             alignItems={"center"}
           >
-            {myAddresses?.data?.data?.addresses?.length > 0 && (
+            {myAddresses?.data?.data?.addresses?.length > 1 && (
               <Box
                 onClick={() => {
                   setOpenDefalultDialog(true);
