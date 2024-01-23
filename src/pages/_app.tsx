@@ -181,6 +181,7 @@ export default function App({
                   <ScrollToTop />
 
                   <Box
+                   style={{ overflowX: "hidden" }}
                     sx={{
                       minHeight: "80vh",
                       mt: {

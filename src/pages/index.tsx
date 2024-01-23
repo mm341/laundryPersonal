@@ -66,10 +66,11 @@ export default function Home({
 
   //  cash footer Social Media Links
   useEffect(() => {
-    if (footerSocialLinks?.length > 0) {
+  
       dispatch(CashFooterLinks(footerSocialLinks));
-    }
+    
   }, [dispatch, footerSocialLinks]);
+  
   return (
     <>
       <Meta
