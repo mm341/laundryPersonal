@@ -66,11 +66,9 @@ export default function Home({
 
   //  cash footer Social Media Links
   useEffect(() => {
-  
-      dispatch(CashFooterLinks(footerSocialLinks));
-    
+    dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
-  
+
   return (
     <>
       <Meta
@@ -78,7 +76,7 @@ export default function Home({
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
       <CssBaseline />
-      <HomeParentBox>
+      <HomeParentBox style={{ overflowX: "hidden" }}>
         <FirstSection
           homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
           homeServices={homeServices?.length > 0 ? homeServices : services}
@@ -105,7 +103,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("services", {
       headers: {
         "Accept-Language": locale,
-        "locale": locale,
+        locale: locale,
       },
     });
     homeServices = configRes?.data?.data?.services;
@@ -117,7 +115,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const Res = await MainApi.get("areas", {
       headers: {
         "Accept-Language": locale,
-        "locale": locale,
+        locale: locale,
       },
     });
 
@@ -130,7 +128,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("master", {
       headers: {
         "Accept-Language": locale,
-        "locale": locale,
+        locale: locale,
       },
     });
     masterData = configRes?.data?.data;
@@ -143,7 +141,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("social-link", {
       headers: {
         "Accept-Language": locale,
-        "locale": locale,
+        locale: locale,
       },
     });
     footerSocialLinks = configRes?.data?.data?.socialLink;

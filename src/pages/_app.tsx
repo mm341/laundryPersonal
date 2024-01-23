@@ -176,25 +176,17 @@ export default function App({
                   style={{ overflowX: "hidden" }}
                   sx={{
                     display: previewLoader ? "none" : "block",
+                    minHeight: "80vh",
+                    mt: {
+                      md: router.pathname !== "/" ? "7rem" : "3.9rem",
+                      xs: router.pathname !== "/" ? "7rem" : "5rem",
+                    },
+                    mb: "5rem",
                   }}
                 >
                   <ScrollToTop />
-
-                  <Box
-                   style={{ overflowX: "hidden" }}
-                    sx={{
-                      minHeight: "80vh",
-                      mt: {
-                        md: router.pathname !== "/" ? "7rem" : "3.9rem",
-                        xs: router.pathname !== "/" ? "7rem" : "5rem",
-                      },
-                      mb: "5rem",
-                    }}
-                  >
-                    <ScrollToTop />
-                    <DynamicFavicon />
-                    {getLayout(<Component {...pageProps} />)}
-                  </Box>
+                  <DynamicFavicon />
+                  {getLayout(<Component {...pageProps} />)}
                 </Box>
                 <Footer />
               </RTL>

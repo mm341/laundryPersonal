@@ -16,7 +16,7 @@ import GlobalSelectBox from "../GlobalSelectBox";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import ServicesDialog from "../Dialogs/ServicesDialog";
-import rightPhotoSection from "../../../public/HomePage/huge img.png";
+
 import photo from "../../../public/HomePage/firstSectionImg.svg";
 
 import GlobalTypography from "./GlobalTypography";
@@ -24,6 +24,8 @@ import AppSmallSection from "./AppSmallSection";
 import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import Carousel from "react-material-ui-carousel";
+import FirstRightSection from "./FirstRightSection";
+import dynamic from "next/dynamic";
 
 const FirstSection = ({
   homeServices,
@@ -56,6 +58,9 @@ const FirstSection = ({
     setOpenOrderDialog(false);
   };
 
+  const FirstRightSection = dynamic(() => import("./FirstRightSection"), {
+    ssr: false,
+  });
   return (
     <>
       <Box
@@ -168,7 +173,7 @@ const FirstSection = ({
                   display: "flex",
                   flexDirection: { sm: "row", xs: "column" },
 
-                  justifyContent: {md:"flex-start",xs:"center"},
+                  justifyContent: { md: "flex-start", xs: "center" },
                   alignItems: "center",
                   gap: { sm: "0px", xs: "15px" },
                   p: { sm: "15px", xs: "0" },
@@ -200,8 +205,8 @@ const FirstSection = ({
                       backgroundColor: theme.palette.primary.main,
                       borderTopRightRadius: "5px",
                       borderBottomRightRadius: "5px",
-                      borderTopLeftRadius: {md:"0",xs:"5px"},
-                      borderBottomLeftRadius: {md:"0",xs:"5px"},
+                      borderTopLeftRadius: { md: "0", xs: "5px" },
+                      borderBottomLeftRadius: { md: "0", xs: "5px" },
                     }}
                     color={"white"}
                   >
@@ -215,22 +220,7 @@ const FirstSection = ({
 
             {/*  Image Right Section */}
 
-            <Box
-              data-aos="fade-left"
-              sx={{
-                width: { md: "50%", xs: "100%" },
-                height: { sm: "710px", xs: "350px" },
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-            >
-              <img
-                alt="img"
-                loading="lazy"
-                src={rightPhotoSection?.src}
-                style={{ width: "100%", height: "100%", objectFit: "contain" }}
-              />
-            </Box>
+            <FirstRightSection />
           </GlobalDisplayFlexBox>
         </Box>
       </Box>
