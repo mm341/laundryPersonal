@@ -80,6 +80,13 @@ const ProductsPage = ({
     (state) => state.products
   );
 
+  useEffect(() => {
+    if (products?.length > 0) {
+      if (products[0]?.service?.name) {
+        localStorage.setItem("service", products[0]?.service?.name);
+      }
+    }
+  }, [products]);
   //     complete hooks
   const [type, setType] = useState<string>(variants[0]?.id);
   useEffect(() => {
