@@ -120,13 +120,13 @@ const ProductsPage = ({
   const handelChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
     if (e.target.value) {
-      dispatch(
-        GetProductsWithSearch({
-          serviceId: router.query.service_id,
-          variantId: type,
-          searchText: e.target.value,
-        })
-      );
+      // dispatch(
+      //   GetProductsWithSearch({
+      //     serviceId: router.query.service_id,
+      //     variantId: type,
+      //     searchText: e.target.value,
+      //   })
+      // );
     } else {
       dispatch(
         GetProducts({
