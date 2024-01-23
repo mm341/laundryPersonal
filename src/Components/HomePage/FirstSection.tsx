@@ -5,7 +5,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 
 import {
   GlobalButton,
@@ -220,7 +220,9 @@ const FirstSection = ({
 
             {/*  Image Right Section */}
 
-            <FirstRightSection />
+            <Suspense fallback={<div>Loading...</div>}>
+              <FirstRightSection />
+            </Suspense>
           </GlobalDisplayFlexBox>
         </Box>
       </Box>

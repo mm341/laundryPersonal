@@ -1,6 +1,3 @@
-// import Image from "next/image";
-// import { Inter } from "next/font/google";
-// import { Box } from "@mui/material";
 import FirstSection from "@/Components/HomePage/FirstSection";
 import { HomeParentBox } from "@/styles/PublicStyles";
 import ServiceSection from "@/Components/HomePage/ServiceSection";
@@ -77,10 +74,10 @@ export default function Home({
       />
       <CssBaseline />
       <HomeParentBox style={{ overflowX: "hidden" }}>
-        {/* <FirstSection
+        <FirstSection
           homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
           homeServices={homeServices?.length > 0 ? homeServices : services}
-        /> */}
+        />
         <WorkLaundry />
         <ServiceSection
           homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
