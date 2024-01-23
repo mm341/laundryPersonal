@@ -91,7 +91,7 @@ const HowItWork = ({
       />
       <CssBaseline />
       <PublicContainer>
-        <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+        <CustomPaperBigCard sx={{ backgroundColor: "white",my:"5px" }}>
           <GlobalDisplayFlexColumnBox
             width={"100%"}
             gap={"140px"}

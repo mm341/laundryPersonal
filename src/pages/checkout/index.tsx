@@ -233,7 +233,7 @@ const CheckOutPage = ({
       <AuthGuard>
         <PublicContainer>
           <CustomPaperBigCard
-            sx={{ backgroundColor: theme.palette.primary.dark }}
+            sx={{ backgroundColor: theme.palette.primary.dark ,my:"5px"}}
           >
             <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
               <Grid container spacing={3} sx={{ alignItems: "flex-start" }}>

@@ -84,7 +84,7 @@ const ContactUs = ({
       <CssBaseline />
       <PublicContainer>
         <CustomPaperBigCard
-          sx={{ backgroundColor: theme.palette.primary.dark }}
+          sx={{ backgroundColor: theme.palette.primary.dark ,my:"5px"}}
         >
           <Box
             sx={{ width: { md: "85%", xs: "100%" }, mx: "auto", py: "25px" }}

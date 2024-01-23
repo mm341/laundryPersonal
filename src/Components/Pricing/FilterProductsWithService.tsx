@@ -86,7 +86,7 @@ const FilterProductsWithService = () => {
     }
   };
   return (
-    <CustomPaperBigCard sx={{ backgroundColor: theme.palette.primary.dark }}>
+    <CustomPaperBigCard sx={{ backgroundColor: theme.palette.primary.dark,my:"5px" }}>
       <GlobalDisplayFlexColumnBox gap={"40px"} sx={{ py: "30px", px: "15px" }}>
         {/*  search field */}
         <Box

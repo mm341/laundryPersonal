@@ -23,7 +23,7 @@ const About = ({
       />
       <CssBaseline />
       <PublicContainer>
-        <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+        <CustomPaperBigCard sx={{ backgroundColor: "white",my:"5px" }}>
           <GlobalDisplayFlexColumnBox sx={{ py: "80px" }}>
             <GlobalDisplayFlexColumnBox gap={"128px"}>
               <GlobalDisplayFlexColumnBox width={"100%"} gap={"56px"}>
