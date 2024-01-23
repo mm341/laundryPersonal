@@ -5,7 +5,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, lazy, useState } from "react";
 
 import {
   GlobalButton,
@@ -58,9 +58,10 @@ const FirstSection = ({
     setOpenOrderDialog(false);
   };
 
-  const FirstRightSection = dynamic(() => import("./FirstRightSection"), {
-    ssr: false,
-  });
+  // const FirstRightSection = dynamic(() => import("./FirstRightSection"), {
+  //   ssr: false,
+  // });
+  const FirstRightSection = lazy(() => import("./FirstRightSection"));
   return (
     <>
       <Box
