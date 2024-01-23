@@ -77,10 +77,10 @@ export default function Home({
       />
       <CssBaseline />
       <HomeParentBox style={{ overflowX: "hidden" }}>
-        <FirstSection
+        {/* <FirstSection
           homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
           homeServices={homeServices?.length > 0 ? homeServices : services}
-        />
+        /> */}
         <WorkLaundry />
         <ServiceSection
           homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
