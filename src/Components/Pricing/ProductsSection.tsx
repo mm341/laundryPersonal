@@ -1,7 +1,7 @@
 import { productInterface } from "@/interfaces/ProductInterface";
 import { useAppSelector } from "@/redux/store";
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import LoadingComponent from "../GlobalComponent/LoadingComponent";
@@ -15,6 +15,7 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
 
   const { t } = useTranslation();
   const { locale } = useRouter();
+const theme=useTheme()
   //  master data
   const { master } = useAppSelector((state) => state.master);
 
@@ -91,15 +92,38 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
                   >
                     {e?.name}
                   </Typography>
-                  <Typography
+                  <Box
                     sx={{
-                      fontSize: "18px",
-                      fontWeight: "400",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
                       width: { sm: "55%", xs: "100%" },
+                      gap:"10px"
                     }}
                   >
-                    {e?.current_price} {master?.currency}
-                  </Typography>
+                    {e?.old_price>0 && (
+                      <Typography
+                        sx={{
+                          fontSize: "18px",
+                          fontWeight: "400",
+                          color:theme.palette.secondary.contrastText,
+                          textDecoration: "line-through",
+                        }}
+                      >
+                        {e?.old_price} {master?.currency} 
+                      </Typography>
+                    )}
+                   {e.old_price>0 && <Typography>/</Typography> }
+                    <Typography
+                      sx={{
+                        fontSize: "18px",
+                        fontWeight: "400",
+                      
+                      }}
+                    >
+                      {e?.current_price} {master?.currency}
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
             ))}

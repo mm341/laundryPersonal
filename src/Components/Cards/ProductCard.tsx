@@ -59,8 +59,8 @@ const ProductCard = ({
             }}
           >
             <img
-            width={400}
-            height={400}
+              width={400}
+              height={400}
               src={product?.image_path}
               loading="lazy"
               alt="productImg"
@@ -83,7 +83,12 @@ const ProductCard = ({
                   {product?.current_price} {master?.currency} / {t("Item")}
                 </Typography>
                 <Typography
-                  sx={{ fontSize: "14px", fontWeight: "400", color: "#999999" }}
+                  sx={{
+                    fontSize: "14px",
+                    fontWeight: "400",
+                    color: "#999999",
+                    textDecoration: "line-through",
+                  }}
                 >
                   {product?.old_price} {master?.currency} / {t("Item")}
                 </Typography>
