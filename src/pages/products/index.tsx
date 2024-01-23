@@ -205,6 +205,7 @@ const ProductsPage = ({
             sx={{
               borderRadius: "10px",
               backgroundColor: theme.palette.primary.dark,
+              my:"5px"
             }}
           >
             <Grid container spacing={3}>
