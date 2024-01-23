@@ -114,8 +114,8 @@ const Cartsection = ({
           />
           <SummarySection />
 
-          <Stack width={"100%"} px={"18px"}>
-            <GlobalButton
+          <GlobalDisplayFlexColumnBox gap={"12px"} width={"100%"} px={"18px"}>
+            {/* <GlobalButton
               px={"0"}
               py={"0"}
               sx={{
@@ -146,8 +146,50 @@ const Cartsection = ({
                   {t("CheckOut")}
                 </Typography>
               </Stack>
+            </GlobalButton> */}
+            <Typography
+              sx={{
+                color: theme.palette.secondary.contrastText,
+                fontSize: "14px",
+                fontWeight: "400",
+              }}
+            >
+              {t("Minimum order value is")} 20 {master.currency}
+            </Typography>
+
+            <GlobalButton
+              px={"0"}
+              py={"0"}
+              sx={{
+                width: "100%",
+                height: "48px",
+                borderRadius: "5px",
+                backgroundColor: theme.palette.secondary.contrastText,
+                color: "white",
+              }}
+              onClick={() => {
+                if (token) {
+                  router.push("/checkout");
+                } else {
+                  handleOpenAuthModal();
+                }
+              }}
+            >
+              <Stack
+                direction={"row"}
+                justifyContent={"center"}
+                width={"100%"}
+                gap={"10px"}
+              >
+                {/* <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>
+                  (40.00 {master?.currency})
+                </Typography> */}
+                <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>
+                  {t("CheckOut")}
+                </Typography>
+              </Stack>
             </GlobalButton>
-          </Stack>
+          </GlobalDisplayFlexColumnBox>
         </GlobalDisplayFlexColumnBox>
       </Box>
 

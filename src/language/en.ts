@@ -231,6 +231,8 @@ export const english = {
 "How Alwan-Elghasil Work":"How Alwan-Elghasil Works",
 "The faster way to do Laundry and all you need so you never have to worry about washing":"The faster way to do Laundry and all you need so you never have to worry about washing",
 
+"Minimum order value is":"Minimum order value is",
+
 
 
 

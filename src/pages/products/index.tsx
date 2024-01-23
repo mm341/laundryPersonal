@@ -130,7 +130,6 @@ const ProductsPage = ({
     }
   };
 
- 
   useEffect(() => {
     if (router.query.service_id && type) {
       dispatch(

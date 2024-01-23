@@ -982,6 +982,7 @@ export const arabic = {
 
   "Pickup Schedule": "جدول الاستلام",
   "No":"لا",
+  "Minimum order value is":"الحد الأدنى لقيمة الطلب هو",
   "Fast Name": "اسم سريع",
   "Not changeable": "غير قابل للتغيير",
   "Delivery Schedule": "جدول التسليم",
