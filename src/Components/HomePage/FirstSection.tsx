@@ -58,9 +58,7 @@ const FirstSection = ({
     setOpenOrderDialog(false);
   };
 
-  // const FirstRightSection = dynamic(() => import("./FirstRightSection"), {
-  //   ssr: false,
-  // });
+ 
   const FirstRightSection = lazy(() => import("./FirstRightSection"));
   return (
     <>
