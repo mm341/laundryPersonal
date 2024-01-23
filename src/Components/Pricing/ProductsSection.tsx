@@ -101,6 +101,19 @@ const theme=useTheme()
                       gap:"10px"
                     }}
                   >
+                  
+                
+                    <Typography
+                      sx={{
+                        fontSize: "18px",
+                        fontWeight: "400",
+                      
+                      }}
+                    >
+                      {e?.current_price} {master?.currency}
+                    </Typography>
+                    {e.old_price>0 && <Typography>/</Typography> }
+
                     {e?.old_price>0 && (
                       <Typography
                         sx={{
@@ -113,16 +126,6 @@ const theme=useTheme()
                         {e?.old_price} {master?.currency} 
                       </Typography>
                     )}
-                   {e.old_price>0 && <Typography>/</Typography> }
-                    <Typography
-                      sx={{
-                        fontSize: "18px",
-                        fontWeight: "400",
-                      
-                      }}
-                    >
-                      {e?.current_price} {master?.currency}
-                    </Typography>
                   </Box>
                 </Box>
               </Box>
