@@ -9,6 +9,7 @@ import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import { Scrollbar } from "../GlobalComponent/Scrollbar";
 
 const ServiceSection = ({
   homeServices,
@@ -33,34 +34,23 @@ const ServiceSection = ({
       <PublicContainer>
         <GlobalDisplayFlexColumnBox width={"100%"} gap={"72px"}>
           <GlobalTypography text={"Our Services"} />
-          <Grid container spacing={3}>
-            {homeServices?.length > 0 && (
-              <Grid item xs={12}>
-                <Typography
-                  onClick={() => push("/services")}
-                  sx={{
-                    textDecoration: "underline",
-                    textAlign: "right",
-                    color: theme.palette.primary.main,
-                    cursor: "pointer",
-                    fontSize: "20px",
-                    fontWeight: "500",
-                  }}
-                >
-                  {t("View All")} ({homeServices?.length})
-                </Typography>
-              </Grid>
-            )}
-            {homeServices?.slice(0, 6)?.map((e: HomeServices, i: number) => (
-              <Grid key={e?.id} item md={4} sm={6} xs={12}>
-                <SeviceCard
-                  setServiceId={setServiceId}
-                  element={e}
-                  setOpenOrderDialog={setOpenAreaDialog}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          <Scrollbar
+            style={{
+              maxHeight: "600px",
+            }}
+          >
+            <Grid container spacing={3}>
+              {homeServices?.map((e: HomeServices, i: number) => (
+                <Grid key={e?.id} item md={4} sm={6} xs={12}>
+                  <SeviceCard
+                    setServiceId={setServiceId}
+                    element={e}
+                    setOpenOrderDialog={setOpenAreaDialog}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Scrollbar>
         </GlobalDisplayFlexColumnBox>
       </PublicContainer>
       <AreaDialog

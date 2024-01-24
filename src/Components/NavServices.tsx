@@ -6,6 +6,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTranslation } from "react-i18next";
 import { HomeServices } from "@/interfaces/HomeServices";
 import { useRouter } from "next/router";
+import { Scrollbar } from "./GlobalComponent/Scrollbar";
 
 const NavServices = ({
   setOpenAreaDialog,
@@ -75,7 +76,7 @@ const NavServices = ({
               p: "20px  ",
             }}
           >
-            {services?.slice(0, 6)?.map((e: HomeServices, i: number) => (
+            {services?.map((e: HomeServices, i: number) => (
               <Box key={e?.id}>
                 <Typography
                   onClick={() => {
@@ -94,24 +95,6 @@ const NavServices = ({
                 </Typography>
               </Box>
             ))}
-
-{services?.length>0 &&
-            <Typography
-              onClick={() => {
-                setResdropdown(false);
-                push("/services");
-              }}
-              sx={{
-                color: theme.palette.primary.main,
-                textAlign: "center",
-                fontWeight: "500",
-                cursor: "pointer",
-                fontSize: "20px",
-              }}
-            >
-              {t("View All")} ({services?.length})
-            </Typography>
-}
           </Box>
         )}
       </RTL>

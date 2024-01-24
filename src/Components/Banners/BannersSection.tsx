@@ -11,6 +11,12 @@ const BannersSection = () => {
   return (
     banners?.length > 0 && (
       <Carousel
+      // sx={
+      //   '.mui-style-1m9128y' {
+      //     text-align: center !important;
+      //     margin-top: 25px !important;
+        
+      // }}
         animation={"slide"}
         duration={200}
         swipe={true}
