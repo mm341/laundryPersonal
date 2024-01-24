@@ -95,6 +95,7 @@ const NavServices = ({
               </Box>
             ))}
 
+{services?.length>0 &&
             <Typography
               onClick={() => {
                 setResdropdown(false);
@@ -110,6 +111,7 @@ const NavServices = ({
             >
               {t("View All")} ({services?.length})
             </Typography>
+}
           </Box>
         )}
       </RTL>
