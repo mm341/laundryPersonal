@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import rightPhotoSection from "../../../public/HomePage/huge img.webp";
+import Image from "next/image";
 const FirstRightSection = () => {
   
   return (
@@ -13,7 +14,9 @@ const FirstRightSection = () => {
         justifyContent: "flex-end",
       }}
     >
-      <img
+      <Image
+      width={500}
+      height={500}
         alt="img"
         loading="lazy"
         src={rightPhotoSection?.src}
