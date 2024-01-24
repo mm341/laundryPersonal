@@ -48,8 +48,13 @@ import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import { Master } from "@/interfaces/MasterInterface";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
-import { CashAreas, CashServices } from "@/redux/slices/Services";
+import {
+  CashAreas,
+  CashServices,
+  GetAllBanners,
+} from "@/redux/slices/Services";
 import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
+import BannersSection from "@/Components/Banners/BannersSection";
 const ProductsPage = ({
   homeServices,
   homeAreas,
@@ -118,8 +123,8 @@ const ProductsPage = ({
   };
   //  search action onChange
   const handelChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
     if (e.target.value) {
+      setSearchText(e.target.value);
       // dispatch(
       //   GetProductsWithSearch({
       //     serviceId: router.query.service_id,
@@ -147,6 +152,12 @@ const ProductsPage = ({
       );
     }
   }, [router.query.service_id, type]);
+
+  //  get all banners
+
+  useEffect(() => {
+    dispatch(GetAllBanners());
+  }, []);
 
   //  function close subProduct modal
 
@@ -188,9 +199,7 @@ const ProductsPage = ({
 
   //  cash footer Social Media Links
   useEffect(() => {
-    
-      dispatch(CashFooterLinks(footerSocialLinks));
-    
+    dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
 
   return (
@@ -201,11 +210,14 @@ const ProductsPage = ({
         <CustomLoaderPage loading={loading} />
       ) : (
         <PublicContainer>
+          {/*  Banners */}
+          <GlobalDisplayFlexColumnBox gap={"48px"}>
+          <BannersSection />
           <CustomPaperBigCard
             sx={{
               borderRadius: "10px",
               backgroundColor: theme.palette.primary.dark,
-              my:"5px"
+              my: "5px",
             }}
           >
             <Grid container spacing={3}>
@@ -325,6 +337,7 @@ const ProductsPage = ({
               </Grid>
             </Grid>
           </CustomPaperBigCard>
+          </GlobalDisplayFlexColumnBox>
         </PublicContainer>
       )}
 

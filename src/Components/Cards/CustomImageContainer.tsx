@@ -1,8 +1,7 @@
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import placeholder from "../../../public/notimage.png";
 import { Box } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 interface customImage {
   cursor?: string;
   mdheight?: string;

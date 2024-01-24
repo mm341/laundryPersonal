@@ -5,16 +5,29 @@ import { language } from "@/models/languageSliceModel";
 import PublicRequest from "@/utils/PublicRequests";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+//   GetAllServices
 export const GetAllServices = createAsyncThunk("addresse/GetAllServices", () =>
   PublicRequest.getData("services")
 );
 
+
+
+//   GetAllBanners
+export const GetAllBanners = createAsyncThunk("addresse/GetAllBanners", () =>
+  PublicRequest.getData("banners")
+);
+
+
+
+
+//   GetAllAreas
 export const GetAllAreas = createAsyncThunk("addresse/GetAllAreas", () =>
   PublicRequest.getData("areas")
 );
 const initialState: ServicesModel = {
   services: [],
   areas: [],
+  banners:[]
 };
 
 // Action creators are generated for each case reducer function
@@ -68,6 +81,26 @@ export const ServicesSlice = createSlice({
     );
     builder.addCase(GetAllAreas.rejected, (state: ServicesModel) => {
       state.areas = [];
+    });
+
+
+
+    // GetAllBanners
+     builder.addCase(GetAllBanners.pending, (state: ServicesModel) => {
+      state.banners = [];
+    });
+    builder.addCase(
+      GetAllBanners.fulfilled,
+      (state: ServicesModel, { payload }: any) => {
+        if (payload?.data?.banners?.length > 0) {
+          state.banners = payload?.data?.banners;
+        } else {
+          state.banners = [];
+        }
+      }
+    );
+    builder.addCase(GetAllBanners.rejected, (state: ServicesModel) => {
+      state.banners = [];
     });
   },
 });
