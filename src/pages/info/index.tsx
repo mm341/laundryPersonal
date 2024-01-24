@@ -28,15 +28,14 @@ const Index = ({
   const router = useRouter();
   const { locale } = useRouter();
   const { page }: any = router.query;
-const dispatch=useAppDispatch()
+  const dispatch = useAppDispatch();
   const [languagedirection, setLanguagedirection] = useState<string>("ltr");
   useEffect(() => {
     locale === "en" ? setLanguagedirection("ltr") : setLanguagedirection("rtl");
   }, [locale]);
 
-
-   //  cash areas
-   useEffect(() => {
+  //  cash areas
+  useEffect(() => {
     dispatch(CashAreas(homeAreas));
   }, [dispatch, homeAreas]);
 
@@ -52,9 +51,7 @@ const dispatch=useAppDispatch()
 
   //  cash footer Social Media Links
   useEffect(() => {
-   
-      dispatch(CashFooterLinks(footerSocialLinks));
-   
+    dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
 
   return (
@@ -78,7 +75,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("services", {
       headers: {
         "Accept-Language": locale,
-        "locale": locale,
+        locale: locale,
       },
     });
     homeServices = configRes?.data?.data?.services;
@@ -90,7 +87,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const Res = await MainApi.get("areas", {
       headers: {
         "Accept-Language": locale,
-        "locale": locale,
+        locale: locale,
       },
     });
 
@@ -103,7 +100,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("master", {
       headers: {
         "Accept-Language": locale,
-        "locale": locale,
+        locale: locale,
       },
     });
     masterData = configRes?.data?.data;
@@ -116,7 +113,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     const configRes = await MainApi.get("social-link", {
       headers: {
         "Accept-Language": locale,
-        "locale": locale,
+        locale: locale,
       },
     });
     footerSocialLinks = configRes?.data?.data?.socialLink;

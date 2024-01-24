@@ -6,7 +6,6 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { Suspense, lazy, useState } from "react";
-
 import {
   GlobalButton,
   GlobalDisplayFlexBox,
@@ -16,16 +15,13 @@ import GlobalSelectBox from "../GlobalSelectBox";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import ServicesDialog from "../Dialogs/ServicesDialog";
-
 import photo from "../../../public/HomePage/firstSectionImg.svg";
-
 import GlobalTypography from "./GlobalTypography";
 import AppSmallSection from "./AppSmallSection";
 import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import Carousel from "react-material-ui-carousel";
-import FirstRightSection from "./FirstRightSection";
-import dynamic from "next/dynamic";
+
 
 const FirstSection = ({
   homeServices,

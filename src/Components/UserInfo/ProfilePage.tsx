@@ -7,13 +7,13 @@ import { GetProfileData } from "@/redux/slices/HandelUpdateProfile";
 
 const ProfilePage = () => {
   //  hooks
-  const dispatch=useAppDispatch()
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(GetProfileData());
   }, []);
   const { accountInfo } = useAppSelector((state) => state.profile);
- 
+
   return (
     <>
       <Meta title={accountInfo?.first_name} description="" keywords="" />

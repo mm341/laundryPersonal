@@ -12,6 +12,7 @@ import AppSmallSection from "./AppSmallSection";
 import { useTranslation } from "react-i18next";
 
 const AppSection = () => {
+  //  hooks
   const { t } = useTranslation();
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));

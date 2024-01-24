@@ -25,10 +25,9 @@ import FormSubmitButton from "./FormSubmitButton";
 const BasicInformationForm = ({
   
   accountInfo,
-  isloading,
+  
 }: {
   accountInfo: AccountInfo;
-  isloading: boolean;
 }) => {
   //  hooks
   const { t } = useTranslation();
@@ -48,22 +47,7 @@ const BasicInformationForm = ({
     validationSchema: ValidationSechemaProfile(),
     onSubmit: async (values: AccountUpdate) => {
       try {
-        // const data: AccountUpdate = {};
-        // if (values.mobile !== accountInfo?.mobile) {
-        //   data.mobile = values.mobile;
-        // }
-        // if (values.name !== accountInfo?.name) {
-        //   data.name = values.name;
-        // }
-        // if (values.alternative_phone !== accountInfo?.alternative_phone) {
-        //   data.alternative_phone = values.alternative_phone;
-        // }
-        // if (values.profile_photo) {
-        //   data.profile_photo = values.profile_photo;
-        // }
-        // if (Object.values(data).length > 0) {
-        //   formSubmitOnSuccess(data);
-        // }
+       
       } catch (err) {}
     },
   });
@@ -117,7 +101,7 @@ const BasicInformationForm = ({
           <Grid item sm={8} xs={12}>
             <GlobalDisplayFlexBox sx={{ gap: "5px" }}>
               <TextField
-                disabled={isloading}
+                // disabled={isloading}
                 sx={{ width: "100%", backgroundColor: "white" }}
                 id="outlined-basic"
                 variant="outlined"
@@ -147,7 +131,7 @@ const BasicInformationForm = ({
           <Grid item sm={8} xs={12}>
             <GlobalDisplayFlexBox sx={{ gap: "5px" }}>
               <TextField
-                disabled={isloading}
+                // disabled={isloading}
                 label={<span>{t("Phone Number")}</span>}
                 variant="outlined"
                 name="mobile"
@@ -174,7 +158,7 @@ const BasicInformationForm = ({
           <Grid item sm={8} xs={12}>
             <GlobalDisplayFlexBox sx={{ gap: "5px" }}>
               <TextField
-                disabled={isloading}
+                // disabled={isloading}
                 label={<span>{t("Alternative Phone")}</span>}
                 variant="outlined"
                 name="alternative_phone"

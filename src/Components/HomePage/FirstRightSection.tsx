@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import rightPhotoSection from "../../../public/HomePage/huge img.webp";
 const FirstRightSection = () => {
+  
   return (
     <Box
       data-aos="fade-left"
