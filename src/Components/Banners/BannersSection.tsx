@@ -17,8 +17,8 @@ const BannersSection = () => {
         navButtonsAlwaysVisible={true}
       >
         {banners?.map((banner, i: number) => (
-          <Box sx={{ width: "100%" }}>
-            <BannerCard banner={banner} key={i} />
+          <Box key={i}  sx={{ width: "100%" }}>
+            <BannerCard banner={banner} />
           </Box>
         ))}
       </Carousel>
