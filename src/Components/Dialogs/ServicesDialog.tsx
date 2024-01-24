@@ -31,7 +31,7 @@ const ServicesDialog = ({
     height: "83%",
     // oveflowY: "auto",
     transform: "translate(-50%, -50%)",
-    width: { md: "60%", xs: "85%" },
+    width: {lg:"57%", md: "62%", xs: "85%" },
     bgcolor: "background.paper",
     p: { md: 4, xs: 1 },
     borderRadius: "10px",

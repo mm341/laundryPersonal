@@ -5,6 +5,7 @@ import { NavMenuLink } from "@/styles/PublicStyles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTranslation } from "react-i18next";
 import { HomeServices } from "@/interfaces/HomeServices";
+import { useRouter } from "next/router";
 
 const NavServices = ({
   setOpenAreaDialog,
@@ -18,6 +19,7 @@ const NavServices = ({
 }) => {
   //   hooks
   const { t } = useTranslation();
+  const { push } = useRouter();
   const theme = useTheme();
   const [resdropdown, setResdropdown] = useState<boolean>(false);
 
@@ -92,6 +94,22 @@ const NavServices = ({
                 </Typography>
               </Box>
             ))}
+
+            <Typography
+              onClick={() => {
+                setResdropdown(false);
+                push("/services");
+              }}
+              sx={{
+                color: theme.palette.primary.main,
+                textAlign: "center",
+                fontWeight: "500",
+                cursor: "pointer",
+                fontSize: "20px",
+              }}
+            >
+              {t("View All")} ({services?.length})
+            </Typography>
           </Box>
         )}
       </RTL>

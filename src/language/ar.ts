@@ -14,7 +14,7 @@ export const arabic = {
   "About Us": "عنا",
   "Follow Us": "تابعنا علي",
   Message: "الرسالة",
-
+  "View All":"عرض الكل",
   "Enter the 4-digit code sent to you at":
     "أدخل الرمز المكون من 4 أرقام المرسل إليك على",
   // "Edit Phone Number":"تعديل رقم الجوال",
