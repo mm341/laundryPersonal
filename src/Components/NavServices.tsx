@@ -89,6 +89,9 @@ const NavServices = ({
                     fontSize: "16px",
                     fontWeight: "400",
                     cursor: "pointer",
+                    "&:hover": {
+                      color: theme.palette.primary.main,
+                    },
                   }}
                 >
                   {e?.name}
