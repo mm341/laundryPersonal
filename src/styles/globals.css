@@ -123,8 +123,8 @@ right: 16px !important;
 };
 
 .rtl-1m9128y{
-  text-align: right !important;
-  margin-top:10px !important;
+  /* text-align: right !important; */
+  /* margin-top:10px !important; */
   transform: translateY(5px) !important;
   -webkit-transform: translateY(5px) !important;
   -moz-transform: translateY(5px) !important;
