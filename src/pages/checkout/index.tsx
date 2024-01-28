@@ -30,7 +30,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { GetAllAdddressses } from "@/redux/slices/AddressesRequests";
 import { AddresseInterface } from "@/interfaces/AddresseInterface";
 import AddNewAddress from "@/Components/UserInfo/ProfileBody/AddNewAddress";
 import PaymentMethods from "@/Components/ChekoutPage/PaymentMethods";
@@ -86,6 +85,8 @@ const CheckOutPage = ({
   const [payment, setPayment] = useState<string>("cash");
   const [onlineMethod, setOnlineMethod] = useState<string>("");
 
+
+  //  selectors
   const { schedules, deliverySchedules } = useAppSelector(
     (state) => state.orders
   );
@@ -113,8 +114,7 @@ const CheckOutPage = ({
       top: "-50px !important",
     },
     "label + &": {
-      // marginBottom: theme.spacing(1),
-      // paddingBottom:theme.spacing(1)
+     
       transform: "translateY(5px)",
     },
     "& .MuiInputBase-input": {
@@ -141,13 +141,12 @@ const CheckOutPage = ({
       ].join(","),
       "&:focus": {
         borderRadius: 4,
-        // borderColor: "#80bdff",
-        // boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+       
       },
     },
   }));
-  //  default addresse
-  const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
+  // //  default addresse
+  // const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
   //  handel initial value of default addresse
 
   const [addresseValue, setAddressevalue] = useState<string>(
