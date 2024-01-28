@@ -14,14 +14,19 @@ interface Props {
   openAreaDialog: boolean;
   handleClose: () => void;
   homeAreas: HomeAreas[];
-  ServiceId:string|undefined
+  ServiceId: string | undefined;
 }
-const AreaDialog = ({ openAreaDialog, handleClose, homeAreas,ServiceId }: Props) => {
+const AreaDialog = ({
+  openAreaDialog,
+  handleClose,
+  homeAreas,
+  ServiceId,
+}: Props) => {
   //    hooks
   const [selectValue, setselectValue] = useState<string>(homeAreas[0]?.id);
   const theme = useTheme();
   const router = useRouter();
-  
+
   const { t } = useTranslation();
   //  style for model
   const style = {
@@ -35,7 +40,7 @@ const AreaDialog = ({ openAreaDialog, handleClose, homeAreas,ServiceId }: Props)
     bgcolor: "background.paper",
     p: 4,
     borderRadius: "10px",
-    maxWidth: "1000px"
+    maxWidth: "1000px",
   };
 
   //    handel select value

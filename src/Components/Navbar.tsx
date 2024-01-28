@@ -32,6 +32,7 @@ import notificationIcon from "../../public/navbar/notification.svg";
 import NotificationPoPover from "./Notification";
 import { GetAllNotification } from "@/redux/slices/Notifications";
 import { GetProfileData } from "@/redux/slices/HandelUpdateProfile";
+import Link from "next/link";
 const Navbar = () => {
   //  hooks
   const dispatch = useAppDispatch();
@@ -229,15 +230,11 @@ const Navbar = () => {
                 }}
               >
                 {/*  logo side */}
-                <Box
-                  onClick={() => {
-                    router.push("/");
-                  }}
-                  sx={{ width: { md: "12%", xs: "100%" } }}
-                >
-                  <Typography sx={{ cursor: "pointer" }}>home</Typography>
-                </Box>
-
+                <Link href="/" prefetch>
+                  <Box sx={{ width: { md: "12%", xs: "100%" } }}>
+                    <Typography sx={{ cursor: "pointer" }}>home</Typography>
+                  </Box>
+                </Link>
                 <GlobalDisplayFlexBox
                   sx={{
                     width: { md: "88%", xs: "100%" },
@@ -251,15 +248,23 @@ const Navbar = () => {
                     services={services}
                     setOpenAreaDialog={setOpenAreaDialog}
                   />
-                  <CustomNavbarTypography onClick={() => push("/howItWork")}>
-                    {t("How It Work")}
-                  </CustomNavbarTypography>
-                  <CustomNavbarTypography onClick={() => push("/pricing")}>
-                    {t("Pricing")}
-                  </CustomNavbarTypography>
-                  <CustomNavbarTypography onClick={() => push("/contactUs")}>
-                    {t("Contact us")}
-                  </CustomNavbarTypography>
+                  <Link href="/howItWork" prefetch>
+                    <CustomNavbarTypography>
+                      {t("How It Work")}
+                    </CustomNavbarTypography>
+                  </Link>
+                  <Link href="/pricing" prefetch>
+                    <CustomNavbarTypography>
+                      {t("Pricing")}
+                    </CustomNavbarTypography>
+                  </Link>
+
+                  <Link href="/contactUs" prefetch>
+                    <CustomNavbarTypography>
+                      {t("Contact us")}
+                    </CustomNavbarTypography>
+                  </Link>
+
                   <CustomNavbarTypography
                     onClick={() => {
                       if (locale === "en") {
