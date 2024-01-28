@@ -753,7 +753,7 @@ export const arabic = {
   "Preferable Time": "الوقت المفضل",
   "Already have an account?": "هل لديك حساب؟",
   "Additional Instruction": "تعليمات  اضافيه",
-  "For e.g. Call before delivery": "For e.g. Call before delivery",
+ 
   Today: "اليوم",
   Tomorrow: "الغد",
   Subtotal: "الاجمالي",
