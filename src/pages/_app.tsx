@@ -176,6 +176,7 @@ export default function App({
                   style={{ overflowX: "hidden" }}
                   sx={{
                     display: previewLoader ? "none" : "block",
+                    width:"100vw",
                     minHeight: "80vh",
                     mt: {
                       md: router.pathname !== "/" ? "7rem" : "3.9rem",

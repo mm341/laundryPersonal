@@ -35,6 +35,7 @@ const AreaDialog = ({ openAreaDialog, handleClose, homeAreas,ServiceId }: Props)
     bgcolor: "background.paper",
     p: 4,
     borderRadius: "10px",
+    maxWidth: "1000px"
   };
 
   //    handel select value

@@ -214,8 +214,8 @@ const Navbar = () => {
           py: "15px",
           position: "fixed",
           top: "0",
-          width: "100%",
-          zIndex: 10010,
+          width: "100vw",
+          zIndex: 1200,
           boxShadow: "0px 4px 4px 0px #0000000F",
         }}
       >
