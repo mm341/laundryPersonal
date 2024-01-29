@@ -123,6 +123,7 @@ const ProductsPage = ({
   };
   //  search action onChange
   const handelChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
     if (e.target.value) {
       setSearchText(e.target.value);
       // dispatch(
