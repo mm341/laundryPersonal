@@ -53,7 +53,7 @@ const OtpForm = ({
   const [otp, setOtp] = useState("");
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
-  let [resend, setResend] = useState(2);
+  let [resend, setResend] = useState(60);
   const dispatch = useAppDispatch();
   //  validation of otp
   const otpFormik = useFormik({
