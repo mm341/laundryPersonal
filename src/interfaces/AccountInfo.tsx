@@ -6,7 +6,7 @@ export const inititalAccountInfo = () => {
     email: "",
     first_name: "",
     gender: null,
-    id: 0,
+    id: "",
     is_active: false,
     join_date: "",
     last_name: null,
