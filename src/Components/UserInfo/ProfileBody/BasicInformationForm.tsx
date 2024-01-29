@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  TextField,
-  Typography,
-  
-} from "@mui/material";
+import { Grid, TextField, Typography } from "@mui/material";
 
 import { useFormik } from "formik";
 import ValidationSechemaProfile from "./Validation";
@@ -23,16 +18,14 @@ import InputImage from "@/Components/GlobalComponent/image.input";
 import FormSubmitButton from "./FormSubmitButton";
 
 const BasicInformationForm = ({
-  
   accountInfo,
-  
 }: {
   accountInfo: AccountInfo;
 }) => {
   //  hooks
   const { t } = useTranslation();
- 
- 
+  
+
   //  account form validation and prepare send api request
 
   const profileFormik = useFormik({
@@ -47,20 +40,13 @@ const BasicInformationForm = ({
     validationSchema: ValidationSechemaProfile(),
     onSubmit: async (values: AccountUpdate) => {
       try {
-       
       } catch (err) {}
     },
   });
 
-  // const formSubmitOnSuccess = (values: AccountUpdate) => {
-  //   formSubmitHandler(values);
-  // };
-
   const singleFileUploadHandlerForCoverPhoto = (value: any) => {
     profileFormik.setFieldValue("profile_photo", value);
   };
-
- 
 
   return (
     <>
@@ -118,12 +104,12 @@ const BasicInformationForm = ({
                   profileFormik.touched.name && profileFormik.errors.name
                 }
               />
-              
+
               <FormSubmitButton
+                id={accountInfo?.id}
                 NewInputName={profileFormik.values.name}
                 InputName={accountInfo?.first_name}
                 formikName="name"
-                
               />
             </GlobalDisplayFlexBox>
           </Grid>
@@ -147,10 +133,10 @@ const BasicInformationForm = ({
                 }
               />
               <FormSubmitButton
+                id={accountInfo?.id}
                 NewInputName={profileFormik.values.mobile}
                 InputName={accountInfo?.mobile}
                 formikName="mobile"
-
               />
             </GlobalDisplayFlexBox>
           </Grid>
@@ -175,6 +161,7 @@ const BasicInformationForm = ({
                 }
               />
               <FormSubmitButton
+                id={accountInfo?.id}
                 NewInputName={profileFormik.values.alternative_phone}
                 InputName={accountInfo?.alternative_phone}
                 formikName="alternative_phone"

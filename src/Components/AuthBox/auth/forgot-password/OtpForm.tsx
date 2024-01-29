@@ -34,6 +34,7 @@ interface props {
   setOpenOtpModal: (e: boolean) => void;
   updatProfile?: boolean;
   formikName?: string;
+  id?:string
 }
 const OtpForm = ({
   data,
@@ -44,6 +45,7 @@ const OtpForm = ({
   modalFor,
   updatProfile,
   formikName,
+  id
 }: props) => {
   //  hooks
   const { locale } = useRouter();
@@ -51,7 +53,7 @@ const OtpForm = ({
   const [otp, setOtp] = useState("");
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
-  let [resend, setResend] = useState(60);
+  let [resend, setResend] = useState(2);
   const dispatch = useAppDispatch();
   //  validation of otp
   const otpFormik = useFormik({
@@ -185,13 +187,13 @@ const OtpForm = ({
               >
                 <Typography
                   onClick={() => {
-                    // if (resendMain === 3) {
-                    //   setResendMain(5);
-                    // } else {
-                    //   setResendMain((resendMain += 1));
-                    //   setResend(resendMain * 60);
-                    // }
+                   
+                   if(id){
+                    dispatch(ResendCode({ mobile: data?.mobile,id:id }));
+                   }else{
                     dispatch(ResendCode({ mobile: data?.mobile }));
+                   }
+                    
                     if(resend===0){
                       setResend(60);
                     }

@@ -24,7 +24,7 @@ export interface AccountInfo {
   email: string;
   first_name: string;
   gender: null;
-  id: number;
+  id: string;
   is_active: boolean;
   join_date: string;
   last_name: null;

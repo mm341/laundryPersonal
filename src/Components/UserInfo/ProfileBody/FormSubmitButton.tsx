@@ -20,6 +20,7 @@ const FormSubmitButton = ({
   formikName,
   imgChange,
   imgValue,
+  id
 }: {
   InputName?: string;
   NewInputName?: string | undefined;
@@ -27,6 +28,7 @@ const FormSubmitButton = ({
   imgChange?: boolean;
   imgValue?: string;
   error?: boolean;
+  id?:string
 }) => {
   //  hooks
   const theme = useTheme();
@@ -165,6 +167,7 @@ const FormSubmitButton = ({
       >
         <Box sx={style}>
           <OtpForm
+          id={id}
             formikName={formikName}
             updatProfile
             setOpenOtpModal={setOpenOtpModal}
