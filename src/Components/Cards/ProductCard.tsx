@@ -28,6 +28,55 @@ const ProductCard = ({
   const { master } = useAppSelector((state) => state.master);
 
   let [quantity, setQuantity] = useState<number>(1);
+
+
+  //  handel current price
+  const handelProductPrice = () => {
+    if (
+      Math.min(...product?.current_price) !==
+      Math.max(...product?.current_price)
+    )
+      return (
+        <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+          {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
+          - {Math.max(...product?.current_price)} {master?.currency} /{" "}
+          {t("Item")}
+        </Typography>
+      );
+    else {
+      return (
+        <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+          {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
+        </Typography>
+      );
+    }
+  };
+
+
+   //  handel old price
+   
+   const handelProductOldPrice = () => {
+   
+    if (
+      Math.min(...product?.old_price) !==
+      Math.max(...product?.old_price)
+    )
+      return (
+        <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+          {Math.min(...product?.old_price)} {master?.currency} / {t("Item")}{" "}
+          - {Math.max(...product?.old_price)} {master?.currency} /{" "}
+          {t("Item")}
+        </Typography>
+      );
+    else {
+      return (
+        <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+          {Math.min(...product?.old_price)} {master?.currency} / {t("Item")}{" "}
+        </Typography>
+      );
+    }
+  };
+
   return (
     <CustomPaperBigCard
       sx={{
@@ -79,9 +128,8 @@ const ProductCard = ({
             {/*  old and current price  case of product discount*/}
             {product?.discount_percentage && (
               <GlobalDisplayFlexColumnBox width={"100%"} gap={"2px"}>
-                <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-                  {product?.current_price} {master?.currency} / {t("Item")}
-                </Typography>
+                
+                {handelProductPrice()}
                 <Typography
                   sx={{
                     fontSize: "14px",
@@ -90,14 +138,14 @@ const ProductCard = ({
                     textDecoration: "line-through",
                   }}
                 >
-                  {product?.old_price} {master?.currency} / {t("Item")}
+                  {handelProductOldPrice()}
                 </Typography>
               </GlobalDisplayFlexColumnBox>
             )}
             {/*  current price  case of no product discount*/}
             {!product?.discount_percentage && (
               <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-                {product?.current_price} {master?.currency} / {t("Item")}
+              {handelProductPrice()}
               </Typography>
             )}
             {/*  quantity */}
