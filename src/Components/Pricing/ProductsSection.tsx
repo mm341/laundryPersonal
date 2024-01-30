@@ -15,13 +15,54 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
 
   const { t } = useTranslation();
   const { locale } = useRouter();
-const theme=useTheme()
+  const theme = useTheme();
   //  master data
   const { master } = useAppSelector((state) => state.master);
 
   //  selectors
 
   const { isloading } = useAppSelector((state) => state.products);
+
+  //  handel old price
+
+  const handelProductOldPrice = (product: productInterface) => {
+    if (Math.min(...product?.old_price) !== Math.max(...product?.old_price))
+      return (
+        <Typography sx={{ fontSize: "16px", fontWeight: "400",textDecoration:"line-through" ,opacity:"0.6"}}>
+          {Math.min(...product?.old_price)} {master?.currency} / {t("Item")} -{" "}
+          {Math.max(...product?.old_price)} {master?.currency} / {t("Item")}
+        </Typography>
+      );
+    else {
+      return (
+        <Typography sx={{ fontSize: "16px", fontWeight: "400",textDecoration:"line-through",opacity:"0.6" }}>
+          {Math.min(...product?.old_price)} {master?.currency} / {t("Item")}{" "}
+        </Typography>
+      );
+    }
+  };
+
+  //  handel current price
+  const handelProductPrice = (product: productInterface) => {
+    if (
+      Math.min(...product?.current_price) !==
+      Math.max(...product?.current_price)
+    )
+      return (
+        <Typography sx={{ fontSize: "18px", fontWeight: "400" }}>
+          {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
+          - {Math.max(...product?.current_price)} {master?.currency} /{" "}
+          {t("Item")}
+        </Typography>
+      );
+    else {
+      return (
+        <Typography sx={{ fontSize: "18px", fontWeight: "400" }}>
+          {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
+        </Typography>
+      );
+    }
+  };
 
   return (
     <Box
@@ -95,37 +136,16 @@ const theme=useTheme()
                   <Box
                     sx={{
                       display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
+                      flexDirection: "column",
+                      alignItems: "flex-start",
                       width: { sm: "55%", xs: "100%" },
-                      gap:"10px"
+                      gap: "10px",
                     }}
                   >
-                  
-                
-                    <Typography
-                      sx={{
-                        fontSize: "18px",
-                        fontWeight: "400",
-                      
-                      }}
-                    >
-                      {e?.current_price} {master?.currency}
-                    </Typography>
-                    {e.old_price>0 && <Typography>/</Typography> }
-
-                    {e?.old_price>0 && (
-                      <Typography
-                        sx={{
-                          fontSize: "18px",
-                          fontWeight: "400",
-                          color:theme.palette.secondary.contrastText,
-                          textDecoration: "line-through",
-                        }}
-                      >
-                        {e?.old_price} {master?.currency} 
-                      </Typography>
-                    )}
+                   
+                      {handelProductPrice(e)}
+                    
+                    {handelProductOldPrice(e)}
                   </Box>
                 </Box>
               </Box>
