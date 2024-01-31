@@ -16,6 +16,9 @@ const BannersSection = () => {
             textAlign: "center !important",
             marginTop: "25px !important",
           },
+          "& .rtl-1abc02a": {
+            backgroundColor: "#494949 !important",
+          },
         }}
         animation={"slide"}
         duration={200}
