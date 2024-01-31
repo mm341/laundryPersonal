@@ -131,7 +131,11 @@ right: 16px !important;
   -ms-transform: translateY(5px) !important;
   -o-transform: translateY(5px) !important;
   font-size: 25px !important
-}
+};
+
+.rtl-1abc02a{
+  background-color: #494949 !important
+};
 
 .mui-style-aq8pb7-MuiSvgIcon-root{
   color:white !important
