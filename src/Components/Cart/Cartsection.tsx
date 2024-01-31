@@ -100,11 +100,11 @@ const Cartsection = ({
 
           <Divider orientation="horizontal" />
           {/*  additional services section */}
-          <AdditionalServicesSection
+          {/* <AdditionalServicesSection
             choicesIds={choicesIds}
             setChoicesIds={setChoicesIds}
             additionalSercvices={additionalSercvices}
-          />
+          /> */}
 
           {/*  coupon section */}
           <CouponSection
