@@ -13,8 +13,7 @@ export type Paylod = {
 // Get Addtional Services
 export const GetAddtionalServices = createAsyncThunk(
   "products/GetAddtionalServices",
-  (payload: { serviceId: string | string[] }) =>
-    PublicRequest.getData(`additional-services?service_id=${payload.serviceId}`)
+  () => PublicRequest.getData(`additional-services`)
 );
 
 // Get Products
@@ -45,9 +44,7 @@ export const GetProductsWithSearch = createAsyncThunk(
 export const GetProductsWithSearchAndService = createAsyncThunk(
   "products/GetProductsWithSearchAndService",
   (payload: Paylod) =>
-    PublicRequest.getData(
-      `products?search=${payload.searchText}`
-    )
+    PublicRequest.getData(`products?search=${payload.searchText}`)
 );
 
 // Get Variants
@@ -113,10 +110,13 @@ export const handelProducts = createSlice({
     );
 
     // GetProductsWithSearch
-    builder.addCase(GetProductsWithSearchAndService.pending, (state: ProductsModel) => {
-      state.isloading = true;
-      state.products = [];
-    });
+    builder.addCase(
+      GetProductsWithSearchAndService.pending,
+      (state: ProductsModel) => {
+        state.isloading = true;
+        state.products = [];
+      }
+    );
     builder.addCase(
       GetProductsWithSearchAndService.fulfilled,
       (state: ProductsModel, { payload }: any) => {
@@ -126,14 +126,16 @@ export const handelProducts = createSlice({
         }
       }
     );
-    
-    builder.addCase(GetProductsWithSearchAndService.rejected, (state: ProductsModel) => {
-      state.products = [];
-    });
 
+    builder.addCase(
+      GetProductsWithSearchAndService.rejected,
+      (state: ProductsModel) => {
+        state.products = [];
+      }
+    );
 
-     // GetProductsWithSearch
-     builder.addCase(GetProductsWithSearch.pending, (state: ProductsModel) => {
+    // GetProductsWithSearch
+    builder.addCase(GetProductsWithSearch.pending, (state: ProductsModel) => {
       state.isloading = true;
       state.products = [];
     });
@@ -146,12 +148,12 @@ export const handelProducts = createSlice({
         }
       }
     );
-    
+
     builder.addCase(GetProductsWithSearch.rejected, (state: ProductsModel) => {
       state.products = [];
     });
 
-     /// GetProductsWithSearchAndService
+    /// GetProductsWithSearchAndService
     //  builder.addCase(GetProductsWithSearchAndService.pending, (state: ProductsModel) => {
     //   state.isloading = true;
     //   state.products = [];

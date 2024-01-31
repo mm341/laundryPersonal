@@ -98,7 +98,7 @@ const ProductsPage = ({
   useEffect(() => {
     if (router.query.service_id) {
       dispatch(GetVariants({ serviceId: router.query.service_id }));
-      dispatch(GetAddtionalServices({ serviceId: router.query.service_id }));
+      dispatch(GetAddtionalServices());
     }
   }, [dispatch, router.query.service_id]);
 
@@ -214,7 +214,9 @@ const ProductsPage = ({
         <PublicContainer>
           {/*  Banners */}
           <GlobalDisplayFlexColumnBox gap={"48px"}>
-            <BannersSection />
+            <Box dir="ltr">
+              <BannersSection />
+            </Box>
             <CustomPaperBigCard
               sx={{
                 borderRadius: "10px",
@@ -333,7 +335,9 @@ const ProductsPage = ({
                     <CustomPaperBigCard
                       sx={{ backgroundColor: "white", py: "20px" }}
                     >
-                      <AdditionalServicesSection additionalSercvices={additionalSercvices}/>
+                      <AdditionalServicesSection
+                        additionalSercvices={additionalSercvices}
+                      />
                     </CustomPaperBigCard>
                   </GlobalDisplayFlexColumnBox>
                 </Grid>

@@ -23,6 +23,7 @@ import { AdditionalServicesInterface } from "@/interfaces/AddtionalServicesInter
 import AdditionalServicesSection from "./AdditionalServicesSection";
 import { number } from "yup";
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
+import AdditionalServicesSectionInCart from "./AdditionalServicesSectionInCart";
 
 const Cartsection = ({
   additionalSercvices,
@@ -100,11 +101,8 @@ const Cartsection = ({
 
           <Divider orientation="horizontal" />
           {/*  additional services section */}
-          {/* <AdditionalServicesSection
-            choicesIds={choicesIds}
-            setChoicesIds={setChoicesIds}
-            additionalSercvices={additionalSercvices}
-          /> */}
+       
+          <AdditionalServicesSectionInCart  additionalSercvices={additionalSercvices}/>
 
           {/*  coupon section */}
           <CouponSection

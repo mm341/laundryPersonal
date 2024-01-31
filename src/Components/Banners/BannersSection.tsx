@@ -11,16 +11,7 @@ const BannersSection = () => {
   return (
     banners?.length > 0 && (
       <Carousel
-        // sx={
-        //   '.mui-style-1m9128y' {
-        //     text-align: center !important;
-        //     margin-top: 25px !important;
-
-        // }}
         sx={{
-          // listStyleType: 'disc',
-          // pl: 4,
-
           "& .mui-style-1m9128y": {
             textAlign: "center !important",
             marginTop: "25px !important",
