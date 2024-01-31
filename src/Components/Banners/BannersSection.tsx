@@ -16,7 +16,7 @@ const BannersSection = () => {
             textAlign: "center !important",
             marginTop: "25px !important",
           },
-          "& .rtl-1abc02a": {
+          "& .rtl-1wy4w1a": {
             backgroundColor: "#494949 !important",
           },
         }}
