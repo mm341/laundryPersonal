@@ -133,7 +133,7 @@ const Cartsection = ({
           <SummarySection />
 
           <GlobalDisplayFlexColumnBox gap={"12px"} width={"100%"} px={"18px"}>
-            {Number(cartList?.total_order_amount) > 20 && (
+            {Number(cartList?.total_order_amount) > master.minimum_cost && (
               <GlobalButton
                 px={"0"}
                 py={"0"}
@@ -171,7 +171,7 @@ const Cartsection = ({
                 </Stack>
               </GlobalButton>
             )}
-            {Number(cartList?.total_order_amount) <= 20 && (
+            {Number(cartList?.total_order_amount) <= master.minimum_cost && (
               <>
                 <Typography
                   sx={{
@@ -180,7 +180,7 @@ const Cartsection = ({
                     fontWeight: "400",
                   }}
                 >
-                  {t("Minimum order value is")} 20 {master.currency}
+                  {t("Minimum order value is")} {master.minimum_cost} {master.currency}
                 </Typography>
 
                 <GlobalButton

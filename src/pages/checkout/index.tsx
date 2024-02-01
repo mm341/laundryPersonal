@@ -85,7 +85,6 @@ const CheckOutPage = ({
   const [payment, setPayment] = useState<string>("cash");
   const [onlineMethod, setOnlineMethod] = useState<string>("");
 
-
   //  selectors
   const { schedules, deliverySchedules } = useAppSelector(
     (state) => state.orders
@@ -114,7 +113,6 @@ const CheckOutPage = ({
       top: "-50px !important",
     },
     "label + &": {
-     
       transform: "translateY(5px)",
     },
     "& .MuiInputBase-input": {
@@ -141,7 +139,6 @@ const CheckOutPage = ({
       ].join(","),
       "&:focus": {
         borderRadius: 4,
-       
       },
     },
   }));
@@ -217,9 +214,7 @@ const CheckOutPage = ({
 
   //  cash footer Social Media Links
   useEffect(() => {
-    
-      dispatch(CashFooterLinks(footerSocialLinks));
-    
+    dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
 
   return (
@@ -232,7 +227,7 @@ const CheckOutPage = ({
       <AuthGuard>
         <PublicContainer>
           <CustomPaperBigCard
-            sx={{ backgroundColor: theme.palette.primary.dark ,my:"5px"}}
+            sx={{ backgroundColor: theme.palette.primary.dark, my: "5px" }}
           >
             <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
               <Grid container spacing={3} sx={{ alignItems: "flex-start" }}>

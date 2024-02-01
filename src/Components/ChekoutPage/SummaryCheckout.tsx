@@ -7,9 +7,11 @@ import { useTranslation } from "react-i18next";
 const SummaryCheckout = () => {
   //  hooks
   const { t } = useTranslation();
-  const theme = useTheme();
+
   //  master data
   const { master } = useAppSelector((state) => state.master);
+  //  cartList data
+  const { cartList } = useAppSelector((state) => state.cartList);
   return (
     <GlobalDisplayFlexColumnBox width={"100%"}>
       <GlobalDisplayFlexColumnBox width={"100%"} gap={"8px"}>
@@ -25,12 +27,13 @@ const SummaryCheckout = () => {
             sx={{
               fontSize: "14px",
               fontWeight: "400",
-             
             }}
           >
             {t("Subtotal")}
           </Typography>
-          <Typography>323 {master?.currency}</Typography>
+          <Typography>
+            {cartList?.sub_total} {master?.currency}
+          </Typography>
         </Box>
         {/* Delivery Charge */}
         <Box
@@ -44,12 +47,13 @@ const SummaryCheckout = () => {
             sx={{
               fontSize: "14px",
               fontWeight: "400",
-            
             }}
           >
             {t("Delivery Charge")}
           </Typography>
-          <Typography>323 {master?.currency}</Typography>
+          <Typography>
+            {cartList?.delivery_fee} {master?.currency}
+          </Typography>
         </Box>
         {/* Discount*/}
         <Box
@@ -63,12 +67,11 @@ const SummaryCheckout = () => {
             sx={{
               fontSize: "14px",
               fontWeight: "400",
-              
             }}
           >
             {t("Discount")}
           </Typography>
-          <Typography>323 {master?.currency}</Typography>
+          {/* <Typography>323 {master?.currency}</Typography> */}
         </Box>
 
         {/* Total*/}
@@ -87,7 +90,9 @@ const SummaryCheckout = () => {
           >
             {t("Total")}
           </Typography>
-          <Typography>323 {master?.currency}</Typography>
+          <Typography>
+            {cartList?.total_order_amount} {master?.currency}
+          </Typography>
         </Box>
       </GlobalDisplayFlexColumnBox>
     </GlobalDisplayFlexColumnBox>
