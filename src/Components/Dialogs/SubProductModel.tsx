@@ -144,7 +144,7 @@ const SubProductModel = ({
                           </GlobalDisplayFlexBox>
 
                           {/*  old price */}
-                          {e?.old_price && (
+                          {e?.old_price > 0 && (
                             <GlobalDisplayFlexBox
                               sx={{ justifyContent: "flex-start", gap: "2px" }}
                             >
@@ -178,7 +178,7 @@ const SubProductModel = ({
                       checked={e.id === subproductId}
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
-                      color={"success"}
+                      color={"primary"}
                     />
                   </CustomStackFullWidth>
                 </ListItem>

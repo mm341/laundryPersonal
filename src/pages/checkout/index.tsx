@@ -568,7 +568,12 @@ const CheckOutPage = ({
                 </Grid>
 
                 {/*  right section products */}
-                <Grid item md={4} xs={12}>
+                <Grid
+                  item
+                  md={4}
+                  xs={12}
+                  sx={{ position: "sticky", top: "0px" }}
+                >
                   <CheckOutProductsSection
                     handelAddOrder={handelAddOrder}
                     checkOut

@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { AddToCart } from "@/redux/slices/CartSlice";
 import arrowRight from "../../../public/products/arrowright.svg";
+import { toast } from "react-hot-toast";
 const ProductCard = ({
   product,
   setProduct,
@@ -79,7 +80,6 @@ const ProductCard = ({
     }
   };
 
-
   const handelAddButton = (e: productInterface) => {
     return !isLoadingAddToCart ? (
       <GlobalButton
@@ -112,12 +112,20 @@ const ProductCard = ({
             setOpenDialog(true);
             setProduct(product);
           } else {
-            dispatch(
-              AddToCart({
-                product_id: product?.id,
-                quantity: Number(quantity),
-              })
-            );
+            if (
+              !cartList?.cart_details?.products
+                ?.map((e) => e.id)
+                .includes(e?.id)
+            ) {
+              dispatch(
+                AddToCart({
+                  product_id: product?.id,
+                  quantity: Number(quantity),
+                })
+              );
+            } else {
+              toast.error("You Add This Product Before");
+            }
           }
         }}
       >
@@ -260,7 +268,37 @@ const ProductCard = ({
         {/*  add to cart button */}
 
         {handelAddButton(product)}
-        {product?.discount_percentage && (
+        {product?.discount_percentage &&
+          product?.sub_products[0]?.old_price === 0 && (
+            <Box
+              sx={{
+                position: "absolute",
+                top: { md: "18.5px", xs: "6.5px" },
+                right: { md: "-53px", xs: "-72px" },
+                backgroundColor: "#38AE04",
+                width: "200px",
+                height: "20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                transform: locale === "en" ? "rotate(30deg)" : "rotate(-30deg)",
+              }}
+            >
+              <Box sx={{ position: "relative" }}>
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    color: "white",
+                  }}
+                >
+                  {product?.discount_percentage} % {t("Off")}
+                </Typography>
+              </Box>
+            </Box>
+          )}
+
+        {product?.discount_percentage && product?.sub_products.length === 0 && (
           <Box
             sx={{
               position: "absolute",
@@ -288,6 +326,36 @@ const ProductCard = ({
             </Box>
           </Box>
         )}
+
+        {product?.discount_percentage &&
+          product?.sub_products[0]?.old_price > 0 && (
+            <Box
+              sx={{
+                position: "absolute",
+                top: { md: "18.5px", xs: "6.5px" },
+                right: { md: "-53px", xs: "-72px" },
+                backgroundColor: "#38AE04",
+                width: "200px",
+                height: "20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                transform: locale === "en" ? "rotate(30deg)" : "rotate(-30deg)",
+              }}
+            >
+              <Box sx={{ position: "relative" }}>
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    color: "white",
+                  }}
+                >
+                  {t("Offer")}
+                </Typography>
+              </Box>
+            </Box>
+          )}
       </GlobalDisplayFlexBox>
     </CustomPaperBigCard>
   );

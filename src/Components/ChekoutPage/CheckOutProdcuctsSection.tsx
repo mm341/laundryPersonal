@@ -30,10 +30,16 @@ const CheckOutProductsSection = ({
   const { t } = useTranslation();
   const { isloadingAddOrder } = useAppSelector((state) => state.orders);
   //  custom design of scrollbar
-  const { cartList, isloading } = useAppSelector((state) => state.cartList);
-  const array = [...Array(10)];
+  const { cartList } = useAppSelector((state) => state.cartList);
+
   return (
-    <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+    <CustomPaperBigCard
+      
+      sx={{
+        backgroundColor: "white",
+       
+      }}
+    >
       <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
         {t("Items")} ({cartList?.cart_details?.products?.length})
       </Typography>

@@ -26,6 +26,7 @@ export interface sub_products {
   name:string;
   price: number;
   old_price:number
+  discount_percentage:number
 }
 export interface productInterface {
   current_price: number[];

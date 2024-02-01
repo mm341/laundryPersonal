@@ -215,7 +215,6 @@ const ProductsPage = ({
     );
   };
 
-  
   return (
     <>
       <Meta title={"services"} description="" keywords="" />
@@ -318,8 +317,9 @@ const ProductsPage = ({
                               products?.map(
                                 (product: productInterface, i: number) => (
                                   <ProductCard
-                                    
-                                    setQuantityForAddRequest={setQuantityForAddRequest}
+                                    setQuantityForAddRequest={
+                                      setQuantityForAddRequest
+                                    }
                                     setOpenDialog={setOpenDialog}
                                     setProduct={setProduct}
                                     key={product?.id}
