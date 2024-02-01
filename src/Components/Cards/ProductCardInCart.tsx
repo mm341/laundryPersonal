@@ -6,7 +6,7 @@ import {
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
 import { Box, Skeleton, Typography, useTheme } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/router";
 import { productInterface } from "@/interfaces/ProductInterface";

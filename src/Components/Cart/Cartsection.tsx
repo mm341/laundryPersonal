@@ -95,7 +95,7 @@ const Cartsection = ({
               gap={"16px"}
             >
               {/*  case of exist cart products */}
-              {cartList?.cart_details?.products?.map((e, i: number) => (
+              { (cartList?.cart_details?.products?.length>0 && !isloading) &&   cartList?.cart_details?.products?.map((e, i: number) => (
                 <ProductCardInCart product={e} key={i} />
               ))}
 

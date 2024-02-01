@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAppSelector } from "@/redux/store";
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
+import LoadingComponent from "../GlobalComponent/LoadingComponent";
 
 const CheckOutProductsSection = ({
   checkOut,
@@ -30,7 +31,7 @@ const CheckOutProductsSection = ({
   const { t } = useTranslation();
   const { isloadingAddOrder } = useAppSelector((state) => state.orders);
   //  custom design of scrollbar
-  
+  const { cartList, isloading } = useAppSelector((state) => state.cartList);
   const array = [...Array(10)];
   return (
     <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
@@ -42,15 +43,25 @@ const CheckOutProductsSection = ({
           maxHeight: "700px",
         }}
       >
+        {/*  products section */}
         <GlobalDisplayFlexColumnBox
           width={"99%"}
           sx={{ mx: "auto", my: "20px" }}
           gap={"20px"}
         >
-          {array?.map((e, i) => (
-            <ProductCardInCart key={i} checkOut />
+          {cartList?.cart_details?.products?.map((e, i) => (
+            <ProductCardInCart product={e} key={i} checkOut />
           ))}
         </GlobalDisplayFlexColumnBox>
+        {cartList?.cart_details?.products?.length > 0 &&
+          !isloading &&
+          cartList?.cart_details?.products?.map((e, i: number) => (
+            <ProductCardInCart product={e} key={i} />
+          ))}
+
+        {isloading && cartList?.cart_details?.products?.length === 0 && (
+          <LoadingComponent />
+        )}
       </Scrollbar>
       {isloadingAddOrder ? (
         <GlobalButton
