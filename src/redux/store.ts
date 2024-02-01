@@ -12,6 +12,7 @@ import { OrderSlice } from "./slices/OrderSlice";
 import { ProductsSlice } from "./slices/ProductsSlice";
 import { NotificationsSlice } from "./slices/Notifications";
 import { ContactingSlice } from "./slices/ContactingUs";
+import { CartReducerSlice } from "./slices/CartSlice";
 
 const persistConfig = {
   key: "Laundry",
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   products: ProductsSlice,
   notification: NotificationsSlice,
   contact: ContactingSlice,
+  cartList: CartReducerSlice,
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 

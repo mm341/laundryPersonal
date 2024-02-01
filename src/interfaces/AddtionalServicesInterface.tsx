@@ -2,7 +2,7 @@ export const initialAdditionalServices = () => {
   return {
     description: "",
     description_bn: "",
-    id: 0,
+    id: "",
     price: 0,
     title: "",
     title_bn: "",
@@ -12,7 +12,7 @@ export const initialAdditionalServices = () => {
 export interface AdditionalServicesInterface {
   description: string;
   description_bn: string;
-  id: number;
+  id: string;
   price: number;
   title: string;
   title_bn: string;

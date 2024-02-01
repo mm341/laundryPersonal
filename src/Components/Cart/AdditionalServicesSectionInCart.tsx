@@ -1,16 +1,17 @@
 import { AdditionalServicesInterface } from "@/interfaces/AddtionalServicesInterface";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   CustomPaperBigCard,
   GlobalButton,
   GlobalDisplayFlexBox,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-import { Typography, useTheme } from "@mui/material";
+import { Skeleton, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
 import deleteIcon from "../../../public/products/deleteButton.svg";
+import { AddToCart } from "@/redux/slices/CartSlice";
 const AdditionalServicesSectionInCart = ({
   additionalSercvices,
 }: {
@@ -19,12 +20,15 @@ const AdditionalServicesSectionInCart = ({
   //  hooks
   const { t } = useTranslation();
   const theme = useTheme();
-
+  const dispatch = useAppDispatch();
+  const { cartList, isLoadingAddToCart } = useAppSelector(
+    (state) => state.cartList
+  );
   //  master data
   const { master } = useAppSelector((state) => state.master);
 
   return (
-    additionalSercvices?.length > 0 && (
+    cartList?.cart_details?.additionals?.length > 0 && (
       <CustomPaperBigCard
         sx={{
           backgroundColor: "white",
@@ -50,7 +54,7 @@ const AdditionalServicesSectionInCart = ({
                 gap: { md: "24px", xs: "32px" },
               }}
             >
-              {additionalSercvices?.map((e, i) => (
+              {cartList?.cart_details?.additionals?.map((e, i) => (
                 <GlobalDisplayFlexBox key={i}>
                   {/*   name */}
 
@@ -74,12 +78,27 @@ const AdditionalServicesSectionInCart = ({
                     <Typography sx={{ fontSize: "14px", fontWeight: "400" }}>
                       {e?.price} {master?.currency}
                     </Typography>
-                    <img
-                      src={deleteIcon?.src}
-                      style={{ cursor: "pointer" }}
-                      loading="lazy"
-                      alt="deleteImg"
-                    />
+
+                    {!isLoadingAddToCart ? (
+                      <img
+                        onClick={() => {
+                          dispatch(
+                            AddToCart({
+                              additional_service_id: e?.id,
+                              remove_additional: 1,
+                            })
+                          );
+                        }}
+                        src={deleteIcon?.src}
+                        style={{ cursor: "pointer" }}
+                        loading="lazy"
+                        alt="deleteImg"
+                      />
+                    ) : (
+                      <>
+                        <Skeleton variant="text" width="20px" height={20} />
+                      </>
+                    )}
                   </GlobalDisplayFlexBox>
                 </GlobalDisplayFlexBox>
               ))}

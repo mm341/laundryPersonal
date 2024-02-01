@@ -13,12 +13,13 @@ import {
   ListItemText,
   Modal,
   Radio,
+  Skeleton,
   Stack,
   Typography,
   styled,
   useTheme,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SimpleBar from "simplebar-react";
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
@@ -27,20 +28,30 @@ const SubProductModel = ({
   openDialog,
   handelClose,
   product,
+  setSubProductId,
+  subproductId,
+  HandelAddProductWithSubProductId,
 }: {
+  setSubProductId: (e: string) => void;
+  subproductId: string;
   openDialog: boolean;
   handelClose: () => void;
   product: productInterface;
+  HandelAddProductWithSubProductId: () => void;
 }) => {
   //  HOOKS
   const { t } = useTranslation();
   const theme = useTheme();
   //  master data
   const { master } = useAppSelector((state) => state.master);
+  //  cartList data
+  const { cartList, isLoadingAddToCart } = useAppSelector(
+    (state) => state.cartList
+  );
   //  style of modal
   const style = {
     position: "absolute",
-    top: {md:"50%",xs:"56%"},
+    top: { md: "50%", xs: "56%" },
     left: "50%",
     transform: "translate(-50%, -50%)",
 
@@ -53,7 +64,16 @@ const SubProductModel = ({
     borderRadius: "10px",
     p: 3,
   };
-  
+
+  useEffect(() => {
+    setSubProductId(product?.sub_products[0]?.id);
+  }, [product]);
+
+  //  handel action add to cart
+  const handelAddToCART = () => {
+    HandelAddProductWithSubProductId();
+    !isLoadingAddToCart && handelClose();
+  };
   return (
     <Modal
       open={openDialog}
@@ -77,6 +97,7 @@ const SubProductModel = ({
             <GlobalDisplayFlexColumnBox width={"100%"} gap={"12px"}>
               {product?.sub_products?.map((e: sub_products, i: number) => (
                 <ListItem
+                  onClick={() => setSubProductId(e?.id)}
                   key={i}
                   sx={{
                     cursor: "pointer",
@@ -85,7 +106,7 @@ const SubProductModel = ({
                     boxShadow: "0px 6px 10px 0px #0000000D",
                     borderRadius: "4px",
                   }}
-                  // selected={adres.id === id}
+                  selected={e.id === subproductId}
                 >
                   <CustomStackFullWidth
                     sx={{
@@ -105,17 +126,56 @@ const SubProductModel = ({
                           >
                             {e?.name}
                           </Typography>
-                          <Typography
-                            sx={{ fontSize: "14px", fontWeight: "400" }}
+                          {/*  current price afyer discount */}
+                          <GlobalDisplayFlexBox
+                            sx={{ justifyContent: "flex-start", gap: "2px" }}
                           >
-                            {e?.price}
-                            {master?.currency}
-                          </Typography>
+                            <Typography
+                              sx={{ fontSize: "14px", fontWeight: "400" }}
+                            >
+                              {e?.price}
+                            </Typography>
+
+                            <Typography
+                              sx={{ fontSize: "14px", fontWeight: "400" }}
+                            >
+                              {master?.currency}
+                            </Typography>
+                          </GlobalDisplayFlexBox>
+
+                          {/*  old price */}
+                          {e?.old_price && (
+                            <GlobalDisplayFlexBox
+                              sx={{ justifyContent: "flex-start", gap: "2px" }}
+                            >
+                              <Typography
+                                sx={{
+                                  fontSize: "14px",
+                                  fontWeight: "400",
+                                  color: "#999999",
+                                  textDecoration: "line-through",
+                                }}
+                              >
+                                {e?.old_price}
+                              </Typography>
+
+                              <Typography
+                                sx={{
+                                  fontSize: "14px",
+                                  fontWeight: "400",
+                                  color: "#999999",
+                                  textDecoration: "line-through",
+                                }}
+                              >
+                                {master?.currency}
+                              </Typography>
+                            </GlobalDisplayFlexBox>
+                          )}
                         </GlobalDisplayFlexColumnBox>
                       }
                     />
                     <Radio
-                      //   checked={Number(adres.id) === Number(id)}
+                      checked={e.id === subproductId}
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
                       color={"success"}
@@ -140,22 +200,27 @@ const SubProductModel = ({
             >
               {t("Cancel")}
             </Typography>
-            <GlobalButton
-              py={""}
-              px={"0"}
-              width={"102px"}
-              height={"32px"}
-              sx={{
-                borderRadius: "4px",
-                backgroundColor: theme.palette.primary.main,
-                color: "white",
-                fontSize: "16px",
-                fontWeight: "500",
-              }}
-              onClick={handelClose}
-            >
-              + {t("Add")}
-            </GlobalButton>
+
+            {!isLoadingAddToCart ? (
+              <GlobalButton
+                py={""}
+                px={"0"}
+                width={"102px"}
+                height={"32px"}
+                sx={{
+                  borderRadius: "4px",
+                  backgroundColor: theme.palette.primary.main,
+                  color: "white",
+                  fontSize: "16px",
+                  fontWeight: "500",
+                }}
+                onClick={handelAddToCART}
+              >
+                + {t("Add")}
+              </GlobalButton>
+            ) : (
+              <Skeleton variant="text" width="50px" height={10} />
+            )}
           </GlobalDisplayFlexBox>
         </GlobalDisplayFlexColumnBox>
       </Stack>

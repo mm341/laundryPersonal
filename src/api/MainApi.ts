@@ -30,8 +30,8 @@ MainApi.interceptors.request.use(
     if (language) config.headers["Accept-Language"] = language;
     if (language) config.headers["locale"] = language;
 
-    config.headers["Content-Type"] = "application/json;charset=utf-8";
-    config.headers["Accept"] = "application/json";
+    // config.headers["Content-Type"] = "application/json;charset=utf-8";
+    // config.headers["Accept"] = "application/json";
     config.headers["Access-Control-Allow-Origin"] = "*";
     config.headers["Access-Control-Allow-Methods"] = "*";
     config.headers["Access-Control-Allow-Headers"] = "*";

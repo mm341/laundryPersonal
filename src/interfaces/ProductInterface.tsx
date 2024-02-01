@@ -6,7 +6,7 @@ export const initialProductData = () => {
     current_price: [],
     description: "",
     discount_percentage: null,
-    id: 0,
+    id: "",
     image_path: "",
     name: "",
     name_bn: "",
@@ -15,20 +15,23 @@ export const initialProductData = () => {
     slug: null,
     sub_products: [],
     variant: { id: "", name: "", name_bn: "" },
+    quantity:0,
+   
   };
 };
 
 export interface sub_products {
   description: string;
-  id: number;
+  id: string;
   name:string;
   price: number;
+  old_price:number
 }
 export interface productInterface {
   current_price: number[];
   description: string;
   discount_percentage: null;
-  id: number;
+  id: string;
   image_path: string;
   name: string;
   name_bn: string;
@@ -37,4 +40,5 @@ export interface productInterface {
   slug: null;
   sub_products: sub_products[];
   variant: VariantInterface;
+  quantity:number
 }

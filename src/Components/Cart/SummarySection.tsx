@@ -9,6 +9,7 @@ const SummarySection = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   //  master data
+  const { cartList } = useAppSelector((state) => state.cartList);
   const { master } = useAppSelector((state) => state.master);
   return (
     <GlobalDisplayFlexColumnBox width={"100%"} gap={"12px"} sx={{ px: "18px" }}>
@@ -33,7 +34,7 @@ const SummarySection = () => {
           >
             {t("Subtotal")}
           </Typography>
-          <Typography>323 {master?.currency}</Typography>
+          <Typography>{cartList?.sub_total} {master?.currency}</Typography>
         </Box>
         {/* Delivery Charge */}
         <Box
@@ -52,7 +53,7 @@ const SummarySection = () => {
           >
             {t("Delivery Charge")}
           </Typography>
-          <Typography>323 {master?.currency}</Typography>
+          <Typography>{cartList?.delivery_fee} {master?.currency}</Typography>
         </Box>
         {/* Discount*/}
         <Box
@@ -71,7 +72,7 @@ const SummarySection = () => {
           >
             {t("Discount")}
           </Typography>
-          <Typography>323 {master?.currency}</Typography>
+          {/* <Typography>323 {master?.currency}</Typography> */}
         </Box>
       </GlobalDisplayFlexColumnBox>
       {/* Total*/}
@@ -90,7 +91,7 @@ const SummarySection = () => {
         >
           {t("Total")}
         </Typography>
-        <Typography>323 {master?.currency}</Typography>
+        <Typography>{cartList?.total_order_amount} {master?.currency}</Typography>
       </Box>
     </GlobalDisplayFlexColumnBox>
   );

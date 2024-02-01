@@ -1,3 +1,4 @@
+import { AddToCart, GetCartDetails } from "@/redux/slices/CartSlice";
 import { AddCoupon } from "@/redux/slices/OrderSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { GlobalButton, GlobalDisplayFlexBox } from "@/styles/PublicStyles";
@@ -21,7 +22,7 @@ const CouponSection = ({
 
   const theme = useTheme();
 
-  const { isLoadingCoupon } = useAppSelector((state) => state.orders);
+  const { isloading } = useAppSelector((state) => state.cartList);
   return (
     <GlobalDisplayFlexBox sx={{ px: "18px" }}>
       <TextField
@@ -30,17 +31,16 @@ const CouponSection = ({
         sx={{ width: { md: "71%", xs: "100%" }, borderRadius: "4px" }}
         size="small"
         placeholder={t("Enter Coupon")}
-        disabled={isLoadingCoupon}
+        disabled={isloading}
       />
-      {!isLoadingCoupon ? (
+      {!isloading ? (
         <GlobalButton
           onClick={() => {
             if (couponValue) {
               if (token) {
                 dispatch(
-                  AddCoupon({
-                    amount: 0,
-                    coupon_code: couponValue,
+                  GetCartDetails({
+                    coupon: couponValue,
                   })
                 );
               } else {

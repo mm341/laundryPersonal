@@ -56,6 +56,7 @@ import {
 import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
 import BannersSection from "@/Components/Banners/BannersSection";
 import AdditionalServicesSection from "@/Components/Cart/AdditionalServicesSection";
+import { AddToCart, GetCartDetails } from "@/redux/slices/CartSlice";
 const ProductsPage = ({
   homeServices,
   homeAreas,
@@ -74,7 +75,9 @@ const ProductsPage = ({
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const [searchText, setSearchText] = useState<string>("");
+  const [subproductId, setSubProductId] = useState<string>("");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [quantityForRequest, setQuantityForAddRequest] = useState<number>(1);
   let [loading, setLoading] = useState<boolean>(false);
   const [choicesIds, setChoicesIds] = useState<number[]>([]);
   const [Product, setProduct] = useState<productInterface>(
@@ -127,13 +130,6 @@ const ProductsPage = ({
     setSearchText(e.target.value);
     if (e.target.value) {
       setSearchText(e.target.value);
-      // dispatch(
-      //   GetProductsWithSearch({
-      //     serviceId: router.query.service_id,
-      //     variantId: type,
-      //     searchText: e.target.value,
-      //   })
-      // );
     } else {
       dispatch(
         GetProducts({
@@ -159,6 +155,12 @@ const ProductsPage = ({
 
   useEffect(() => {
     dispatch(GetAllBanners());
+  }, []);
+
+  //  get all CartList
+
+  useEffect(() => {
+    dispatch(GetCartDetails({}));
   }, []);
 
   //  function close subProduct modal
@@ -204,6 +206,14 @@ const ProductsPage = ({
     dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
 
+  const HandelAddProductWithSubProductId = () => {
+    dispatch(
+      AddToCart({
+        product_id: subproductId,
+        quantity: quantityForRequest,
+      })
+    );
+  };
   return (
     <>
       <Meta title={"services"} description="" keywords="" />
@@ -306,6 +316,8 @@ const ProductsPage = ({
                               products?.map(
                                 (product: productInterface, i: number) => (
                                   <ProductCard
+                                    
+                                    setQuantityForAddRequest={setQuantityForAddRequest}
                                     setOpenDialog={setOpenDialog}
                                     setProduct={setProduct}
                                     key={product?.id}
@@ -355,6 +367,9 @@ const ProductsPage = ({
       )}
 
       <SubProductModel
+        HandelAddProductWithSubProductId={HandelAddProductWithSubProductId}
+        setSubProductId={setSubProductId}
+        subproductId={subproductId}
         handelClose={handelCloseModal}
         product={Product}
         openDialog={openDialog}

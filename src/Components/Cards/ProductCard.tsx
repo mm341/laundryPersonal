@@ -1,34 +1,39 @@
 import { productInterface } from "@/interfaces/ProductInterface";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   CustomPaperBigCard,
   GlobalButton,
   GlobalDisplayFlexBox,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-import { Box, Typography, useTheme } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Skeleton, Typography, useTheme } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
-// import Image from "next/image";
+import { AddToCart } from "@/redux/slices/CartSlice";
+import arrowRight from "../../../public/products/arrowright.svg";
 const ProductCard = ({
   product,
   setProduct,
   setOpenDialog,
+  setQuantityForAddRequest,
 }: {
   product: productInterface;
   setProduct: (e: productInterface) => void;
   setOpenDialog: (e: boolean) => void;
+  setQuantityForAddRequest: (e: number) => void;
 }) => {
   //  hooks
   const { locale } = useRouter();
   const { t } = useTranslation();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
   //  master data
   const { master } = useAppSelector((state) => state.master);
-
+  const { cartList, isLoadingAddToCart } = useAppSelector(
+    (state) => state.cartList
+  );
   let [quantity, setQuantity] = useState<number>(1);
-
 
   //  handel current price
   const handelProductPrice = () => {
@@ -52,20 +57,17 @@ const ProductCard = ({
     }
   };
 
+  useEffect(() => {
+    setQuantityForAddRequest(quantity);
+  }, [quantity]);
+  //  handel old price
 
-   //  handel old price
-   
-   const handelProductOldPrice = () => {
-   
-    if (
-      Math.min(...product?.old_price) !==
-      Math.max(...product?.old_price)
-    )
+  const handelProductOldPrice = () => {
+    if (Math.min(...product?.old_price) !== Math.max(...product?.old_price))
       return (
         <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-          {Math.min(...product?.old_price)} {master?.currency} / {t("Item")}{" "}
-          - {Math.max(...product?.old_price)} {master?.currency} /{" "}
-          {t("Item")}
+          {Math.min(...product?.old_price)} {master?.currency} / {t("Item")} -{" "}
+          {Math.max(...product?.old_price)} {master?.currency} / {t("Item")}
         </Typography>
       );
     else {
@@ -75,6 +77,60 @@ const ProductCard = ({
         </Typography>
       );
     }
+  };
+
+
+  const handelAddButton = (e: productInterface) => {
+    return !isLoadingAddToCart ? (
+      <GlobalButton
+        py={""}
+        px={"0"}
+        width={"102px"}
+        height={"32px"}
+        sx={{
+          borderRadius: "4px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "5px",
+          border: `2px solid ${theme.palette.primary.main}`,
+          color: cartList?.cart_details?.products
+            ?.map((e) => e.id)
+            .includes(e?.id)
+            ? "white"
+            : theme.palette.primary.main,
+          fontSize: "16px",
+          fontWeight: "500",
+          backgroundColor: cartList?.cart_details?.products
+            ?.map((e) => e.id)
+            .includes(e?.id)
+            ? theme.palette.primary.main
+            : "white",
+        }}
+        onClick={() => {
+          if (product?.sub_products?.length > 0) {
+            setOpenDialog(true);
+            setProduct(product);
+          } else {
+            dispatch(
+              AddToCart({
+                product_id: product?.id,
+                quantity: Number(quantity),
+              })
+            );
+          }
+        }}
+      >
+        {cartList?.cart_details?.products?.map((e) => e.id).includes(e?.id) ? (
+          <img src={arrowRight?.src} loading="lazy" alt="img" />
+        ) : (
+          <Typography>+</Typography>
+        )}{" "}
+        {t("Add")}{" "}
+      </GlobalButton>
+    ) : (
+      <Skeleton variant="text" width="50px" height={10} />
+    );
   };
 
   return (
@@ -128,7 +184,6 @@ const ProductCard = ({
             {/*  old and current price  case of product discount*/}
             {product?.discount_percentage && (
               <GlobalDisplayFlexColumnBox width={"100%"} gap={"2px"}>
-                
                 {handelProductPrice()}
                 <Typography
                   sx={{
@@ -145,7 +200,7 @@ const ProductCard = ({
             {/*  current price  case of no product discount*/}
             {!product?.discount_percentage && (
               <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-              {handelProductPrice()}
+                {handelProductPrice()}
               </Typography>
             )}
             {/*  quantity */}
@@ -202,31 +257,9 @@ const ProductCard = ({
 
         {/*  right section  */}
 
-        {/*  add button */}
+        {/*  add to cart button */}
 
-        <GlobalButton
-          py={""}
-          px={"0"}
-          width={"102px"}
-          height={"32px"}
-          sx={{
-            borderRadius: "4px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "5px",
-            border: `2px solid ${theme.palette.primary.main}`,
-            color: theme.palette.primary.main,
-            fontSize: "16px",
-            fontWeight: "500",
-          }}
-          onClick={() => {
-            setOpenDialog(true);
-            setProduct(product);
-          }}
-        >
-          + {t("Add")}{" "}
-        </GlobalButton>
+        {handelAddButton(product)}
         {product?.discount_percentage && (
           <Box
             sx={{

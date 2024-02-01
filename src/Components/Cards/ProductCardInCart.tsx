@@ -1,23 +1,35 @@
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   CustomPaperBigCard,
   GlobalButton,
   GlobalDisplayFlexBox,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Skeleton, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/router";
+import { productInterface } from "@/interfaces/ProductInterface";
+import { AddToCart } from "@/redux/slices/CartSlice";
 // import Image from "next/image";
-const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
+const ProductCardInCart = ({
+  checkOut,
+  product,
+}: {
+  checkOut?: boolean;
+  product: productInterface;
+}) => {
   //  hooks
   const { locale } = useRouter();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
   //  master data
   const { master } = useAppSelector((state) => state.master);
+  const { cartList, isLoadingAddToCart } = useAppSelector(
+    (state) => state.cartList
+  );
 
-  let [quantity, setQuantity] = useState<number>(1);
+  let quantity = product?.quantity;
   return (
     <CustomPaperBigCard
       sx={{
@@ -51,7 +63,7 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
             <img
               width={"100"}
               height={"100"}
-              src="http://adminlaundry.razinsoft.com/storage/images/products/QpiDQXTAt3KnmNfOtGEg66sQmU7ndpKigAzzUhBZ.jpg"
+              src={product?.image_path}
               loading="lazy"
               alt="productImg"
               style={{ width: "100%", height: "100%", borderRadius: "4px" }}
@@ -64,18 +76,18 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
           >
             {/*product  name */}
             <Typography sx={{ fontSize: "14px", fontWeight: "500" }}>
-              Blouse
+              {product?.name}
             </Typography>
 
             {/*  srrvice name */}
             <Typography
               sx={{ fontSize: "14px", fontWeight: "400", color: "#999999" }}
             >
-              Blouse
+              {product?.service?.name}
             </Typography>
 
             {/*  quantity */}
-            {!checkOut && (
+            {!checkOut && !isLoadingAddToCart && (
               <Box
                 sx={{
                   width: "100%",
@@ -86,10 +98,17 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
                 }}
                 dir="ltr"
               >
-                {quantity > 1 && (
+                {product.quantity > 1 && (
                   <GlobalButton
                     onClick={() => {
-                      quantity > 1 && setQuantity((quantity -= 1));
+                      if (product.quantity > 1) {
+                        dispatch(
+                          AddToCart({
+                            product_id: product?.id,
+                            quantity: Number((quantity -= 1)),
+                          })
+                        );
+                      }
                     }}
                     py={"0"}
                     px={"0"}
@@ -105,10 +124,17 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
                   </GlobalButton>
                 )}
 
-                {quantity === 1 && (
+                {product.quantity === 1 && (
                   <GlobalButton
                     onClick={() => {
-                      quantity > 1 && setQuantity((quantity -= 1));
+                      product.quantity === 1 &&
+                        dispatch(
+                          AddToCart({
+                            product_id: product?.id,
+                            remove_product: 1,
+                            quantity: 1,
+                          })
+                        );
                     }}
                     py={"0"}
                     px={"0"}
@@ -129,10 +155,17 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
                   </GlobalButton>
                 )}
                 <Typography sx={{ fontSize: "14px", fontWeight: "400" }}>
-                  {quantity}
+                  {product?.quantity}
                 </Typography>
                 <GlobalButton
-                  onClick={() => setQuantity((quantity += 1))}
+                  onClick={() => {
+                    dispatch(
+                      AddToCart({
+                        product_id: product?.id,
+                        quantity: Number((quantity += 1)),
+                      })
+                    );
+                  }}
                   py={"0"}
                   px={"0"}
                   sx={{
@@ -147,6 +180,12 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
                 </GlobalButton>
               </Box>
             )}
+            {isLoadingAddToCart && (
+              <>
+                <Skeleton variant="text" width="50px" height={10} />
+                <Skeleton variant="text" width="50px" height={10} />
+              </>
+            )}
 
             {checkOut && (
               <Typography
@@ -156,7 +195,8 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
                   color: theme.palette.secondary.contrastText,
                 }}
               >
-                3×8.00 {master?.currency}
+                {product?.quantity}×{product?.current_price[0]}{" "}
+                {master?.currency}
               </Typography>
             )}
           </GlobalDisplayFlexColumnBox>
@@ -165,7 +205,7 @@ const ProductCardInCart = ({ checkOut }: { checkOut?: boolean }) => {
         {/* { right Section} */}
 
         <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
-          8.00 {master?.currency}
+          {product?.old_price[0]} {master?.currency}
         </Typography>
       </GlobalDisplayFlexBox>
     </CustomPaperBigCard>

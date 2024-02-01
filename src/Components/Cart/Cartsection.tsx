@@ -13,18 +13,19 @@ import {
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProductCardInCart from "../Cards/ProductCardInCart";
-import SimpleBar from "simplebar-react";
 import CouponSection from "./CouponSection";
 import SummarySection from "./SummarySection";
 import { useAppSelector } from "@/redux/store";
 import { useRouter } from "next/router";
 import AuthModal from "../AuthBox/AuthModel";
 import { AdditionalServicesInterface } from "@/interfaces/AddtionalServicesInterface";
-import AdditionalServicesSection from "./AdditionalServicesSection";
-import { number } from "yup";
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
 import AdditionalServicesSectionInCart from "./AdditionalServicesSectionInCart";
-
+import EmptyData from "../GlobalComponent/EmptyData";
+import emptyProductsImg from "../../../public/products/empty products.png";
+import emptyProductsArabicImg from "../../../public/products/empty productsArabic.png";
+import LoadingComponent from "../GlobalComponent/LoadingComponent";
+import { toast } from "react-hot-toast";
 const Cartsection = ({
   additionalSercvices,
   choicesIds,
@@ -39,12 +40,12 @@ const Cartsection = ({
   const { t } = useTranslation();
 
   const router = useRouter();
+  const { locale } = useRouter();
   const [authModalOpen, setOpen] = useState<boolean>(false);
   const [couponValue, setCouponValue] = useState<string>("");
   const [modalFor, setModalFor] = useState<string>("sign-in");
   const { master } = useAppSelector((state) => state.master);
-
-  const array = [...Array(8)];
+  const { cartList, isloading } = useAppSelector((state) => state.cartList);
 
   //  get token from localstorage
 
@@ -78,7 +79,7 @@ const Cartsection = ({
       >
         <GlobalDisplayFlexColumnBox width={"100%"} gap={"30px"}>
           <Typography sx={{ px: "20px", fontSize: "16px", fontWeight: "500" }}>
-            {t("Cart")} (6)
+            {t("Cart")} ({cartList?.cart_details?.products?.length})
           </Typography>
 
           {/*  products */}
@@ -93,16 +94,35 @@ const Cartsection = ({
               px={"20px"}
               gap={"16px"}
             >
-              {array?.map((e, i: number) => (
-                <ProductCardInCart key={i} />
+              {/*  case of exist cart products */}
+              {cartList?.cart_details?.products?.map((e, i: number) => (
+                <ProductCardInCart product={e} key={i} />
               ))}
+
+              {/*  case of empty cart products */}
+              {!isloading && cartList?.cart_details?.products?.length === 0 && (
+                <EmptyData
+                  img={
+                    locale === "en"
+                      ? emptyProductsImg?.src
+                      : emptyProductsArabicImg?.src
+                  }
+                />
+              )}
+              {isloading && cartList?.cart_details?.products?.length === 0 && (
+                <LoadingComponent />
+              )}
             </GlobalDisplayFlexColumnBox>
           </Scrollbar>
 
           <Divider orientation="horizontal" />
           {/*  additional services section */}
-       
-          <AdditionalServicesSectionInCart  additionalSercvices={additionalSercvices}/>
+
+          <Box sx={{ px: "18px" }}>
+            <AdditionalServicesSectionInCart
+              additionalSercvices={additionalSercvices}
+            />
+          </Box>
 
           {/*  coupon section */}
           <CouponSection
@@ -113,80 +133,80 @@ const Cartsection = ({
           <SummarySection />
 
           <GlobalDisplayFlexColumnBox gap={"12px"} width={"100%"} px={"18px"}>
-            {/* <GlobalButton
-              px={"0"}
-              py={"0"}
-              sx={{
-                width: "100%",
-                height: "48px",
-                borderRadius: "5px",
-                backgroundColor: theme.palette.primary.main,
-                color: "white",
-              }}
-              onClick={() => {
-                if (token) {
-                  router.push("/checkout");
-                } else {
-                  handleOpenAuthModal();
-                }
-              }}
-            >
-              <Stack
-                direction={"row"}
-                justifyContent={"center"}
-                width={"100%"}
-                gap={"10px"}
+            {Number(cartList?.total_order_amount) > 20 && (
+              <GlobalButton
+                px={"0"}
+                py={"0"}
+                sx={{
+                  width: "100%",
+                  height: "48px",
+                  borderRadius: "5px",
+                  backgroundColor: theme.palette.primary.main,
+                  color: "white",
+                }}
+                onClick={() => {
+                  if (token) {
+                    if (cartList?.cart_details?.products?.length > 0) {
+                      router.push("/checkout");
+                    } else {
+                      toast.error(t("Add Product to your cart, at first"));
+                    }
+                  } else {
+                    handleOpenAuthModal();
+                  }
+                }}
               >
-                <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>
-                  (40.00 {master?.currency})
+                <Stack
+                  direction={"row"}
+                  justifyContent={"center"}
+                  width={"100%"}
+                  gap={"10px"}
+                >
+                  <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>
+                    ({cartList?.total_order_amount} {master?.currency})
+                  </Typography>
+                  <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>
+                    {t("CheckOut")}
+                  </Typography>
+                </Stack>
+              </GlobalButton>
+            )}
+            {Number(cartList?.total_order_amount) <= 20 && (
+              <>
+                <Typography
+                  sx={{
+                    color: theme.palette.secondary.contrastText,
+                    fontSize: "14px",
+                    fontWeight: "400",
+                  }}
+                >
+                  {t("Minimum order value is")} 20 {master.currency}
                 </Typography>
-                <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>
-                  {t("CheckOut")}
-                </Typography>
-              </Stack>
-            </GlobalButton> */}
-            <Typography
-              sx={{
-                color: theme.palette.secondary.contrastText,
-                fontSize: "14px",
-                fontWeight: "400",
-              }}
-            >
-              {t("Minimum order value is")} 20 {master.currency}
-            </Typography>
 
-            <GlobalButton
-              px={"0"}
-              py={"0"}
-              sx={{
-                width: "100%",
-                height: "48px",
-                borderRadius: "5px",
-                backgroundColor: theme.palette.secondary.contrastText,
-                color: "white",
-              }}
-              onClick={() => {
-                if (token) {
-                  router.push("/checkout");
-                } else {
-                  handleOpenAuthModal();
-                }
-              }}
-            >
-              <Stack
-                direction={"row"}
-                justifyContent={"center"}
-                width={"100%"}
-                gap={"10px"}
-              >
-                {/* <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>
-                  (40.00 {master?.currency})
-                </Typography> */}
-                <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>
-                  {t("CheckOut")}
-                </Typography>
-              </Stack>
-            </GlobalButton>
+                <GlobalButton
+                  px={"0"}
+                  py={"0"}
+                  sx={{
+                    width: "100%",
+                    height: "48px",
+                    borderRadius: "5px",
+                    backgroundColor: theme.palette.secondary.contrastText,
+                    color: "white",
+                  }}
+                >
+                  <Stack
+                    direction={"row"}
+                    justifyContent={"center"}
+                    width={"100%"}
+                    gap={"10px"}
+                  >
+                    <Typography sx={{ fontSize: "16px", fontWeight: "700" }}>
+                      {t("CheckOut")}
+                    </Typography>
+                  </Stack>
+                </GlobalButton>
+              </>
+            )}
           </GlobalDisplayFlexColumnBox>
         </GlobalDisplayFlexColumnBox>
       </Box>
