@@ -145,31 +145,49 @@ const SubProductModel = ({
 
                           {/*  old price */}
                           {e?.old_price > 0 && (
-                            <GlobalDisplayFlexBox
-                              sx={{ justifyContent: "flex-start", gap: "2px" }}
-                            >
-                              <Typography
+                            
+                              <GlobalDisplayFlexBox
                                 sx={{
-                                  fontSize: "14px",
-                                  fontWeight: "400",
-                                  color: "#999999",
-                                  textDecoration: "line-through",
+                                  justifyContent: "flex-start",
+                                  gap: "5px",
                                 }}
                               >
-                                {e?.old_price}
-                              </Typography>
+                                <Typography
+                                  sx={{
+                                    fontSize: "14px",
+                                    fontWeight: "400",
+                                    color: "#999999",
+                                    textDecoration: "line-through",
+                                  }}
+                                >
+                                  {e?.old_price}
+                                </Typography>
 
-                              <Typography
+                                <Typography
+                                  sx={{
+                                    fontSize: "14px",
+                                    fontWeight: "400",
+                                    color: "#999999",
+                                    textDecoration: "line-through",
+                                  }}
+                                >
+                                  {master?.currency}
+                                </Typography>
+
+
+                                <Typography
                                 sx={{
-                                  fontSize: "14px",
+                                  color: "#38AE04",
+                                  fontSize: "13px",
                                   fontWeight: "400",
-                                  color: "#999999",
-                                  textDecoration: "line-through",
                                 }}
                               >
-                                {master?.currency}
+                                  {e?.discount_percentage} % {t("Off")}
                               </Typography>
-                            </GlobalDisplayFlexBox>
+                              </GlobalDisplayFlexBox>
+
+                             
+                           
                           )}
                         </GlobalDisplayFlexColumnBox>
                       }
