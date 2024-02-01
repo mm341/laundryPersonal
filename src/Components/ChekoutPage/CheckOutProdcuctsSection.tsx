@@ -56,7 +56,7 @@ const CheckOutProductsSection = ({
         {cartList?.cart_details?.products?.length > 0 &&
           !isloading &&
           cartList?.cart_details?.products?.map((e, i: number) => (
-            <ProductCardInCart product={e} key={i} />
+            <ProductCardInCart checkOut product={e} key={i} />
           ))}
 
         {isloading && cartList?.cart_details?.products?.length === 0 && (

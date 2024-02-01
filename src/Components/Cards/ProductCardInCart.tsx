@@ -195,7 +195,7 @@ const ProductCardInCart = ({
                   color: theme.palette.secondary.contrastText,
                 }}
               >
-                {product?.quantity}×{product?.current_price[0]}{" "}
+                {product?.quantity}×{product?.old_price[0]}{" "}
                 {master?.currency}
               </Typography>
             )}
