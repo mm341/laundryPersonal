@@ -1,3 +1,4 @@
+import { number } from "yup";
 import { AdditionalServicesInterface } from "./AddtionalServicesInterface";
 import { productInterface } from "./ProductInterface";
 
@@ -22,6 +23,7 @@ export const initialCartList = () => {
     coupon: 0,
     delivery_fee: "",
     total_order_amount: "",
+    discount:number
   };
 };
 
@@ -31,4 +33,5 @@ export interface CartListInterface {
   coupon: number;
   delivery_fee: string;
   total_order_amount: string;
+  discount:number
 }
