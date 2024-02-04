@@ -49,7 +49,21 @@ export const AddToCart = createAsyncThunk(
 export const UpdateCart = createAsyncThunk(
   "cart/UpdateCart",
   (payload: addToCartPayload) =>
-    PublicRequest.postData(payload, `customer/addresses/${payload?.id}`)
+    PublicRequest.postData(payload, `customer/cart/update-cart`)
+      .then((res: any) => {
+        if (res) {
+          toast.success(res?.message);
+          return res;
+        }
+      })
+      .catch((err) => PublicHandelingErrors.onErrorResponse(err))
+);
+
+// UpdateCart
+export const RemoveElement = createAsyncThunk(
+  "cart/RemoveElement",
+  (payload: addToCartPayload) =>
+    PublicRequest.postData(payload, `/customer/cart/remove-from-cart`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
@@ -123,7 +137,7 @@ export const CartListSlice = createSlice({
       state.isLoadingAddToCart = false;
     });
 
-    //  post update address
+    //  post update cart
     builder.addCase(UpdateCart.pending, (state: CartListModel) => {
       state.isLoadingUpdateCart = true;
     });
@@ -131,9 +145,26 @@ export const CartListSlice = createSlice({
       UpdateCart.fulfilled,
       (state: CartListModel, { payload }: any) => {
         state.isLoadingUpdateCart = false;
+        if (payload?.data) {
+          state.cartList = payload?.data;
+        }
       }
     );
     builder.addCase(UpdateCart.rejected, (state: CartListModel) => {
+      state.isLoadingUpdateCart = false;
+    });
+
+    // Remove element from Cart
+    builder.addCase(RemoveElement.pending, (state: CartListModel) => {
+      state.isLoadingUpdateCart = true;
+    });
+    builder.addCase(
+      RemoveElement.fulfilled,
+      (state: CartListModel, { payload }: any) => {
+        state.isLoadingUpdateCart = false;
+      }
+    );
+    builder.addCase(RemoveElement.rejected, (state: CartListModel) => {
       state.isLoadingUpdateCart = false;
     });
 

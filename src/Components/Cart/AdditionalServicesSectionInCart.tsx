@@ -11,7 +11,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
 import deleteIcon from "../../../public/products/deleteButton.svg";
-import { AddToCart } from "@/redux/slices/CartSlice";
+import { AddToCart, RemoveElement } from "@/redux/slices/CartSlice";
 const AdditionalServicesSectionInCart = ({
   additionalSercvices,
 }: {
@@ -21,7 +21,7 @@ const AdditionalServicesSectionInCart = ({
   const { t } = useTranslation();
   const theme = useTheme();
   const dispatch = useAppDispatch();
-  const { cartList, isLoadingAddToCart } = useAppSelector(
+  const { cartList, isLoadingUpdateCart } = useAppSelector(
     (state) => state.cartList
   );
   //  master data
@@ -79,13 +79,12 @@ const AdditionalServicesSectionInCart = ({
                       {e?.price} {master?.currency}
                     </Typography>
 
-                    {!isLoadingAddToCart ? (
+                    {!isLoadingUpdateCart ? (
                       <img
                         onClick={() => {
                           dispatch(
-                            AddToCart({
+                            RemoveElement({
                               additional_service_id: e?.id,
-                              remove_additional: 1,
                             })
                           );
                         }}

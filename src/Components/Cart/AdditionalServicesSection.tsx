@@ -101,7 +101,7 @@ const AdditionalServicesSection = ({
           }}
         >
           <GlobalDisplayFlexColumnBox
-            width={"95%"}
+            width={"100%"}
             sx={{ width: "99%", mx: "auto", my: "5px" }}
             gap={"24px"}
           >

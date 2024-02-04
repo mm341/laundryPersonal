@@ -10,7 +10,7 @@ import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/router";
 import { productInterface } from "@/interfaces/ProductInterface";
-import { AddToCart } from "@/redux/slices/CartSlice";
+import { AddToCart, RemoveElement, UpdateCart } from "@/redux/slices/CartSlice";
 // import Image from "next/image";
 const ProductCardInCart = ({
   checkOut,
@@ -25,9 +25,7 @@ const ProductCardInCart = ({
   const dispatch = useAppDispatch();
   //  master data
   const { master } = useAppSelector((state) => state.master);
-  const { cartList, isLoadingAddToCart } = useAppSelector(
-    (state) => state.cartList
-  );
+  const { isLoadingUpdateCart } = useAppSelector((state) => state.cartList);
 
   let quantity = product?.quantity;
   return (
@@ -87,7 +85,7 @@ const ProductCardInCart = ({
             </Typography>
 
             {/*  quantity */}
-            {!checkOut && !isLoadingAddToCart && (
+            {!checkOut && !isLoadingUpdateCart && (
               <Box
                 sx={{
                   width: "100%",
@@ -103,7 +101,7 @@ const ProductCardInCart = ({
                     onClick={() => {
                       if (product.quantity > 1) {
                         dispatch(
-                          AddToCart({
+                          UpdateCart({
                             product_id: product?.id,
                             quantity: Number((quantity -= 1)),
                           })
@@ -129,10 +127,8 @@ const ProductCardInCart = ({
                     onClick={() => {
                       product.quantity === 1 &&
                         dispatch(
-                          AddToCart({
+                          RemoveElement({
                             product_id: product?.id,
-                            remove_product: 1,
-                            quantity: 1,
                           })
                         );
                     }}
@@ -160,7 +156,7 @@ const ProductCardInCart = ({
                 <GlobalButton
                   onClick={() => {
                     dispatch(
-                      AddToCart({
+                      UpdateCart({
                         product_id: product?.id,
                         quantity: Number((quantity += 1)),
                       })
@@ -180,7 +176,7 @@ const ProductCardInCart = ({
                 </GlobalButton>
               </Box>
             )}
-            {isLoadingAddToCart && (
+            {isLoadingUpdateCart && (
               <>
                 <Skeleton variant="text" width="50px" height={10} />
                 <Skeleton variant="text" width="50px" height={10} />
@@ -195,8 +191,7 @@ const ProductCardInCart = ({
                   color: theme.palette.secondary.contrastText,
                 }}
               >
-                {product?.quantity}×{product?.old_price[0]}{" "}
-                {master?.currency}
+                {product?.quantity}×{product?.old_price[0]} {master?.currency}
               </Typography>
             )}
           </GlobalDisplayFlexColumnBox>
