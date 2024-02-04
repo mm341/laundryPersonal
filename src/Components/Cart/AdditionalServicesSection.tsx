@@ -33,7 +33,7 @@ const AdditionalServicesSection = ({
       <GlobalButton
         py={""}
         px={"0"}
-        width={"102px"}
+        width={"105px"}
         height={"32px"}
         sx={{
           borderRadius: "4px",
