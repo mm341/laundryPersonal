@@ -1,5 +1,6 @@
 import {
   GlobalButton,
+  GlobalDisplayFlexBox,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
 import {
@@ -15,7 +16,7 @@ import { useTranslation } from "react-i18next";
 import ProductCardInCart from "../Cards/ProductCardInCart";
 import CouponSection from "./CouponSection";
 import SummarySection from "./SummarySection";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useRouter } from "next/router";
 import AuthModal from "../AuthBox/AuthModel";
 import { AdditionalServicesInterface } from "@/interfaces/AddtionalServicesInterface";
@@ -24,8 +25,10 @@ import AdditionalServicesSectionInCart from "./AdditionalServicesSectionInCart";
 import EmptyData from "../GlobalComponent/EmptyData";
 import emptyProductsImg from "../../../public/products/empty products.png";
 import emptyProductsArabicImg from "../../../public/products/empty productsArabic.png";
+import deleteProductsImg from "../../../public/products/deleteCart.svg";
 import LoadingComponent from "../GlobalComponent/LoadingComponent";
 import { toast } from "react-hot-toast";
+import { DeleteCart } from "@/redux/slices/CartSlice";
 const Cartsection = ({
   additionalSercvices,
   choicesIds,
@@ -38,7 +41,7 @@ const Cartsection = ({
   // hooks
   const theme = useTheme();
   const { t } = useTranslation();
-
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const { locale } = useRouter();
   const [authModalOpen, setOpen] = useState<boolean>(false);
@@ -78,9 +81,44 @@ const Cartsection = ({
         }}
       >
         <GlobalDisplayFlexColumnBox width={"100%"} gap={"30px"}>
-          <Typography sx={{ px: "20px", fontSize: "16px", fontWeight: "500" }}>
-            {t("Cart")} ({cartList?.cart_details?.products?.length})
-          </Typography>
+          <GlobalDisplayFlexBox
+            sx={{ justifyContent: "space-between", px: "20px" }}
+          >
+            <GlobalDisplayFlexBox
+              sx={{ justifyContent: "flex-start", gap: "2px" }}
+            >
+              <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
+                {t("Cart")}
+              </Typography>
+              <Typography>
+                ({cartList?.cart_details?.products?.length})
+              </Typography>
+            </GlobalDisplayFlexBox>
+            {/*  clear cart */}
+            {cartList?.cart_details?.products?.length > 0 && (
+              <GlobalDisplayFlexBox
+                onClick={() =>
+                  dispatch(DeleteCart({ id: cartList?.cart_details?.cart_id }))
+                }
+                sx={{
+                  justifyContent: "flex-end",
+                  gap: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                <img src={deleteProductsImg} loading="lazy" alt="img" />
+                <Typography
+                  sx={{
+                    color: theme.palette.primary.main,
+                    fontSize: "14px",
+                    fontWeight: "400",
+                  }}
+                >
+                  {t("Clear Cart")}
+                </Typography>
+              </GlobalDisplayFlexBox>
+            )}
+          </GlobalDisplayFlexBox>
 
           {/*  products */}
 
@@ -95,9 +133,11 @@ const Cartsection = ({
               gap={"16px"}
             >
               {/*  case of exist cart products */}
-              { (cartList?.cart_details?.products?.length>0 && !isloading) &&   cartList?.cart_details?.products?.map((e, i: number) => (
-                <ProductCardInCart product={e} key={i} />
-              ))}
+              {cartList?.cart_details?.products?.length > 0 &&
+                !isloading &&
+                cartList?.cart_details?.products?.map((e, i: number) => (
+                  <ProductCardInCart product={e} key={i} />
+                ))}
 
               {/*  case of empty cart products */}
               {!isloading && cartList?.cart_details?.products?.length === 0 && (
@@ -180,7 +220,8 @@ const Cartsection = ({
                     fontWeight: "400",
                   }}
                 >
-                  {t("Minimum order value is")} {master.minimum_cost} {master.currency}
+                  {t("Minimum order value is")} {master.minimum_cost}{" "}
+                  {master.currency}
                 </Typography>
 
                 <GlobalButton

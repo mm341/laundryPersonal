@@ -77,7 +77,7 @@ export const RemoveElement = createAsyncThunk(
 export const DeleteCart = createAsyncThunk(
   "cart/DeleteCart",
   (payload: addToCartPayload) =>
-    PublicRequest.deleteData(`cart/clear-cart/${payload?.id}`)
+    PublicRequest.deleteData(`/customer/cart/clear-cart/${payload?.id}`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
@@ -179,6 +179,7 @@ export const CartListSlice = createSlice({
       DeleteCart.fulfilled,
       (state: CartListModel, { payload }: any) => {
         state.isloadingDeleteCart = false;
+        state.cartList = initialCartList();
       }
     );
     builder.addCase(DeleteCart.rejected, (state: CartListModel) => {
