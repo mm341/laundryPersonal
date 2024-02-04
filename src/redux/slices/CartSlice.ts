@@ -162,6 +162,9 @@ export const CartListSlice = createSlice({
       RemoveElement.fulfilled,
       (state: CartListModel, { payload }: any) => {
         state.isLoadingUpdateCart = false;
+        if (payload?.data) {
+          state.cartList = payload?.data;
+        }
       }
     );
     builder.addCase(RemoveElement.rejected, (state: CartListModel) => {
