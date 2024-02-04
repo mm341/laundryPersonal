@@ -347,7 +347,7 @@ const ProductsPage = ({
                     </CustomPaperBigCard>
 
                     <CustomPaperBigCard
-                      sx={{ backgroundColor: "white", py: "20px" }}
+                      sx={{ backgroundColor: "white", py: "20px",px:"0" }}
                     >
                       <AdditionalServicesSection
                         additionalSercvices={additionalSercvices}

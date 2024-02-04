@@ -23,14 +23,14 @@ export const initialCartList = () => {
     coupon: 0,
     delivery_fee: "",
     total_order_amount: "",
-    discount:number
+    discount:0
   };
 };
 
 export interface CartListInterface {
   cart_details: Cart_details;
   sub_total: string;
-  coupon: number;
+  coupon?: number;
   delivery_fee: string;
   total_order_amount: string;
   discount:number
