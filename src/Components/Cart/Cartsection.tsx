@@ -106,7 +106,7 @@ const Cartsection = ({
                   cursor: "pointer",
                 }}
               >
-                <img src={deleteProductsImg} loading="lazy" alt="img" />
+                <img src={deleteProductsImg?.src} loading="lazy" alt="img" />
                 <Typography
                   sx={{
                     color: theme.palette.primary.main,
