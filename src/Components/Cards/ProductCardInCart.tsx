@@ -200,7 +200,7 @@ const ProductCardInCart = ({
         {/* { right Section} */}
 
         <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
-          {product?.old_price[0]} {master?.currency}
+          {product?.cart_old_price[0]} {master?.currency}
         </Typography>
       </GlobalDisplayFlexBox>
     </CustomPaperBigCard>

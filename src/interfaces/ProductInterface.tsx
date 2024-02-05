@@ -16,6 +16,7 @@ export const initialProductData = () => {
     sub_products: [],
     variant: { id: "", name: "", name_bn: "" },
     quantity:0,
+    art_old_price:[]
    
   };
 };
@@ -42,4 +43,5 @@ export interface productInterface {
   sub_products: sub_products[];
   variant: VariantInterface;
   quantity:number
+  cart_old_price:number[]
 }
