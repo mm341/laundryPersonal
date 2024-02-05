@@ -104,11 +104,15 @@ export const CartListSlice = createSlice({
     //  get cartList
     builder.addCase(GetCartDetails.pending, (state: CartListModel) => {
       state.isloading = true;
+      state.isLoadingAddToCart = false;
+      state.isLoadingUpdateCart = false;
     });
     builder.addCase(
       GetCartDetails.fulfilled,
       (state: CartListModel, { payload }: any) => {
         state.isloading = false;
+        state.isLoadingAddToCart = false;
+        state.isLoadingUpdateCart = false;
         if (payload?.data) {
           state.cartList = payload?.data;
         }
@@ -116,10 +120,12 @@ export const CartListSlice = createSlice({
     );
     builder.addCase(GetCartDetails.rejected, (state: CartListModel) => {
       state.isloading = false;
+      state.isLoadingAddToCart = false;
+      state.isLoadingUpdateCart = false;
     });
     // AddToCart;
     builder.addCase(AddToCart.pending, (state: CartListModel) => {
-      state.isLoadingAddToCart = true;
+      state.isLoadingAddToCart = false;
     });
     builder.addCase(
       AddToCart.fulfilled,

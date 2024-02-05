@@ -233,6 +233,7 @@ const Cartsection = ({
                     borderRadius: "5px",
                     backgroundColor: theme.palette.secondary.contrastText,
                     color: "white",
+                    cursor:"default"
                   }}
                 >
                   <Stack
