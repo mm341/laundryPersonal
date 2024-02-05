@@ -22,7 +22,7 @@ interface cartListPayload {
 export const GetCartDetails = createAsyncThunk(
   "cart/GetCartDetails",
   (payload: cartListPayload) =>
-    PublicRequest.postData(payload, "my-cart")
+    PublicRequest.postData(payload, "/cart/my-cart")
       .then((res: any) => {
         if (res) {
           return res;
@@ -35,7 +35,7 @@ export const GetCartDetails = createAsyncThunk(
 export const AddToCart = createAsyncThunk(
   "cart/AddToCart",
   (payload: addToCartPayload) =>
-    PublicRequest.postData(payload, `customer/cart/add-to-cart`)
+    PublicRequest.postData(payload, `/cart/add-to-cart`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
@@ -49,7 +49,7 @@ export const AddToCart = createAsyncThunk(
 export const UpdateCart = createAsyncThunk(
   "cart/UpdateCart",
   (payload: addToCartPayload) =>
-    PublicRequest.postData(payload, `customer/cart/update-cart`)
+    PublicRequest.postData(payload, `/cart/update-cart`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
@@ -63,7 +63,7 @@ export const UpdateCart = createAsyncThunk(
 export const RemoveElement = createAsyncThunk(
   "cart/RemoveElement",
   (payload: addToCartPayload) =>
-    PublicRequest.postData(payload, `/customer/cart/remove-from-cart`)
+    PublicRequest.postData(payload, `/cart/remove-from-cart`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
@@ -77,7 +77,7 @@ export const RemoveElement = createAsyncThunk(
 export const DeleteCart = createAsyncThunk(
   "cart/DeleteCart",
   (payload: addToCartPayload) =>
-    PublicRequest.deleteData(`/customer/cart/clear-cart/${payload?.id}`)
+    PublicRequest.deleteData(`/cart/clear-cart/${payload?.id}`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
