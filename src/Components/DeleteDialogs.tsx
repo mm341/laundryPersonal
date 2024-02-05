@@ -101,7 +101,7 @@ const DeleteDialog = ({
                 {t(Cancel)}
               </GlobalButton>
               <Button
-                onClick={handelAction}
+                onClick={!loading ? handelAction : () => console.log("")}
                 style={{
                   backgroundColor: "#329CD7",
                   width: "130px",

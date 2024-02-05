@@ -106,6 +106,7 @@ export const CartListSlice = createSlice({
       state.isloading = true;
       state.isLoadingAddToCart = false;
       state.isLoadingUpdateCart = false;
+      state.isloadingDeleteCart = false;
     });
     builder.addCase(
       GetCartDetails.fulfilled,
@@ -113,6 +114,7 @@ export const CartListSlice = createSlice({
         state.isloading = false;
         state.isLoadingAddToCart = false;
         state.isLoadingUpdateCart = false;
+        state.isloadingDeleteCart = false;
         if (payload?.data) {
           state.cartList = payload?.data;
         }
@@ -122,6 +124,7 @@ export const CartListSlice = createSlice({
       state.isloading = false;
       state.isLoadingAddToCart = false;
       state.isLoadingUpdateCart = false;
+      state.isloadingDeleteCart = false;
     });
     // AddToCart;
     builder.addCase(AddToCart.pending, (state: CartListModel) => {

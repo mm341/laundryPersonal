@@ -50,7 +50,9 @@ const Cartsection = ({
   const [couponValue, setCouponValue] = useState<string>("");
   const [modalFor, setModalFor] = useState<string>("sign-in");
   const { master } = useAppSelector((state) => state.master);
-  const { cartList, isloading } = useAppSelector((state) => state.cartList);
+  const { cartList, isloading, isloadingDeleteCart } = useAppSelector(
+    (state) => state.cartList
+  );
 
   //  get token from localstorage
 
@@ -269,6 +271,7 @@ const Cartsection = ({
       />
       {openDeleteCart && (
         <DeleteDialog
+          size={25}
           handelAction={() => handelClearCart(cartList?.cart_details?.cart_id)}
           Cancel={"Cancel"}
           header={"Clear Cart?"}
@@ -276,6 +279,7 @@ const Cartsection = ({
           setOpenDeleteDialog={setOpenDeleteCart}
           text={"Are you sure you want to Clear Cart"}
           primaryButtonText={"Clear Cart"}
+          loading={isloadingDeleteCart}
         />
       )}
     </>
