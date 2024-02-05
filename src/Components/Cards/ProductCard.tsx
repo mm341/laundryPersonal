@@ -34,7 +34,7 @@ const ProductCard = ({
   const { cartList, isLoadingAddToCart } = useAppSelector(
     (state) => state.cartList
   );
-  console.log(isLoadingAddToCart)
+
   let [quantity, setQuantity] = useState<number>(1);
 
   //  handel current price
