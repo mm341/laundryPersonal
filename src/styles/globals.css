@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+};
+
+.handelSticky{
+  position: sticky !important;
+  position: -webkit-sticky !important;
+  top: 0px !important;
+};
+.mui-style-1m9128y {
+  text-align: center !important;
+  margin-top: 25px !important;
+}
+.rtl-1m9128y{
+  text-align: center !important;
+  margin-top: 25px !important;
+}
+.rtl-1g04gm2-MuiButtonBase-root-MuiIconButton-root{
+  background-color: #494949 !important
+};
+.mui-style-17rwaj.Mui-selected {
+  background-color: #329CD7 !important;
+  color:white !important
+};
+.mui-style-1ynlm0l-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+.mui-style-1ynlm0l-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
+  background-color: #329CD7 !important;
+  color:white!important
+}
+.mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
+  background-color: #329CD7 !important;
+  color:white !important
+};
+.mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root:focus{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+.mui-style-1u1qng9-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+
+.rtl-1u1qng9-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+.rtl-17rwaj:focus.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+.mui-style-1ynlm0l-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+.rtl-1ynlm0l-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+.mui-style-1t51e6o:focus.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+
+.rtl-1t51e6o:focus.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+
+.rtl-1t51e6o.Mui-selected:hover{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+.mui-style-1t51e6o.Mui-selected:hover{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+
+.mui-style-1t51e6o.Mui-selected:focus{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+
+/* body {
+  background-color: #ffffff;
+color: #333333;
+} */
+
+/* Dark mode styles when the user prefers dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+}
+
+/* .mui-style-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
+right: 16px !important;
+} */
+/* .react-tel-input .flag-dropdown{
+  position: absolute !important;
+  left:-1px!important
+} */
+.mui-style-1m9128y {
+  text-align: left !important;
+  margin-top:10px !important;
+  transform: translateY(5px) !important;
+  -webkit-transform: translateY(5px) !important;
+  -moz-transform: translateY(5px) !important;
+  -ms-transform: translateY(5px) !important;
+  -o-transform: translateY(5px) !important;
+  font-size: 25px !important
+};
+
+.rtl-1m9128y{
+  /* text-align: right !important; */
+  /* margin-top:10px !important; */
+  transform: translateY(5px) !important;
+  -webkit-transform: translateY(5px) !important;
+  -moz-transform: translateY(5px) !important;
+  -ms-transform: translateY(5px) !important;
+  -o-transform: translateY(5px) !important;
+  font-size: 25px !important
+};
+
+.rtl-1wy4w1a{
+  background-color: #494949!important
+};
+
+
+.mui-style-aq8pb7-MuiSvgIcon-root{
+  color:white !important
+};
+
+
+.react-tel-input .selected-flag .arrow{
+  display: none !important;
+  visibility: hidden !important;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+.closebtn {
+  position: absolute;
+  left: unset;
+  right:10px;
+  top: 1rem;
+  border: none;
+  border-radius: 50%;
+  /*width: 2rem;*/
+  /*height: 2rem;*/
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+}
