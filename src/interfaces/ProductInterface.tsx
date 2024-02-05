@@ -16,7 +16,7 @@ export const initialProductData = () => {
     sub_products: [],
     variant: { id: "", name: "", name_bn: "" },
     quantity:0,
-    art_old_price:[]
+    cart_old_price:[]
    
   };
 };
