@@ -29,6 +29,7 @@ import deleteProductsImg from "../../../public/products/deleteCart.svg";
 import LoadingComponent from "../GlobalComponent/LoadingComponent";
 import { toast } from "react-hot-toast";
 import { DeleteCart } from "@/redux/slices/CartSlice";
+import DeleteDialog from "../DeleteDialogs";
 const Cartsection = ({
   additionalSercvices,
   choicesIds,
@@ -45,6 +46,7 @@ const Cartsection = ({
   const router = useRouter();
   const { locale } = useRouter();
   const [authModalOpen, setOpen] = useState<boolean>(false);
+  const [openDeleteCart, setOpenDeleteCart] = useState<boolean>(false);
   const [couponValue, setCouponValue] = useState<string>("");
   const [modalFor, setModalFor] = useState<string>("sign-in");
   const { master } = useAppSelector((state) => state.master);
@@ -67,6 +69,14 @@ const Cartsection = ({
   const handleCloseAuthModal = () => {
     setOpen(false);
     setModalFor("sign-in");
+  };
+
+  const handelClearCart = (id: string) => {
+    dispatch(DeleteCart({ id: id })).then((promiseResponse) => {
+      if (promiseResponse.meta.requestStatus === "fulfilled") {
+        setOpenDeleteCart(false);
+      }
+    });
   };
 
   return (
@@ -97,9 +107,7 @@ const Cartsection = ({
             {/*  clear cart */}
             {cartList?.cart_details?.products?.length > 0 && (
               <GlobalDisplayFlexBox
-                onClick={() =>
-                  dispatch(DeleteCart({ id: cartList?.cart_details?.cart_id }))
-                }
+                onClick={() => setOpenDeleteCart(true)}
                 sx={{
                   justifyContent: "flex-end",
                   gap: "5px",
@@ -233,7 +241,7 @@ const Cartsection = ({
                     borderRadius: "5px",
                     backgroundColor: theme.palette.secondary.contrastText,
                     color: "white",
-                    cursor:"default"
+                    cursor: "default",
                   }}
                 >
                   <Stack
@@ -259,6 +267,17 @@ const Cartsection = ({
         setModalFor={setModalFor}
         handleClose={handleCloseAuthModal}
       />
+      {openDeleteCart && (
+        <DeleteDialog
+          handelAction={() => handelClearCart(cartList?.cart_details?.cart_id)}
+          Cancel={"Cancel"}
+          header={"Clear Cart?"}
+          openDeleteDialog={openDeleteCart}
+          setOpenDeleteDialog={setOpenDeleteCart}
+          text={"Are you sure you want to Clear Cart"}
+          primaryButtonText={"Clear Cart"}
+        />
+      )}
     </>
   );
 };

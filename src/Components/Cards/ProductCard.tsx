@@ -96,14 +96,14 @@ const ProductCard = ({
           gap: "5px",
           border: `2px solid ${theme.palette.primary.main}`,
           color: cartList?.cart_details?.products
-            ?.map((e:productInterface) => e.id)
+            ?.map((e) => e.id)
             .includes(e?.id)
             ? "white"
             : theme.palette.primary.main,
           fontSize: "16px",
           fontWeight: "500",
           backgroundColor: cartList?.cart_details?.products
-            ?.map((e:productInterface) => e.id)
+            ?.map((e) => e.id)
             .includes(e?.id)
             ? theme.palette.primary.main
             : "white",
@@ -115,7 +115,7 @@ const ProductCard = ({
           } else {
             if (
               !cartList?.cart_details?.products
-                ?.map((e:productInterface) => e.id)
+                ?.map((e) => e.id)
                 .includes(e?.id)
             ) {
               dispatch(
@@ -130,7 +130,7 @@ const ProductCard = ({
           }
         }}
       >
-        {cartList?.cart_details?.products?.map((e:productInterface) => e.id).includes(e?.id) ? (
+        {cartList?.cart_details?.products?.map((e) => e.id).includes(e?.id) ? (
           <img src={arrowRight?.src} loading="lazy" alt="img" />
         ) : (
           <Typography>+</Typography>
