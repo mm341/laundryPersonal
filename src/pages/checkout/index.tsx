@@ -76,7 +76,7 @@ const CheckOutPage = ({
   const dispatch: any = useAppDispatch();
 
   const [pickupDate, setPickupData] = useState<string>("");
-  const { accountInfo } = useAppSelector((state) => state.profile);
+
   const [addtionalInformation, setAdditionalInformation] = useState<string>("");
   const [deliveryDate, setDeliveryDate] = useState<string>("");
   const [deliveryHour, setDeliveryHour] = useState<string>("");
@@ -86,10 +86,12 @@ const CheckOutPage = ({
   const [onlineMethod, setOnlineMethod] = useState<string>("");
 
   //  selectors
+  const { cartList } = useAppSelector((state) => state.cartList);
+  const { accountInfo } = useAppSelector((state) => state.profile);
   const { schedules, deliverySchedules } = useAppSelector(
     (state) => state.orders
   );
-
+ 
   //  default addresse
   const {
     isLoading,
@@ -188,7 +190,7 @@ const CheckOutPage = ({
           delivery_hour: deliveryHour,
           pick_date: pickupDate,
           pick_hour: pickupHour,
-          products: [],
+          products: cartList?.cart_details?.products,
           instruction: addtionalInformation,
         })
       );

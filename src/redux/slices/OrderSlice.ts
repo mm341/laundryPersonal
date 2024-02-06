@@ -5,6 +5,7 @@ import PublicRequest from "@/utils/PublicRequests";
 import { OrdersModel } from "@/models/OrdersModel";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 import { toast } from "react-hot-toast";
+import { productInterface } from "@/interfaces/ProductInterface";
 
 interface CouponPayload {
   amount: number;
@@ -57,12 +58,12 @@ interface OrderPayload {
   pick_date: string;
   pick_hour: string;
 
-  products: [];
+  products: productInterface[];
 }
 export const AddOrder = createAsyncThunk(
   "updateProfile/AddOrder",
   (payload: OrderPayload) =>
-    PublicRequest.postData(payload, `orders`)
+    PublicRequest.postData(payload, `customer/orders`)
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
