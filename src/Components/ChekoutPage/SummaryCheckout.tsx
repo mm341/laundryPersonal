@@ -71,7 +71,10 @@ const SummaryCheckout = () => {
           >
             {t("Discount")}
           </Typography>
-          {/* <Typography>323 {master?.currency}</Typography> */}
+          <Typography>
+            {" "}
+            {cartList?.discount} {master?.currency}
+          </Typography>
         </Box>
 
         {/* Total*/}
