@@ -24,7 +24,6 @@ const BasicInformationForm = ({
 }) => {
   //  hooks
   const { t } = useTranslation();
-  
 
   //  account form validation and prepare send api request
 
@@ -161,7 +160,8 @@ const BasicInformationForm = ({
                 }
               />
               <FormSubmitButton
-              alternativeValue={profileFormik.values.alternative_phone}
+              alternative
+                alternativeValue={profileFormik.values.alternative_phone}
                 id={accountInfo?.id}
                 NewInputName={profileFormik.values.alternative_phone}
                 InputName={accountInfo?.alternative_phone}

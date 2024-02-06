@@ -22,6 +22,7 @@ const FormSubmitButton = ({
   imgValue,
   id,
   alternativeValue,
+  alternative
 }: {
   InputName?: string;
   NewInputName?: string | undefined;
@@ -31,6 +32,7 @@ const FormSubmitButton = ({
   error?: boolean;
   id?: string;
   alternativeValue?: string;
+  alternative?:boolean
 }) => {
   //  hooks
   const theme = useTheme();
@@ -66,7 +68,7 @@ const FormSubmitButton = ({
         NewInputName &&
         NewInputName?.length > 2) ||
       imgValue ||
-      !alternativeValue
+      alternative
     ) {
       if (token) {
         setLoading(true);
