@@ -161,6 +161,7 @@ const BasicInformationForm = ({
                 }
               />
               <FormSubmitButton
+              alternativeValue={profileFormik.values.alternative_phone}
                 id={accountInfo?.id}
                 NewInputName={profileFormik.values.alternative_phone}
                 InputName={accountInfo?.alternative_phone}

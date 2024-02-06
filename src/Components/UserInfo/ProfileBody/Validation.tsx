@@ -9,7 +9,7 @@ const ValidationSechemaProfile = () => {
   //   // mobile: Yup.string().required(t('phone number required')),
   // });
   return Yup.object({
-    name: Yup.string().required(t("name is required")),
+    name: Yup.string().required(t("name is required")).min(3).max(25),
     mobile: Yup.string()
       .required(t("Please give a phone number"))
       .min(12, t("number must be 12 digits"))

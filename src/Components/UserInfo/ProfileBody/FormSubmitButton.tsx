@@ -20,7 +20,8 @@ const FormSubmitButton = ({
   formikName,
   imgChange,
   imgValue,
-  id
+  id,
+  alternativeValue,
 }: {
   InputName?: string;
   NewInputName?: string | undefined;
@@ -28,7 +29,8 @@ const FormSubmitButton = ({
   imgChange?: boolean;
   imgValue?: string;
   error?: boolean;
-  id?:string
+  id?: string;
+  alternativeValue?: string;
 }) => {
   //  hooks
   const theme = useTheme();
@@ -59,7 +61,13 @@ const FormSubmitButton = ({
         formData.append("profile_photo", imgValue);
       }
     }
-    if (NewInputName !== InputName || imgValue) {
+    if (
+      (NewInputName !== InputName &&
+        NewInputName &&
+        NewInputName?.length > 2) ||
+      imgValue ||
+      !alternativeValue
+    ) {
       if (token) {
         setLoading(true);
         axios
@@ -77,9 +85,12 @@ const FormSubmitButton = ({
               toast.success(res?.data?.message);
               dispatch(SaveProfileData(res?.data?.data?.user));
 
-              if (
-                formikName === "mobile" ||
-                formikName === "alternative_phone"
+              if (formikName === "mobile") {
+                setOpenOtpModal(true);
+                setOtbData({ mobile: NewInputName });
+              } else if (
+                formikName === "alternative_phone" &&
+                alternativeValue
               ) {
                 setOpenOtpModal(true);
                 setOtbData({ mobile: NewInputName });
@@ -167,7 +178,7 @@ const FormSubmitButton = ({
       >
         <Box sx={style}>
           <OtpForm
-          id={id}
+            id={id}
             formikName={formikName}
             updatProfile
             setOpenOtpModal={setOpenOtpModal}
