@@ -97,6 +97,16 @@
   color:white !important
 }
 
+.mui-style-17rwaj.Mui-selected:hover{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+
+.mui-style-17rwaj:focus.Mui-selected{
+  background-color: #329CD7 !important;
+  color:white !important
+}
+
 /* body {
   background-color: #ffffff;
 color: #333333;
