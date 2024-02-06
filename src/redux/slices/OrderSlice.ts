@@ -33,7 +33,9 @@ export const AddCoupon = createAsyncThunk(
 export const GetPickUpDuration = createAsyncThunk(
   "orders/GetPickUpDuration",
   (payload: { date: string }) =>
-    PublicRequest.getData(`customer/order-schedules/${payload?.date}&type=pick`)
+    PublicRequest.getData(
+      `customer/order-schedules?date=${payload?.date}&type=pick`
+    )
 );
 
 export const GetDeliveryDuration = createAsyncThunk(
@@ -44,7 +46,7 @@ export const GetDeliveryDuration = createAsyncThunk(
     pickup_time: string;
   }) =>
     PublicRequest.getData(
-      `customer/delivery-schedules/${payload?.deliverydata}?pickup_date=${payload?.PickedDate}&pickup_time=${payload?.pickup_time}&type=delivery`
+      `customer/order-schedules?date=${payload?.deliverydata}&type=delivery`
     )
 );
 
