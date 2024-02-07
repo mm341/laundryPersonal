@@ -190,7 +190,6 @@ const CheckOutPage = ({
           delivery_hour: deliveryHour,
           pick_date: pickupDate,
           pick_hour: pickupHour,
-          products: cartList?.cart_details?.products,
           instruction: addtionalInformation,
           payment_type:payment
         })
