@@ -36,17 +36,17 @@ const PaymentMethods = ({
         {/*  cash */}
 
         <Box
-          onClick={() => setPayment("cash_on_delivery ")}
+          onClick={() => setPayment("cash_on_delivery")}
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             border: `1px solid ${theme.palette.primary.main}`,
             backgroundColor:
-              payment === "cash_on_delivery "
+              payment === "cash_on_delivery"
                 ? theme.palette.primary.main
                 : "white",
-            color: payment === "cash_on_delivery " ? "white" : "black",
+            color: payment === "cash_on_delivery" ? "white" : "black",
             width: "196px",
             height: "48px",
             borderRadius: "4px",
