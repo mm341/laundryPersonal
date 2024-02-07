@@ -36,15 +36,17 @@ const PaymentMethods = ({
         {/*  cash */}
 
         <Box
-          onClick={() => setPayment("cash")}
+          onClick={() => setPayment("cash_on_delivery ")}
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             border: `1px solid ${theme.palette.primary.main}`,
             backgroundColor:
-              payment === "cash" ? theme.palette.primary.main : "white",
-            color: payment === "cash" ? "white" : "black",
+              payment === "cash_on_delivery "
+                ? theme.palette.primary.main
+                : "white",
+            color: payment === "cash_on_delivery " ? "white" : "black",
             width: "196px",
             height: "48px",
             borderRadius: "4px",
@@ -55,7 +57,7 @@ const PaymentMethods = ({
           <img
             style={{
               filter:
-                payment === "cash"
+                payment === "cash_on_delivery"
                   ? "invert(100%) sepia(0%) saturate(0%) hue-rotate(136deg) brightness(250%) contrast(104%)"
                   : "invert(55%) sepia(93%) saturate(971%) hue-rotate(172deg) brightness(87%) contrast(93%)",
             }}
@@ -69,15 +71,17 @@ const PaymentMethods = ({
         {/*  online */}
 
         <Box
-          onClick={() => setPayment("Online")}
+          onClick={() => setPayment("online_payment ")}
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             border: `1px solid ${theme.palette.primary.main}`,
             backgroundColor:
-              payment === "Online" ? theme.palette.primary.main : "white",
-            color: payment === "Online" ? "white" : "black",
+              payment === "online_payment "
+                ? theme.palette.primary.main
+                : "white",
+            color: payment === "online_payment " ? "white" : "black",
             cursor: "pointer",
             width: "196px",
             height: "48px",
@@ -88,7 +92,7 @@ const PaymentMethods = ({
           <img
             style={{
               filter:
-                payment === "Online"
+                payment === "online_payment "
                   ? "invert(100%) sepia(0%) saturate(0%) hue-rotate(136deg) brightness(250%) contrast(104%)"
                   : "invert(55%) sepia(93%) saturate(971%) hue-rotate(172deg) brightness(87%) contrast(93%)",
             }}
@@ -113,7 +117,10 @@ const PaymentMethods = ({
                 width: "124px",
                 height: "50px",
                 borderRadius: "4px",
-                border:onlineMethod===e.text?`1px solid ${theme.palette.primary.main}`:"1px solid white",
+                border:
+                  onlineMethod === e.text
+                    ? `1px solid ${theme.palette.primary.main}`
+                    : "1px solid white",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

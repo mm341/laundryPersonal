@@ -82,7 +82,7 @@ const CheckOutPage = ({
   const [deliveryHour, setDeliveryHour] = useState<string>("");
   const [pickupHour, setPickupHour] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
-  const [payment, setPayment] = useState<string>("cash");
+  const [payment, setPayment] = useState<string>("cash_on_delivery");
   const [onlineMethod, setOnlineMethod] = useState<string>("");
 
   //  selectors
@@ -192,6 +192,7 @@ const CheckOutPage = ({
           pick_hour: pickupHour,
           products: cartList?.cart_details?.products,
           instruction: addtionalInformation,
+          payment_type:payment
         })
       );
     } else {
