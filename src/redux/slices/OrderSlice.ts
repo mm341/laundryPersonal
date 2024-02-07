@@ -13,7 +13,7 @@ interface CouponPayload {
 }
 
 export const GetOrders = createAsyncThunk("orders/GetOrders", (payload) =>
-  PublicRequest.getData("orders?status=undefined")
+  PublicRequest.getData("customer/orders")
 );
 
 //  enter Coupon
@@ -68,6 +68,7 @@ export const AddOrder = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
+          return res
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))

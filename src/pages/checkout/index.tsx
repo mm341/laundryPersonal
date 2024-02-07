@@ -91,7 +91,7 @@ const CheckOutPage = ({
   const { schedules, deliverySchedules } = useAppSelector(
     (state) => state.orders
   );
- 
+
   //  default addresse
   const {
     isLoading,
@@ -191,9 +191,13 @@ const CheckOutPage = ({
           pick_date: pickupDate,
           pick_hour: pickupHour,
           instruction: addtionalInformation,
-          payment_type:payment
+          payment_type: payment,
         })
-      );
+      ).then((promiseResponse: any) => {
+        if (promiseResponse.payload.data.order.id) {
+          router.push("/order");
+        }
+      });
     } else {
       toast.error(t("Enter all required data"));
     }
