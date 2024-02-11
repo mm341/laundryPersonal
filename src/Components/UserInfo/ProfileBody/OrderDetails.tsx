@@ -32,7 +32,7 @@ const OrderDetails = ({
   const [productsDetails, setOpenProductsDetails] = useState<boolean>(false);
   const [openRateDialog, setOpenRateDialog] = useState(false);
 
-  console.log(orderData)
+
   return (
     <>
       <GlobalDisplayFlexColumnBox

@@ -175,6 +175,13 @@ const CheckOutPage = ({
     }
   }, [deliveryDate, pickupDate, dispatch, pickupHour]);
 
+  
+
+  useMemo(() => {
+    if (!pickupHour) {
+      setDeliveryDate("");
+    }
+  }, [pickupHour]);
   //  function add order
 
   const handelAddOrder = () => {
@@ -404,7 +411,7 @@ const CheckOutPage = ({
                           )}
                         </Grid>
                         <Grid item sm={6} xs={12}>
-                          {(deliveryDate && pickupHour) ? (
+                          {deliveryDate && pickupHour ? (
                             <PreferableTimeInput
                               disablePortal
                               id="combo-box-demo"
