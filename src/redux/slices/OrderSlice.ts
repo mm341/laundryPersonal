@@ -12,8 +12,12 @@ interface CouponPayload {
   coupon_code: string;
 }
 
-export const GetOrders = createAsyncThunk("orders/GetOrders", (payload:{filter:string}) =>
-  PublicRequest.getData(`customer/orders?filter=${payload.filter}`)
+export const GetOrders = createAsyncThunk(
+  "orders/GetOrders",
+  (payload: { filter: string; limit: Number; offset: Number }) =>
+    PublicRequest.getData(
+      `customer/orders?filter=${payload.filter}&limit=${payload.limit}&offset=${payload?.offset}`
+    )
 );
 
 //  enter Coupon
@@ -35,8 +39,7 @@ export const GetPickUpDuration = createAsyncThunk(
   (payload: { date: string }) =>
     PublicRequest.getData(
       `customer/order-schedules?date=${payload?.date}&type=pick`
-    )
-    .catch((err) => PublicHandelingErrors.onErrorResponse(err))
+    ).catch((err) => PublicHandelingErrors.onErrorResponse(err))
 );
 
 export const GetDeliveryDuration = createAsyncThunk(
@@ -76,6 +79,9 @@ export const AddOrder = createAsyncThunk(
 );
 
 const initialState: OrdersModel = {
+  limit: "",
+  offset: "",
+  total_size: "",
   isloading: false,
   orders: [],
   schedules: [],
@@ -94,6 +100,9 @@ export const handelOrders = createSlice({
     builder.addCase(GetOrders.pending, (state: OrdersModel) => {
       state.isloading = true;
       state.orders = [];
+      state.limit = "";
+      state.offset = "";
+      state.total_size = "";
     });
     builder.addCase(
       GetOrders.fulfilled,
@@ -101,12 +110,18 @@ export const handelOrders = createSlice({
         if (payload) {
           state.orders = payload.data.orders;
           state.isloading = false;
+          state.limit = payload.data.limit;
+          state.offset = payload.data.offset;
+          state.total_size = payload.data.total_size;
         }
       }
     );
     builder.addCase(GetOrders.rejected, (state: OrdersModel) => {
       state.isloading = false;
       state.orders = [];
+      state.limit = "";
+      state.offset = "";
+      state.total_size = "";
     });
 
     // GetPickUpDuration

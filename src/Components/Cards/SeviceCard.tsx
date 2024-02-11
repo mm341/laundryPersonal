@@ -33,7 +33,7 @@ const SeviceCard = ({
       onMouseLeave={() => setBright(false)}
     >
       <img
-        width={"300"}
+        width={"213"}
         height={"300"}
         src={element?.image_path}
         alt="img"
@@ -41,7 +41,7 @@ const SeviceCard = ({
         style={{
           borderRadius: "5px",
           width: "100%",
-          height: "250px",
+          height: "213px",
           objectFit: "contain",
         }}
         className=" brightness-75"

@@ -20,12 +20,17 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Meta from "../GlobalComponent/Meta";
 import { useRouter } from "next/router";
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
+import CustomePagination from "../GlobalComponent/pagination/Pagination";
 const OrderPage = () => {
   // hooks
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const { locale } = useRouter();
-  const { orders, isloading } = useAppSelector((state) => state.orders);
+  const [limit, setLimit] = useState<Number>(10);
+  const [offset, setOffset] = useState<Number>(1);
+  const { orders, isloading, total_size } = useAppSelector(
+    (state) => state.orders
+  );
   const [orderType, setOrderType] = useState<string>("on_going");
   const [orderData, setOrderData] = useState<OrdersInterface>(
     inititalOrdersInterface()
@@ -36,12 +41,13 @@ const OrderPage = () => {
 
   const handleOrderType = (value: string) => {
     setOrderType(value);
+    setOffset(1);
   };
 
   //  send request to get all orders
   useEffect(() => {
-    dispatch(GetOrders({ filter: orderType }));
-  }, [dispatch, orderType]);
+    dispatch(GetOrders({ filter: orderType,limit:limit,offset:offset }));
+  }, [dispatch, orderType,offset]);
 
   return (
     <>
@@ -62,7 +68,7 @@ const OrderPage = () => {
             <Grid item xs={12} sx={{ mb: "10px" }}>
               <Scrollbar
                 style={{
-                  maxHeight: "500px",
+                  maxHeight: "600px",
                 }}
               >
                 {orders?.length > 0 && !isloading && (
@@ -117,6 +123,14 @@ const OrderPage = () => {
               )}
             </Grid>
           </Grid>
+        )}
+        { !orderDetails &&Number(total_size) > 10 && (
+          <CustomePagination
+            total_size={total_size}
+            page_limit={limit}
+            offset={offset}
+            setOffset={setOffset}
+          />
         )}
         {/*  case of open order details */}
         {orderDetails && (
