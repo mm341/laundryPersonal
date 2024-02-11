@@ -17,7 +17,7 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
   const { master } = useAppSelector((state) => state.master);
   //  order data
   const orderDetailsData: OrderData[] = [
-    { key: "Order ID", value: `#${order?.id}` },
+    { key: "Order ID", value: `#${order?.order_code}` },
     { key: "Order Date", value: order?.ordered_at },
     { key: "Pick Up at", value: order?.pick_date },
     { key: "Delivery at", value: order?.delivery_date },
@@ -43,12 +43,16 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
         order?.order_status === "Order confirmed" ||
         order?.order_status === "Picked your order" ||
         order?.order_status === "Pending" ||
-        order?.order_status === "Processing"
+        order?.order_status === "Processing" ||
+        order?.order_status === "قيد الانتظار" ||
+        order?.order_status === "تم تاكيد الطلب" ||
+        order?.order_status === "اختار طلبك" ||
+        order?.order_status === "يعالج"
       ) {
         color = "#FFA412";
-      } else if (order?.order_status === "Delivered") {
+      } else if (order?.order_status === "Delivered"||order?.order_status === "تم التوصيل") {
         color = "#00A53C";
-      } else if (order?.order_status === "Cancelled") {
+      } else if (order?.order_status === "Cancelled"||order?.order_status === "ألغيت") {
         color = "#8E1400";
       }
     }

@@ -36,17 +36,24 @@ const OrderCard = ({
   //  handel orderStatus color
   const OrderActionStatus = (order: OrdersInterface) => {
     let color;
+
     switch (order?.order_status) {
       case "Order confirmed":
       case "Picked your order":
       case "Pending":
       case "Processing":
+      case "قيد الانتظار":
+      case "تم تاكيد الطلب":
+        case "اختار طلبك":
+          case "يعالج":
         color = "#FFA412";
         break;
       case "Delivered":
+        case "تم التوصيل":
         color = "#00A53C";
         break;
       case "Cancelled":
+        case "ألغيت":
         color = "#8E1400";
         break;
     }
@@ -54,7 +61,6 @@ const OrderCard = ({
     return color;
   };
 
- 
   return (
     <Stack
       sx={{ boxShadow: "0px 2px 4px 0px #00000014", backgroundColor: "white" }}
@@ -88,7 +94,7 @@ const OrderCard = ({
               <Typography
                 sx={{ fontSize: { sm: "16px", xs: "12px" }, fontWeight: "400" }}
               >
-               {order?.ordered_at}
+                {order?.ordered_at}
               </Typography>
             </GlobalDisplayFlexBox>
 
