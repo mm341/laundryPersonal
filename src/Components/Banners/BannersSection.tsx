@@ -28,7 +28,13 @@ const BannersSection = () => {
   function SampleNextArrow({ onClick }: { onClick?: any }) {
     return (
       <div
-        className="  absolute top-[40%]  z-50 cursor-pointer lg:right-[-60px] right-[30px] "
+        style={{
+          position: "absolute",
+          top: "40%",
+          right: "30px",
+          zIndex: "50",
+          cursor: "pointer",
+        }}
         onClick={onClick}
       >
         <img src={arrow1?.src} alt="arrow2" loading="lazy" />
@@ -39,7 +45,13 @@ const BannersSection = () => {
   function SamplePrevArrow({ onClick }: { onClick?: any }) {
     return (
       <div
-        className="  absolute top-[40%] lg:left-[-30px] sm:left-[-10px] left-[30px] z-50 cursor-pointer"
+        style={{
+          position: "absolute",
+          top: "40%",
+          left: "30px",
+          zIndex: "50",
+          cursor: "pointer",
+        }}
         onClick={onClick}
       >
         <img src={arrow2?.src} alt="arrow1" loading="lazy" />
