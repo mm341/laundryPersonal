@@ -93,7 +93,14 @@ const initialState: OrdersModel = {
 export const handelOrders = createSlice({
   name: "orders",
   initialState,
-  reducers: {},
+  reducers: {
+    clearSchedules:(state)=>{
+      state.schedules = [];
+    },
+    clearDeliverySchedules:(state)=>{
+      state.deliverySchedules = [];
+    },
+  },
 
   extraReducers: (builder) => {
     // GetOrders
@@ -140,6 +147,8 @@ export const handelOrders = createSlice({
     builder.addCase(GetPickUpDuration.rejected, (state: OrdersModel) => {
       state.schedules = [];
     });
+
+
 
     // GetDeliveryDuration
     builder.addCase(GetDeliveryDuration.pending, (state: OrdersModel) => {
@@ -188,5 +197,5 @@ export const handelOrders = createSlice({
     });
   },
 });
-
+export const { clearSchedules, clearDeliverySchedules } = handelOrders.actions
 export const OrderSlice = handelOrders.reducer;

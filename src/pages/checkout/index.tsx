@@ -40,6 +40,8 @@ import {
   AddOrder,
   GetDeliveryDuration,
   GetPickUpDuration,
+  clearDeliverySchedules,
+  clearSchedules,
 } from "@/redux/slices/OrderSlice";
 import timeIcon from "../../../public/CheckOut/timeIcon.svg";
 import dateIcon from "../../../public/CheckOut/dateIcon.svg";
@@ -82,6 +84,9 @@ const CheckOutPage = ({
   const [addtionalInformation, setAdditionalInformation] = useState<string>("");
   const [deliveryDate, setDeliveryDate] = useState<string>("");
   const [deliveryHour, setDeliveryHour] = useState<string>("");
+  const { schedules, deliverySchedules } = useAppSelector(
+    (state) => state.orders
+  );
   const [pickupHour, setPickupHour] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
   const [payment, setPayment] = useState<string>("cash_on_delivery");
@@ -90,11 +95,28 @@ const CheckOutPage = ({
   //  selectors
   const { cartList } = useAppSelector((state) => state.cartList);
   const { accountInfo } = useAppSelector((state) => state.profile);
-  const { schedules, deliverySchedules } = useAppSelector(
-    (state) => state.orders
-  );
 
+  //  handel initialvalue of scheduals
+
+  useEffect(() => {
+    if (schedules?.length > 0) {
+      setPickupHour(schedules[0]?.hour);
+    } else {
+      setPickupHour("");
+    }
+  }, [schedules]);
+
+  //  handel initialvalue of delivery scheduals
+
+  useEffect(() => {
+    if (deliverySchedules?.length > 0) {
+      setDeliveryHour(deliverySchedules[0]?.hour);
+    } else {
+      setDeliveryHour("");
+    }
+  }, [deliverySchedules]);
   //  default addresse
+  console.log(deliverySchedules)
   const {
     isLoading,
     data: myAddresses,
@@ -146,6 +168,7 @@ const CheckOutPage = ({
       },
     },
   }));
+
   // //  default addresse
   // const defaultAddresse: string = myAddresses?.data?.data?.addresses[0]?.id;
   //  handel initial value of default addresse
@@ -159,7 +182,15 @@ const CheckOutPage = ({
   }, [myAddresses]);
   useEffect(() => {
     if (pickupDate) {
-      dispatch(GetPickUpDuration({ date: pickupDate }));
+      dispatch(GetPickUpDuration({ date: pickupDate })).then(
+        (promiseResponse: any) => {
+          if (promiseResponse) {
+            if (promiseResponse?.payload?.data?.schedules?.length === 0) {
+              toast.error(t("Service is not available this day"));
+            }
+          }
+        }
+      );
     }
   }, [dispatch, pickupDate]);
 
@@ -171,9 +202,15 @@ const CheckOutPage = ({
           PickedDate: pickupDate,
           pickup_time: pickupHour,
         })
-      );
+      ).then((promiseResponse: any) => {
+        if (promiseResponse) {
+          if (promiseResponse?.payload?.data?.schedules?.length === 0) {
+            toast.error(t("Service is not available this day"));
+          }
+        }
+      });
     }
-  }, [deliveryDate, pickupDate, dispatch, pickupHour]);
+  }, [deliveryDate, pickupDate, pickupHour]);
 
   useMemo(() => {
     if (!pickupHour) {
@@ -327,7 +364,6 @@ const CheckOutPage = ({
                               disablePast
                               label={t("Date")}
                               onChange={(e) => {
-                                setPickupHour("");
                                 setPickupData(CommonUtil.formatDate2(e));
                               }}
                               sx={{ width: "100%" }}
@@ -335,20 +371,28 @@ const CheckOutPage = ({
                           </LocalizationProvider>
                         </Grid>
                         <Grid item sm={6} xs={12}>
-                          {pickupDate ? (
-                            <PreferableTimeInput
-                              disablePortal
-                              id="combo-box-demo"
+                          {pickupDate && schedules?.length > 0 ? (
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              value={pickupHour}
+                              label={t("Time")}
                               sx={{ width: "100%" }}
-                              options={schedules}
-                              getOptionLabel={(option: any) => option?.title}
-                              onChange={(e, option: any) => {
-                                setPickupHour(option?.hour);
+                              onChange={(e) => {
+                                setPickupHour(e.target.value);
                               }}
-                              renderInput={(params) => (
-                                <TextField {...params} label={t("Time")} />
+                            >
+                              {schedules?.map(
+                                (
+                                  e: { hour: string; title: string },
+                                  i: number
+                                ) => (
+                                  <MenuItem value={e?.hour}>
+                                    {e?.title}
+                                  </MenuItem>
+                                )
                               )}
-                            />
+                            </Select>
                           ) : (
                             <Stack
                               sx={{
@@ -387,7 +431,6 @@ const CheckOutPage = ({
                               <DatePicker
                                 minDate={dayjs(pickupDate).add(1, "day")}
                                 onChange={(e) => {
-                                  setDeliveryHour("");
                                   setDeliveryDate(CommonUtil.formatDate2(e));
                                 }}
                                 disablePast
@@ -420,20 +463,30 @@ const CheckOutPage = ({
                           )}
                         </Grid>
                         <Grid item sm={6} xs={12}>
-                          {deliveryDate && pickupHour ? (
-                            <PreferableTimeInput
-                              disablePortal
-                              id="combo-box-demo"
+                          {deliveryDate &&
+                          pickupHour &&
+                          deliverySchedules?.length > 0 ? (
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              value={deliveryHour}
+                              label={t("Time")}
                               sx={{ width: "100%" }}
-                              options={deliverySchedules}
-                              getOptionLabel={(option: any) => option?.title}
-                              onChange={(e, option: any) => {
-                                setDeliveryHour(option?.hour);
+                              onChange={(e) => {
+                                setDeliveryHour(e.target.value);
                               }}
-                              renderInput={(params) => (
-                                <TextField {...params} label={t("Time")} />
+                            >
+                              {schedules?.map(
+                                (
+                                  e: { hour: string; title: string },
+                                  i: number
+                                ) => (
+                                  <MenuItem value={e?.hour}>
+                                    {e?.title}
+                                  </MenuItem>
+                                )
                               )}
-                            />
+                            </Select>
                           ) : (
                             <Stack
                               sx={{
