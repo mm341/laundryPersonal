@@ -116,7 +116,7 @@ const CheckOutPage = ({
     }
   }, [deliverySchedules]);
   //  default addresse
-  console.log(deliverySchedules)
+  
   const {
     isLoading,
     data: myAddresses,
@@ -387,7 +387,7 @@ const CheckOutPage = ({
                                   e: { hour: string; title: string },
                                   i: number
                                 ) => (
-                                  <MenuItem value={e?.hour}>
+                                  <MenuItem key={i} value={e?.hour}>
                                     {e?.title}
                                   </MenuItem>
                                 )
@@ -481,7 +481,7 @@ const CheckOutPage = ({
                                   e: { hour: string; title: string },
                                   i: number
                                 ) => (
-                                  <MenuItem value={e?.hour}>
+                                  <MenuItem key={i} value={e?.hour}>
                                     {e?.title}
                                   </MenuItem>
                                 )
