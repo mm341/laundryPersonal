@@ -7,8 +7,7 @@ import PublicContainer from "../PublicContainer";
 import AreaDialog from "../Dialogs/AreaDialog";
 import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
-import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
+
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
 
 const ServiceSection = ({
@@ -20,8 +19,7 @@ const ServiceSection = ({
 }) => {
   //  hooks
   const theme = useTheme();
-  const { push } = useRouter();
-  const { t } = useTranslation();
+  
   const [openAreaDialog, setOpenAreaDialog] = useState<boolean>(false);
   const [ServiceId, setServiceId] = useState<string | undefined>();
 

@@ -42,7 +42,7 @@ const SeviceCard = ({
           borderRadius: "5px",
           width: "100%",
           height: "250px",
-          objectFit: "cover",
+          objectFit: "contain",
         }}
         className=" brightness-75"
       />
