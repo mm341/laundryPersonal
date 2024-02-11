@@ -309,7 +309,7 @@ const CheckOutPage = ({
                         <Grid item sm={6} xs={12}>
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
-                              maxDate={dayjs().add(4, "day")}
+                              // maxDate={dayjs().add(4, "day")}
                               disablePast
                               label={t("Date")}
                               onChange={(e) => {

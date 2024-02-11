@@ -36,6 +36,7 @@ export const GetPickUpDuration = createAsyncThunk(
     PublicRequest.getData(
       `customer/order-schedules?date=${payload?.date}&type=pick`
     )
+    .catch((err) => PublicHandelingErrors.onErrorResponse(err))
 );
 
 export const GetDeliveryDuration = createAsyncThunk(
@@ -59,7 +60,7 @@ interface OrderPayload {
   instruction?: string;
   pick_date: string;
   pick_hour: string;
-  payment_type ?:string
+  payment_type?: string;
 }
 export const AddOrder = createAsyncThunk(
   "updateProfile/AddOrder",
@@ -68,7 +69,7 @@ export const AddOrder = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
-          return res
+          return res;
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
