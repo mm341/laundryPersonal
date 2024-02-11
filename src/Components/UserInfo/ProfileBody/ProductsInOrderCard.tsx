@@ -89,10 +89,10 @@ const ProductsInOrderCard = ({
                 }}
               >
                 <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
-                  16.00 {master.currency}
+                  {product?.discounted_price&& product?.discounted_price *product?.quantity} {master.currency}
                 </Typography>
                 <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-                  2×8.00 {master.currency}
+                  {product?.quantity}×{product?.discounted_price} {master.currency}
                 </Typography>
               </Box>
             </GlobalDisplayFlexBox>

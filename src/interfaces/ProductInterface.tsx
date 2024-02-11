@@ -3,6 +3,7 @@ import { initialServiceData, serviceInterface } from "./serviceInterface";
 
 export const initialProductData = () => {
   return {
+    discounted_price:0,
     current_price: [],
     description: "",
     discount_percentage: null,
@@ -30,6 +31,7 @@ export interface sub_products {
   discount_percentage:number
 }
 export interface productInterface {
+  discounted_price?:number
   current_price: number[];
   description: string;
   discount_percentage: null;

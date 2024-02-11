@@ -49,6 +49,7 @@ export interface OrdersInterface {
     stripe_id: string;
     user: AccountInfo;
   };
+ 
   delivery_charge: number;
   delivery_date: string;
   delivery_hour: string;

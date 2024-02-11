@@ -735,12 +735,12 @@ export const arabic = {
   "Popular Food Nearby": " طعام شعبي قريب ",
   "food for you": " أطعمة لك ",
   restaurants: " مطاعم ",
-
+"Products":"المنتجات",
   "Resturant Informations": " معلومات المطعم ",
   "Payment Status": "حالة الدفع",
   "Order Status": " حالة الطلب ",
-  "Clear Cart?":"مسح السله ",
-  "Are you sure you want to Clear Cart":"هل تريد مسح السله ؟",
+  "Clear Cart?":"حذف المنتجات ",
+  "Are you sure you want to Clear Cart":"هل تريد حذف جميع المنتجات؟",
   "Payment method": " طريقة الدفع او السداد ",
 
   "Order placed": "تم الطلب",
