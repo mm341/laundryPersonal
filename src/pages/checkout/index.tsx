@@ -327,6 +327,7 @@ const CheckOutPage = ({
                               disablePast
                               label={t("Date")}
                               onChange={(e) => {
+                                setPickupHour("");
                                 setPickupData(CommonUtil.formatDate2(e));
                               }}
                               sx={{ width: "100%" }}
@@ -386,6 +387,7 @@ const CheckOutPage = ({
                               <DatePicker
                                 minDate={dayjs(pickupDate).add(1, "day")}
                                 onChange={(e) => {
+                                  setDeliveryHour("");
                                   setDeliveryDate(CommonUtil.formatDate2(e));
                                 }}
                                 disablePast
