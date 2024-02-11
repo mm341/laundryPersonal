@@ -19,6 +19,7 @@ import noOrdersFoundArabic from "../../../public/info/noOrderFoundArabic.png";
 import CircularProgress from "@mui/material/CircularProgress";
 import Meta from "../GlobalComponent/Meta";
 import { useRouter } from "next/router";
+import { Scrollbar } from "../GlobalComponent/Scrollbar";
 const OrderPage = () => {
   // hooks
   const theme = useTheme();
@@ -59,19 +60,24 @@ const OrderPage = () => {
             </Grid>
             {/*  orders cards */}
             <Grid item xs={12} sx={{ mb: "10px" }}>
-              {orders?.length > 0 && !isloading && (
-                <GlobalDisplayFlexColumnBox width={"100%"} gap={"25px"}>
-                  {orders?.map((e: OrdersInterface, i: number) => (
-                    <OrderCard
-                      setOrderData={setOrderData}
-                      order={e}
-                      setOrderDetails={setOrderDetails}
-                      key={i}
-                    />
-                  ))}
-                </GlobalDisplayFlexColumnBox>
-              )}
-
+              <Scrollbar
+                style={{
+                  maxHeight: "500px",
+                }}
+              >
+                {orders?.length > 0 && !isloading && (
+                  <GlobalDisplayFlexColumnBox width={"100%"} gap={"25px"}>
+                    {orders?.map((e: OrdersInterface, i: number) => (
+                      <OrderCard
+                        setOrderData={setOrderData}
+                        order={e}
+                        setOrderDetails={setOrderDetails}
+                        key={i}
+                      />
+                    ))}
+                  </GlobalDisplayFlexColumnBox>
+                )}
+              </Scrollbar>
               {/*  loading data */}
               {isloading && orders?.length === 0 && (
                 <Box
