@@ -203,7 +203,7 @@ const CheckOutPage = ({
           payment_type: payment,
         })
       ).then((promiseResponse: any) => {
-        if (promiseResponse.payload.data.order.id) {
+        if (promiseResponse?.payload?.data?.order?.id) {
           router.push("/order");
           dispatch(GetCartDetails({}));
         }

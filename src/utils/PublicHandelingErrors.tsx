@@ -7,7 +7,7 @@ export default class PublicHandelingErrors {
     error: unknown | any,
     variables?: { contact?: string | undefined; rating?: number | null } | any
   ) => {
-   
+  
     if (error?.response?.data?.errors) {
       Object.values(error?.response?.data?.errors)?.map((e: any) =>
         toast.error(e)
