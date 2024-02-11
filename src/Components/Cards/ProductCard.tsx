@@ -80,7 +80,7 @@ const ProductCard = ({
       );
     }
   };
-
+console.log(cartList?.cart_details?.products)
   const handelAddButton = (e: productInterface) => {
     return !isLoadingAddToCart ? (
       <GlobalButton
@@ -95,18 +95,26 @@ const ProductCard = ({
           alignItems: "center",
           gap: "5px",
           border: `2px solid ${theme.palette.primary.main}`,
-          color: cartList?.cart_details?.products
-            ?.map((e) => e.id)
-            .includes(e?.id)
-            ? "white"
-            : theme.palette.primary.main,
+          color:
+            cartList?.cart_details?.products
+              ?.map((e) => e.id)
+              .includes(e?.id) ||
+            cartList?.cart_details?.products
+              ?.map((e) => e.parent_id)
+              .includes(e?.id)
+              ? "white"
+              : theme.palette.primary.main,
           fontSize: "16px",
           fontWeight: "500",
-          backgroundColor: cartList?.cart_details?.products
-            ?.map((e) => e.id)
-            .includes(e?.id)
-            ? theme.palette.primary.main
-            : "white",
+          backgroundColor:
+            cartList?.cart_details?.products
+              ?.map((e) => e.id)
+              .includes(e?.id) ||
+            cartList?.cart_details?.products
+              ?.map((e) => e.parent_id)
+              .includes(e?.id)
+              ? theme.palette.primary.main
+              : "white",
         }}
         onClick={() => {
           if (product?.sub_products?.length > 0) {

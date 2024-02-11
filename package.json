@@ -27,6 +27,7 @@
     "aos": "^2.3.4",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
+    "firebase": "^10.8.0",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.16",
     "google-map-react": "^2.2.1",
