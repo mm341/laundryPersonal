@@ -225,7 +225,7 @@ const ProductsPage = ({
         <PublicContainer>
           {/*  Banners */}
           <GlobalDisplayFlexColumnBox gap={"48px"}>
-            <Box dir="ltr">
+            <Box>
               <BannersSection />
             </Box>
             <CustomPaperBigCard

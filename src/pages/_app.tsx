@@ -32,7 +32,8 @@ import ScrollToTop from "@/Components/GlobalComponent/scroll-top/ScrollToTop";
 import dynamic from "next/dynamic";
 import logoHeader from "../../public/App/Disk-1s-200px.gif";
 import DynamicFavicon from "@/Components/GlobalComponent/favicon/DynamicFavicon";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
 Router.events.on("routeChangeComplete", nProgress.done);

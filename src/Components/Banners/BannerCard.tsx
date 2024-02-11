@@ -2,11 +2,14 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import { Banners } from "@/interfaces/ServiceBanners";
 
 const BannerCard = ({ banner }: { banner: Banners }) => {
+  // hooks
+  const theme=useTheme()
+  const issmall = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Box
       sx={{
@@ -21,7 +24,7 @@ const BannerCard = ({ banner }: { banner: Banners }) => {
           alt={"bannerImg"}
          
           style={{
-            height: "447px",
+            height: !issmall?"447px":"250px",
             borderRadius: "8px",
             cursor: "pointer",
             width:"100%"
