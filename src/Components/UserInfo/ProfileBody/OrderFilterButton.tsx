@@ -8,10 +8,12 @@ const OrderFilterButton = ({
   setType,
   type,
   FilterType,
+  value
 }: {
   setType: (e: string) => void;
   type: string;
   FilterType: string;
+  value:string
 }) => {
   //  hooks
   const theme = useTheme();
@@ -39,7 +41,7 @@ const OrderFilterButton = ({
         setType(FilterType);
       }}
     >
-      {t(FilterType)}
+      {t(value)}
     </Button>
   );
 };

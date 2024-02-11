@@ -12,7 +12,11 @@ const GroupButtonsOrder = ({
   type: string;
   setType: (e: string) => void;
 }) => {
-  const filterData: string[] = ["Ongoing", "Completed", "Other"];
+  const filterData: { key: string; value: string }[] = [
+    { key: "Ongoing", value: "on_going" },
+    { key: "Completed", value: "completed" },
+    { key: "Other", value: "other" },
+  ];
   return (
     <Box sx={{ mt: "10px", width: "100%" }}>
       <ButtonGroup sx={{ borderTopLeftRadius: "30px", height: "36px" }}>
@@ -21,7 +25,8 @@ const GroupButtonsOrder = ({
             key={i}
             setType={setType}
             type={type}
-            FilterType={e}
+            FilterType={e.value}
+            value={e.key}
           />
         ))}
       </ButtonGroup>

@@ -23,9 +23,9 @@ const OrderPage = () => {
   // hooks
   const theme = useTheme();
   const dispatch = useAppDispatch();
-  const {locale}=useRouter()
+  const { locale } = useRouter();
   const { orders, isloading } = useAppSelector((state) => state.orders);
-  const [orderType, setOrderType] = useState<string>("Ongoing");
+  const [orderType, setOrderType] = useState<string>("on_going");
   const [orderData, setOrderData] = useState<OrdersInterface>(
     inititalOrdersInterface()
   );
@@ -39,8 +39,8 @@ const OrderPage = () => {
 
   //  send request to get all orders
   useEffect(() => {
-    dispatch(GetOrders());
-  }, [dispatch]);
+    dispatch(GetOrders({ filter: orderType }));
+  }, [dispatch, orderType]);
 
   return (
     <>
@@ -98,7 +98,15 @@ const OrderPage = () => {
                     minHeight: "300px",
                   }}
                 >
-                  <img src={locale==="en"?noOrdersFound?.src:noOrdersFoundArabic?.src} loading="lazy" alt="img" />
+                  <img
+                    src={
+                      locale === "en"
+                        ? noOrdersFound?.src
+                        : noOrdersFoundArabic?.src
+                    }
+                    loading="lazy"
+                    alt="img"
+                  />
                 </Box>
               )}
             </Grid>

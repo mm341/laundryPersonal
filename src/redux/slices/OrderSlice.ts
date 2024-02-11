@@ -12,8 +12,8 @@ interface CouponPayload {
   coupon_code: string;
 }
 
-export const GetOrders = createAsyncThunk("orders/GetOrders", (payload) =>
-  PublicRequest.getData("customer/orders")
+export const GetOrders = createAsyncThunk("orders/GetOrders", (payload:{filter:string}) =>
+  PublicRequest.getData(`customer/orders?filter=${payload.filter}`)
 );
 
 //  enter Coupon
