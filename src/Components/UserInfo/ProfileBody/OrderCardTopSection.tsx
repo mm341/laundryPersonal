@@ -24,7 +24,7 @@ const OrderCardTopSection = ({
     <GlobalDisplayFlexColumnBox width={"100%"} gap={"5px"}>
       <GlobalDisplayFlexBox style={{ flexDirection: "row" }} sx={{ p: "18px" }}>
         <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
-          {t("Products")} ({order.products?.length})
+          {t("Products")} ({order?.products?.length+order?.additionals?.length})
         </Typography>
         {/*  handel click on arrow */}
         {!openProductsDetails ? (

@@ -18,12 +18,12 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
   //  order data
   const orderDetailsData: OrderData[] = [
     { key: "Order ID", value: `#${order?.id}` },
-    { key: "Order Date", value: "28 Nov, 2023 16:04" },
+    { key: "Order Date", value: order?.ordered_at },
     { key: "Pick Up at", value: order?.pick_date },
     { key: "Delivery at", value: order?.delivery_date },
     { key: "Order Status", value: order?.order_status },
     { key: "Payment Status", value: "Paid" },
-    { key: "Sub total", value: `32.00 ${master?.currency}` },
+    { key: "Sub total", value: `${order?.sub_total} ${master?.currency}` },
     {
       key: "Delivery Charge",
       value: `${order?.delivery_charge} ${master?.currency}`,

@@ -37,6 +37,7 @@ export const inititalOrdersInterface = () => {
     quantity: {},
     rating: 0,
     total_amount: 0,
+    sub_total:0
   };
 };
 
@@ -44,6 +45,7 @@ export interface Quantity {
   [key: number]: number;
 }
 export interface OrdersInterface {
+  sub_total:number
   address: AddresseInterface;
   amount: number;
   customer: {
