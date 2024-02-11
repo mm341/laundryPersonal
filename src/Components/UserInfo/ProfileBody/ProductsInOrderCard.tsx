@@ -130,7 +130,7 @@ const ProductsInOrderCard = ({
                       fontWeight: "400",
                     }}
                   >
-                    {order?.products[0]?.service}
+                    {order?.products[0]?.service?.name}
                   </Typography>
                 )}
               </GlobalDisplayFlexColumnBox>
