@@ -12,7 +12,7 @@ export const inititalMasterData = () => {
     address:"",
     mobile:"",
     email:"",
-    notifications:0
+   
   };
 };
 
@@ -30,5 +30,5 @@ export interface Master {
   address:string
   mobile:string
   email:string
-  notifications:number
+  
 }
