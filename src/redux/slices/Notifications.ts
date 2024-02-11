@@ -12,6 +12,7 @@ export const GetAllNotification = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           // toast.success(res?.message);
+          return res;
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
@@ -24,7 +25,7 @@ export const GetMasterData = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           // toast.success(res?.message);
-          return res
+          return res;
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
@@ -33,7 +34,6 @@ export const GetMasterData = createAsyncThunk(
 const initialState: NotificationModel = {
   isloading: false,
   notifications: [],
-  
 };
 
 export const NotificationSlice = createSlice({
@@ -51,15 +51,13 @@ export const NotificationSlice = createSlice({
       GetAllNotification.fulfilled,
       (state: NotificationModel, { payload }: any) => {
         state.isloading = false;
-        state.notifications = payload?.data?.notifications;
+        state.notifications = payload?.data?.notification;
       }
     );
     builder.addCase(GetAllNotification.rejected, (state: NotificationModel) => {
       state.isloading = false;
       state.notifications = [];
     });
-
-  
   },
 });
 

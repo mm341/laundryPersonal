@@ -155,6 +155,7 @@ const OrderCard = ({
                 width: { sm: "170px", xs: "100px" },
                 height: "40px",
                 color: OrderActionStatus(order),
+                cursor:"default"
               }}
             >
               {order?.order_status}

@@ -9,7 +9,8 @@ import React, { useEffect, useRef } from "react";
 
 import dumyImg from "../../public/navbar/dumyNotificationImg.svg";
 import SimpleBar from "simplebar-react";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import LoadingComponent from "./GlobalComponent/LoadingComponent";
 interface Props {
   onClose: () => void;
   open: boolean;
@@ -19,9 +20,9 @@ const NotificationPoPover = (props: Props) => {
 
   const theme = useTheme();
   const { locale } = useRouter();
-
+  const { notifications,isloading } = useAppSelector((state) => state.notification);
   const { onClose, open } = props;
-  const array = [...Array(4)];
+console.log(notifications)
   //  handle close popover
 
   let menuRef: any = useRef();
@@ -40,7 +41,7 @@ const NotificationPoPover = (props: Props) => {
   }, []);
 
   //  custom design of scrollbar
- 
+
   return (
     <Box
       ref={menuRef}
@@ -52,11 +53,11 @@ const NotificationPoPover = (props: Props) => {
         maxHeight: "500px",
         overflowY: "auto",
         zIndex: "99999",
-        backgroundColor:"white",
-        borderRadius:"15px",
-        boxShadow: "0px 0px 4px 0px #00000033"
-
-        
+        backgroundColor: "white",
+        borderRadius: "15px",
+        boxShadow: "0px 0px 4px 0px #00000033",
+        height: "390px",
+        width:"390px"
       }}
     >
       <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
@@ -65,41 +66,46 @@ const NotificationPoPover = (props: Props) => {
           gap={"15px"}
           sx={{ py: "10px" }}
         >
-          {array?.map((e, i) => (
-            <GlobalDisplayFlexColumnBox width={"100%"} gap={"10px"} key={i}>
-              <GlobalDisplayFlexColumnBox gap={"5px"}>
-                <Typography sx={{ fontWeight: "400", fontSize: "12px" }}>
-                  28 Nov, 2023
-                </Typography>
-                <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
-                  <GlobalDisplayFlexBox sx={{ gap: "50px" }}>
-                    <GlobalDisplayFlexBox sx={{ gap: "12px" }}>
-                      <img src={dumyImg?.src} loading="lazy" alt="img" />
+          {notifications?.length > 0 &&!isloading &&
+            notifications?.map((e, i) => (
+              <GlobalDisplayFlexColumnBox width={"100%"} gap={"10px"} key={i}>
+                <GlobalDisplayFlexColumnBox gap={"5px"}>
+                  <Typography sx={{ fontWeight: "400", fontSize: "12px" }}>
+                    28 Nov, 2023
+                  </Typography>
+                  <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+                    <GlobalDisplayFlexBox sx={{ gap: "50px" }}>
+                      <GlobalDisplayFlexBox sx={{ gap: "12px" }}>
+                        <img src={dumyImg?.src} loading="lazy" alt="img" />
 
-                      <GlobalDisplayFlexColumnBox gap={"7px"} width={"100%"}>
-                        <Typography
-                          sx={{ fontSize: "14px", fontWeight: "500" }}
-                        >
-                          order
-                        </Typography>
-                        <Typography
-                          sx={{
-                            fontSize: "14px",
-                            fontWeight: "400",
-                            color: theme.palette.secondary.contrastText,
-                          }}
-                        >
-                          your order is confirmed
-                        </Typography>
-                      </GlobalDisplayFlexColumnBox>
+                        <GlobalDisplayFlexColumnBox gap={"7px"} width={"100%"}>
+                          <Typography
+                            sx={{ fontSize: "14px", fontWeight: "500" }}
+                          >
+                            {e?.title}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "14px",
+                              fontWeight: "400",
+                              color: theme.palette.secondary.contrastText,
+                            }}
+                          >
+                            {e?.message}
+                          </Typography>
+                        </GlobalDisplayFlexColumnBox>
+                      </GlobalDisplayFlexBox>
+
+                      <Typography sx={{ fontSize: "12px" }}>13:54</Typography>
                     </GlobalDisplayFlexBox>
-
-                    <Typography sx={{ fontSize: "12px" }}>13:54</Typography>
-                  </GlobalDisplayFlexBox>
-                </CustomPaperBigCard>
+                  </CustomPaperBigCard>
+                </GlobalDisplayFlexColumnBox>
               </GlobalDisplayFlexColumnBox>
-            </GlobalDisplayFlexColumnBox>
-          ))}
+            ))}
+
+          {notifications?.length === 0 &&isloading && (
+            <LoadingComponent />
+          )}
         </GlobalDisplayFlexColumnBox>
       </CustomPaperBigCard>
     </Box>
