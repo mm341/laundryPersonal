@@ -30,7 +30,10 @@ import AuthModal from "./AuthBox/AuthModel";
 import cartIcon from "../../public/navbar/cart.svg";
 import notificationIcon from "../../public/navbar/notification.svg";
 import NotificationPoPover from "./Notification";
-import { GetAllNotification, GetMasterData } from "@/redux/slices/Notifications";
+import {
+  GetAllNotification,
+  GetMasterData,
+} from "@/redux/slices/Notifications";
 import { GetProfileData } from "@/redux/slices/HandelUpdateProfile";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
@@ -45,12 +48,14 @@ const Navbar = () => {
   const [openAreaDialog, setOpenAreaDialog] = useState<boolean>(false);
   const [ServiceId, setServiceId] = useState<string | undefined>();
   const [modalFor, setModalFor] = useState<string>("sign-in");
-  
+
   const [authModalOpen, setOpen] = useState<boolean>(false);
   const [openPopover, setOpenPopover] = useState<boolean>(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
   //  selectors
-  const { accountInfo } = useAppSelector((state) => state.profile);
+  const { accountInfo, unReadNotifications } = useAppSelector(
+    (state) => state.profile
+  );
   const { services, areas } = useAppSelector((state) => state.services);
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -83,9 +88,9 @@ const Navbar = () => {
 
   const handleOpenNotification = () => {
     if (token) {
-      dispatch(GetAllNotification()).then((promiseResponse)=>{
-        if(promiseResponse.meta.requestStatus==="fulfilled"){
-          dispatch(GetProfileData())
+      dispatch(GetAllNotification()).then((promiseResponse) => {
+        if (promiseResponse.meta.requestStatus === "fulfilled") {
+          dispatch(GetProfileData());
         }
       });
       // dispatch(GetMasterData())
@@ -111,6 +116,7 @@ const Navbar = () => {
     path = localStorage.getItem("path");
     token = localStorage.getItem("token");
   }
+
 
   //  handel profile section and login button due to token
 
@@ -168,7 +174,7 @@ const Navbar = () => {
           <Box sx={{ position: "relative" }}>
             <Box
               sx={{
-                // display: !master?.notifications ? "none" : "flex",
+                display: unReadNotifications > 0 ? "flex" : "none",
                 position: "absolute",
                 right: "-5px",
                 top: "0px",
@@ -189,7 +195,7 @@ const Navbar = () => {
                   fontWeight: "600",
                 }}
               >
-                {/* {master?.notifications} */}
+                {unReadNotifications}
               </Typography>
             </Box>
 
@@ -234,10 +240,10 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (token && (!accountInfo || Object.values(accountInfo)?.length === 0)) {
+    if (token ) {
       dispatch(GetProfileData());
     }
-  }, [token, accountInfo]);
+  }, [token]);
 
   return (
     <>

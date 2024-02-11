@@ -183,31 +183,35 @@ const CheckOutPage = ({
   //  function add order
 
   const handelAddOrder = () => {
-    if (
-      deliveryDate &&
-      pickupDate &&
-      pickupHour &&
-      deliveryHour &&
-      addresseValue
-    ) {
-      dispatch(
-        AddOrder({
-          address_id: addresseValue,
-          delivery_date: deliveryDate,
-          delivery_hour: deliveryHour,
-          pick_date: pickupDate,
-          pick_hour: pickupHour,
-          instruction: addtionalInformation,
-          payment_type: payment,
-        })
-      ).then((promiseResponse: any) => {
-        if (promiseResponse?.payload?.data?.order?.id) {
-          router.push("/order");
-          dispatch(GetCartDetails({}));
-        }
-      });
+    if (dayjs(deliveryDate) <= dayjs(pickupDate)) {
+      toast.error(t("The delivery date must be a date after pick date."));
     } else {
-      toast.error(t("Enter all required data"));
+      if (
+        deliveryDate &&
+        pickupDate &&
+        pickupHour &&
+        deliveryHour &&
+        addresseValue
+      ) {
+        dispatch(
+          AddOrder({
+            address_id: addresseValue,
+            delivery_date: deliveryDate,
+            delivery_hour: deliveryHour,
+            pick_date: pickupDate,
+            pick_hour: pickupHour,
+            instruction: addtionalInformation,
+            payment_type: payment,
+          })
+        ).then((promiseResponse: any) => {
+          if (promiseResponse?.payload?.data?.order?.id) {
+            router.push("/order");
+            dispatch(GetCartDetails({}));
+          }
+        });
+      } else {
+        toast.error(t("Enter all required data"));
+      }
     }
   };
 

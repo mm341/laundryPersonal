@@ -14,7 +14,7 @@ export const GetProfileData = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           // toast.success(res?.message);
-          return res
+          return res;
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
@@ -30,6 +30,7 @@ export const Updating = createAsyncThunk(
 const initialState: UpdateProfileModel = {
   isloading: false,
   accountInfo: inititalAccountInfo(),
+  unReadNotifications: 0,
 };
 
 export const UpdatingAccount = createSlice({
@@ -60,19 +61,21 @@ export const UpdatingAccount = createSlice({
 
     builder.addCase(GetProfileData.pending, (state: UpdateProfileModel) => {
       // state.isloading = true;
+      state.unReadNotifications = 0;
     });
     builder.addCase(
       GetProfileData.fulfilled,
-      (state: UpdateProfileModel, {payload}:any) => {
+      (state: UpdateProfileModel, { payload }: any) => {
        
         if (payload) {
           state.accountInfo = payload?.data?.customer?.user;
+          state.unReadNotifications = payload?.data?.notifications;
         }
-        
       }
     );
     builder.addCase(GetProfileData.rejected, (state: UpdateProfileModel) => {
       // state.isloading = false;
+      state.unReadNotifications = 0;
     });
   },
 });
