@@ -11,6 +11,8 @@ export const english = {
   Street: "Street",
   "Follow Us":"Follow Us",
   "View All":"View All",
+  "Clear Cart?":"Clear Cart",
+  "Are you sure you want to Clear Cart":"Are you sure you want to Clear Cart ?",
   "Save New Address": "Save New Address",
   "Enter the 4-digit code sent to you at":"Enter the 4-digit code sent to you at",
   // "Edit Phone Number":"Edit Phone Number",

@@ -57,6 +57,8 @@ import { Master } from "@/interfaces/MasterInterface";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
 import { CashAreas, CashServices } from "@/redux/slices/Services";
 import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
+import { GetCartDetails } from "@/redux/slices/CartSlice";
+import AuthAndCartListGuard from "@/Components/authentication/CartListGuard";
 const CheckOutPage = ({
   homeServices,
   homeAreas,
@@ -196,6 +198,7 @@ const CheckOutPage = ({
       ).then((promiseResponse: any) => {
         if (promiseResponse.payload.data.order.id) {
           router.push("/order");
+          dispatch(GetCartDetails({}));
         }
       });
     } else {
@@ -230,7 +233,8 @@ const CheckOutPage = ({
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
       <CssBaseline />
-      <AuthGuard>
+
+      <AuthAndCartListGuard>
         <PublicContainer>
           <CustomPaperBigCard
             sx={{ backgroundColor: theme.palette.primary.dark, my: "5px" }}
@@ -589,7 +593,8 @@ const CheckOutPage = ({
             </CustomPaperBigCard>
           </CustomPaperBigCard>
         </PublicContainer>
-      </AuthGuard>
+      </AuthAndCartListGuard>
+
       {/*  add addresse Dialog */}
 
       <AddNewAddress

@@ -739,7 +739,8 @@ export const arabic = {
   "Resturant Informations": " معلومات المطعم ",
   "Payment Status": "حالة الدفع",
   "Order Status": " حالة الطلب ",
-
+  "Clear Cart?":"مسح السله ",
+  "Are you sure you want to Clear Cart":"هل تريد مسح السله ؟",
   "Payment method": " طريقة الدفع او السداد ",
 
   "Order placed": "تم الطلب",
