@@ -1,5 +1,6 @@
 import { AccountInfo, inititalAccountInfo } from "./AccountInfo";
 import { AddresseInterface, initialAddresse } from "./AddresseInterface";
+import { AdditionalServicesInterface } from "./AddtionalServicesInterface";
 import { productInterface } from "./ProductInterface";
 
 export const inititalOrdersInterface = () => {
@@ -11,6 +12,7 @@ export const inititalOrdersInterface = () => {
       stripe_id: "",
       user: inititalAccountInfo(),
     },
+    additionals:[],
     delivery_charge: 0,
     delivery_date: "",
     delivery_hour: "",
@@ -49,7 +51,7 @@ export interface OrdersInterface {
     stripe_id: string;
     user: AccountInfo;
   };
- 
+  additionals:AdditionalServicesInterface[]
   delivery_charge: number;
   delivery_date: string;
   delivery_hour: string;

@@ -278,7 +278,7 @@ const Cartsection = ({
           openDeleteDialog={openDeleteCart}
           setOpenDeleteDialog={setOpenDeleteCart}
           text={"Are you sure you want to Clear Cart"}
-          primaryButtonText={"Clear Cart"}
+          primaryButtonText={"Yes"}
           loading={isloadingDeleteCart}
         />
       )}

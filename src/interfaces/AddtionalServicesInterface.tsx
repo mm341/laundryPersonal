@@ -6,10 +6,12 @@ export const initialAdditionalServices = () => {
     price: 0,
     title: "",
     title_bn: "",
+    name:"",
   };
 };
 
 export interface AdditionalServicesInterface {
+  name:string
   description: string;
   description_bn: string;
   id: string;
