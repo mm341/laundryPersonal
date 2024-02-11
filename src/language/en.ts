@@ -664,7 +664,7 @@ export const english = {
   "Last name is required": "Last name is required",
   "Address Form": "Address Form",
   "items selected": "items selected",
-
+"The delivery date must be a date after pick date.":"The delivery date must be a date after pick date.",
   "Image Format - JPG, Pong, ZPEG, GIF Image Size - Maximum Size 2Mb Image Ratio - 1: 1":
     "Image Format - JPG, Pong, ZPEG, GIF Image Size - Maximum Size 2Mb Image Ratio - 1: 1",
 

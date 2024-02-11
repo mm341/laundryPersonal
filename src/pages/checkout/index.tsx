@@ -175,8 +175,6 @@ const CheckOutPage = ({
     }
   }, [deliveryDate, pickupDate, dispatch, pickupHour]);
 
-  
-
   useMemo(() => {
     if (!pickupHour) {
       setDeliveryDate("");
@@ -213,6 +211,11 @@ const CheckOutPage = ({
     }
   };
 
+  useEffect(() => {
+    if (dayjs(deliveryDate) <= dayjs(pickupDate)) {
+      toast.error(t("The delivery date must be a date after pick date."));
+    }
+  }, [pickupDate, deliveryDate]);
   //  cash areas
   useEffect(() => {
     dispatch(CashAreas(homeAreas));
