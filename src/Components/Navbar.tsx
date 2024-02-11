@@ -30,9 +30,10 @@ import AuthModal from "./AuthBox/AuthModel";
 import cartIcon from "../../public/navbar/cart.svg";
 import notificationIcon from "../../public/navbar/notification.svg";
 import NotificationPoPover from "./Notification";
-import { GetAllNotification } from "@/redux/slices/Notifications";
+import { GetAllNotification, GetMasterData } from "@/redux/slices/Notifications";
 import { GetProfileData } from "@/redux/slices/HandelUpdateProfile";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
 const Navbar = () => {
   //  hooks
   const dispatch = useAppDispatch();
@@ -44,7 +45,7 @@ const Navbar = () => {
   const [openAreaDialog, setOpenAreaDialog] = useState<boolean>(false);
   const [ServiceId, setServiceId] = useState<string | undefined>();
   const [modalFor, setModalFor] = useState<string>("sign-in");
-
+  
   const [authModalOpen, setOpen] = useState<boolean>(false);
   const [openPopover, setOpenPopover] = useState<boolean>(false);
   const [openNotification, setOpenNotification] = useState<boolean>(false);
@@ -81,7 +82,17 @@ const Navbar = () => {
   //  open notification popover
 
   const handleOpenNotification = () => {
-    setOpenNotification(!openNotification);
+    if (token) {
+      dispatch(GetAllNotification()).then((promiseResponse)=>{
+        if(promiseResponse.meta.requestStatus==="fulfilled"){
+          dispatch(GetProfileData())
+        }
+      });
+      // dispatch(GetMasterData())
+      setOpenNotification(!openNotification);
+    } else {
+      toast.error(t("You Must Login , At First"));
+    }
   };
 
   //  close notification popover
@@ -154,13 +165,42 @@ const Navbar = () => {
             loading="lazy"
             alt="cartIcon"
           />
-          <img
-            onClick={handleOpenNotification}
-            style={{ width: "30px", height: "30px", cursor: "pointer" }}
-            src={notificationIcon?.src}
-            loading="lazy"
-            alt="notificationIcon"
-          />
+          <Box sx={{ position: "relative" }}>
+            <Box
+              sx={{
+                // display: !master?.notifications ? "none" : "flex",
+                position: "absolute",
+                right: "-5px",
+                top: "0px",
+                color: "white",
+
+                width: "16px",
+                height: "16px",
+                borderRadius: "50%",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: theme.palette.primary.main,
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: "10px",
+                  fontWeight: "600",
+                }}
+              >
+                {/* {master?.notifications} */}
+              </Typography>
+            </Box>
+
+            <img
+              onClick={handleOpenNotification}
+              style={{ width: "30px", height: "30px", cursor: "pointer" }}
+              src={notificationIcon?.src}
+              loading="lazy"
+              alt="notificationIcon"
+            />
+          </Box>
         </Stack>
       </Box>
     ) : (
@@ -192,14 +232,6 @@ const Navbar = () => {
       </Stack>
     );
   };
-
-  //  call notification api in case of token exist
-
-  useEffect(() => {
-    if (token) {
-      dispatch(GetAllNotification());
-    }
-  }, [token]);
 
   useEffect(() => {
     if (token && (!accountInfo || Object.values(accountInfo)?.length === 0)) {

@@ -1,3 +1,23 @@
+
+export const inititalMasterData = () => {
+  return {
+    android_url: "",
+    currency: "",
+    delivery_cost: 0,
+    fee_cost: 0,
+    ios_url: "",
+    minimum_cost: 0,
+    post_code: [],
+    fav_icon: "",
+    address:"",
+    mobile:"",
+    email:"",
+    notifications:0
+  };
+};
+
+
+
 export interface Master {
   android_url: string;
   currency: string;
@@ -10,4 +30,5 @@ export interface Master {
   address:string
   mobile:string
   email:string
+  notifications:number
 }

@@ -3,11 +3,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import PublicRequest from "@/utils/PublicRequests";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 import { NotificationModel } from "@/models/NotificationSliceModel";
+import { inititalMasterData } from "@/interfaces/MasterInterface";
 
 export const GetAllNotification = createAsyncThunk(
-  "addresse/GetAllAdddressses",
+  "notifications/GetAllNotification",
   () =>
-    PublicRequest.getData("notifications")
+    PublicRequest.getData("customer/notifications")
       .then((res: any) => {
         if (res) {
           // toast.success(res?.message);
@@ -16,9 +17,23 @@ export const GetAllNotification = createAsyncThunk(
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
 );
 
+export const GetMasterData = createAsyncThunk(
+  "notifications/GetMasterData",
+  () =>
+    PublicRequest.getData("master")
+      .then((res: any) => {
+        if (res) {
+          // toast.success(res?.message);
+          return res
+        }
+      })
+      .catch((err) => PublicHandelingErrors.onErrorResponse(err))
+);
+
 const initialState: NotificationModel = {
   isloading: false,
   notifications: [],
+  
 };
 
 export const NotificationSlice = createSlice({
@@ -43,6 +58,8 @@ export const NotificationSlice = createSlice({
       state.isloading = false;
       state.notifications = [];
     });
+
+  
   },
 });
 
