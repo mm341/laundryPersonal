@@ -404,7 +404,7 @@ const CheckOutPage = ({
                           )}
                         </Grid>
                         <Grid item sm={6} xs={12}>
-                          {deliveryDate ? (
+                          {(deliveryDate && pickupHour) ? (
                             <PreferableTimeInput
                               disablePortal
                               id="combo-box-demo"
