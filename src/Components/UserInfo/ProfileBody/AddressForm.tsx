@@ -107,17 +107,17 @@ const AddressForm = ({
   const typeData: AddresseType[] = [
     {
       label: t("Home"),
-      value: locale === "en" ? "home" : "المنزل",
+      value: "home",
       img: homeSelectIcon,
     },
     {
       label: t("Office"),
-      value: locale === "en" ? "office" : "المكتب",
+      value: "office",
       img: officeSelectIcon,
     },
     {
       label: t("Others"),
-      value: locale === "en" ? "others" : "اخري",
+      value: "others",
       img: OthersSelectIcon,
     },
   ];
@@ -126,7 +126,7 @@ const AddressForm = ({
     if (addresse?.address_name) {
       setAddresseType(addresse?.address_name);
     } else {
-      locale === "en" ? setAddresseType("home") : setAddresseType("المنزل");
+      setAddresseType("home");
     }
   }, [addresse?.address_name]);
 
