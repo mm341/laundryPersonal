@@ -26,13 +26,13 @@ import GlobalAddresseType from "@/Components/GlobalComponent/GlobalAddresseType"
 import { GlobalDisplayFlexBox } from "@/styles/PublicStyles";
 import markerIcon from "../../../../public/info/markerIcon.svg";
 import GoogleMapComponent from "./GoogleMapComponent";
-import { useGeolocated } from "react-geolocated";
+
 
 import ValidationSchemaForAddAddress from "./ValidationSchemaForAddAddress";
 import { AddresseInterface } from "@/interfaces/AddresseInterface";
 import {
   AddAddresse,
-  GetAllAdddressses,
+  
   UpdateAddresse,
   addAddressePayload,
 } from "@/redux/slices/AddressesRequests";
@@ -63,9 +63,7 @@ const AddressForm = ({
 
   //   handel google map componenet
   // /////////////////////////////////////////////////
-  // const [currentLocation, setCurrentLocation] = useState<
-  //   locationInterface | undefined
-  // >();
+  
   const [location, setLocation] = useState<locationInterface>({
     lat: 30.00758635247977,
     lng: 31.459522247314453,
@@ -80,28 +78,7 @@ const AddressForm = ({
   const { isLoadingAddAddresse } = useAppSelector((state) => state.addresse);
   const [isDisablePickButton, setDisablePickButton] = useState<boolean>(false);
 
-  // const { coords, isGeolocationEnabled } = useGeolocated({
-  //   positionOptions: {
-  //     enableHighAccuracy: false,
-  //   },
-  //   userDecisionTimeout: 1000,
-  // });
-
-  // useEffect(() => {
-  //   if (coords?.latitude && coords?.longitude && isGeolocationEnabled) {
-  //     setCurrentLocation({
-  //       lat: coords?.latitude,
-  //       lng: coords?.longitude,
-  //     });
-
-  //     setLocation({
-  //       lat: coords?.latitude,
-  //       lng: coords?.longitude,
-  //     });
-  //   }
-  // }, [coords?.latitude, coords?.longitude, isGeolocationEnabled]);
-
-  // ///////////////////////////////////////////////////
+ 
 
   //  select Addresse Type
   const typeData: AddresseType[] = [
@@ -130,6 +107,7 @@ const AddressForm = ({
     }
   }, [addresse?.address_name]);
 
+ 
   //  handel current location with api from google map
 
   useEffect(() => {
@@ -234,20 +212,14 @@ const AddressForm = ({
   const appartmentHandler = (value: string) => {
     addAddressFormik.setFieldValue("apartment_no", value);
   };
-  // useEffect(() => {
-  //     addAddressFormik.setFieldValue('address', deliveryAddress)
-  // }, [deliveryAddress])
+ 
 
   useEffect(() => {
     if (addresseType) {
       addAddressFormik.setFieldValue("address_type", addresseType);
     }
   }, [addresseType]);
-  // useEffect(() => {
-  //   if (selectValue) {
-  //     addAddressFormik.setFieldValue("area", selectValue);
-  //   }
-  // }, [selectValue]);
+ 
 
   useEffect(() => {
     if (addresse?.latitude && addresse?.longitude) {

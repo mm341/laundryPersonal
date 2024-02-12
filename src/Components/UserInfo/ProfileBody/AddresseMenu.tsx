@@ -50,17 +50,17 @@ const AddresseMenu = ({
   const { locale } = useRouter();
   const OrderActionStatus = (addresse: AddresseInterface) => {
     let img;
-
+    console.log(addresse?.address_name);
     switch (addresse?.address_name) {
-      case "home" ?? "المنزل":
+      case "home":
         img = titleADreesseHomeIcon?.src;
         break;
 
-      case "office" ?? "المكتب":
+      case "office":
         img = titleADreesseOfficeIcon?.src;
         break;
 
-      case "others" ?? "اخري":
+      case "others":
         img = titleADreesseOthersIcon?.src;
         break;
     }
@@ -175,11 +175,7 @@ const AddresseMenu = ({
                             >
                               <img
                                 style={{ width: "20px", height: "20px" }}
-                                src={
-                                  locale === "en"
-                                    ? OrderActionStatus(addresse)
-                                    : OrderActionStatusArabic(addresse)
-                                }
+                                src={OrderActionStatus(addresse)}
                                 loading="lazy"
                                 alt="img"
                               />
