@@ -48,13 +48,13 @@ const AddressForm = ({
   refetch,
 }: {
   setOpen: (e: boolean) => void;
-  addresse: AddresseInterface |undefined;
+  addresse: AddresseInterface | undefined;
   refetch: () => void;
 }) => {
   //  hooks
   const dispatch = useAppDispatch();
   const theme = useTheme();
-const {locale}=useRouter()
+  const { locale } = useRouter();
   const [addresseType, setAddresseType] = useState<string>(
     addresse?.address_name ?? "home"
   );
@@ -74,7 +74,9 @@ const {locale}=useRouter()
   const [placeDetailsEnabled, setPlaceDetailsEnabled] =
     useState<boolean>(false);
   const [locationEnabled, setLocationEnabled] = useState<boolean>(false);
-  const [addresseNow, setAddresseNow] = useState<string>( addresse?.address_location??"");
+  const [addresseNow, setAddresseNow] = useState<string>(
+    addresse?.address_location ?? ""
+  );
   const { isLoadingAddAddresse } = useAppSelector((state) => state.addresse);
   const [isDisablePickButton, setDisablePickButton] = useState<boolean>(false);
 
@@ -105,17 +107,17 @@ const {locale}=useRouter()
   const typeData: AddresseType[] = [
     {
       label: t("Home"),
-      value: locale==="en"?"home":"المنزل",
+      value: locale === "en" ? "home" : "المنزل",
       img: homeSelectIcon,
     },
     {
       label: t("Office"),
-      value: locale==="en"?"office":"المكتب",
+      value: locale === "en" ? "office" : "المكتب",
       img: officeSelectIcon,
     },
     {
       label: t("Others"),
-      value: locale==="en"?"others":"اخري",
+      value: locale === "en" ? "others" : "اخري",
       img: OthersSelectIcon,
     },
   ];
@@ -124,8 +126,7 @@ const {locale}=useRouter()
     if (addresse?.address_name) {
       setAddresseType(addresse?.address_name);
     } else {
-      locale==="en"?
-      setAddresseType("home"):setAddresseType("المنزل");
+      locale === "en" ? setAddresseType("home") : setAddresseType("المنزل");
     }
   }, [addresse?.address_name]);
 
@@ -172,7 +173,7 @@ const {locale}=useRouter()
   const addAddressFormik = useFormik({
     initialValues: {
       address_type: "",
-      address_location:addresse?.address_location ??"",
+      address_location: addresse?.address_location ?? "",
       // area: addresse?.area ?? "",
       building_no: addresse?.building_no ?? "",
       floor_no: addresse?.floor_no ?? "",
@@ -191,7 +192,7 @@ const {locale}=useRouter()
           street: values.street,
           address_name: values?.address_type,
           id: addresse?.id,
-          address_location:addresseNow
+          address_location: addresseNow,
         };
         // formSubmitOnSuccess(newData)
 
@@ -216,7 +217,6 @@ const {locale}=useRouter()
     },
   });
 
-  
   // const formSubmitOnSuccess = (values) => {
   //     formSubmit(values)
   // }
@@ -252,7 +252,7 @@ const {locale}=useRouter()
   useEffect(() => {
     if (addresse?.latitude && addresse?.longitude) {
       setLocation({
-        lat:addresse?.latitude,
+        lat: addresse?.latitude,
         lng: addresse?.longitude,
       });
     } else {

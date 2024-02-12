@@ -76,18 +76,12 @@ const DrawerMenu = ({
   //  logout function
   const handleLogout = async () => {
     try {
-      // window.location.reload();
+      
       router.push("/", locale);
-    // onClose?.();
-    // localStorage.clear();
+   
     localStorage.removeItem("token");
     toast.success(t("Logout Successfully"));
-      //   toast.success(t(logoutSuccessFull));
-      //   if (router.pathname === "/home") {
-      //     router.push("/home");
-      //   } else {
-      //     router.push("/home");
-      //   }
+      
     } catch (err) {
       //   toast.error('Unable to logout.');
     }
@@ -321,7 +315,7 @@ const DrawerMenu = ({
       >
         {menuList()}
       </CustomDrawer>
-      {/* <AuthModal/> */}
+    
     </Container>
   );
 };

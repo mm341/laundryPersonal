@@ -173,7 +173,7 @@ const ProductCard = ({
             justifyContent: "flex-start",
             alignItems: "center",
             gap: "15px",
-            width: { sm: "60%", xs: "100%" },
+            width: { md: "60%", xs: "100%" },
           }}
         >
           <GlobalDisplayFlexBox

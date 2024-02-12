@@ -77,7 +77,7 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
         if (values?.mobile) {
           data.mobile = `+${values?.mobile.toString()}`;
         }
-        data.firebase_token = "dit1R4PBb5SQ5gI3LnEJw1:APA91bExTQmRbv2le18rJbDDttRUBjREdy4iM14HBpIZQv12bbIQlTNFHyvWpLgaOnQO6dTDID89cSMbX4A5lWLCsxrXe3lqxveaTFmk9BmSQALzf9YVUIPyDX3nx83CEfDAYMUVgkb1";
+        data.firebase_token = firebase_token;
         formSubmitHandler(data);
       } catch (err) {}
     },

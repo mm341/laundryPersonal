@@ -117,7 +117,6 @@ const Navbar = () => {
     token = localStorage.getItem("token");
   }
 
-
   //  handel profile section and login button due to token
 
   const handelAuth = () => {
@@ -240,7 +239,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (token ) {
+    if (token) {
       dispatch(GetProfileData());
     }
   }, [token]);
@@ -336,32 +335,42 @@ const Navbar = () => {
                 ref={anchorRef}
                 sx={{ transform: "translateY(5px)" }}
               >
-                <Stack
-                  sx={{
-                    gap: "8px",
-                    justifyContent: "center",
-                    display: "flex",
-                    flexDirection: "row-reverse",
-                    cursor: "pointer",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    style={{ width: "30px", height: "30px" }}
-                    src={accountphoto?.src}
+                <Stack  direction={"row"} gap={"20px"}>
+                <img
+                    onClick={handleOpenNotification}
+                    style={{ width: "30px", height: "30px", cursor: "pointer" }}
+                    src={notificationIcon?.src}
                     loading="lazy"
-                    alt="accountphoto"
+                    alt="notificationIcon"
                   />
-
-                  <Typography
+                  <Stack
                     sx={{
-                      fontSize: "16px",
-                      fontWeight: "400",
-                      color: "#636363",
+                      gap: "8px",
+                      justifyContent: "center",
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                      cursor: "pointer",
+                      alignItems: "center",
                     }}
                   >
-                    {t("Hello")}, {accountInfo?.name}
-                  </Typography>
+                    <img
+                      style={{ width: "30px", height: "30px" }}
+                      src={accountphoto?.src}
+                      loading="lazy"
+                      alt="accountphoto"
+                    />
+
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: "400",
+                        color: "#636363",
+                      }}
+                    >
+                      {t("Hello")}, {accountInfo?.name}
+                    </Typography>
+                  </Stack>
+                 
                 </Stack>
               </Box>
             </DrawerMenu>
