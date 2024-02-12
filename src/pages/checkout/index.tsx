@@ -376,6 +376,8 @@ const CheckOutPage = ({
                           </Grid>
                           <Grid item sm={6} xs={12}>
                             {pickupDate && schedules?.length > 0 ? (
+                              <FormControl fullWidth>
+                                 <InputLabel id="demo-simple-select-label">{t("Time")}</InputLabel>
                               <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
@@ -397,6 +399,7 @@ const CheckOutPage = ({
                                   )
                                 )}
                               </Select>
+                              </FormControl>
                             ) : (
                               <Stack
                                 sx={{
@@ -470,6 +473,8 @@ const CheckOutPage = ({
                             {deliveryDate &&
                             pickupHour &&
                             deliverySchedules?.length > 0 ? (
+                              <FormControl fullWidth>
+                              <InputLabel id="demo-simple-select-label">{t("Time")}</InputLabel>
                               <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
@@ -491,6 +496,7 @@ const CheckOutPage = ({
                                   )
                                 )}
                               </Select>
+                              </FormControl>
                             ) : (
                               <Stack
                                 sx={{
