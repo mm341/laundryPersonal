@@ -91,7 +91,7 @@ const OtpForm = ({
         } else {
           SendData.mobile = data?.mobile;
         }
-        SendData.fcm_token = firebase_token;
+        SendData.fcm_token ="dit1R4PBb5SQ5gI3LnEJw1:APA91bExTQmRbv2le18rJbDDttRUBjREdy4iM14HBpIZQv12bbIQlTNFHyvWpLgaOnQO6dTDID89cSMbX4A5lWLCsxrXe3lqxveaTFmk9BmSQALzf9YVUIPyDX3nx83CEfDAYMUVgkb1";
         formSubmitHandler(SendData);
       } catch (err) {}
     },
