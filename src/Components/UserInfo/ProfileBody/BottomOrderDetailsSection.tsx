@@ -20,7 +20,10 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
     { key: "Order ID", value: `#${order?.order_code}` },
     { key: "Order Date", value: order?.ordered_at },
     { key: "Pick Up at", value: `${order?.pick_date} ( ${order?.pick_hour} )` },
-    { key: "Delivery at", value: `${order?.delivery_date} ( ${order?.delivery_hour} )`  },
+    {
+      key: "Delivery at",
+      value: `${order?.delivery_date} ( ${order?.delivery_hour} )`,
+    },
     { key: "Order Status", value: order?.order_status },
     { key: "Payment Status", value: order?.payment_status },
     { key: "Sub total", value: `${order?.sub_total} ${master?.currency}` },
@@ -50,9 +53,15 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
         order?.order_status === "يعالج"
       ) {
         color = "#FFA412";
-      } else if (order?.order_status === "Delivered"||order?.order_status === "تم التوصيل") {
+      } else if (
+        order?.order_status === "Delivered" ||
+        order?.order_status === "تم التوصيل"
+      ) {
         color = "#00A53C";
-      } else if (order?.order_status === "Cancelled"||order?.order_status === "ألغيت") {
+      } else if (
+        order?.order_status === "Cancelled" ||
+        order?.order_status === "ألغيت"
+      ) {
         color = "#8E1400";
       }
     }
