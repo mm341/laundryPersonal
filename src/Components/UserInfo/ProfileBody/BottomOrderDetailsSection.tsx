@@ -19,8 +19,8 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
   const orderDetailsData: OrderData[] = [
     { key: "Order ID", value: `#${order?.order_code}` },
     { key: "Order Date", value: order?.ordered_at },
-    { key: "Pick Up at", value: order?.pick_date },
-    { key: "Delivery at", value: order?.delivery_date },
+    { key: "Pick Up at", value: `${order?.pick_date} ( ${order?.pick_hour} )` },
+    { key: "Delivery at", value: `${order?.delivery_date} ( ${order?.delivery_hour} )`  },
     { key: "Order Status", value: order?.order_status },
     { key: "Payment Status", value: order?.payment_status },
     { key: "Sub total", value: `${order?.sub_total} ${master?.currency}` },
