@@ -11,6 +11,7 @@ import dumyImg from "../../public/navbar/dumyNotificationImg.svg";
 import SimpleBar from "simplebar-react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import LoadingComponent from "./GlobalComponent/LoadingComponent";
+import { useTranslation } from "react-i18next";
 interface Props {
   onClose: () => void;
   open: boolean;
@@ -20,9 +21,11 @@ const NotificationPoPover = (props: Props) => {
 
   const theme = useTheme();
   const { locale } = useRouter();
-  const { notifications,isloading } = useAppSelector((state) => state.notification);
+  const { notifications, isloading } = useAppSelector(
+    (state) => state.notification
+  );
   const { onClose, open } = props;
-console.log(notifications)
+  const { t } = useTranslation();
   //  handle close popover
 
   let menuRef: any = useRef();
@@ -57,7 +60,7 @@ console.log(notifications)
         borderRadius: "15px",
         boxShadow: "0px 0px 4px 0px #00000033",
         height: "390px",
-        width:"390px"
+        width: "390px",
       }}
     >
       <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
@@ -66,7 +69,8 @@ console.log(notifications)
           gap={"15px"}
           sx={{ py: "10px" }}
         >
-          {notifications?.length > 0 &&!isloading &&
+          {notifications?.length > 0 &&
+            !isloading &&
             notifications?.map((e, i) => (
               <GlobalDisplayFlexColumnBox width={"100%"} gap={"10px"} key={i}>
                 <GlobalDisplayFlexColumnBox gap={"5px"}>
@@ -103,8 +107,19 @@ console.log(notifications)
               </GlobalDisplayFlexColumnBox>
             ))}
 
-          {notifications?.length === 0 &&isloading && (
-            <LoadingComponent />
+          {notifications?.length === 0 && isloading && <LoadingComponent />}
+          {notifications?.length === 0 && !isloading && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                minHeight: "300px",
+              }}
+            >
+              <Typography>{t("Empty Data")}</Typography>
+            </Box>
           )}
         </GlobalDisplayFlexColumnBox>
       </CustomPaperBigCard>

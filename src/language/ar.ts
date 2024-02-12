@@ -751,6 +751,7 @@ export const arabic = {
   "Delivery Options": "خيارات التوصيل",
   "Home Delivery": "توصيل منزلي",
   "Service is not available this day":"الخدمه غير متاحه في هذا اليوم",
+  "Added":"تم إضافة",
   "Take Away": "يبعد",
   "Preferable Time": "الوقت المفضل",
   "Already have an account?": "هل لديك حساب؟",

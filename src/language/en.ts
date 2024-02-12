@@ -668,6 +668,7 @@ export const english = {
   "Image Format - JPG, Pong, ZPEG, GIF Image Size - Maximum Size 2Mb Image Ratio - 1: 1":
     "Image Format - JPG, Pong, ZPEG, GIF Image Size - Maximum Size 2Mb Image Ratio - 1: 1",
 "Service is not available this day":"Service is not available this day",
+"Added":"Added",
   "Order ID": "Order ID",
   "Order Amount": "Order Amount",
 

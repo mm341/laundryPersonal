@@ -78,7 +78,9 @@ const AdditionalServicesSection = ({
         ) : (
           <Typography>+</Typography>
         )}{" "}
-        {t("Add")}{" "}
+        {cartList?.cart_details?.additionals?.map((e) => e.id).includes(e?.id)
+          ? t("Added")
+          : t("Add")}
       </GlobalButton>
     ) : (
       <Skeleton variant="text" width="50px" height={10} />

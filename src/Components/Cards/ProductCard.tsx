@@ -80,7 +80,7 @@ const ProductCard = ({
       );
     }
   };
-console.log(cartList?.cart_details?.products)
+
   const handelAddButton = (e: productInterface) => {
     return !isLoadingAddToCart ? (
       <GlobalButton
@@ -143,7 +143,12 @@ console.log(cartList?.cart_details?.products)
         ) : (
           <Typography>+</Typography>
         )}{" "}
-        {t("Add")}{" "}
+        {cartList?.cart_details?.products?.map((e) => e.id).includes(e?.id) ||
+        cartList?.cart_details?.products
+          ?.map((e) => e.parent_id)
+          .includes(e?.id)
+          ? t("Added")
+          : t("Add")}
       </GlobalButton>
     ) : (
       <Skeleton variant="text" width="50px" height={10} />
