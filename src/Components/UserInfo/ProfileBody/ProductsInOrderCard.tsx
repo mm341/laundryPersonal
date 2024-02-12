@@ -9,6 +9,7 @@ import { OrdersInterface } from "@/interfaces/OrdersInterface";
 import { productInterface } from "@/interfaces/ProductInterface";
 // import Image from "next/image";
 import { useAppSelector } from "@/redux/store";
+import { useTranslation } from "react-i18next";
 const ProductsInOrderCard = ({
   openProductsDetails,
   order,
@@ -17,7 +18,7 @@ const ProductsInOrderCard = ({
   order: OrdersInterface;
 }) => {
   //  hooks
-  const theme = useTheme();
+  const { t } = useTranslation();
   //  master data
 
   const { master } = useAppSelector((state) => state.master);
@@ -116,13 +117,13 @@ const ProductsInOrderCard = ({
           ))}
 
           {order?.additionals?.map((e, i) => (
-            <GlobalDisplayFlexColumnBox key={i} sx={{ px: "18px"}}>
-            <GlobalDisplayFlexBox  sx={{py:"24px" }}>
-              <GlobalDisplayFlexColumnBox gap={"8px"}>
-                <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
-                  {e?.name}
-                </Typography>
-                {order?.products[0]?.service && (
+            <GlobalDisplayFlexColumnBox key={i} sx={{ px: "18px" }}>
+              <GlobalDisplayFlexBox sx={{ py: "24px" }}>
+                <GlobalDisplayFlexColumnBox gap={"8px"}>
+                  <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
+                    {e?.name}
+                  </Typography>
+
                   <Typography
                     sx={{
                       color: "#666666",
@@ -130,20 +131,16 @@ const ProductsInOrderCard = ({
                       fontWeight: "400",
                     }}
                   >
-                    {order?.products[0]?.service?.name}
+                    {t("Additional Service")}
                   </Typography>
-                )}
-              </GlobalDisplayFlexColumnBox>
-              <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
-                {" "}
-                {e?.price} {master?.currency}
-              </Typography>
-              
-            </GlobalDisplayFlexBox>
-            <Divider  orientation="horizontal" />
+                </GlobalDisplayFlexColumnBox>
+                <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
+                  {" "}
+                  {e?.price} {master?.currency}
+                </Typography>
+              </GlobalDisplayFlexBox>
+              <Divider orientation="horizontal" />
             </GlobalDisplayFlexColumnBox>
-           
-           
           ))}
         </>
       )}
