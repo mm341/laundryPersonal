@@ -50,7 +50,7 @@ const AddresseMenu = ({
   const { locale } = useRouter();
   const OrderActionStatus = (addresse: AddresseInterface) => {
     let img;
-    console.log(addresse?.address_name);
+  
     switch (addresse?.address_name) {
       case "home":
         img = titleADreesseHomeIcon?.src;
