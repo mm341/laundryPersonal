@@ -22,7 +22,7 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
     { key: "Pick Up at", value: order?.pick_date },
     { key: "Delivery at", value: order?.delivery_date },
     { key: "Order Status", value: order?.order_status },
-    { key: "Payment Status", value: "Paid" },
+    { key: "Payment Status", value: order?.payment_status },
     { key: "Sub total", value: `${order?.sub_total} ${master?.currency}` },
     {
       key: "Delivery Charge",
