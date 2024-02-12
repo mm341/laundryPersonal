@@ -253,6 +253,8 @@ const CheckOutPage = ({
     }
   };
 
+
+
   useEffect(() => {
     if (dayjs(deliveryDate) <= dayjs(pickupDate)) {
       toast.error(t("The delivery date must be a date after pick date."));
@@ -427,7 +429,7 @@ const CheckOutPage = ({
 
                         <Grid container spacing={3}>
                           <Grid item sm={6} xs={12}>
-                            {pickupHour ? (
+                            {pickupHour &&pickupDate ? (
                               <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                   minDate={dayjs(pickupDate).add(1, "day")}
