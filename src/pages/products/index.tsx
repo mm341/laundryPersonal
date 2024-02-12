@@ -57,6 +57,7 @@ import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
 import BannersSection from "@/Components/Banners/BannersSection";
 import AdditionalServicesSection from "@/Components/Cart/AdditionalServicesSection";
 import { AddToCart, GetCartDetails } from "@/redux/slices/CartSlice";
+import HandelNotification from "@/Components/GlobalComponent/HandelNotification";
 const ProductsPage = ({
   homeServices,
   homeAreas,
@@ -219,155 +220,156 @@ const ProductsPage = ({
     <>
       <Meta title={"services"} description="" keywords="" />
       <CssBaseline />
-      {loading ? (
-        <CustomLoaderPage loading={loading} />
-      ) : (
-        <PublicContainer>
-          {/*  Banners */}
-          <GlobalDisplayFlexColumnBox gap={"48px"}>
-            <Box>
-              <BannersSection />
-            </Box>
-            <CustomPaperBigCard
-              sx={{
-                borderRadius: "10px",
-                backgroundColor: theme.palette.primary.dark,
-                my: "5px",
-              }}
-            >
-              <Grid container spacing={3}>
-                <Grid item md={8} xs={12}>
-                  <GlobalDisplayFlexColumnBox width={"100%"} gap={"26px"}>
-                    {/*  all variants section */}
-                    <GroupButtonsVariants
-                      setSearchText={setSearchText}
-                      data={variants}
-                      type={type}
-                      setType={setType}
-                    />
-
-                    {/*  products section */}
-                    <CustomPaperBigCard
-                      sx={{ backgroundColor: "white", py: "20px" }}
-                    >
-                      <GlobalDisplayFlexColumnBox width={"100%"} gap={"30px"}>
-                        <GlobalDisplayFlexBox sx={{ px: "14px" }}>
-                          <ServiceName />
-                          {/*  search field */}
-                          <Box
-                            component={"form"}
-                            sx={{
-                              boxShadow: "0px 1px 20px 0px #0000001A",
-                              backgroundColor: "white",
-                            }}
-                            onSubmit={handelSubmit}
-                          >
-                            <FormControl>
-                              <OutlinedInput
-                                size="small"
-                                onChange={handelChange}
-                                value={searchText}
-                                id="header-search"
-                                endAdornment={
-                                  <InputAdornment
-                                    position="end"
-                                    sx={{ cursor: "pointer" }}
-                                  >
-                                    <Fade in={searchText !== ""}>
-                                      <CloseOutlined
-                                        onClick={() => {
-                                          setSearchText("");
-
-                                          dispatch(
-                                            GetProducts({
-                                              serviceId:
-                                                router.query.service_id,
-                                              variantId: type,
-                                            })
-                                          );
-                                        }}
-                                        color="primary"
-                                      />
-                                    </Fade>
-
-                                    <SearchIcon onClick={handelSubmit} />
-                                  </InputAdornment>
-                                }
-                                aria-describedby="header-search-text"
-                                aria-label="weight"
-                                placeholder={t("Search")}
-                              />
-                            </FormControl>
-                          </Box>
-                        </GlobalDisplayFlexBox>
-
-                        {/*  products card */}
-
-                        <Scrollbar
-                          style={{
-                            maxHeight: "600px",
-                          }}
-                        >
-                          <GlobalDisplayFlexColumnBox
-                            width={"100%"}
-                            gap={"16px"}
-                            sx={{ my: "10px", px: "12px" }}
-                          >
-                            {products?.length > 0 &&
-                              products?.map(
-                                (product: productInterface, i: number) => (
-                                  <ProductCard
-                                    setQuantityForAddRequest={
-                                      setQuantityForAddRequest
-                                    }
-                                    setOpenDialog={setOpenDialog}
-                                    setProduct={setProduct}
-                                    key={product?.id}
-                                    product={product}
-                                  />
-                                )
-                              )}
-                          </GlobalDisplayFlexColumnBox>
-                        </Scrollbar>
-                        {/*  case of loading data */}
-                        {isloading && products?.length === 0 && (
-                          <LoadingComponent />
-                        )}
-                        {/*  case of empty products data */}
-                        {!isloading && products?.length === 0 && (
-                          <EmptyData
-                            img={
-                              locale === "en"
-                                ? emptyProductsImg?.src
-                                : emptyProductsArabicImg?.src
-                            }
-                          />
-                        )}
-                      </GlobalDisplayFlexColumnBox>
-                    </CustomPaperBigCard>
-
-                    <CustomPaperBigCard
-                      sx={{ backgroundColor: "white", py: "20px",px:"0" }}
-                    >
-                      <AdditionalServicesSection
-                        additionalSercvices={additionalSercvices}
+      <HandelNotification>
+        {loading ? (
+          <CustomLoaderPage loading={loading} />
+        ) : (
+          <PublicContainer>
+            {/*  Banners */}
+            <GlobalDisplayFlexColumnBox gap={"48px"}>
+              <Box>
+                <BannersSection />
+              </Box>
+              <CustomPaperBigCard
+                sx={{
+                  borderRadius: "10px",
+                  backgroundColor: theme.palette.primary.dark,
+                  my: "5px",
+                }}
+              >
+                <Grid container spacing={3}>
+                  <Grid item md={8} xs={12}>
+                    <GlobalDisplayFlexColumnBox width={"100%"} gap={"26px"}>
+                      {/*  all variants section */}
+                      <GroupButtonsVariants
+                        setSearchText={setSearchText}
+                        data={variants}
+                        type={type}
+                        setType={setType}
                       />
-                    </CustomPaperBigCard>
-                  </GlobalDisplayFlexColumnBox>
-                </Grid>
-                <Grid item md={4} xs={12}>
-                  <Cartsection
-                    choicesIds={choicesIds}
-                    setChoicesIds={setChoicesIds}
-                    additionalSercvices={additionalSercvices}
-                  />
-                </Grid>
-              </Grid>
-            </CustomPaperBigCard>
-          </GlobalDisplayFlexColumnBox>
-        </PublicContainer>
-      )}
 
+                      {/*  products section */}
+                      <CustomPaperBigCard
+                        sx={{ backgroundColor: "white", py: "20px" }}
+                      >
+                        <GlobalDisplayFlexColumnBox width={"100%"} gap={"30px"}>
+                          <GlobalDisplayFlexBox sx={{ px: "14px" }}>
+                            <ServiceName />
+                            {/*  search field */}
+                            <Box
+                              component={"form"}
+                              sx={{
+                                boxShadow: "0px 1px 20px 0px #0000001A",
+                                backgroundColor: "white",
+                              }}
+                              onSubmit={handelSubmit}
+                            >
+                              <FormControl>
+                                <OutlinedInput
+                                  size="small"
+                                  onChange={handelChange}
+                                  value={searchText}
+                                  id="header-search"
+                                  endAdornment={
+                                    <InputAdornment
+                                      position="end"
+                                      sx={{ cursor: "pointer" }}
+                                    >
+                                      <Fade in={searchText !== ""}>
+                                        <CloseOutlined
+                                          onClick={() => {
+                                            setSearchText("");
+
+                                            dispatch(
+                                              GetProducts({
+                                                serviceId:
+                                                  router.query.service_id,
+                                                variantId: type,
+                                              })
+                                            );
+                                          }}
+                                          color="primary"
+                                        />
+                                      </Fade>
+
+                                      <SearchIcon onClick={handelSubmit} />
+                                    </InputAdornment>
+                                  }
+                                  aria-describedby="header-search-text"
+                                  aria-label="weight"
+                                  placeholder={t("Search")}
+                                />
+                              </FormControl>
+                            </Box>
+                          </GlobalDisplayFlexBox>
+
+                          {/*  products card */}
+
+                          <Scrollbar
+                            style={{
+                              maxHeight: "600px",
+                            }}
+                          >
+                            <GlobalDisplayFlexColumnBox
+                              width={"100%"}
+                              gap={"16px"}
+                              sx={{ my: "10px", px: "12px" }}
+                            >
+                              {products?.length > 0 &&
+                                products?.map(
+                                  (product: productInterface, i: number) => (
+                                    <ProductCard
+                                      setQuantityForAddRequest={
+                                        setQuantityForAddRequest
+                                      }
+                                      setOpenDialog={setOpenDialog}
+                                      setProduct={setProduct}
+                                      key={product?.id}
+                                      product={product}
+                                    />
+                                  )
+                                )}
+                            </GlobalDisplayFlexColumnBox>
+                          </Scrollbar>
+                          {/*  case of loading data */}
+                          {isloading && products?.length === 0 && (
+                            <LoadingComponent />
+                          )}
+                          {/*  case of empty products data */}
+                          {!isloading && products?.length === 0 && (
+                            <EmptyData
+                              img={
+                                locale === "en"
+                                  ? emptyProductsImg?.src
+                                  : emptyProductsArabicImg?.src
+                              }
+                            />
+                          )}
+                        </GlobalDisplayFlexColumnBox>
+                      </CustomPaperBigCard>
+
+                      <CustomPaperBigCard
+                        sx={{ backgroundColor: "white", py: "20px", px: "0" }}
+                      >
+                        <AdditionalServicesSection
+                          additionalSercvices={additionalSercvices}
+                        />
+                      </CustomPaperBigCard>
+                    </GlobalDisplayFlexColumnBox>
+                  </Grid>
+                  <Grid item md={4} xs={12}>
+                    <Cartsection
+                      choicesIds={choicesIds}
+                      setChoicesIds={setChoicesIds}
+                      additionalSercvices={additionalSercvices}
+                    />
+                  </Grid>
+                </Grid>
+              </CustomPaperBigCard>
+            </GlobalDisplayFlexColumnBox>
+          </PublicContainer>
+        )}
+      </HandelNotification>
       <SubProductModel
         HandelAddProductWithSubProductId={HandelAddProductWithSubProductId}
         setSubProductId={setSubProductId}

@@ -1,5 +1,11 @@
 import React, { useRef } from "react";
-import { Box, Stack, Typography, TextField, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Typography,
+  TextField,
+  useMediaQuery,
+} from "@mui/material";
 
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
@@ -34,7 +40,7 @@ interface props {
   setOpenOtpModal: (e: boolean) => void;
   updatProfile?: boolean;
   formikName?: string;
-  id?:string
+  id?: string;
 }
 const OtpForm = ({
   data,
@@ -45,7 +51,7 @@ const OtpForm = ({
   modalFor,
   updatProfile,
   formikName,
-  id
+  id,
 }: props) => {
   //  hooks
   const { locale } = useRouter();
@@ -55,6 +61,12 @@ const OtpForm = ({
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
   let [resend, setResend] = useState(60);
   const dispatch = useAppDispatch();
+  //  get firebase token from localstorage
+  let firebase_token: string | undefined | null = undefined;
+
+  if (typeof window !== "undefined") {
+    firebase_token = localStorage.getItem("cm_firebase_token");
+  }
   //  validation of otp
   const otpFormik = useFormik({
     //here reset_token is otp inputs
@@ -71,19 +83,20 @@ const OtpForm = ({
           otp: string;
           alternative_phone?: string | undefined;
           mobile?: string | undefined;
-        } = { otp: "" };
+          fcm_token: string | null | undefined;
+        } = { otp: "", fcm_token: "" };
         SendData.otp = values.otp;
         if (formikName === "alternative_phone") {
           SendData.alternative_phone = data?.mobile;
         } else {
           SendData.mobile = data?.mobile;
         }
-
+        SendData.fcm_token = firebase_token;
         formSubmitHandler(SendData);
       } catch (err) {}
     },
   });
-  
+
   const handleOpenAuthModal = () => {
     setOpenOtpModal(false);
     if (modalFor === "sign-in") {
@@ -187,17 +200,15 @@ const OtpForm = ({
               >
                 <Typography
                   onClick={() => {
-                   
-                   if(id){
-                    dispatch(ResendCode({ mobile: data?.mobile,id:id }));
-                   }else{
-                    dispatch(ResendCode({ mobile: data?.mobile }));
-                   }
-                    
-                    if(resend===0){
+                    if (id) {
+                      dispatch(ResendCode({ mobile: data?.mobile, id: id }));
+                    } else {
+                      dispatch(ResendCode({ mobile: data?.mobile }));
+                    }
+
+                    if (resend === 0) {
                       setResend(60);
                     }
-                    
                   }}
                   sx={{
                     fontSize: "14px",
@@ -292,7 +303,12 @@ const OtpForm = ({
         src={img?.src}
         loading="lazy"
         alt="img"
-        style={{ width: "281px", height: "284px", objectFit: "cover",display:issmall?"none":"block" }}
+        style={{
+          width: "281px",
+          height: "284px",
+          objectFit: "cover",
+          display: issmall ? "none" : "block",
+        }}
       />
     </GlobalDisplayFlexBox>
   );

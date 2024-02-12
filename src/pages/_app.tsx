@@ -34,6 +34,7 @@ import logoHeader from "../../public/App/Disk-1s-200px.gif";
 import DynamicFavicon from "@/Components/GlobalComponent/favicon/DynamicFavicon";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { fetchToken } from "@/firebase";
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
 Router.events.on("routeChangeComplete", nProgress.done);
@@ -77,6 +78,13 @@ export default function App({
       localStorage?.setItem("language", "ar");
     }
   }, [locale]);
+
+
+  
+    useEffect(() => {
+      fetchToken().then()
+  }, [])
+  
 
   //  custom theme
   const theme = useMemo(

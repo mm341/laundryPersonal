@@ -46,16 +46,18 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const [isRemember, setIsRemember] = useState<boolean>(false);
-  const [openModal, setModalOpen] = useState<boolean>(false);
   const [openOtpModal, setOpenOtpModal] = useState<boolean>(false);
   const [otpData, setOtpData] = useState<{ mobile: string | undefined }>({
     mobile: "",
   });
-  const [mainToken, setMainToken] = useState<null>(null);
 
+  //  get firebase token from localstorage
+  let firebase_token: string | undefined | null = undefined;
+
+  if (typeof window !== "undefined") {
+    firebase_token = localStorage.getItem("cm_firebase_token");
+  }
   //  login action validation and send api request
   const loginFormik = useFormik({
     initialValues: {
@@ -64,19 +66,18 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
     validationSchema: Yup.object({
       mobile: Yup.string()
         .required(t("Please give a phone number"))
-        .min(12, t("number must be 12 digits"))
-        // .matches(
-        //   /^(201|01|00201)[0-2,5]{1}[0-9]{8}$|^(009665|9665|9665|05|5)(5|0|3|6|4|9|8|7)([0-9]{7})$/,
-        //   t("The phone format is invalid.")
-        // ),
+        .min(12, t("number must be 12 digits")),
     }),
     onSubmit: async (values: { mobile: string | undefined }) => {
       try {
-        const data: { mobile: string | undefined } = { mobile: "" };
+        const data: {
+          mobile: string | undefined;
+          firebase_token: string | undefined | null;
+        } = { mobile: "", firebase_token: "" };
         if (values?.mobile) {
           data.mobile = `+${values?.mobile.toString()}`;
         }
-
+        data.firebase_token = firebase_token;
         formSubmitHandler(data);
       } catch (err) {}
     },
@@ -147,7 +148,7 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
     width: { sm: "791px", xs: "90%", mx: "auto" },
     bgcolor: "background.paper",
     p: 4,
-    borderRadius:"6px"
+    borderRadius: "6px",
   };
 
   const languagedirection = localStorage.getItem("direction");

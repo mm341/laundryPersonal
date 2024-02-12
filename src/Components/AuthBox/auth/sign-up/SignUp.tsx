@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 
 import TextField from "@mui/material/TextField";
@@ -14,11 +14,10 @@ import { CustomBoxForModal } from "../auth.style";
 import { toast } from "react-hot-toast";
 
 import OtpForm from "../forgot-password/OtpForm";
-import { Modal, Stack, Typography } from "@mui/material";
+import { Modal, Typography } from "@mui/material";
 
-import { LoadingButton } from "@mui/lab";
 import { SignModel } from "../sign-in/SignIn";
-import { AccountUpdate } from "@/interfaces/FormUpdateAccountInterface";
+
 import { RTL } from "@/Components/GlobalComponent/RTL/RTL";
 import {
   CustomStackFullWidth,
@@ -35,6 +34,7 @@ import SignUpvalidation from "../SignUpValidation";
 import { SaveProfileData } from "@/redux/slices/HandelUpdateProfile";
 
 const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
+  //  hooks
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -57,13 +57,18 @@ const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
       } catch (err) {}
     },
   });
+  //  get firebase token from localstorage
+  let firebase_token: string | undefined | null = undefined;
 
+  if (typeof window !== "undefined") {
+    firebase_token = localStorage.getItem("cm_firebase_token");
+  }
   const { mutate, isLoading, error } = useMutation("sign-up", AuthApi.signUp);
 
   const formSubmitHandler = (values: AccountRegister) => {
     const signUpData: AccountRegister = {
       name: values.name,
-
+      firebase_token: firebase_token,
       mobile: `+${values.mobile}`,
     };
 
@@ -120,7 +125,7 @@ const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
     width: { sm: "791px", xs: "90%", mx: "auto" },
     bgcolor: "background.paper",
     p: 4,
-    borderRadius:"6px"
+    borderRadius: "6px",
   };
 
   const languagedirection = localStorage.getItem("direction");

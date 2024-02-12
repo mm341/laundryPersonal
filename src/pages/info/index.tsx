@@ -13,6 +13,7 @@ import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
 import { useAppDispatch } from "@/redux/store";
 import { CashAreas, CashServices } from "@/redux/slices/Services";
 import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
+import HandelNotification from "@/Components/GlobalComponent/HandelNotification";
 const Index = ({
   homeServices,
   homeAreas,
@@ -57,9 +58,11 @@ const Index = ({
   return (
     <RTL direction={languagedirection}>
       <CssBaseline />
-      <PublicContainer>
-        <AuthGuard>{page && <UserInfo page={page} />}</AuthGuard>
-      </PublicContainer>
+      <HandelNotification>
+        <PublicContainer>
+          <AuthGuard>{page && <UserInfo page={page} />}</AuthGuard>
+        </PublicContainer>
+      </HandelNotification>
     </RTL>
   );
 };

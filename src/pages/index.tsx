@@ -22,6 +22,7 @@ import { Master } from "@/interfaces/MasterInterface";
 import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
 import { CssBaseline } from "@mui/material";
+import HandelNotification from "@/Components/GlobalComponent/HandelNotification";
 
 export default function Home({
   homeServices,
@@ -73,6 +74,7 @@ export default function Home({
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
       <CssBaseline />
+      <HandelNotification>
       <HomeParentBox style={{ overflowX: "hidden" }}>
         <FirstSection
           homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
@@ -87,6 +89,7 @@ export default function Home({
         <AppSection />
         <LaundryFaqs />
       </HomeParentBox>
+      </HandelNotification>
     </>
   );
 }
