@@ -20,9 +20,7 @@ const HandelNotification = ({ children }: AuxProps) => {
   useEffect(() => {
     onMessageListener()
       .then((payload: any) => {
-        console.log(payload)
         if (payload?.notification?.title) {
-         
           toast.success(
             <Stack
               sx={{ cursor: "pointer" }}

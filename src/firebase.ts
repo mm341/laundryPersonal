@@ -6,7 +6,7 @@ import {
   isSupported,
   Messaging,
 } from "firebase/messaging";
-// import { useStoreFcm } from './hooks/react-query/push-notification/usePushNotification'
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAeSrc9ll_GBxfi_9f0PXupac-MYIfVv_I",

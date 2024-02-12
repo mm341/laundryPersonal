@@ -36,6 +36,7 @@ import {
   UpdateAddresse,
   addAddressePayload,
 } from "@/redux/slices/AddressesRequests";
+import { useRouter } from "next/router";
 export interface locationInterface {
   lat: number;
   lng: number;
@@ -53,7 +54,7 @@ const AddressForm = ({
   //  hooks
   const dispatch = useAppDispatch();
   const theme = useTheme();
-
+const {locale}=useRouter()
   const [addresseType, setAddresseType] = useState<string>(
     addresse?.address_name ?? "home"
   );
@@ -104,17 +105,17 @@ const AddressForm = ({
   const typeData: AddresseType[] = [
     {
       label: t("Home"),
-      value: "home",
+      value: locale==="en"?"home":"المنزل",
       img: homeSelectIcon,
     },
     {
       label: t("Office"),
-      value: "office",
+      value: locale==="en"?"office":"المكتب",
       img: officeSelectIcon,
     },
     {
       label: t("Others"),
-      value: "others",
+      value: locale==="en"?"others":"اخري",
       img: OthersSelectIcon,
     },
   ];
@@ -123,7 +124,8 @@ const AddressForm = ({
     if (addresse?.address_name) {
       setAddresseType(addresse?.address_name);
     } else {
-      setAddresseType("home");
+      locale==="en"?
+      setAddresseType("home"):setAddresseType("المنزل");
     }
   }, [addresse?.address_name]);
 
