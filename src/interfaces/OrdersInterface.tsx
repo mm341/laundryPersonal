@@ -12,7 +12,7 @@ export const inititalOrdersInterface = () => {
       stripe_id: "",
       user: inititalAccountInfo(),
     },
-    additionals:[],
+    additionals: [],
     delivery_charge: 0,
     delivery_date: "",
     delivery_hour: "",
@@ -37,7 +37,7 @@ export const inititalOrdersInterface = () => {
     quantity: {},
     rating: 0,
     total_amount: 0,
-    sub_total:0
+    sub_total: 0,
   };
 };
 
@@ -45,15 +45,17 @@ export interface Quantity {
   [key: number]: number;
 }
 export interface OrdersInterface {
-  sub_total:number
+  sub_total: number;
   address: AddresseInterface;
   amount: number;
   customer: {
     addresses: AddresseInterface[];
     stripe_id: string;
     user: AccountInfo;
+    mobile?: string;
+    name?: string;
   };
-  additionals:AdditionalServicesInterface[]
+  additionals: AdditionalServicesInterface[];
   delivery_charge: number;
   delivery_date: string;
   delivery_hour: string;
