@@ -230,12 +230,12 @@ const ProductCard = ({
               sx={{
                 width: "100%",
                 display: "flex",
-                justifyContent: locale === "en" ? "flex-start" : "flex-end",
+                justifyContent:  "flex-start" ,
                 gap: "10px",
                 alignItems: "center",
                 mt: { md: "12px", xs: "5px" },
               }}
-              dir="ltr"
+             
             >
               <GlobalButton
                 onClick={() => {

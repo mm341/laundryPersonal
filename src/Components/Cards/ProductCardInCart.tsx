@@ -90,11 +90,11 @@ const ProductCardInCart = ({
                 sx={{
                   width: "100%",
                   display: "flex",
-                  justifyContent: locale === "en" ? "flex-start" : "flex-end",
+                  justifyContent: "flex-start" ,
                   gap: "10px",
                   alignItems: "center",
                 }}
-                dir="ltr"
+               
               >
                 {product.quantity > 1 && (
                   <GlobalButton
