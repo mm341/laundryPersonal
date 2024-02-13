@@ -233,7 +233,7 @@ const OtpForm = ({
                         : { display: "none" }
                     }
                   >
-                    {resend} <span style={{ color: "black" }}>s</span>
+                    {resend} <span style={{ color: "black" }}>{t("s")}</span>
                   </span>
                 </Typography>
               </Box>

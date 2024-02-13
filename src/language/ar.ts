@@ -1226,6 +1226,7 @@ export const arabic = {
     "تمت إضافة المنتجات التي يمكن إعادة ترتيبها إلى عربة التسوق بنجاح.",
   "Additional Information": "معلومات إضافية",
   "Street number": "معلومات إضافية",
+  "s":"ثانيه",
   Street: "الشارع",
   "House number": "رقم الدار",
   Included: "متضمن",
