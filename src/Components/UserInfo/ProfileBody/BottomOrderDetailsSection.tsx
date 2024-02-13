@@ -85,6 +85,7 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
               {t(e?.key)}
             </Typography>
             <Typography
+            dir="ltr"
               sx={{
                 fontSize: "16px",
                 fontWeight: "400",
