@@ -61,6 +61,7 @@ export const onMessageListener = async () =>
     (async () => {
       const messagingResolve: any = await messaging;
       onMessage(messagingResolve, (payload) => {
+        console.log(payload)
         resolve(payload);
       });
     })()
