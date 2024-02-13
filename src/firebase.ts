@@ -7,7 +7,6 @@ import {
   Messaging,
 } from "firebase/messaging";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyAeSrc9ll_GBxfi_9f0PXupac-MYIfVv_I",
   authDomain: "alwan-alghasil-laundry.firebaseapp.com",
@@ -28,7 +27,6 @@ const messaging: any = (async () => {
     if (isSupportedBrowser) {
       return getMessaging(firebaseApp);
     }
-    console.log('Firebase not supported this browser');
     return null;
   } catch (err) {
     return null;
@@ -41,7 +39,6 @@ export const fetchToken = async () => {
       "BI7Xr4bEECldcUxCSqKFTMqfNVsm6iddBV-IVjsFyAZ-roz0egnV-AASrwhsl9ALsYp7leA2o8tI4TfnR0_9_6I",
   })
     .then((currentToken) => {
-      console.log(currentToken)
       if (currentToken) {
         localStorage.setItem("cm_firebase_token", currentToken);
 
@@ -61,7 +58,6 @@ export const onMessageListener = async () =>
     (async () => {
       const messagingResolve: any = await messaging;
       onMessage(messagingResolve, (payload) => {
-        console.log(payload)
         resolve(payload);
       });
     })()
