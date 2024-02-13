@@ -43,8 +43,7 @@ const NotificationPoPover = (props: Props) => {
     };
   }, []);
 
-  //  custom design of scrollbar
-
+ 
   return (
     <Box
       ref={menuRef}
@@ -74,8 +73,17 @@ const NotificationPoPover = (props: Props) => {
             notifications?.map((e, i) => (
               <GlobalDisplayFlexColumnBox width={"100%"} gap={"10px"} key={i}>
                 <GlobalDisplayFlexColumnBox gap={"5px"}>
-                  <Typography sx={{ fontWeight: "400", fontSize: "12px" }}>
-                   {e?.date}
+                  <Typography
+                    style={{
+                      textAlign: locale === "en" ? "left" : "right",
+                    }}
+                    dir="ltr"
+                    sx={{
+                      fontWeight: "400",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {e?.date}
                   </Typography>
                   <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
                     <GlobalDisplayFlexBox sx={{ gap: "50px" }}>
