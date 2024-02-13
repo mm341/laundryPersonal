@@ -25,10 +25,10 @@ const firebaseApp = !getApps().length
 const messaging: any = (async () => {
   try {
     const isSupportedBrowser = await isSupported();
-    // if (isSupportedBrowser) {
+    if (isSupportedBrowser) {
       return getMessaging(firebaseApp);
-    // }
-
+    }
+    console.log('Firebase not supported this browser');
     return null;
   } catch (err) {
     return null;
