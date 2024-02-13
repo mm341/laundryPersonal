@@ -25,9 +25,9 @@ const firebaseApp = !getApps().length
 const messaging: any = (async () => {
   try {
     const isSupportedBrowser = await isSupported();
-    if (isSupportedBrowser) {
+    // if (isSupportedBrowser) {
       return getMessaging(firebaseApp);
-    }
+    // }
 
     return null;
   } catch (err) {
@@ -41,6 +41,7 @@ export const fetchToken = async () => {
       "BI7Xr4bEECldcUxCSqKFTMqfNVsm6iddBV-IVjsFyAZ-roz0egnV-AASrwhsl9ALsYp7leA2o8tI4TfnR0_9_6I",
   })
     .then((currentToken) => {
+      console.log(currentToken)
       if (currentToken) {
         localStorage.setItem("cm_firebase_token", currentToken);
 

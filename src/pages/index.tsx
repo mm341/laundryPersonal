@@ -66,7 +66,7 @@ export default function Home({
   useEffect(() => {
     dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
-
+console.log("what")
   return (
     <>
       <Meta
