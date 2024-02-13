@@ -11,6 +11,7 @@ import { OrdersInterface } from "@/interfaces/OrdersInterface";
 import addresseIcon from "../../../../public/order/addresseIcon.svg";
 import customerIcon from "../../../../public/order/customerIcon.svg";
 import phoneIcon from "../../../../public/order/phoneiCON.svg";
+import { useRouter } from "next/router";
 const OrderDeliveryDetails = ({
   orderData,
 }: {
@@ -19,6 +20,8 @@ const OrderDeliveryDetails = ({
   //  hooks
 
   const { t } = useTranslation();
+
+  const { locale } = useRouter();
   return (
     <CustomPaperBigCard sx={{ backgroundColor: "white", px: "28px" }}>
       <GlobalDisplayFlexColumnBox gap={"24px"}>
@@ -47,10 +50,15 @@ const OrderDeliveryDetails = ({
                   color: alpha("#272727", 0.6),
                 }}
               >
-                {orderData?.address?.street} street{" "}
-                {orderData?.address?.apartment_no} Apartment,{" "}
-                {orderData?.address?.building_no} Building,{" "}
-                {orderData?.address?.floor_no} Floor
+                {locale === "en"
+                  ? `${orderData?.address?.street} ${t("Street")} ,
+                ${orderData?.address?.apartment_no} ${t("Apartment")} ,
+                ${orderData?.address?.building_no} ${t("Building")} ,
+                ${orderData?.address?.floor_no} ${t("Floor")}`
+                  : `${t("Street")} ${orderData?.address?.street}, 
+                  ${t("Apartment")} ${orderData?.address?.apartment_no},
+                  ${t("Building")} ${orderData?.address?.building_no}, 
+                  ${t("Floor")} ${orderData?.address?.floor_no}`}
               </Typography>
             </GlobalDisplayFlexColumnBox>
           </Box>
