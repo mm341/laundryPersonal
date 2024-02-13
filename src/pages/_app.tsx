@@ -34,7 +34,7 @@ import logoHeader from "../../public/App/Disk-1s-200px.gif";
 import DynamicFavicon from "@/Components/GlobalComponent/favicon/DynamicFavicon";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { fetchToken } from "@/firebase";
+import { fetchToken, onMessageListener } from "@/firebase";
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);
 Router.events.on("routeChangeComplete", nProgress.done);
@@ -79,12 +79,10 @@ export default function App({
     }
   }, [locale]);
 
-
-  
-    useEffect(() => {
-      fetchToken().then()
-  }, [])
-  
+  useEffect(() => {
+    fetchToken().then();
+    onMessageListener().then();
+  }, []);
 
   //  custom theme
   const theme = useMemo(
@@ -185,7 +183,7 @@ export default function App({
                   style={{ overflowX: "hidden" }}
                   sx={{
                     display: previewLoader ? "none" : "block",
-                    width:"100vw",
+                    width: "100vw",
                     minHeight: "80vh",
                     mt: {
                       md: router.pathname !== "/" ? "7rem" : "3.9rem",
