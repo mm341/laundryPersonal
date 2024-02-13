@@ -20,7 +20,6 @@ const ProductCardInCart = ({
   product: productInterface;
 }) => {
   //  hooks
-  const { locale } = useRouter();
   const theme = useTheme();
   const dispatch = useAppDispatch();
   //  master data
@@ -28,6 +27,8 @@ const ProductCardInCart = ({
   const { isLoadingUpdateCart } = useAppSelector((state) => state.cartList);
 
   let quantity = product?.quantity;
+
+  
   return (
     <CustomPaperBigCard
       sx={{
