@@ -67,6 +67,7 @@ export default function Home({
     dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
 console.log("what")
+console.log("what")
   return (
     <>
       <Meta
