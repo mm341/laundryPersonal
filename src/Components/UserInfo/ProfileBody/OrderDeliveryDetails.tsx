@@ -92,9 +92,10 @@ const OrderDeliveryDetails = ({
             sx={{ justifyContent: "flex-start", gap: "13px" }}
           >
             <img loading="lazy" alt="img" src={phoneIcon?.src} />
-            <Typography sx={{ fontSize: "14px", fontWeight: "500" }}>
+            <Typography  sx={{ fontSize: "14px", fontWeight: "500" }}>
               {t("Phone Number")} :{" "}
               <Typography
+              dir="ltr"
                 sx={{ fontSize: "14px", fontWeight: "400" }}
                 component={"span"}
               >
