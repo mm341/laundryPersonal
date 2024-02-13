@@ -81,7 +81,6 @@ export default function App({
 
   useEffect(() => {
     fetchToken().then();
-    onMessageListener().then();
   }, []);
 
   //  custom theme
