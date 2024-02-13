@@ -10,18 +10,10 @@ import {
   GlobalDisplayFlexBox,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
-const FaqCard = ({
-  e,
-  i,
-}: {
-  e: {
-    question: string;
-    answer: string;
-  };
-  i: number;
-}) => {
+import { cardInterface } from "@/interfaces/HomeData";
+const FaqCard = ({ element, i }: { element: cardInterface; i: number }) => {
   const theme = useTheme();
-  const { t } = useTranslation();
+
   const [previewAnswer, setPreviewAnswer] = useState<Boolean>(false);
 
   return (
@@ -65,11 +57,11 @@ const FaqCard = ({
               fontSize: { md: "24px", xs: "16px" },
               fontWeight: "600",
               textAlign: "left",
-              cursor:"pointer"
+              cursor: "pointer",
             }}
             onClick={() => setPreviewAnswer(!previewAnswer)}
           >
-            {t(e?.question)}
+            {element?.title}
           </Typography>
 
           {previewAnswer && (
@@ -82,7 +74,7 @@ const FaqCard = ({
               }}
               style={{ opacity: "0.7" }}
             >
-              {t(e?.answer)}
+              {element?.body}
             </Typography>
           )}
         </GlobalDisplayFlexColumnBox>

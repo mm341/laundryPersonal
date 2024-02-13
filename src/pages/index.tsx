@@ -23,18 +23,23 @@ import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
 import { CssBaseline } from "@mui/material";
 import HandelNotification from "@/Components/GlobalComponent/HandelNotification";
+import { HomeData } from "@/interfaces/HomeData";
 
 export default function Home({
   homeServices,
   homeAreas,
   masterData,
   footerSocialLinks,
+  homeData,
 }: {
   homeServices: HomeServices[];
   homeAreas: HomeAreas[];
   masterData: Master;
   footerSocialLinks: FooterSocialLinks[];
+  homeData:HomeData
 }) {
+
+  
   //  hooks
   const dispatch = useAppDispatch();
   //  selectors
@@ -85,9 +90,9 @@ export default function Home({
           homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
           homeServices={homeServices?.length > 0 ? homeServices : services}
         />
-        <LaundrySimpleSection />
+        <LaundrySimpleSection homeData={homeData} />
         <AppSection />
-        <LaundryFaqs />
+        <LaundryFaqs  homeData={homeData}/>
       </HomeParentBox>
       </HandelNotification>
     </>
@@ -99,6 +104,9 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
   let homeAreas = [];
   let masterData = {};
   let footerSocialLinks = [];
+  let homeData={}
+
+  //  homeServices
   try {
     const configRes = await MainApi.get("services", {
       headers: {
@@ -149,12 +157,27 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     footerSocialLinks = [];
   }
 
+
+   //  homeData
+   try {
+    const configRes = await MainApi.get("website-settings", {
+      headers: {
+        "Accept-Language": locale,
+        locale: locale,
+      },
+    });
+    homeData = configRes?.data?.data;
+  } catch (e) {
+    homeData = {};
+  }
+
   return {
     props: {
       homeServices,
       homeAreas,
       masterData,
       footerSocialLinks,
+      homeData
     },
   };
 };

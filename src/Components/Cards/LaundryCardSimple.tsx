@@ -6,9 +6,8 @@ import { Typography, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 import dumyImg from "../../../public/DumyImg/fakeIcon.svg";
-const LaundrySimpleCard = () => {
-  const router = useRouter();
-  const theme = useTheme();
+import { cardInterface } from "@/interfaces/HomeData";
+const LaundrySimpleCard = ({ element }: { element: cardInterface }) => {
   return (
     <GlobalDisplayFlexColumnBox
       width={"100%"}
@@ -23,18 +22,29 @@ const LaundrySimpleCard = () => {
         sx={{ gap: "8px", alignItems: "center", justifyContent: "flex-start" }}
       >
         <img
-          src={dumyImg?.src}
+          src={element?.icon}
           style={{ width: "26px", height: "26px" }}
           loading="lazy"
           alt="img"
         />
-        <Typography sx={{ fontSize: "20px", fontWeight: "600",textAlign:{sm:"left",xs:"center"} }}>
-          HOUSEHOLD ITEMS
+        <Typography
+          sx={{
+            fontSize: "20px",
+            fontWeight: "600",
+            textAlign: { sm: "left", xs: "center" },
+          }}
+        >
+          {element?.title}
         </Typography>
       </GlobalDisplayFlexBox>
-      <Typography sx={{ fontSize: "16px", fontWeight: "400",textAlign:{sm:"left",xs:"center"} }}>
-        No more wasting time going to the laundromat or having a tedious laundry
-        day, as we receive your clothes and deliver them to you quickly!
+      <Typography
+        sx={{
+          fontSize: "16px",
+          fontWeight: "400",
+          textAlign: { sm: "left", xs: "center" },
+        }}
+      >
+        {element?.body}
       </Typography>
     </GlobalDisplayFlexColumnBox>
   );

@@ -5,45 +5,28 @@ import GlobalTypography from "./GlobalTypography";
 
 import PublicContainer from "../PublicContainer";
 import FaqCard from "../FaqCard";
+import { HomeData } from "@/interfaces/HomeData";
 
-const LaundryFaqs = () => {
-  const array = [
-    {
-      question: "h1",
-      answer: "h2",
-    },
-    {
-      question: "h3",
-      answer: "h4",
-    },
-    {
-      question: "h5",
-      answer: "h6",
-    },
-    {
-      question: "h7",
-      answer: "h8",
-    },
-   
-   
-  ];
+const LaundryFaqs = ({ homeData }: { homeData: HomeData }) => {
+ 
   return (
     <PublicContainer>
       <GlobalDisplayFlexColumnBox width={"100%"} gap={"75px"}>
-        <GlobalTypography text={"FAQ"} />
+        <GlobalTypography text={homeData?.faqs?.section_title} />
 
         <Box
           sx={{
-            width: {md:"65%",xs:"100%"},
+            width: { md: "65%", xs: "100%" },
             mx: "auto",
             display: "flex",
             flexDirection: "column",
             gap: "25px",
           }}
         >
-          {array?.map((e, i) => (
-            <FaqCard i={i} e={e} key={i} />
-          ))}
+          {homeData?.faqs?.cards?.length > 0 &&
+            homeData?.faqs?.cards?.map((e, i) => (
+              <FaqCard i={i} element={e} key={i} />
+            ))}
         </Box>
       </GlobalDisplayFlexColumnBox>
     </PublicContainer>
