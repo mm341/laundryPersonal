@@ -4,6 +4,8 @@ export const initialNotification = () => {
     isRead: 0,
     title: "",
     message: "",
+    date: "",
+    image: "",
   };
 };
 
@@ -12,4 +14,6 @@ export interface NotificationInterface {
   isRead: number;
   message: string;
   title: string;
+  date: string;
+  image: string;
 }

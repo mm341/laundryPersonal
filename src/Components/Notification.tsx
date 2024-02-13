@@ -75,12 +75,12 @@ const NotificationPoPover = (props: Props) => {
               <GlobalDisplayFlexColumnBox width={"100%"} gap={"10px"} key={i}>
                 <GlobalDisplayFlexColumnBox gap={"5px"}>
                   <Typography sx={{ fontWeight: "400", fontSize: "12px" }}>
-                    28 Nov, 2023
+                   {e?.date}
                   </Typography>
                   <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
                     <GlobalDisplayFlexBox sx={{ gap: "50px" }}>
                       <GlobalDisplayFlexBox sx={{ gap: "12px" }}>
-                        <img src={dumyImg?.src} loading="lazy" alt="img" />
+                        <img src={e?.image} loading="lazy" alt="img" />
 
                         <GlobalDisplayFlexColumnBox gap={"7px"} width={"100%"}>
                           <Typography
@@ -100,7 +100,7 @@ const NotificationPoPover = (props: Props) => {
                         </GlobalDisplayFlexColumnBox>
                       </GlobalDisplayFlexBox>
 
-                      <Typography sx={{ fontSize: "12px" }}>13:54</Typography>
+                      {/* <Typography sx={{ fontSize: "12px" }}>13:54</Typography> */}
                     </GlobalDisplayFlexBox>
                   </CustomPaperBigCard>
                 </GlobalDisplayFlexColumnBox>
