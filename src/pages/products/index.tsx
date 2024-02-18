@@ -359,8 +359,7 @@ const ProductsPage = ({
                   </Grid>
                   <Grid item md={4} xs={12}>
                     <Cartsection
-                      choicesIds={choicesIds}
-                      setChoicesIds={setChoicesIds}
+                     
                       additionalSercvices={additionalSercvices}
                     />
                   </Grid>
