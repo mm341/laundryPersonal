@@ -11,6 +11,19 @@ import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 interface state {
   isloading: boolean;
 }
+
+export const LogoutRequest = createAsyncThunk(
+  "contacting/LogoutRequest",
+  (payload: { fcm_token: string | null | undefined }) =>
+    PublicRequest.postData(payload, "customer/logout")
+      .then((res: any) => {
+        if (res) {
+          toast.success(res?.message);
+          return res;
+        }
+      })
+      .catch((err) => PublicHandelingErrors.onErrorResponse(err))
+);
 export const ContactingRequest = createAsyncThunk(
   "contacting/ContactingRequest",
   (payload: ContactInterface) =>

@@ -28,6 +28,8 @@ import { HomeAreas } from "@/interfaces/HomeAreas";
 import { HomeServices } from "@/interfaces/HomeServices";
 import AuthModal from "./AuthBox/AuthModel";
 import { toast } from "react-hot-toast";
+import { useAppDispatch } from "@/redux/store";
+import { LogoutRequest } from "@/redux/slices/ContactingUs";
 
 const DrawerMenu = ({
   onClose,
@@ -55,6 +57,7 @@ const DrawerMenu = ({
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [authModalOpen, setOpen] = useState<boolean>(false);
   const [ServiceId, setServiceId] = useState<string | undefined>();
+  const dispatch = useAppDispatch();
   //  change route function
   const changeLocale = (locale: string) => {
     router.push(router.pathname, router.asPath, { locale });
@@ -73,15 +76,28 @@ const DrawerMenu = ({
     setForSignup("sign-in");
   };
 
+  //  get cm_firebase_token from local storage
+
+  let fcm_token: string | undefined | null = "";
+
+  if (typeof window !== "undefined") {
+    fcm_token = localStorage.getItem("fcm_token");
+  }
   //  logout function
   const handleLogout = async () => {
     try {
-      
-      router.push("/", locale);
-   
-    localStorage.removeItem("token");
-    toast.success(t("Logout Successfully"));
-      
+      // router.push("/", locale);
+      dispatch(LogoutRequest({ fcm_token: fcm_token })).then(
+        (promiseResponse) => {
+          if (promiseResponse?.payload?.message === "Logged out successfully!") {
+            localStorage.removeItem("token");
+            localStorage.removeItem("fcm_token");
+            // toast.success(t("Logout Successfully"));
+          }
+        }
+      );
+      // localStorage.removeItem("token");
+      // toast.success(t("Logout Successfully"));
     } catch (err) {
       //   toast.error('Unable to logout.');
     }
@@ -315,7 +331,6 @@ const DrawerMenu = ({
       >
         {menuList()}
       </CustomDrawer>
-    
     </Container>
   );
 };

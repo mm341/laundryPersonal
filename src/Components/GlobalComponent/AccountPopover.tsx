@@ -26,6 +26,8 @@ import profile from "../../../public/navbar/profileImg.svg";
 import order from "../../../public/navbar/orderImg.svg";
 import addresseIcon from "../../../public/navbar/addresseImg.svg";
 import DeleteDialog from "../DeleteDialogs";
+import { useAppDispatch } from "@/redux/store";
+import { LogoutRequest } from "@/redux/slices/ContactingUs";
 
 interface Props {
   anchorEl: Element | PopoverVirtualElement | null;
@@ -39,6 +41,7 @@ export const AccountPopover = (props: Props) => {
   const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
   const { anchorEl, onClose, open } = props;
+  const dispatch = useAppDispatch();
   const menuData = [
     {
       id: 1,
@@ -62,14 +65,30 @@ export const AccountPopover = (props: Props) => {
   const [languagedirection, setlanguagedirection] = useState("ltr");
   const [logout, setLogout] = useState<boolean>(false);
 
+  //  get cm_firebase_token from local storage
+  let fcm_token: string | undefined | null = "";
+
+  if (typeof window !== "undefined") {
+    fcm_token = localStorage.getItem("fcm_token");
+  }
   //  logout function
   const handleLogout = async () => {
     router.push("/", locale);
     // onClose?.();
     // localStorage.clear();
-    setLogout(false);
-    localStorage.removeItem("token");
-    toast.success(t("Logout Successfully"));
+    dispatch(LogoutRequest({ fcm_token: fcm_token })).then(
+      (promiseResponse) => {
+        if (promiseResponse?.payload?.message === "Logged out successfully!") {
+          setLogout(false);
+          localStorage.removeItem("token");
+          localStorage.removeItem("fcm_token");
+          // toast.success(t("Logout Successfully"));
+        }
+      }
+    );
+    // setLogout(false);
+    // localStorage.removeItem("token");
+    // toast.success(t("Logout Successfully"));
 
     // window.location.reload();
   };
