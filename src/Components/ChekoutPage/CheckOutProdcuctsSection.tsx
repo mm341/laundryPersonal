@@ -57,7 +57,7 @@ const CheckOutProductsSection = ({
             <ProductCardInCart product={e} key={i} checkOut />
           ))}
           <AdditionalServicesSectionInCart
-          checkOut
+            checkOut
             additionalSercvices={cartList?.cart_details?.additionals}
           />
         </GlobalDisplayFlexColumnBox>
