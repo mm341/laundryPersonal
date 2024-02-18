@@ -33,7 +33,7 @@ const AreaDialog = ({
     position: "absolute",
     top: "50%",
     left: "50%",
-    height: { md: "20%", x: "40%" },
+    height: { md: "200px", xs: "40%" },
     oveflowY: "scroll",
     transform: "translate(-50%, -50%)",
     width: { md: "30%", sm: "45%", xs: "90%" },
