@@ -3,7 +3,6 @@ import React from "react";
 import rightPhotoSection from "../../../public/HomePage/huge img.webp";
 import Image from "next/image";
 const FirstRightSection = () => {
-  
   return (
     <Box
       data-aos="fade-left"
@@ -14,9 +13,9 @@ const FirstRightSection = () => {
         justifyContent: "flex-end",
       }}
     >
-      <Image
-      width={500}
-      height={500}
+      <img
+        width={500}
+        height={500}
         alt="img"
         loading="lazy"
         src={rightPhotoSection?.src}

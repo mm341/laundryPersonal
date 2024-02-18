@@ -21,6 +21,7 @@ import AppSmallSection from "./AppSmallSection";
 import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import Carousel from "react-material-ui-carousel";
+import FirstRightSection from "./FirstRightSection";
 
 
 const FirstSection = ({
@@ -54,8 +55,7 @@ const FirstSection = ({
     setOpenOrderDialog(false);
   };
 
- 
-  const FirstRightSection = lazy(() => import("./FirstRightSection"));
+
   return (
     <>
       <Box
@@ -215,9 +215,9 @@ const FirstSection = ({
 
             {/*  Image Right Section */}
 
-            <Suspense fallback={<div>Loading...</div>}>
+            {/* <Suspense fallback={<div>Loading...</div>}> */}
               <FirstRightSection />
-            </Suspense>
+            {/* </Suspense> */}
           </GlobalDisplayFlexBox>
         </Box>
       </Box>
