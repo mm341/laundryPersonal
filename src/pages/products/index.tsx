@@ -92,7 +92,7 @@ const ProductsPage = ({
 
   useEffect(() => {
     if (products?.length > 0) {
-      if (products[0]?.service?.name) {
+      if (products[0] && products[0]?.service?.name) {
         localStorage.setItem("service", products[0]?.service?.name);
       }
     }
@@ -108,7 +108,7 @@ const ProductsPage = ({
 
   //    handel initial value of variant type
   useEffect(() => {
-    if (variants?.length > 0) {
+    if (variants?.length > 0&&variants[0]) {
       setType(variants[0]?.id);
     }
   }, [variants]);
@@ -358,10 +358,7 @@ const ProductsPage = ({
                     </GlobalDisplayFlexColumnBox>
                   </Grid>
                   <Grid item md={4} xs={12}>
-                    <Cartsection
-                     
-                      additionalSercvices={additionalSercvices}
-                    />
+                    <Cartsection additionalSercvices={additionalSercvices} />
                   </Grid>
                 </Grid>
               </CustomPaperBigCard>
