@@ -4,7 +4,7 @@ import MainApi from "@/api/MainApi"
 
 export const ReviewApi = {
     submit: (formData:rating) => {
-        return MainApi.post('ratings', formData)
+        return MainApi.post('customer/ratings', formData)
     },
    
 }

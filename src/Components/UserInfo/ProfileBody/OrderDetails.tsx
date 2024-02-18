@@ -32,7 +32,6 @@ const OrderDetails = ({
   const [productsDetails, setOpenProductsDetails] = useState<boolean>(false);
   const [openRateDialog, setOpenRateDialog] = useState(false);
 
-
   return (
     <>
       <GlobalDisplayFlexColumnBox
@@ -94,40 +93,40 @@ const OrderDetails = ({
               justifyContent: "flex-end",
             }}
           >
-            {orderData?.order_status === "Delivered" &&
-              orderData?.rating === 0 && (
-                <GlobalButton
-                  px={"0"}
-                  py={"0"}
-                  sx={{
-                    backgroundColor: theme.palette.primary.main,
-                    width: { md: "320px", xs: "250px" },
-                    height: "48px",
-                    borderRadius: "5px",
-                  }}
-                  onClick={() => setOpenRateDialog(true)}
+            {(orderData?.order_status === "Delivered" && orderData?.rating) ===
+              null && (
+              <GlobalButton
+                px={"0"}
+                py={"0"}
+                sx={{
+                  backgroundColor: theme.palette.primary.main,
+                  width: { md: "320px", xs: "250px" },
+                  height: "48px",
+                  borderRadius: "5px",
+                }}
+                onClick={() => setOpenRateDialog(true)}
+              >
+                <Box
+                  sx={{ display: "flex", gap: "15px", alignItems: "center" }}
                 >
-                  <Box
-                    sx={{ display: "flex", gap: "15px", alignItems: "center" }}
+                  <img
+                    src={rateButtonIcon?.src}
+                    loading="lazy"
+                    alt="img"
+                    style={{ width: "20px", height: "20px" }}
+                  />
+                  <Typography
+                    sx={{
+                      fontSize: "16px",
+                      fontWeight: "500",
+                      color: "white",
+                    }}
                   >
-                    <img
-                      src={rateButtonIcon?.src}
-                      loading="lazy"
-                      alt="img"
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                    <Typography
-                      sx={{
-                        fontSize: "16px",
-                        fontWeight: "500",
-                        color: "white",
-                      }}
-                    >
-                      {t("Rate your Experience")}
-                    </Typography>
-                  </Box>
-                </GlobalButton>
-              )}
+                    {t("Rate your Experience")}
+                  </Typography>
+                </Box>
+              </GlobalButton>
+            )}
 
             {orderData?.order_status === "Delivered" &&
               orderData?.rating > 0 && (
