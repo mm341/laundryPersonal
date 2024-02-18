@@ -76,10 +76,10 @@ const CheckOutPage = ({
   //  hooks
   const router = useRouter();
   const { t } = useTranslation();
-  const { locale } = useRouter();
+
   const theme = useTheme();
   const dispatch: any = useAppDispatch();
-
+  const { push, locale, pathname, query, asPath } = useRouter();
   const [pickupDate, setPickupData] = useState<string>("");
 
   const [addtionalInformation, setAdditionalInformation] = useState<string>("");
@@ -94,7 +94,7 @@ const CheckOutPage = ({
   const [onlineMethod, setOnlineMethod] = useState<string>("");
 
   //  selectors
-  const { cartList } = useAppSelector((state) => state.cartList);
+
   const { accountInfo } = useAppSelector((state) => state.profile);
 
   //  handel initialvalue of scheduals
@@ -253,8 +253,6 @@ const CheckOutPage = ({
     }
   };
 
-
-
   useEffect(() => {
     if (dayjs(deliveryDate) <= dayjs(pickupDate)) {
       toast.error(t("The delivery date must be a date after pick date."));
@@ -280,6 +278,7 @@ const CheckOutPage = ({
     dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
 
+
   return (
     <>
       <Meta
@@ -287,7 +286,7 @@ const CheckOutPage = ({
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
       <CssBaseline />
-      
+
       <HandelNotification>
         <AuthAndCartListGuard>
           <PublicContainer>
@@ -377,28 +376,30 @@ const CheckOutPage = ({
                           <Grid item sm={6} xs={12}>
                             {pickupDate && schedules?.length > 0 ? (
                               <FormControl fullWidth>
-                                 <InputLabel id="demo-simple-select-label">{t("Time")}</InputLabel>
-                              <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={pickupHour}
-                                label={t("Time")}
-                                sx={{ width: "100%" }}
-                                onChange={(e) => {
-                                  setPickupHour(e.target.value);
-                                }}
-                              >
-                                {schedules?.map(
-                                  (
-                                    e: { hour: string; title: string },
-                                    i: number
-                                  ) => (
-                                    <MenuItem key={i} value={e?.hour}>
-                                      {e?.title}
-                                    </MenuItem>
-                                  )
-                                )}
-                              </Select>
+                                <InputLabel id="demo-simple-select-label">
+                                  {t("Time")}
+                                </InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={pickupHour}
+                                  label={t("Time")}
+                                  sx={{ width: "100%" }}
+                                  onChange={(e) => {
+                                    setPickupHour(e.target.value);
+                                  }}
+                                >
+                                  {schedules?.map(
+                                    (
+                                      e: { hour: string; title: string },
+                                      i: number
+                                    ) => (
+                                      <MenuItem key={i} value={e?.hour}>
+                                        {e?.title}
+                                      </MenuItem>
+                                    )
+                                  )}
+                                </Select>
                               </FormControl>
                             ) : (
                               <Stack
@@ -433,7 +434,7 @@ const CheckOutPage = ({
 
                         <Grid container spacing={3}>
                           <Grid item sm={6} xs={12}>
-                            {pickupHour &&pickupDate ? (
+                            {pickupHour && pickupDate ? (
                               <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                   minDate={dayjs(pickupDate).add(1, "day")}
@@ -474,28 +475,30 @@ const CheckOutPage = ({
                             pickupHour &&
                             deliverySchedules?.length > 0 ? (
                               <FormControl fullWidth>
-                              <InputLabel id="demo-simple-select-label">{t("Time")}</InputLabel>
-                              <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={deliveryHour}
-                                label={t("Time")}
-                                sx={{ width: "100%" }}
-                                onChange={(e) => {
-                                  setDeliveryHour(e.target.value);
-                                }}
-                              >
-                                {schedules?.map(
-                                  (
-                                    e: { hour: string; title: string },
-                                    i: number
-                                  ) => (
-                                    <MenuItem key={i} value={e?.hour}>
-                                      {e?.title}
-                                    </MenuItem>
-                                  )
-                                )}
-                              </Select>
+                                <InputLabel id="demo-simple-select-label">
+                                  {t("Time")}
+                                </InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={deliveryHour}
+                                  label={t("Time")}
+                                  sx={{ width: "100%" }}
+                                  onChange={(e) => {
+                                    setDeliveryHour(e.target.value);
+                                  }}
+                                >
+                                  {schedules?.map(
+                                    (
+                                      e: { hour: string; title: string },
+                                      i: number
+                                    ) => (
+                                      <MenuItem key={i} value={e?.hour}>
+                                        {e?.title}
+                                      </MenuItem>
+                                    )
+                                  )}
+                                </Select>
                               </FormControl>
                             ) : (
                               <Stack
