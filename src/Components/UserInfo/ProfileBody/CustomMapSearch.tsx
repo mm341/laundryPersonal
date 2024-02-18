@@ -58,6 +58,9 @@ const CustomMapSearch = ({
             width: "100%",
           }}
         >
+           
+
+            
           <Autocomplete
             fullWidth
             freeSolo
@@ -83,26 +86,30 @@ const CustomMapSearch = ({
                 {...params}
                 sx={{ backgroundColor: "white" }}
                 placeholder={t("Search location here...")}
-                onChange={(event) => {
+                onChange={(event:any) => {
                   setSearchKey({
                     description: event.target.value,
-                  });
+                  }
+                  
+                  
+                  );
                   if (event.target.value) {
                     setEnabled(true);
                   } else {
                     setEnabled(false);
                   }
                 }}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    setSearchKey({
-                      description: event.target.value,
-                    });
-                  }
-                }}
+                // onKeyPress={(e) => {
+                //   if (e.key === "Enter") {
+                //     setSearchKey({
+                //       description: event.target.value,
+                //     });
+                //   }
+                // }}
               />
             )}
           />
+        
         </Paper>
       </Stack>
     </>
