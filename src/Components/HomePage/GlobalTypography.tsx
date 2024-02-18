@@ -31,7 +31,9 @@ const GlobalTypography = ({
         sx={{
           textAlign: "center",
           fontSize: {
-            md: !FirstSection ? "36px" : "44px",
+            xl: !FirstSection ? "36px" : "42px",
+            lg: !FirstSection ? "36px" : "25px",
+            md: !FirstSection ? "36px" : "22px",
             sm: !FirstSection ? "26px" : "36px",
             xs: "18px",
           },

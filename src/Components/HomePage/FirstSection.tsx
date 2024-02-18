@@ -162,7 +162,7 @@ const FirstSection = ({
               {/*  sleect area box */}
               <Box
                 sx={{
-                  width: { md: "85%", xs: "100%" },
+                  width: {xl:"85%", md: "95%", xs: "100%" },
                   mr: "auto",
                   transform: { sm: "translateX(-15px)", xs: "translateX(0px)" },
                   display: "flex",
