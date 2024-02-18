@@ -24,6 +24,8 @@ import { OrdersInterface } from "@/interfaces/OrdersInterface";
 import { useMutation } from "react-query";
 import { ReviewApi } from "@/React-Query/ReviewApi";
 import { useRouter } from "next/router";
+import { useAppDispatch } from "@/redux/store";
+import { GetOrders } from "@/redux/slices/OrderSlice";
 
 export interface rating {
   rating: number;
@@ -43,7 +45,7 @@ const OrderRateDiaolg = ({
 
   const theme = useTheme();
   const { t } = useTranslation();
-
+  const dispatch = useAppDispatch();
   const { push, locale, pathname, query, asPath } = useRouter();
   const { mutate, isLoading, error } = useMutation(
     "submit-review-deliveryman",
@@ -76,7 +78,9 @@ const OrderRateDiaolg = ({
     mutate(formData, {
       onSuccess: (response: any) => {
         setOpenRateDialog(false);
-        push(asPath, undefined, { locale });
+        // push(asPath, undefined, { locale });
+        window.location.reload();
+        // dispatch(GetOrders({ filter: "completed", limit: 10, offset: 1 }));
         toast.success(response?.data?.message);
       },
       onError: PublicHandelingErrors.onErrorResponse,
