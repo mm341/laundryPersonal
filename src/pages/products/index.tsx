@@ -108,7 +108,7 @@ const ProductsPage = ({
 
   //    handel initial value of variant type
   useEffect(() => {
-    if (variants?.length > 0&&variants[0]) {
+    if (variants?.length > 0 && variants[0]) {
       setType(variants[0]?.id);
     }
   }, [variants]);
