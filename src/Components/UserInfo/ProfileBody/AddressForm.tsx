@@ -27,16 +27,17 @@ import { GlobalDisplayFlexBox } from "@/styles/PublicStyles";
 import markerIcon from "../../../../public/info/markerIcon.svg";
 import GoogleMapComponent from "./GoogleMapComponent";
 
-
 import ValidationSchemaForAddAddress from "./ValidationSchemaForAddAddress";
 import { AddresseInterface } from "@/interfaces/AddresseInterface";
 import {
   AddAddresse,
-  
   UpdateAddresse,
   addAddressePayload,
 } from "@/redux/slices/AddressesRequests";
 import { useRouter } from "next/router";
+import { useQuery } from "react-query";
+import { GoogleApi } from "@/React-Query/googleApi";
+import CustomMapSearch from "./CustomMapSearch";
 export interface locationInterface {
   lat: number;
   lng: number;
@@ -63,7 +64,7 @@ const AddressForm = ({
 
   //   handel google map componenet
   // /////////////////////////////////////////////////
-  
+
   const [location, setLocation] = useState<locationInterface>({
     lat: 30.00758635247977,
     lng: 31.459522247314453,
@@ -77,9 +78,41 @@ const AddressForm = ({
   );
   const { isLoadingAddAddresse } = useAppSelector((state) => state.addresse);
   const [isDisablePickButton, setDisablePickButton] = useState<boolean>(false);
+  const [searchKey, setSearchKey] = useState({ description: "" });
+  const [enabled, setEnabled] = useState(false);
+  const [placeDescription, setPlaceDescription] = useState<any>(undefined);
+  const [predictions, setPredictions] = useState([]);
+  const [placeId, setPlaceId] = useState("");
 
- 
+  //  get places from api
+  const { data: places, isLoading: isLoadingPlacesApi } = useQuery(
+    ["places", searchKey.description],
+    async () => GoogleApi.placeApiAutocomplete(searchKey.description)
+  );
 
+  const {
+    isLoading: isLoading2,
+    data: placeDetails,
+    isError: isErrorTwo,
+    error: errorTwo,
+    refetch: placeApiRefetchOne,
+  } = useQuery(["placeDetails", placeId], async () =>
+    GoogleApi.placeApiDetails(placeId)
+  );
+
+  useEffect(() => {
+    if (placeDetails) {
+      setLocation(placeDetails?.data?.result?.geometry?.location);
+      setAddresseNow(placeDetails?.data?.result.formatted_address);
+      setLocationEnabled(true);
+    }
+  }, [placeDetails]);
+  useEffect(() => {
+    if (places) {
+      setPredictions(places?.data?.predictions);
+    }
+  }, [places]);
+  
   //  select Addresse Type
   const typeData: AddresseType[] = [
     {
@@ -107,7 +140,6 @@ const AddressForm = ({
     }
   }, [addresse?.address_name]);
 
- 
   //  handel current location with api from google map
 
   useEffect(() => {
@@ -212,14 +244,12 @@ const AddressForm = ({
   const appartmentHandler = (value: string) => {
     addAddressFormik.setFieldValue("apartment_no", value);
   };
- 
 
   useEffect(() => {
     if (addresseType) {
       addAddressFormik.setFieldValue("address_type", addresseType);
     }
   }, [addresseType]);
- 
 
   useEffect(() => {
     if (addresse?.latitude && addresse?.longitude) {
@@ -263,19 +293,31 @@ const AddressForm = ({
           </Grid>
 
           <Grid item xs={12}>
-            <GoogleMapComponent
-              addresse={addresse}
-              // currentLocation={currentLocation}
-              addresseNow={addresseNow}
-              setLocation={setLocation}
-              location={location}
-              setPlaceDetailsEnabled={setPlaceDetailsEnabled}
-              placeDetailsEnabled={placeDetailsEnabled}
-              setLocationEnabled={setLocationEnabled}
-              setDisablePickButton={setDisablePickButton}
-              height="300px"
-              markerIcon={markerIcon}
-            />
+            <Stack spacing={1}>
+              <CustomMapSearch
+                setSearchKey={setSearchKey}
+                setEnabled={setEnabled}
+                predictions={predictions}
+                setPlaceId={setPlaceId}
+                setPlaceDetailsEnabled={setPlaceDetailsEnabled}
+                setPlaceDescription={setPlaceDescription}
+                searchKey={searchKey}
+                isLoadingPlacesApi={isLoadingPlacesApi}
+              />
+              <GoogleMapComponent
+                addresse={addresse}
+                // currentLocation={currentLocation}
+                addresseNow={addresseNow}
+                setLocation={setLocation}
+                location={location}
+                setPlaceDetailsEnabled={setPlaceDetailsEnabled}
+                placeDetailsEnabled={placeDetailsEnabled}
+                setLocationEnabled={setLocationEnabled}
+                setDisablePickButton={setDisablePickButton}
+                height="300px"
+                markerIcon={markerIcon}
+              />
+            </Stack>
           </Grid>
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik

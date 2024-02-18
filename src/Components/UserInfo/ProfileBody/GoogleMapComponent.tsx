@@ -101,6 +101,7 @@ const GoogleMapComponent = ({
     }),
     []
   );
+
   const [map, setMap] = useState<any>({});
   const [zoom, setZoom] = useState<number>(10);
   const [centerPosition, setCenterPosition] = useState(center);
@@ -131,13 +132,13 @@ const GoogleMapComponent = ({
   // }, [addresse?.latitude, addresse?.longitude, location]);
 
   useEffect(() => {
-    // if (location) {
-    //   setCenterPosition(location);
-    // }
-    if (map?.center && mapSetup && map.center.lat && map.center.lng) {
+    if (location) {
+      setCenterPosition(location);
+    }
+    if (map?.center && mapSetup && map?.center?.lat && map?.center?.lng) {
       setCenterPosition({
-        lat: map.center.lat(),
-        lng: map.center.lng(),
+        lat: map?.center?.lat(),
+        lng: map?.center?.lng(),
       });
     }
 
