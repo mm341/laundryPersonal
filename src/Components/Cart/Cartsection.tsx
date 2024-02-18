@@ -32,12 +32,9 @@ import { DeleteCart } from "@/redux/slices/CartSlice";
 import DeleteDialog from "../DeleteDialogs";
 const Cartsection = ({
   additionalSercvices,
-  choicesIds,
-  setChoicesIds,
+ 
 }: {
   additionalSercvices: AdditionalServicesInterface[];
-  choicesIds: number[];
-  setChoicesIds: (e: number[]) => void;
 }) => {
   // hooks
   const theme = useTheme();

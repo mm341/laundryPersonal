@@ -14,8 +14,10 @@ import deleteIcon from "../../../public/products/deleteButton.svg";
 import { AddToCart, RemoveElement } from "@/redux/slices/CartSlice";
 const AdditionalServicesSectionInCart = ({
   additionalSercvices,
+  checkOut,
 }: {
   additionalSercvices: AdditionalServicesInterface[];
+  checkOut?: boolean;
 }) => {
   //  hooks
   const { t } = useTranslation();
@@ -80,22 +82,26 @@ const AdditionalServicesSectionInCart = ({
                     </Typography>
 
                     {!isLoadingUpdateCart ? (
-                      <img
-                        onClick={() => {
-                          dispatch(
-                            RemoveElement({
-                              additional_service_id: e?.id,
-                            })
-                          );
-                        }}
-                        src={deleteIcon?.src}
-                        style={{ cursor: "pointer" }}
-                        loading="lazy"
-                        alt="deleteImg"
-                      />
+                      !checkOut && (
+                        <img
+                          onClick={() => {
+                            dispatch(
+                              RemoveElement({
+                                additional_service_id: e?.id,
+                              })
+                            );
+                          }}
+                          src={deleteIcon?.src}
+                          style={{ cursor: "pointer" }}
+                          loading="lazy"
+                          alt="deleteImg"
+                        />
+                      )
                     ) : (
                       <>
-                        <Skeleton variant="text" width="20px" height={20} />
+                        {!checkOut && (
+                          <Skeleton variant="text" width="20px" height={20} />
+                        )}
                       </>
                     )}
                   </GlobalDisplayFlexBox>

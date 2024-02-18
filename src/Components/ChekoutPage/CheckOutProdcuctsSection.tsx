@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAppSelector } from "@/redux/store";
 import { Scrollbar } from "../GlobalComponent/Scrollbar";
+import AdditionalServicesSectionInCart from "../Cart/AdditionalServicesSectionInCart";
 
 const CheckOutProductsSection = ({
   checkOut,
@@ -34,10 +35,8 @@ const CheckOutProductsSection = ({
 
   return (
     <CustomPaperBigCard
-      
       sx={{
         backgroundColor: "white",
-       
       }}
     >
       <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
@@ -57,6 +56,10 @@ const CheckOutProductsSection = ({
           {cartList?.cart_details?.products?.map((e, i) => (
             <ProductCardInCart product={e} key={i} checkOut />
           ))}
+          <AdditionalServicesSectionInCart
+          checkOut
+            additionalSercvices={cartList?.cart_details?.additionals}
+          />
         </GlobalDisplayFlexColumnBox>
       </Scrollbar>
       {isloadingAddOrder ? (
