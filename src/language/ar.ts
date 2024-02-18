@@ -742,7 +742,7 @@ export const arabic = {
   "Clear Cart?":"حذف المنتجات ",
   "Are you sure you want to Clear Cart":"هل تريد حذف جميع المنتجات؟",
   "Payment method": " طريقة الدفع او السداد ",
-"The delivery date must be a date after pick date.":"يجب  علي تاؤيخ التسليم ان يكون تاريخا لاحقا لتاريخ الاستلام ",
+"The delivery date must be a date after pick date.":"يجب  علي تاريخ التسليم ان يكون تاريخا لاحقا لتاريخ الاستلام ",
   "Order placed": "تم الطلب",
   Order: "ترتيب",
   "Follow us on": "اتبعنا",
