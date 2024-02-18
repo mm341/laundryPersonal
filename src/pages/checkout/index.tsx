@@ -62,6 +62,7 @@ import { CashFooterLinks, CashMasterData } from "@/redux/slices/MasterSlice";
 import { GetCartDetails } from "@/redux/slices/CartSlice";
 import AuthAndCartListGuard from "@/Components/authentication/CartListGuard";
 import HandelNotification from "@/Components/GlobalComponent/HandelNotification";
+import { Url } from "next/dist/shared/lib/router/router";
 const CheckOutPage = ({
   homeServices,
   homeAreas,
@@ -278,6 +279,13 @@ const CheckOutPage = ({
     dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
 
+  //  get old path from localstorage
+
+  let path: null | undefined | string | Url | any = undefined;
+
+  if (typeof window !== "undefined") {
+    path = localStorage.getItem("path");
+  }
 
   return (
     <>
@@ -314,13 +322,17 @@ const CheckOutPage = ({
                         {locale === "en" ? (
                           <ArrowBackIcon
                             sx={{ cursor: "pointer" }}
-                            onClick={() => router.back()}
+                            onClick={() =>
+                              router.push(path, undefined, { locale })
+                            }
                             color="primary"
                           />
                         ) : (
                           <ArrowForwardIcon
                             sx={{ cursor: "pointer" }}
-                            onClick={() => router.back()}
+                            onClick={() =>
+                              router.push(path, undefined, { locale })
+                            }
                             color="primary"
                           />
                         )}
