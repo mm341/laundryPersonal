@@ -303,7 +303,7 @@ const DrawerMenu = ({
         </Box>
         <Box
           sx={{
-            width: "60%",
+            width: "65%",
             display: "flex",
             flexDirection: "row",
             alignItems: "center",

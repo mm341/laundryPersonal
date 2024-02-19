@@ -94,6 +94,7 @@ const Cartsection = ({
             sx={{ justifyContent: "space-between", px: "20px" }}
           >
             <GlobalDisplayFlexBox
+            style={{flexDirection:"row",gap:"5px"}}
               sx={{ justifyContent: "flex-start", gap: "2px" }}
             >
               <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
@@ -106,9 +107,10 @@ const Cartsection = ({
             {/*  clear cart */}
             {cartList?.cart_details?.products?.length > 0 && (
               <GlobalDisplayFlexBox
+              style={{flexDirection:"row",gap:"5px"}}
                 onClick={() => setOpenDeleteCart(true)}
                 sx={{
-                  justifyContent: "flex-end",
+                  justifyContent: {md:"flex-end",xs:"flex-start"},
                   gap: "5px",
                   cursor: "pointer",
                 }}

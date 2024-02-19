@@ -73,6 +73,7 @@ const OrderDeliveryDetails = ({
 
           {/*  name */}
           <GlobalDisplayFlexBox
+          style={{flexDirection:"row"}}
             sx={{ justifyContent: "flex-start", gap: "13px" }}
           >
             <img loading="lazy" alt="img" src={customerIcon?.src} />
@@ -89,6 +90,7 @@ const OrderDeliveryDetails = ({
 
           {/*  phone */}
           <GlobalDisplayFlexBox
+           style={{flexDirection:"row"}}
             sx={{ justifyContent: "flex-start", gap: "13px" }}
           >
             <img loading="lazy" alt="img" src={phoneIcon?.src} />

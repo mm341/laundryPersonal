@@ -50,8 +50,8 @@ const NotificationPoPover = (props: Props) => {
       sx={{
         display: open ? "flex" : "none",
         position: "absolute",
-        top: { md: "40px", xs: "65px" },
-        right: locale === "en" ? "13%" : "13.5%",
+        top: { md: "40px", xs: "50px" },
+        right: locale === "en" ? {sm:"13%",xs:"10%"} : "13.5%",
         maxHeight: "500px",
         overflowY: "auto",
         zIndex: "99999",
@@ -59,7 +59,7 @@ const NotificationPoPover = (props: Props) => {
         borderRadius: "15px",
         boxShadow: "0px 0px 4px 0px #00000033",
         height: "390px",
-        width: "390px",
+        width: {sm:"390px",xs:"270px"},
       }}
     >
       <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
