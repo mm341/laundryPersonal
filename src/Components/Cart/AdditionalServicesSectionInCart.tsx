@@ -39,9 +39,9 @@ const AdditionalServicesSectionInCart = ({
         <GlobalDisplayFlexColumnBox
           width={"100%"}
           gap={"17px"}
-          sx={{ px: "18px" }}
+         
         >
-          <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
+          <Typography sx={{ fontSize: "16px", fontWeight: "500" , px: "18px" }}>
             {t("Additional Service")}
           </Typography>
           <Scrollbar
@@ -54,6 +54,7 @@ const AdditionalServicesSectionInCart = ({
                 width: "100%",
                 mx: "auto",
                 gap: { md: "24px", xs: "32px" },
+              px: "18px" 
               }}
             >
               {cartList?.cart_details?.additionals?.map((e, i) => (
