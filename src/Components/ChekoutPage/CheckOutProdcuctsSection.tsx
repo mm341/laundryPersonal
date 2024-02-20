@@ -6,6 +6,7 @@ import {
 import React from "react";
 import ProductCardInCart from "../Cards/ProductCardInCart";
 import {
+  Box,
   CircularProgress,
   Typography,
   alpha,
@@ -39,29 +40,39 @@ const CheckOutProductsSection = ({
         backgroundColor: "white",
       }}
     >
-      <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+      <Typography sx={{ fontSize: "16px", fontWeight: "400", px: "12px" }}>
         {t("Items")} ({cartList?.cart_details?.products?.length})
       </Typography>
-      <Scrollbar
-        style={{
-          maxHeight: "700px",
-        }}
+
+      {/*  products section */}
+      <GlobalDisplayFlexColumnBox
+        width={"100%"}
+        sx={{ mx: "auto", my: "20px" }}
+        gap={"20px"}
       >
-        {/*  products section */}
-        <GlobalDisplayFlexColumnBox
-          width={"98%"}
-          sx={{ mx: "auto", my: "20px" }}
-          gap={"20px"}
+        <Scrollbar
+          style={{
+            maxHeight: "720px",
+          }}
         >
-          {cartList?.cart_details?.products?.map((e, i) => (
-            <ProductCardInCart product={e} key={i} checkOut />
-          ))}
+          <GlobalDisplayFlexColumnBox
+            width={"100%"}
+            sx={{ mx: "auto", my: "20px", px: "12px" }}
+            gap={"20px"}
+          >
+            {cartList?.cart_details?.products?.map((e, i) => (
+              <ProductCardInCart product={e} key={i} checkOut />
+            ))}
+          </GlobalDisplayFlexColumnBox>
+        </Scrollbar>
+        <Box sx={{ width: "100%", px: "12px" }}>
           <AdditionalServicesSectionInCart
             checkOut
             additionalSercvices={cartList?.cart_details?.additionals}
           />
-        </GlobalDisplayFlexColumnBox>
-      </Scrollbar>
+        </Box>
+      </GlobalDisplayFlexColumnBox>
+
       {isloadingAddOrder ? (
         <GlobalButton
           sx={{

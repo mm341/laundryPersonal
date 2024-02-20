@@ -92,8 +92,13 @@ const MyAddresses = () => {
   //  function delete addresse
   const RemoveAddresse = () => {
     dispatch(DeleteAddresse({ id: addresseId })).then((res) => {
-      if (res.meta.requestStatus === "fulfilled") {
+     
+      if (
+        res?.payload?.data?.addresses?.length > 0 ||
+        res?.payload?.data?.addresses?.length === 0
+      ) {
         refetch();
+
         setOpenDeleteDialog(false);
       }
     });
@@ -102,14 +107,14 @@ const MyAddresses = () => {
   //  function default addresse
   const DefaultAddresse = () => {
     dispatch(handelDefaultAddresse({ id: addresseDefaultId })).then((res) => {
-      if (res.meta.requestStatus === "fulfilled") {
+      if (res?.payload?.data?.addresses?.length > 0) {
         refetch();
+
         setOpenDefalultDialog(false);
       }
     });
   };
   //  custom design of scrollbar
-  
 
   return (
     <>
@@ -196,6 +201,7 @@ const MyAddresses = () => {
       {/*  open deltete addresse dialog */}
       {openDeleteDialog && (
         <DeleteDialog
+          size={25}
           Cancel={"Cancel"}
           header={"Remove Address?"}
           openDeleteDialog={openDeleteDialog}
@@ -210,6 +216,7 @@ const MyAddresses = () => {
       {/*  open change default addresse dialog */}
       {openDefalultDialog && (
         <DeleteDialog
+          size={25}
           Cancel={"Cancel"}
           header={""}
           openDeleteDialog={openDefalultDialog}

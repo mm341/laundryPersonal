@@ -1,6 +1,7 @@
 import PublicContainer from "@/Components/PublicContainer";
 import {
   CustomPaperBigCard,
+  GlobalDisplayFlexBox,
   GlobalDisplayFlexColumnBox,
   PreferableTimeInput,
 } from "@/styles/PublicStyles";
@@ -541,7 +542,30 @@ const CheckOutPage = ({
 
                       {/*  delivery addresse */}
                       <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                        <GlobalDisplayFlexBox>
                         <ChekOutTitle title="Deliver To" />
+                          {myAddresses?.data?.data?.addresses?.length > 0 && (
+                            <Box
+                              onClick={() => setOpen(true)}
+                              sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                border: `1px solid ${theme.palette.primary.main}`,
+                                backgroundColor: theme.palette.primary.main,
+                                color: "white",
+                                width: "196px",
+                                height: "48px",
+                                borderRadius: "4px",
+                                gap: "5px",
+                                cursor: "pointer",
+                              }}
+                            >
+                              <Typography>{t("Add New Address")}</Typography>
+                            </Box>
+                          )}
+                        </GlobalDisplayFlexBox>
+                        
 
                         {myAddresses?.data?.data?.addresses?.length > 0 && (
                           <FormControl fullWidth>

@@ -207,8 +207,10 @@ const AddressForm = ({
         // formSubmitOnSuccess(newData)
 
         if (addresse?.id) {
+          
           dispatch(UpdateAddresse(newData)).then((res: any) => {
-            if (res.meta.requestStatus === "fulfilled") {
+          
+            if (res?.payload?.data?.addresses?.length>0) {
               refetch();
 
               setOpen(false);
@@ -216,7 +218,8 @@ const AddressForm = ({
           });
         } else {
           dispatch(AddAddresse(newData)).then((res: any) => {
-            if (res.meta.requestStatus === "fulfilled") {
+            
+            if (res?.payload?.data?.addresses?.length>0) {
               refetch();
 
               setOpen(false);

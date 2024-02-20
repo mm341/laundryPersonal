@@ -30,6 +30,7 @@ export const AddAddresse = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
+          return res
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
@@ -42,6 +43,7 @@ export const UpdateAddresse = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
+          return res
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
@@ -54,6 +56,7 @@ export const DeleteAddresse = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
+          return res
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
@@ -69,6 +72,7 @@ export const handelDefaultAddresse = createAsyncThunk(
       .then((res: any) => {
         if (res) {
           toast.success(res?.message);
+          return res
         }
       })
       .catch((err) => PublicHandelingErrors.onErrorResponse(err))
