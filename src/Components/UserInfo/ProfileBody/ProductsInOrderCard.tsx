@@ -90,26 +90,50 @@ const ProductsInOrderCard = ({
 
                 {/*  price and quantity */}
 
-                <Box
-                  sx={{
-                    width: { md: "50%", xs: "100%" },
-                    display: "flex",
-                    justifyContent: { md: "flex-end", xs: "flex-start" },
-                    alignItems: { md: "flex-end", xs: "flex-start" },
-                    flexDirection: "column",
-                    gap: "20px",
-                  }}
-                >
-                  <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
-                    {product?.discounted_price &&
-                      product?.discounted_price * product?.quantity}{" "}
-                    {master.currency}
-                  </Typography>
-                  <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-                    {product?.quantity}×{product?.discounted_price}{" "}
-                    {master.currency}
-                  </Typography>
-                </Box>
+                {product?.discounted_price && product?.discounted_price > 0 ? (
+                  <Box
+                    sx={{
+                      width: { md: "50%", xs: "100%" },
+                      display: "flex",
+                      justifyContent: { md: "flex-end", xs: "flex-start" },
+                      alignItems: { md: "flex-end", xs: "flex-start" },
+                      flexDirection: "column",
+                      gap: "20px",
+                    }}
+                  >
+                    <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
+                      {product?.discounted_price &&
+                        product?.discounted_price * product?.quantity}{" "}
+                      {master.currency}
+                    </Typography>
+                    <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+                      {product?.quantity}×{product?.discounted_price}{" "}
+                      {master.currency}
+                    </Typography>
+                  </Box>
+                ) : (
+                  <Box
+                    sx={{
+                      width: { md: "50%", xs: "100%" },
+                      display: "flex",
+                      justifyContent: { md: "flex-end", xs: "flex-start" },
+                      alignItems: { md: "flex-end", xs: "flex-start" },
+                      flexDirection: "column",
+                      gap: "20px",
+                    }}
+                  >
+                    <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
+                      {product?.old_price?.length > 0 &&
+                        product?.old_price[0] > 0 &&
+                        product?.old_price[0] * product?.quantity}{" "}
+                      {master.currency}
+                    </Typography>
+                    <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+                      {product?.quantity}×{product?.old_price[0]}{" "}
+                      {master.currency}
+                    </Typography>
+                  </Box>
+                )}
               </GlobalDisplayFlexBox>
 
               <Divider orientation="horizontal" />
