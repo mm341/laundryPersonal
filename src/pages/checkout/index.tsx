@@ -543,7 +543,7 @@ const CheckOutPage = ({
                       {/*  delivery addresse */}
                       <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                         <GlobalDisplayFlexBox>
-                        <ChekOutTitle title="Deliver To" />
+                          <ChekOutTitle title="Deliver To" />
                           {myAddresses?.data?.data?.addresses?.length > 0 && (
                             <Box
                               onClick={() => setOpen(true)}
@@ -554,8 +554,8 @@ const CheckOutPage = ({
                                 border: `1px solid ${theme.palette.primary.main}`,
                                 backgroundColor: theme.palette.primary.main,
                                 color: "white",
-                                width: "196px",
-                                height: "48px",
+                                width: "156px",
+                                height: "38px",
                                 borderRadius: "4px",
                                 gap: "5px",
                                 cursor: "pointer",
@@ -565,7 +565,6 @@ const CheckOutPage = ({
                             </Box>
                           )}
                         </GlobalDisplayFlexBox>
-                        
 
                         {myAddresses?.data?.data?.addresses?.length > 0 && (
                           <FormControl fullWidth>
