@@ -24,14 +24,14 @@ export const initialProductData = () => {
 };
 
 export interface sub_products {
-  description?: string;
-  id?: string;
-  name?:string;
-  price?: number;
-  old_price?:number
-  discount_percentage?:number
-  parent_id?:string
-  quantity?:number
+  description: string;
+  id: string;
+  name:string;
+  price: number;
+  old_price:number
+  discount_percentage:number
+  parent_id:string
+  
 }
 export interface productInterface {
   parent_id: string;
@@ -43,7 +43,7 @@ export interface productInterface {
   image_path: string;
   name: string;
   name_bn: string;
-  old_price:number[];
+  old_price: number[];
   service: serviceInterface;
   slug: null;
   sub_products: sub_products[];
