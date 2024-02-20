@@ -7,6 +7,7 @@ export const initialAdditionalServices = () => {
     title: "",
     title_bn: "",
     name:"",
+    quantity:0,
   };
 };
 
@@ -18,4 +19,5 @@ export interface AdditionalServicesInterface {
   price: number;
   title: string;
   title_bn: string;
+  quantity:number
 }

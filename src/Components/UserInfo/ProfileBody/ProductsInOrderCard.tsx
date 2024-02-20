@@ -160,7 +160,7 @@ const ProductsInOrderCard = ({
                 </GlobalDisplayFlexColumnBox>
                 <Typography sx={{ fontSize: "18px", fontWeight: "600" }}>
                   {" "}
-                  {e?.price} {master?.currency}
+                  {e?.price *e?.quantity} {master?.currency}
                 </Typography>
               </GlobalDisplayFlexBox>
               <Divider orientation="horizontal" />
