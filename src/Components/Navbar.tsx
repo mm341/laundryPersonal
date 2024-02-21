@@ -20,7 +20,7 @@ import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import NavServices from "./NavServices";
 import AreaDialog from "./Dialogs/AreaDialog";
-
+import logo from "../../public/navbar/logo.svg"
 import DrawerMenu from "./DrawerMenu";
 
 import accountphoto from "../../public/navbar/accountPhoto.svg";
@@ -249,7 +249,7 @@ const Navbar = () => {
       <Box
         sx={{
           backgroundColor: "white",
-          py: "15px",
+          py: "10px",
           position: "fixed",
           top: "0",
           width: "100vw",
@@ -267,11 +267,13 @@ const Navbar = () => {
                 }}
               >
                 {/*  logo side */}
-                <Link href="/" prefetch>
+               
                   <Box sx={{ width: { md: "12%", xs: "100%" } }}>
-                    <Typography sx={{ cursor: "pointer" }}>home</Typography>
+                  <Link href="/" prefetch style={{width:"100%"}}>
+                   <img style={{width:"60.5px",height:"50px"}} src={logo?.src} alt="img" loading="lazy"/>
+                   </Link>
                   </Box>
-                </Link>
+                
                 <GlobalDisplayFlexBox
                   sx={{
                     width: { md: "88%", xs: "100%" },

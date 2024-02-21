@@ -75,7 +75,7 @@ const AdditionalServicesSectionInCart = ({
                   >
                     {/*  price and delete */}
                     <Typography sx={{ fontSize: "14px", fontWeight: "400" }}>
-                      {e?.price * e?.quantity} {master?.currency}
+                      {(e?.price * e?.quantity).toFixed(2)} {master?.currency}
                     </Typography>
 
                     {!isLoadingUpdateCart ? (

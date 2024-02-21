@@ -125,18 +125,22 @@ const Footer = () => {
                     {t("Download Now")}
                   </CustomFooterH2Typography>
                   <CustomFooterTypographyBox>
+                    <a href={master?.android_url} target="_blank">
                     <img
                       style={{ cursor: "pointer" }}
                       loading="lazy"
                       alt="img"
                       src={googleplay?.src}
                     />
+                    </a>
+                    <a href={master?.ios_url} target="_blank">
                     <img
                       style={{ cursor: "pointer" }}
                       loading="lazy"
                       alt="img"
                       src={appleplay?.src}
                     />
+                    </a>
                   </CustomFooterTypographyBox>
                 </CustomFooterH1Box>
 
