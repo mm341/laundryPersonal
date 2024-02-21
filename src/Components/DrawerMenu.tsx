@@ -95,7 +95,7 @@ const DrawerMenu = ({
             promiseResponse?.payload?.message === "!تم تسجيل الخروج بنجاح"
           ) {
             localStorage.removeItem("token");
-            localStorage.removeItem("cm_firebase_token");
+            // localStorage.removeItem("cm_firebase_token");
             // toast.success(t("Logout Successfully"));
           }
         }
