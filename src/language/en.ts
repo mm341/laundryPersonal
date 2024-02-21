@@ -410,8 +410,8 @@ export const english = {
   CheckOut:"CheckOut",
   "Personal Info":"Personal Info",
   "Card Number": "Card Number",
-  "We start our delivery process and you will receive your food soon.":
-    "We start our delivery process and you will receive your food soon.",
+  "We start our delivery process and you will receive your order soon.":
+    "We start our delivery process and you will receive your order soon.",
   Cart: "Cart",
   "By signing up, you agree to our terms and conditions":
     "By signing up, you agree to our",
@@ -1038,8 +1038,8 @@ export const english = {
   "Select And Start meaningful conversations!":
     "Select And Start meaningful conversations!",
   "Leave a message": "Leave a message",
-  "Your order is placed Successfully. We start our delivery process and you will receive your food soon.":
-    "Your order is placed Successfully. We start our delivery process and you will receive your food soon.",
+  "Your order is placed Successfully. We start our delivery process and you will receive your order soon.":
+    "Your order is placed Successfully. We start our delivery process and you will receive your order soon.",
   "point.": "point.",
   "It will add to your balance when the order is delivered.":
     "It will add to your balance when the order is delivered.",

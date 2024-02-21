@@ -67,12 +67,12 @@ const FirstSection = ({
           boxShadow: "7px 7px 8px 0px #1E214F0F",
         }}
       >
-        <Box sx={{ width: "85%", mx: "auto" }}>
+        <Box sx={{ width: {xl:"80%",lg:"95%",xs:"90%"}, mx: "auto" }}>
           <GlobalDisplayFlexBox>
             {/*  leftSection */}
             <GlobalDisplayFlexColumnBox
               data-aos="fade-right"
-              width={!issmall ? "42%" : "100%"}
+              width={!issmall ? "45%" : "100%"}
               gap={"50px"}
               alignItems={"center"}
               sx={{ py: "25px" }}

@@ -369,7 +369,7 @@ export const arabic = {
 
   "Card Number": "رقم البطاقه",
   "We start our delivery process and you will receive your food soon.":
-    "نبدأ عملية التسليم وسوف تتلقى طعامك قريبا.",
+    "نبدأ عملية التسليم وسوف تتلقى طلبك قريبا.",
   Cart: "السله",
   "Phone Number": "رقم الجوال",
   "Update Profile": "تحديث الحساب",
@@ -1043,7 +1043,7 @@ export const arabic = {
   "Select And Start meaningful conversations!": "حدد وابدأ محادثات هادفة!",
   "Leave a message": "اترك رسالة",
   "Your order is placed Successfully. We start our delivery process and you will receive your food soon.":
-    "تم تقديم طلبك بنجاح. نبدأ عملية التوصيل وستتلقى طعامك قريبًا",
+    "تم تقديم طلبك بنجاح. نبدأ عملية التوصيل وستتلقى طلبك قريبًا",
   "point.": "نقطة",
   "It will add to your balance when the order is delivered.":
     "ستضيف إلى رصيدك عند تسليم الطلب.",

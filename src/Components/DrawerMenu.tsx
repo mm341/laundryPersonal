@@ -30,7 +30,8 @@ import AuthModal from "./AuthBox/AuthModel";
 import { toast } from "react-hot-toast";
 import { useAppDispatch } from "@/redux/store";
 import { LogoutRequest } from "@/redux/slices/ContactingUs";
-
+import Link from "next/link";
+import logo from "../../public/navbar/logo.svg"
 const DrawerMenu = ({
   onClose,
   open,
@@ -294,12 +295,14 @@ const DrawerMenu = ({
         <Box
           sx={{ width: "40%", display: "flex", justifyContent: "flex-start" }}
         >
-          <Typography
-            sx={{ cursor: "pointer" }}
-            onClick={() => router.push("/")}
-          >
-            home
-          </Typography>
+          <Link href="/" prefetch style={{ width: "100%" }}>
+            <img
+              style={{ width: "60.5px", height: "50px" }}
+              src={logo?.src}
+              alt="img"
+              loading="lazy"
+            />
+          </Link>
         </Box>
         <Box
           sx={{

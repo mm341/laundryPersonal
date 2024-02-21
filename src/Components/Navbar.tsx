@@ -249,7 +249,7 @@ const Navbar = () => {
       <Box
         sx={{
           backgroundColor: "white",
-          py: "10px",
+          py: {md:"10px",xs:"15px"},
           position: "fixed",
           top: "0",
           width: "100vw",
