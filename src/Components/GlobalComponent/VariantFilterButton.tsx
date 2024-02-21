@@ -29,6 +29,9 @@ const VariantFilterButton = ({
       style={{
         backgroundColor:
           type === FilterType?.id ? theme.palette.primary.main : "white",
+          // minWidth:"310px",
+          width: "max-content"
+          
       }}
       sx={{
         "&:hover": {
@@ -37,7 +40,9 @@ const VariantFilterButton = ({
         },
         backgroundColor:
           type === FilterType?.id ? theme.palette.primary.main : "white",
-        width: { xs: "34%", sm: "185px" },
+        // width: { xs: "34%", sm: "185px" },
+        // width:"fit-content",
+        // minWidth:"250px",
         height: "40px",
         color: type === FilterType?.id ? "white" : theme.palette.primary.main,
         fontSize: { sm: "16px", xs: "10px" },
