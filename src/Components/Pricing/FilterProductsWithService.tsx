@@ -71,11 +71,7 @@ const FilterProductsWithService = () => {
 
     if (e.target.value) {
       setServiceId("");
-      // dispatch(
-      //   GetProductsWithSearchAndService({
-      //     searchText: e.target.value,
-      //   })
-      // );
+     
     } else {
       setServiceId(services[0]?.id);
       dispatch(

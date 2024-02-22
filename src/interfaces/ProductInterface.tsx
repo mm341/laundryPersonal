@@ -7,7 +7,7 @@ export const initialProductData = () => {
     discounted_price:0,
     current_price: [],
     description: "",
-    discount_percentage: null,
+    discount_percentage: 0,
     id: "",
     image_path: "",
     name: "",
@@ -38,7 +38,7 @@ export interface productInterface {
   discounted_price?:number
   current_price: number[];
   description: string;
-  discount_percentage: null;
+  discount_percentage: number;
   id: string;
   image_path: string;
   name: string;

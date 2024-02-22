@@ -26,16 +26,48 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
   //  handel old price
 
   const handelProductOldPrice = (product: productInterface) => {
-    if (Math.min(...product?.old_price) !== Math.max(...product?.old_price))
+    if (
+      Math.min(...product?.old_price) !== Math.max(...product?.old_price) &&
+      product?.discount_percentage < 0
+    )
       return (
-        <Typography sx={{ fontSize: "16px", fontWeight: "400",textDecoration:"line-through" ,opacity:"0.6"}}>
+        <Typography
+          sx={{
+            fontSize: "16px",
+            fontWeight: "400",
+            textDecoration: "line-through",
+            opacity: "0.6",
+          }}
+        >
           {Math.min(...product?.old_price)} {master?.currency} / {t("Item")} -{" "}
           {Math.max(...product?.old_price)} {master?.currency} / {t("Item")}
         </Typography>
       );
-    else {
+    else if (
+      Math.min(...product?.old_price) !== Math.max(...product?.old_price) &&
+      !product?.discount_percentage 
+     
+    ) {
       return (
-        <Typography sx={{ fontSize: "16px", fontWeight: "400",textDecoration:"line-through",opacity:"0.6" }}>
+        <Typography
+          sx={{
+            fontSize: "16px",
+            fontWeight: "400",
+          }}
+        >
+          {Math.min(...product?.old_price)} {master?.currency} / {t("Item")} -{" "}
+          {Math.max(...product?.old_price)} {master?.currency} / {t("Item")}
+        </Typography>
+      );
+    } else {
+      return (
+        <Typography
+          sx={{
+            fontSize: "16px",
+            fontWeight: "400",
+           
+          }}
+        >
           {Math.min(...product?.old_price)} {master?.currency} / {t("Item")}{" "}
         </Typography>
       );
@@ -142,9 +174,10 @@ const ProductsSection = ({ products }: { products: productInterface[] }) => {
                       gap: "10px",
                     }}
                   >
-                   
-                      {handelProductPrice(e)}
-                    
+                    {
+                      e?.discount_percentage < 0 &&
+                      handelProductPrice(e)}
+
                     {handelProductOldPrice(e)}
                   </Box>
                 </Box>
