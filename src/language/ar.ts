@@ -368,7 +368,7 @@ export const arabic = {
   Summary: "تفاصيل الدفع",
 
   "Card Number": "رقم البطاقه",
-  "We start our delivery process and you will receive your food soon.":
+  "We start our delivery process and you will receive your order soon.":
     "نبدأ عملية التسليم وسوف تتلقى طلبك قريبا.",
   Cart: "السله",
   "Phone Number": "رقم الجوال",

@@ -128,7 +128,7 @@ const SignInPage = ({
       if (res?.data?.data?.access?.token) {
         toast.success(res?.data?.message);
         localStorage.setItem("token", res?.data?.data?.access?.token);
-        checkOut&&dispatch(GetCartDetails({}));
+        checkOut && dispatch(GetCartDetails({}));
         handleClose?.();
         setOpenOtpModal(false);
         dispatch(SaveProfileData(res?.data?.data?.user));

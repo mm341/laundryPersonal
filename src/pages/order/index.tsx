@@ -49,7 +49,7 @@ const OrderPage = () => {
               }}
             >
               {t(
-                "We start our delivery process and you will receive your food soon."
+                "We start our delivery process and you will receive your order soon."
               )}
             </Typography>
           </GlobalDisplayFlexColumnBox>

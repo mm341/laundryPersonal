@@ -38,6 +38,7 @@ import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { GoogleApi } from "@/React-Query/googleApi";
 import CustomMapSearch from "./CustomMapSearch";
+import { useGeolocated } from "react-geolocated";
 export interface locationInterface {
   lat: number;
   lng: number;
@@ -59,6 +60,8 @@ const AddressForm = ({
   const [addresseType, setAddresseType] = useState<string>(
     addresse?.address_name ?? "home"
   );
+  //  master data
+  const { master } = useAppSelector((state) => state.master);
 
   const { t } = useTranslation();
 
@@ -66,9 +69,31 @@ const AddressForm = ({
   // /////////////////////////////////////////////////
 
   const [location, setLocation] = useState<locationInterface>({
-    lat: 30.00758635247977,
-    lng: 31.459522247314453,
+    lat: 0.0459734,
+    lng: 31.3477784,
   });
+  //  function get current location
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+    useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 1000,
+      // isGeolocationEnabled: true,
+    });
+  useEffect(() => {
+    if (coords && !addresse?.latitude && !addresse?.longitude) {
+      setLocation({
+        lat: coords?.latitude,
+        lng: coords?.longitude,
+      });
+    } else if (!coords?.latitude && !addresse?.latitude) {
+      setLocation({
+        lat: 30.0459734,
+        lng: 31.3477784,
+      });
+    }
+  }, [coords, addresse?.latitude, addresse?.longitude]);
 
   const [placeDetailsEnabled, setPlaceDetailsEnabled] =
     useState<boolean>(false);
@@ -112,7 +137,7 @@ const AddressForm = ({
       setPredictions(places?.data?.predictions);
     }
   }, [places]);
-  
+
   //  select Addresse Type
   const typeData: AddresseType[] = [
     {
@@ -152,15 +177,20 @@ const AddressForm = ({
           setAddresseNow(address?.results[0]?.formatted_address);
         });
     }
-    // if (currentLocation?.lat && currentLocation?.lng) {
-    //   fetch(
-    //     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation?.lat},${currentLocation?.lng}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
-    //   )
-    //     .then((res) => res.json())
-    //     .then((address) => {
-    //       setAddresseNow(address?.results[0]?.formatted_address);
-    //     });
-    // }
+    if (
+      coords?.latitude &&
+      coords?.longitude &&
+      !addresse?.latitude &&
+      !addresse?.longitude
+    ) {
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords?.latitude},${coords?.longitude}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
+      )
+        .then((res) => res.json())
+        .then((address) => {
+          setAddresseNow(address?.results[0]?.formatted_address);
+        });
+    }
     if (location?.lat && location?.lng) {
       fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location?.lat},${location?.lng}&key=AIzaSyCP79UJhaH4Gx2odCILeJ5qhT2H9uVqRBg`
@@ -173,6 +203,8 @@ const AddressForm = ({
   }, [
     location?.lat,
     location?.lng,
+    coords?.latitude,
+    coords?.longitude,
     // currentLocation?.lat,
     // currentLocation?.lng,
     addresse?.latitude,
@@ -207,10 +239,8 @@ const AddressForm = ({
         // formSubmitOnSuccess(newData)
 
         if (addresse?.id) {
-          
           dispatch(UpdateAddresse(newData)).then((res: any) => {
-          
-            if (res?.payload?.data?.addresses?.length>0) {
+            if (res?.payload?.data?.addresses?.length > 0) {
               refetch();
 
               setOpen(false);
@@ -218,8 +248,7 @@ const AddressForm = ({
           });
         } else {
           dispatch(AddAddresse(newData)).then((res: any) => {
-            
-            if (res?.payload?.data?.addresses?.length>0) {
+            if (res?.payload?.data?.addresses?.length > 0) {
               refetch();
 
               setOpen(false);
@@ -260,12 +289,7 @@ const AddressForm = ({
         lat: addresse?.latitude,
         lng: addresse?.longitude,
       });
-    } else {
-      setLocation({
-        lat: 30,
-        lng: 30,
-      });
-    }
+    } 
   }, [addresse?.latitude, addresse?.longitude]);
 
   return (
