@@ -34,10 +34,10 @@ const ServiceSection = ({
           <GlobalTypography text={"Our Services"} />
           <Scrollbar
             style={{
-              maxHeight: "600px",
+              maxHeight: "620px",
             }}
           >
-            <Grid container spacing={3}>
+            <Grid container spacing={3} sx={{p:"5px"}}>
               {homeServices?.map((e: HomeServices, i: number) => (
                 <Grid key={e?.id} item md={4} sm={6} xs={12}>
                   <SeviceCard

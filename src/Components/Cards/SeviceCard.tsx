@@ -1,5 +1,7 @@
 import {
+  CustomPaperBigCard,
   GlobalButton,
+  GlobalDisplayFlexBox,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
 import { Box, Fade, Typography, useMediaQuery, useTheme } from "@mui/material";
@@ -27,11 +29,23 @@ const SeviceCard = ({
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Box
-      style={{ position: "relative" }}
+    <CustomPaperBigCard
+      sx={{
+        backgroundColor: "white",
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+        // height: "335px",
+        position: "relative",
+      }}
       onMouseOver={() => setBright(true)}
       onMouseLeave={() => setBright(false)}
     >
+      <Typography
+        sx={{ fontSize: { md: "20px", xs: "16px" }, fontWeight: "500" }}
+      >
+        {element?.name}
+      </Typography>
       <img
         width={"213"}
         height={"300"}
@@ -41,77 +55,63 @@ const SeviceCard = ({
         style={{
           borderRadius: "5px",
           width: "100%",
-          height: "213px",
+          height: "100px",
           objectFit: "contain",
         }}
         className=" brightness-75"
       />
 
-      <Box
+      <Typography
         sx={{
-          position: "absolute",
-          top: "0",
-          left: "0",
-          background:
-            "linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, #A3DEFF 100%)",
-          width: "100%",
-          height: "100%",
+          fontSize: { md: "16px", xs: "12px" },
+          fontWeight: "400",
+          textAlign: "center",
         }}
       >
-        <GlobalDisplayFlexColumnBox
-          width={"90%"}
-          sx={{
-            mx: "auto",
-            height: "100%",
-            justifyContent: "flex-end",
-            py: "15px",
-            gap: { md: "16px", xs: "5px" },
+        {element?.description}
+      </Typography>
+
+      {bright && (
+        <GlobalDisplayFlexBox
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, #A3DEFF 89%)",
+              position:"absolute",
+              left:"0",
+              top:"0px",
+              justifyContent:"center",
+              borderRadius: "10px",
           }}
-          alignItems={"flex-start"}
+          sx={{ width: "100%", height: "100%" }}
         >
-          <Typography
-            sx={{ fontSize: { md: "20px", xs: "16px" }, fontWeight: "500" }}
+          <GlobalButton
+            onClick={() => {
+              if (area) {
+                localStorage.setItem("service", element?.name);
+                router.push(`/products?service_id=${element?.id}`);
+              } else {
+                localStorage.setItem("service", element?.name);
+                setServiceId(element?.id);
+                setOpenOrderDialog(true);
+              }
+            }}
+            service
+            sx={{
+              color: "white",
+              display: "flex",
+              backgroundColor: theme.palette.primary.main,
+              border: `1px solid ${theme.palette.primary.main}`,
+              borderRadius: "4px",
+              fontSize: { md: "16px", xs: "12px" },
+            }}
+            px={!issmall ? "25px" : "10px"}
+            py={!issmall ? "10px" : "6px"}
           >
-            {element?.name}
-          </Typography>
-          <Typography
-            sx={{ fontSize: { md: "16px", xs: "12px" }, fontWeight: "400" }}
-          >
-            {element?.description}
-          </Typography>
-
-          {bright && (
-            <GlobalButton
-              onClick={() => {
-                if (area) {
-                  localStorage.setItem("service", element?.name);
-                  router.push(`/products?service_id=${element?.id}`);
-                } else {
-                  localStorage.setItem("service", element?.name);
-                  setServiceId(element?.id);
-                  setOpenOrderDialog(true);
-                }
-              }}
-              service
-              sx={{
-                color: "white",
-                display: "flex",
-                backgroundColor: theme.palette.primary.main,
-                border: `1px solid ${theme.palette.primary.main}`,
-                borderRadius: "4px",
-                fontSize: { md: "16px", xs: "12px" },
-              }}
-              px={!issmall ? "25px" : "10px"}
-              py={!issmall ? "10px" : "6px"}
-
-              // eslint-disable-next-line react/jsx-no-duplicate-props
-            >
-              {t("Get the Service")}
-            </GlobalButton>
-          )}
-        </GlobalDisplayFlexColumnBox>
-      </Box>
-    </Box>
+            {t("Get the Service")}
+          </GlobalButton>
+        </GlobalDisplayFlexBox>
+     )} 
+    </CustomPaperBigCard>
   );
 };
 
