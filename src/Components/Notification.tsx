@@ -26,6 +26,7 @@ const NotificationPoPover = (props: Props) => {
   );
   const { onClose, open } = props;
   const { t } = useTranslation();
+  const router=useRouter()
   //  handle close popover
 
   let menuRef: any = useRef();
@@ -62,7 +63,7 @@ const NotificationPoPover = (props: Props) => {
         width: {sm:"390px",xs:"270px"},
       }}
     >
-      <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+      <CustomPaperBigCard sx={{ backgroundColor: "white" }} >
         <GlobalDisplayFlexColumnBox
           width={"100%"}
           gap={"15px"}
@@ -85,7 +86,14 @@ const NotificationPoPover = (props: Props) => {
                   >
                     {e?.date}
                   </Typography>
-                  <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
+                  <CustomPaperBigCard sx={{ backgroundColor: "white",cursor:e?.order_id?"pointer":"default" }}
+                  
+                  onClick={()=>{
+                    if(e?.order_id){
+                      router.push("/info?page=order")
+                    }
+                  }}
+                  >
                     <GlobalDisplayFlexBox sx={{ gap: "50px" }}>
                       <GlobalDisplayFlexBox sx={{ gap: "12px" }}>
                         <img src={e?.image} loading="lazy" alt="img" />

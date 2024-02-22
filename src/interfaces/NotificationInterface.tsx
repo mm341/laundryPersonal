@@ -6,6 +6,7 @@ export const initialNotification = () => {
     message: "",
     date: "",
     image: "",
+    order_id:"",
   };
 };
 
@@ -16,4 +17,5 @@ export interface NotificationInterface {
   title: string;
   date: string;
   image: string;
+  order_id:string
 }
