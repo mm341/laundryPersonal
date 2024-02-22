@@ -81,7 +81,7 @@ const NavServices = ({
                 <Typography
                   onClick={() => {
                     localStorage.setItem("service", e?.name);
-                    setOpenAreaDialog(true);
+                    push(`/products?service_id=${e?.id}`);
                     setServiceId(e?.id);
                     setResdropdown(false);
                   }}

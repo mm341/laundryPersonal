@@ -10,20 +10,9 @@ import React, { useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import { HomeServices } from "@/interfaces/HomeServices";
-import img from "../../../public/serviceFakeImg.png";
-// import Image from "next/image";
-const SeviceCard = ({
-  setOpenOrderDialog,
-  area,
-  element,
-  setServiceId,
-}: {
-  setOpenOrderDialog?: ((action: boolean) => void) | any;
-  area?: boolean;
-  element: HomeServices;
-  setServiceId: (action: string | undefined) => void;
-}) => {
-  const [bright, setBright] = useState<boolean>(false);
+
+const SeviceCard = ({ element }: { element: HomeServices }) => {
+ 
   const { t } = useTranslation();
   const router = useRouter();
   const theme = useTheme();
@@ -35,12 +24,10 @@ const SeviceCard = ({
         backgroundColor: "white",
         display: "flex",
         flexDirection: "column",
-        // gap: "20px",
-        // height: "335px",
+      
         position: "relative",
       }}
-      onMouseOver={() => setBright(true)}
-      onMouseLeave={() => setBright(false)}
+     
     >
       <img
         width={"213"}
@@ -77,9 +64,8 @@ const SeviceCard = ({
             height: "150px",
             width: "95%",
             mx: "auto",
-            display:"flex",
-            alignItems:"center",
-           
+            display: "flex",
+            alignItems: "center",
           }}
         >
           {element?.description}
@@ -89,14 +75,9 @@ const SeviceCard = ({
       <GlobalDisplayFlexBox sx={{ justifyContent: "center" }}>
         <GlobalButton
           onClick={() => {
-            if (area) {
-              localStorage.setItem("service", element?.name);
-              router.push(`/products?service_id=${element?.id}`);
-            } else {
-              localStorage.setItem("service", element?.name);
-              setServiceId(element?.id);
-              setOpenOrderDialog(true);
-            }
+            // if (area) {
+            localStorage.setItem("service", element?.name);
+            router.push(`/products?service_id=${element?.id}`);
           }}
           service
           sx={{
@@ -117,8 +98,7 @@ const SeviceCard = ({
         </GlobalButton>
       </GlobalDisplayFlexBox>
 
-
-{/*  static img */}
+      {/*  static img */}
       {/* <img
         style={{
           position: "absolute",

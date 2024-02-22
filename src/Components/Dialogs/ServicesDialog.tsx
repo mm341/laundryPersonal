@@ -31,7 +31,7 @@ const ServicesDialog = ({
     height: "83%",
     // oveflowY: "auto",
     transform: "translate(-50%, -50%)",
-    width: {lg:"57%", md: "62%", xs: "85%" },
+    width: {lg:"52%", md: "62%", xs: "85%" },
     bgcolor: "background.paper",
     p: { md: 4, xs: 1 },
     borderRadius: "10px",
@@ -62,15 +62,13 @@ const ServicesDialog = ({
           <GlobalTypography text={"Select Service Category"} />
 
           <Scrollbar style={{ maxHeight: issmall ? "430px" : "90%" }}>
-            <Grid sx={{ my: "40px", height: "100%" }} container spacing={3}>
+            <Grid sx={{ mb: "10px",mt:"2px", height: "100%" ,width:"98%",mx:"auto"}} container spacing={3}>
               {homeServices?.map((e: HomeServices, i: number) => (
-                <Grid key={i} item md={4} sm={6} xs={12}>
+                <Grid key={i} item  sm={6} xs={12}>
                   <SeviceCard
-                    area
+                    
                     element={e}
-                    setServiceId={function (action: string | undefined): void {
-                      throw new Error("Function not implemented.");
-                    }}
+                    
                   />
                 </Grid>
               ))}

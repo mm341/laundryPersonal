@@ -35,7 +35,7 @@ const FirstSection = ({
   const { t } = useTranslation();
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
-  const [selectValue, setselectValue] = useState<string>(homeAreas[0]?.id);
+  const [selectValue, setselectValue] = useState<string>(homeAreas[1]?.id);
   const [openOrderDialog, setOpenOrderDialog] = useState<boolean>(false);
   const handelSelectBox = (
     e: React.ChangeEvent<HTMLSelectElement> | SelectChangeEvent<string>

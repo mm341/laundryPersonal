@@ -41,9 +41,8 @@ const ServiceSection = ({
               {homeServices?.map((e: HomeServices, i: number) => (
                 <Grid key={e?.id} item md={4} sm={6} xs={12}>
                   <SeviceCard
-                    setServiceId={setServiceId}
                     element={e}
-                    setOpenOrderDialog={setOpenAreaDialog}
+                   
                   />
                 </Grid>
               ))}
