@@ -10,6 +10,7 @@ import React, { useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import { HomeServices } from "@/interfaces/HomeServices";
+import img from "../../../public/serviceFakeImg.png";
 // import Image from "next/image";
 const SeviceCard = ({
   setOpenOrderDialog,
@@ -34,18 +35,13 @@ const SeviceCard = ({
         backgroundColor: "white",
         display: "flex",
         flexDirection: "column",
-        gap: "20px",
+        // gap: "20px",
         // height: "335px",
         position: "relative",
       }}
       onMouseOver={() => setBright(true)}
       onMouseLeave={() => setBright(false)}
     >
-      <Typography
-        sx={{ fontSize: { md: "20px", xs: "16px" }, fontWeight: "500" }}
-      >
-        {element?.name}
-      </Typography>
       <img
         width={"213"}
         height={"300"}
@@ -57,21 +53,83 @@ const SeviceCard = ({
           width: "100%",
           height: "100px",
           objectFit: "contain",
+          marginTop: "20px",
+          marginBottom: "20px",
         }}
         className=" brightness-75"
       />
+      <GlobalDisplayFlexColumnBox gap={"0px"}>
+        <Typography
+          sx={{
+            fontSize: { md: "20px", xs: "16px" },
+            fontWeight: "500",
+            textAlign: "center",
+          }}
+        >
+          {element?.name}
+        </Typography>
 
-      <Typography
-        sx={{
-          fontSize: { md: "16px", xs: "12px" },
-          fontWeight: "400",
-          textAlign: "center",
+        <Typography
+          sx={{
+            fontSize: { md: "16px", xs: "12px" },
+            fontWeight: "400",
+            textAlign: "center",
+            height: "150px",
+            width: "95%",
+            mx: "auto",
+            display:"flex",
+            alignItems:"center",
+           
+          }}
+        >
+          {element?.description}
+        </Typography>
+      </GlobalDisplayFlexColumnBox>
+
+      <GlobalDisplayFlexBox sx={{ justifyContent: "center" }}>
+        <GlobalButton
+          onClick={() => {
+            if (area) {
+              localStorage.setItem("service", element?.name);
+              router.push(`/products?service_id=${element?.id}`);
+            } else {
+              localStorage.setItem("service", element?.name);
+              setServiceId(element?.id);
+              setOpenOrderDialog(true);
+            }
+          }}
+          service
+          sx={{
+            width: "180px",
+            height: "36px",
+            color: "white",
+            display: "flex",
+            backgroundColor: theme.palette.primary.main,
+            border: `1px solid ${theme.palette.primary.main}`,
+            borderRadius: "4px",
+            fontSize: { md: "16px", xs: "12px" },
+            mb: "16px",
+          }}
+          px={!issmall ? "25px" : "10px"}
+          py={!issmall ? "10px" : "6px"}
+        >
+          {t("Get the Service")}
+        </GlobalButton>
+      </GlobalDisplayFlexBox>
+
+
+{/*  static img */}
+      {/* <img
+        style={{
+          position: "absolute",
+          top: "56px",
+          right: "0",
         }}
-      >
-        {element?.description}
-      </Typography>
-
-      {bright && (
+        loading="lazy"
+        alt="img"
+        src={img?.src}
+      /> */}
+      {/* {bright && (
         <GlobalDisplayFlexBox
           style={{
             background:
@@ -110,7 +168,7 @@ const SeviceCard = ({
             {t("Get the Service")}
           </GlobalButton>
         </GlobalDisplayFlexBox>
-     )} 
+     )}  */}
     </CustomPaperBigCard>
   );
 };
