@@ -8,11 +8,12 @@ export interface authModel {
   handleClose: () => void;
   modalFor: string;
   setModalFor: (e: string) => void;
+  checkOut?:boolean
 }
 const AuthModal = ({
   open,
   handleClose,
-
+  checkOut,
   modalFor,
   setModalFor,
 }: authModel) => {
@@ -25,7 +26,7 @@ const AuthModal = ({
         aria-describedby="modal-modal-description"
       >
         {modalFor === "sign-in" ? (
-          <SignInPage modalFor={modalFor} handleClose={handleClose} setModalFor={setModalFor} />
+          <SignInPage checkOut={checkOut} modalFor={modalFor} handleClose={handleClose} setModalFor={setModalFor} />
         ) : (
           <SignUpPage modalFor={modalFor} handleClose={handleClose} setModalFor={setModalFor} />
         )}

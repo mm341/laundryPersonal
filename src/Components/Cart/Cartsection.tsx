@@ -263,6 +263,7 @@ const Cartsection = ({
       </Box>
 
       <AuthModal
+      checkOut
         open={authModalOpen}
         modalFor={modalFor}
         setModalFor={setModalFor}

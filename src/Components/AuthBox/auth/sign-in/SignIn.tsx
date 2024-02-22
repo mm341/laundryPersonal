@@ -34,14 +34,21 @@ import { AuthApi } from "@/React-Query/authApi";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 import { useAppDispatch } from "@/redux/store";
 import { SaveProfileData } from "@/redux/slices/HandelUpdateProfile";
+import { GetCartDetails } from "@/redux/slices/CartSlice";
 
 export interface SignModel {
   handleClose: () => void;
   signInSuccess?: boolean;
   modalFor: string;
   setModalFor: (e: string) => void;
+  checkOut?: boolean;
 }
-const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
+const SignInPage = ({
+  setModalFor,
+  handleClose,
+  modalFor,
+  checkOut,
+}: SignModel) => {
   //  hooks
   const theme = useTheme();
   const { t } = useTranslation();
@@ -118,17 +125,14 @@ const SignInPage = ({ setModalFor, handleClose, modalFor }: SignModel) => {
     mobile?: string | undefined;
   }) => {
     const onSuccessHandler = (res: any) => {
-      dispatch(SaveProfileData(res.data.data.user));
-
-      if (res.data.data.access.token) {
+      if (res?.data?.data?.access?.token) {
         toast.success(res?.data?.message);
         localStorage.setItem("token", res?.data?.data?.access?.token);
-
+        checkOut&&dispatch(GetCartDetails({}));
         handleClose?.();
+        setOpenOtpModal(false);
+        dispatch(SaveProfileData(res?.data?.data?.user));
       }
-      setOpenOtpModal(false);
-
-      handleClose?.();
     };
     otpVerifyMutate(values, {
       onSuccess: onSuccessHandler,
