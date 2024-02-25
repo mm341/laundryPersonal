@@ -29,20 +29,22 @@ const ProductCard = ({
   const { t } = useTranslation();
   const theme = useTheme();
   const dispatch = useAppDispatch();
+  let [quantity, setQuantity] = useState<number>(1);
   //  master data
   const { master } = useAppSelector((state) => state.master);
   const { cartList, isLoadingAddToCart } = useAppSelector(
     (state) => state.cartList
   );
 
-  let [quantity, setQuantity] = useState<number>(1);
+  
+
 
   //  handel old price
 
   const handelProductOldPrice = () => {
     if (
       Math.min(...product?.old_price) !== Math.max(...product?.old_price) &&
-      product?.discount_percentage < 0
+      product?.discount_percentage > 0
     )
       return (
         <Typography
@@ -70,6 +72,22 @@ const ProductCard = ({
         >
           {Math.min(...product?.old_price)} {master?.currency} / {t("Item")} -{" "}
           {Math.max(...product?.old_price)} {master?.currency} / {t("Item")}
+        </Typography>
+      );
+    } else if (
+      Math.min(...product?.old_price) === Math.max(...product?.old_price) &&
+      product?.discount_percentage
+    ) {
+      return (
+        <Typography
+          sx={{
+            fontSize: "16px",
+            fontWeight: "400",
+            textDecoration: "line-through",
+            opacity: "0.6",
+          }}
+        >
+          {Math.min(...product?.old_price)} {master?.currency} / {t("Item")}
         </Typography>
       );
     } else {
@@ -107,49 +125,12 @@ const ProductCard = ({
       );
     }
   };
-  // //  handel current price
-  // const handelProductPrice = () => {
-  //   if (
-  //     Math.min(...product?.current_price) !==
-  //     Math.max(...product?.current_price)
-  //   )
-  //     return (
-  //       <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-  //         {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
-  //         - {Math.max(...product?.current_price)} {master?.currency} /{" "}
-  //         {t("Item")}
-  //       </Typography>
-  //     );
-  //   else {
-  //     return (
-  //       <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-  //         {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
-  //       </Typography>
-  //     );
-  //   }
-  // };
 
   useEffect(() => {
     setQuantityForAddRequest(quantity);
   }, [quantity]);
-  //  handel old price
 
-  // const handelProductOldPrice = () => {
-  //   if (Math.min(...product?.old_price) !== Math.max(...product?.old_price))
-  //     return (
-  //       <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-  //         {Math.min(...product?.old_price)} {master?.currency} / {t("Item")} -{" "}
-  //         {Math.max(...product?.old_price)} {master?.currency} / {t("Item")}
-  //       </Typography>
-  //     );
-  //   else {
-  //     return (
-  //       <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
-  //         {Math.min(...product?.old_price)} {master?.currency} / {t("Item")}{" "}
-  //       </Typography>
-  //     );
-  //   }
-  // };
+  //  handel add button
 
   const handelAddButton = (e: productInterface) => {
     return !isLoadingAddToCart ? (
@@ -274,7 +255,7 @@ const ProductCard = ({
             </Typography>
 
             {/*  old and current price  case of product discount*/}
-            {product?.discount_percentage<0 && (
+            {product?.discount_percentage > 0 && (
               <GlobalDisplayFlexColumnBox width={"100%"} gap={"2px"}>
                 {handelProductPrice()}
                 <Typography
