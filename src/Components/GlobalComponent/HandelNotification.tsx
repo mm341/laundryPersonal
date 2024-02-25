@@ -14,38 +14,39 @@ interface notification {
 }
 const HandelNotification = ({ children }: AuxProps) => {
   //  hooks
-
+  const [notification, setNotification] = useState<any>(null);
   const { push } = useRouter();
 
   useEffect(() => {
     onMessageListener()
       .then((payload: any) => {
-       
-        if (payload?.notification?.title) {
-          toast.success(
-            <Stack
-              sx={{ cursor: "pointer" }}
-              onClick={() => push("/info?page=order")}
-            >
-              <Stack
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "5px",
-                  flexDirection: "row",
-                }}
-              >
-                <Typography>{payload?.notification?.title}</Typography>
-              </Stack>
-
-              <Typography>{payload?.notification?.body}</Typography>
-            </Stack>
-          );
-        }
+        setNotification(payload?.notification);
       })
       .catch((err) => toast(err));
-  }, []);
+    if (notification) {
+      console.log(notification);
+      toast.success(
+        <Stack
+          sx={{ cursor: "pointer" }}
+          onClick={() => push("/info?page=order")}
+        >
+          <Stack
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "5px",
+              flexDirection: "row",
+            }}
+          >
+            <Typography>{notification?.title}</Typography>
+          </Stack>
+
+          <Typography>{notification?.body}</Typography>
+        </Stack>
+      );
+    }
+  }, [notification]);
 
   return <>{children}</>;
 };

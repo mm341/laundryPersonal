@@ -20,6 +20,7 @@ import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import { Master } from "@/interfaces/MasterInterface";
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
+import HandelNotification from "@/Components/GlobalComponent/HandelNotification";
 export interface data {
   title: string;
   describtion: string;
@@ -90,6 +91,7 @@ const HowItWork = ({
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
       <CssBaseline />
+      <HandelNotification>
       <PublicContainer>
         <CustomPaperBigCard sx={{ backgroundColor: "white",my:"5px" }}>
           <GlobalDisplayFlexColumnBox
@@ -132,6 +134,7 @@ const HowItWork = ({
           </GlobalDisplayFlexColumnBox>
         </CustomPaperBigCard>
       </PublicContainer>
+      </HandelNotification>
     </>
   );
 };

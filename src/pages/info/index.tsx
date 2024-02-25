@@ -56,14 +56,15 @@ const Index = ({
   }, [dispatch, footerSocialLinks]);
 
   return (
-    <RTL direction={languagedirection}>
-      <CssBaseline />
-      <HandelNotification>
+    <HandelNotification>
+      <RTL direction={languagedirection}>
+        <CssBaseline />
+
         <PublicContainer>
           <AuthGuard>{page && <UserInfo page={page} />}</AuthGuard>
         </PublicContainer>
-      </HandelNotification>
-    </RTL>
+      </RTL>
+    </HandelNotification>
   );
 };
 
