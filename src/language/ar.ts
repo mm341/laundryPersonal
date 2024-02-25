@@ -791,7 +791,7 @@ export const arabic = {
   "Rate your Experience": "قم بتقيم تجربتك",
   " Add New +": "أضف جديد +",
   "Address Type": "نوع العنوان",
-  home: "مسكن",
+  home: "منزل",
   "Please select a cancellation reason": "من فضلك حدد سبب الالغاء",
   "By signing up, you agree to our terms and conditions":
     "بالتسجيل فإنك توافق علي",
@@ -800,6 +800,7 @@ export const arabic = {
   "Busy Now": "مشغول الان",
 
   Others: "أخري",
+  others: "أخري",
   "Contact Person Name": "اسم شخص الاتصال",
   "Contact Person Number": "رقم جهة الاتصال",
   "Street Number": "رقم الشارع",
@@ -999,6 +1000,7 @@ export const arabic = {
   point: "نقطة",
   "Your Profile": "ملفك الشخصي",
   Office: "مكتب",
+  office: "مكتب",
   Apply: "تفعيل",
   "Enter Coupon": "أدخل الكوبون",
   "Recommend Products": "المنتجات الموصي بها",

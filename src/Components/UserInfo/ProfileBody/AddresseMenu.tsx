@@ -68,25 +68,7 @@ const AddresseMenu = ({
     return img;
   };
 
-  const OrderActionStatusArabic = (addresse: AddresseInterface) => {
-    let img;
-
-    switch (addresse?.address_name) {
-      case "المنزل":
-        img = titleADreesseHomeIcon?.src;
-        break;
-
-      case "المكتب":
-        img = titleADreesseOfficeIcon?.src;
-        break;
-
-      case "اخري":
-        img = titleADreesseOthersIcon?.src;
-        break;
-    }
-
-    return img;
-  };
+ 
 
   return (
     <Grid container spacing={1.5}>
@@ -218,12 +200,27 @@ const AddresseMenu = ({
                                   lineBreak: "anywhere",
                                 }}
                               >
-                                {` ${addresse?.address_name} ${
-                                  addresse?.street
-                                } ${t("Street")}
-                              ${addresse?.apartment_no} ${t("Apartment")},
-                                ${addresse?.building_no} ${t("Building")},
-                                    ${addresse?.floor_no} ${t("Floor")}`}
+                               {locale === "en"
+                                          ? ` ${t(addresse?.address_name)} ${
+                                              addresse?.street
+                                            } ${t("Street")}
+                                    ${addresse?.apartment_no} ${t("Apartment")},
+                                      ${addresse?.building_no} ${t("Building")},
+                                          ${addresse?.floor_no} ${t("Floor")}`
+                                          : ` ${t(addresse?.address_name)}
+                                          
+                                          ${t("Street")}
+
+                                          ${addresse?.street} 
+                                          ${t("Apartment")}  ${
+                                              addresse?.apartment_no
+                                            } ,
+                                          ${t("Building")}      ${
+                                              addresse?.building_no
+                                            } ,
+                                          ${t("Floor")}   ${
+                                              addresse?.floor_no
+                                            } `}
                               </Box>
                             </Box>
                           </Box>

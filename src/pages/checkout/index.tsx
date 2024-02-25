@@ -297,6 +297,20 @@ const CheckOutPage = ({
     path = localStorage.getItem("path");
   }
 
+  let handelAddresseDirection = (addresse: AddresseInterface, i: number) => {
+    if (locale === "en") {
+      return ` ${addresse?.address_name} ${addresse?.street} ${t("Street")}
+                              ${addresse?.apartment_no} ${t("Apartment")},
+                                ${addresse?.building_no} ${t("Building")},
+                                    ${addresse?.floor_no} ${t("Floor")}`;
+    } else {
+      return ` ${addresse?.address_name} ${addresse?.street} ${t("Street")}
+                              ${t("Apartment")} ${addresse?.apartment_no} ,
+                              ${t("Building")} ${addresse?.building_no} ,
+                              ${t("Floor")} ${addresse?.floor_no}`;
+    }
+  };
+
   return (
     <>
       <Meta
@@ -510,7 +524,7 @@ const CheckOutPage = ({
                                     setDeliveryHour(e.target.value);
                                   }}
                                 >
-                                  {schedules?.map(
+                                  {deliverySchedules?.map(
                                     (
                                       e: { hour: string; title: string },
                                       i: number
@@ -600,15 +614,30 @@ const CheckOutPage = ({
                                         key={i}
                                         value={addresse?.id}
                                       >
-                                        {` ${
-                                          addresse?.address_name
-                                        } ${addresse?.street?.slice(
-                                          0,
-                                          30
-                                        )}... ${t("Street")}
-                                ${addresse?.apartment_no} ${t("Apartment")},
-                                  ${addresse?.building_no} ${t("Building")},
-                                      ${addresse?.floor_no} ${t("Floor")}`}
+                                        {locale === "en"
+                                          ? ` ${t(
+                                              addresse?.address_name
+                                            )} ${addresse?.street?.slice(
+                                              0,
+                                              30
+                                            )}... ${t("Street")}
+                                    ${addresse?.apartment_no} ${t("Apartment")},
+                                      ${addresse?.building_no} ${t("Building")},
+                                          ${addresse?.floor_no} ${t("Floor")}`
+                                          : ` ${t(addresse?.address_name)}
+                                          
+                                          ${t("Street")}
+
+                                          ${addresse?.street?.slice(0, 30)}... 
+                                          ${t("Apartment")}  ${
+                                              addresse?.apartment_no
+                                            } ,
+                                          ${t("Building")}      ${
+                                              addresse?.building_no
+                                            } ,
+                                          ${t("Floor")}   ${
+                                              addresse?.floor_no
+                                            } `}
                                       </option>
                                     );
                                   } else {
@@ -621,12 +650,27 @@ const CheckOutPage = ({
                                         key={i}
                                         value={addresse?.id}
                                       >
-                                        {` ${addresse?.address_name} ${
-                                          addresse?.street
-                                        } ${t("Street")}
-                              ${addresse?.apartment_no} ${t("Apartment")},
-                                ${addresse?.building_no} ${t("Building")},
-                                    ${addresse?.floor_no} ${t("Floor")}`}
+                                        {locale === "en"
+                                          ? ` ${t(addresse?.address_name)} ${
+                                              addresse?.street
+                                            } ${t("Street")}
+                                    ${addresse?.apartment_no} ${t("Apartment")},
+                                      ${addresse?.building_no} ${t("Building")},
+                                          ${addresse?.floor_no} ${t("Floor")}`
+                                          : ` ${t(addresse?.address_name)}
+                                          
+                                          ${t("Street")}
+
+                                          ${addresse?.street} 
+                                          ${t("Apartment")}  ${
+                                              addresse?.apartment_no
+                                            } ,
+                                          ${t("Building")}      ${
+                                              addresse?.building_no
+                                            } ,
+                                          ${t("Floor")}   ${
+                                              addresse?.floor_no
+                                            } `}
                                       </option>
                                     );
                                   }
