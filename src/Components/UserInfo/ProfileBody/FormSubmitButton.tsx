@@ -73,7 +73,7 @@ const FormSubmitButton = ({
       if (token) {
         setLoading(true);
         axios
-          .postForm(`${baseUrl}customer/profile/update`, formData, {
+          .postForm(`${baseUrl}/customer/profile/update`, formData, {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "multipart/form-data", // Assuming you are sending form data
