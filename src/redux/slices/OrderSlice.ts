@@ -64,6 +64,7 @@ interface OrderPayload {
   pick_date: string;
   pick_hour: string;
   payment_type?: string;
+  coupon?:string|undefined|null
 }
 export const AddOrder = createAsyncThunk(
   "updateProfile/AddOrder",

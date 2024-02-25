@@ -221,6 +221,13 @@ const CheckOutPage = ({
     }
   }, [pickupHour]);
   //  function add order
+  //  get coupon value from localstorage
+
+  let coupon: string | undefined | null = undefined;
+
+  if (typeof window !== "undefined") {
+    coupon = localStorage.getItem("coupon");
+  }
 
   const handelAddOrder = () => {
     if (dayjs(deliveryDate) <= dayjs(pickupDate)) {
@@ -242,9 +249,11 @@ const CheckOutPage = ({
             pick_hour: pickupHour,
             instruction: addtionalInformation,
             payment_type: payment,
+            coupon: coupon,
           })
         ).then((promiseResponse: any) => {
           if (promiseResponse?.payload?.data?.order?.id) {
+            localStorage.setItem("coupon", "");
             router.push("/order");
             dispatch(GetCartDetails({}));
           }

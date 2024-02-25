@@ -42,7 +42,11 @@ const CouponSection = ({
                   GetCartDetails({
                     coupon: couponValue,
                   })
-                );
+                ).then((promiseResponse) => {
+                  if (promiseResponse?.payload?.data?.cart_details?.cart_id) {
+                    localStorage.setItem("coupon", couponValue);
+                  }
+                });
               } else {
                 toast.error(t("Please Sign In , First"));
               }
