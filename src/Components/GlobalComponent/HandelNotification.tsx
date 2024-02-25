@@ -24,7 +24,6 @@ const HandelNotification = ({ children }: AuxProps) => {
       })
       .catch((err) => toast(err));
     if (notification) {
-      console.log(notification);
       toast.success(
         <Stack
           sx={{ cursor: "pointer" }}
