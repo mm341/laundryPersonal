@@ -224,7 +224,7 @@ const ProductCard = ({
             justifyContent: "flex-start",
             alignItems: "center",
             gap: "15px",
-            width: { md: "60%", xs: "100%" },
+            width: { md: "85%", xs: "100%" },
             flexDirection:{md:"row",xs:"column"}
           }}
         >
