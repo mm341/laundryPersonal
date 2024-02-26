@@ -225,10 +225,11 @@ const ProductCard = ({
             alignItems: "center",
             gap: "15px",
             width: { md: "60%", xs: "100%" },
+            flexDirection:{md:"row",xs:"column"}
           }}
         >
           <GlobalDisplayFlexBox
-            style={{ width: "147px", height: "110px" }}
+            style={{ width: "157px", height: "123px" }}
             sx={{
               width: "147px",
               height: "110px",
@@ -252,6 +253,11 @@ const ProductCard = ({
               sx={{ fontSize: { md: "20px", xs: "14px" }, fontWeight: "600" }}
             >
               {product?.name}
+            </Typography>
+            <Typography
+              sx={{ fontSize: { md: "16px", xs: "14px" }, fontWeight: "400",opacity:"0.7" }}
+            >
+              {product?.description}
             </Typography>
 
             {/*  old and current price  case of product discount*/}

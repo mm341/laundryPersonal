@@ -117,7 +117,7 @@ const AdditionalServicesSection = ({
               >
                 <GlobalDisplayFlexBox>
                   {/*  price and name */}
-                  <GlobalDisplayFlexColumnBox gap={"20px"}>
+                  <GlobalDisplayFlexColumnBox sx={{width:{md:"70%",xs:"100%"}}} gap={"20px"}>
                     <Typography
                       sx={{
                         fontSize: "16px",
@@ -126,6 +126,11 @@ const AdditionalServicesSection = ({
                       }}
                     >
                       {e?.title}
+                    </Typography>
+                    <Typography
+                      sx={{ fontSize: { md: "16px", xs: "14px" }, fontWeight: "400",opacity:"0.7" }}
+                    >
+                      {e?.description}
                     </Typography>
                     <GlobalDisplayFlexBox
                       sx={{
