@@ -254,8 +254,9 @@ const ProductCard = ({
             >
               {product?.name}
             </Typography>
+            {/* { describtion} */}
             <Typography
-              sx={{ fontSize: { md: "16px", xs: "14px" }, fontWeight: "400",opacity:"0.7" }}
+              sx={{ fontSize: { md: "14px", xs: "12px" }, fontWeight: "400",opacity:"0.7" }}
             >
               {product?.description}
             </Typography>
