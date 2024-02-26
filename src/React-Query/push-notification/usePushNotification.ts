@@ -4,9 +4,9 @@ import { useMutation } from 'react-query'
 
 const postHandler = async (token:string) => {
 
-    const { data } = await MainApi.post('/api/v1/customer/cm-firebase-token', {
-        cm_firebase_token: token,
-        _method: 'put',
+    const { data } = await MainApi.post('/customer/profile/update-fcm-token', {
+        fcm_token: token,
+        // _method: 'put',
     })
     return data
 }

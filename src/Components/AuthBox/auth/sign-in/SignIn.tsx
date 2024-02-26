@@ -84,7 +84,7 @@ const SignInPage = ({
         if (values?.mobile) {
           data.mobile = `+${values?.mobile.toString()}`;
         }
-        data.firebase_token = firebase_token;
+        // data.firebase_token = firebase_token;
         formSubmitHandler(data);
       } catch (err) {}
     },

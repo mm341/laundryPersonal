@@ -68,7 +68,7 @@ const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
   const formSubmitHandler = (values: AccountRegister) => {
     const signUpData: AccountRegister = {
       name: values.name,
-      firebase_token: firebase_token,
+      // firebase_token: firebase_token,
       mobile: `+${values.mobile}`,
     };
 

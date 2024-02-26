@@ -1,4 +1,5 @@
-import { onMessageListener } from "@/firebase";
+import { useStoreFcm } from "@/React-Query/push-notification/usePushNotification";
+import { fetchToken, onMessageListener } from "@/firebase";
 import { AuxProps } from "@/interfaces/ChildrenInterface";
 import { Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
@@ -17,6 +18,29 @@ const HandelNotification = ({ children }: AuxProps) => {
   const [notification, setNotification] = useState<any>(null);
   const { push } = useRouter();
 
+  const [isTokenFound, setTokenFound] = useState(false);
+  const [fcmToken, setFcmToken] = useState<string | undefined>("");
+
+  useEffect(() => {
+    handleFetchToken();
+  }, []);
+
+  const handleFetchToken = async () => {
+    await fetchToken(setTokenFound, setFcmToken);
+  };
+
+
+  let token: undefined | any | null = undefined;
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token");
+  }
+  const { mutate } = useStoreFcm();
+
+  useEffect(() => {
+    if (token && fcmToken) {
+      mutate(fcmToken);
+    }
+  }, [fcmToken, token]);
   useEffect(() => {
     onMessageListener()
       .then((payload: any) => {
