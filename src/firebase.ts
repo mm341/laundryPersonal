@@ -123,8 +123,8 @@ const messaging = (async () => {
 })();
 
 export const fetchToken = async (
-  setTokenFound: (found: boolean) => void,
-  setFcmToken: (token?: string) => void
+  setTokenFound: (e?: any) => void,
+  setFcmToken: (e?: any) => void
 ) => {
   try {
     const currentMessaging: any = await messaging;

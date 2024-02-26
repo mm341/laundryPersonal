@@ -79,9 +79,6 @@ export default function App({
     }
   }, [locale]);
 
-  useEffect(() => {
-    fetchToken().then();
-  }, []);
 
   //  custom theme
   const theme = useMemo(
