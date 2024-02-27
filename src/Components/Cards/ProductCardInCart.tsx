@@ -47,7 +47,7 @@ const ProductCardInCart = ({
             justifyContent: "flex-start",
             alignItems: "center",
             gap: "15px",
-            width: { sm: "70%", xs: "100%" },
+            width: { md: "70%", xs: "100%" },
           }}
         >
           <GlobalDisplayFlexBox
@@ -71,16 +71,17 @@ const ProductCardInCart = ({
 
           <GlobalDisplayFlexColumnBox
             width={"100%"}
-            gap={!checkOut ? "16px" : "10px"}
+            sx={{gap:!checkOut ? {md:"16px",xs:"5px"} : {md:"10px",xs:"5px"}}}
+           
           >
             {/*product  name */}
             <Typography sx={{ fontSize: "14px", fontWeight: "500" }}>
               {product?.name}
             </Typography>
 
-            {/*  srrvice name */}
+            {/*  service name */}
             <Typography
-              sx={{ fontSize: "14px", fontWeight: "400", color: "#999999" }}
+              sx={{ fontSize: {md:"14px",xs:"12px"}, fontWeight: "400", color: "#999999" }}
             >
               {product?.service?.name}
             </Typography>

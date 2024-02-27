@@ -49,12 +49,12 @@ const AdditionalServicesSectionInCart = ({
               sx={{
                 width: "100%",
                 mx: "auto",
-                gap: { md: "24px", xs: "32px" },
+                gap: { md: "24px", xs: "19px" },
                 px: "18px",
               }}
             >
               {cartList?.cart_details?.additionals?.map((e, i) => (
-                <GlobalDisplayFlexBox key={i}>
+                <GlobalDisplayFlexBox sx={{gap:{md:"0",xs:"5px"}}} key={i}>
                   {/*   name */}
 
                   <Typography
@@ -62,15 +62,18 @@ const AdditionalServicesSectionInCart = ({
                       fontSize: "14px",
                       fontWeight: "400",
                       color: theme.palette.secondary.contrastText,
+                      width:{md:"45%",xs:"100%"}
                     }}
                   >
                     {e?.title}
                   </Typography>
 
                   <GlobalDisplayFlexBox
+                  style={{flexDirection:"row"}}
                     sx={{
+                      width:{md:"50%",xs:"100%"},
                       gap: "15px",
-                      justifyContent: "flex-end",
+                      justifyContent: {md:"flex-end",xs:"flex-start"},
                     }}
                   >
                     {/*  price and delete */}

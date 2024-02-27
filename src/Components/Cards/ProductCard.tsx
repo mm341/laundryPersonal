@@ -247,7 +247,7 @@ const ProductCard = ({
             />
           </GlobalDisplayFlexBox>
 
-          <GlobalDisplayFlexColumnBox width={"100%"} gap={"2px"}>
+          <GlobalDisplayFlexColumnBox width={"100%"} gap={"2px"} sx={{alignItems:{md:"flex-start",xs:"center"}}}>
             {/*  name */}
             <Typography
               sx={{ fontSize: { md: "20px", xs: "14px" }, fontWeight: "600" }}
@@ -256,7 +256,7 @@ const ProductCard = ({
             </Typography>
             {/* { describtion} */}
             <Typography
-              sx={{ fontSize: { md: "14px", xs: "12px" }, fontWeight: "400",opacity:"0.7" }}
+              sx={{ fontSize: { md: "14px", xs: "12px" }, fontWeight: "400",opacity:"0.7",textAlign:{md:"left",xs:"center"} }}
             >
               {product?.description}
             </Typography>
@@ -288,7 +288,7 @@ const ProductCard = ({
               sx={{
                 width: "100%",
                 display: "flex",
-                justifyContent: "flex-start",
+                justifyContent: {md:"flex-start",xs:"center"},
                 gap: "10px",
                 alignItems: "center",
                 mt: { md: "12px", xs: "5px" },

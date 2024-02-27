@@ -14,5 +14,5 @@ const ScrollbarRoot = styled(SimpleBar)`
 
 // eslint-disable-next-line react/display-name
 export const Scrollbar = React.forwardRef((props: any, children) => {
-  return <ScrollbarRoot {...props} />;
+  return <ScrollbarRoot forceVisible {...props} />;
 });
