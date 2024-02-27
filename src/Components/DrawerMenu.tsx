@@ -31,7 +31,7 @@ import { toast } from "react-hot-toast";
 import { useAppDispatch } from "@/redux/store";
 import { LogoutRequest } from "@/redux/slices/ContactingUs";
 import Link from "next/link";
-import logo from "../../public/navbar/logo.svg"
+import logo from "../../public/navbar/logo.svg";
 const DrawerMenu = ({
   onClose,
   open,
@@ -53,15 +53,15 @@ const DrawerMenu = ({
   const theme = useTheme();
   const { t } = useTranslation();
   const router = useRouter();
-  const { locale } = useRouter();
   const [languagedirection, setLanguagedirection] = useState<string>("ltr");
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [authModalOpen, setOpen] = useState<boolean>(false);
   const [ServiceId, setServiceId] = useState<string | undefined>();
   const dispatch = useAppDispatch();
+  const { push, locale, pathname, query, asPath } = useRouter();
   //  change route function
   const changeLocale = (locale: string) => {
-    router.push(router.pathname, router.asPath, { locale });
+    router.push({ pathname, query }, asPath, { locale });
     setOpenDrawer(false);
   };
   //  open Auth dialog
@@ -87,14 +87,12 @@ const DrawerMenu = ({
   //  logout function
   const handleLogout = async () => {
     try {
-     
       dispatch(LogoutRequest({ fcm_token: fcm_token })).then(
         (promiseResponse) => {
           if (
             promiseResponse?.payload?.message === "Logged out successfully!" ||
             promiseResponse?.payload?.message === "!تم تسجيل الخروج بنجاح"
           ) {
-         
             router.push("/", locale);
             localStorage.removeItem("token");
             localStorage.removeItem("cm_firebase_token");
@@ -102,7 +100,6 @@ const DrawerMenu = ({
           }
         }
       );
-     
     } catch (err) {
       //   toast.error('Unable to logout.');
     }
@@ -335,7 +332,6 @@ const DrawerMenu = ({
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "flex-end",
-           
           }}
         >
           {token && children}

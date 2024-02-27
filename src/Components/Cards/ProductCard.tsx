@@ -49,7 +49,7 @@ const ProductCard = ({
       return (
         <Typography
           sx={{
-            fontSize: "16px",
+            fontSize: {md:"16px",xs:"12px"},
             fontWeight: "400",
             textDecoration: "line-through",
             opacity: "0.6",
@@ -66,7 +66,7 @@ const ProductCard = ({
       return (
         <Typography
           sx={{
-            fontSize: "16px",
+            fontSize: {md:"16px",xs:"12px"},
             fontWeight: "400",
           }}
         >
@@ -81,7 +81,7 @@ const ProductCard = ({
       return (
         <Typography
           sx={{
-            fontSize: "16px",
+            fontSize: {md:"16px",xs:"12px"},
             fontWeight: "400",
             textDecoration: "line-through",
             opacity: "0.6",
@@ -94,7 +94,7 @@ const ProductCard = ({
       return (
         <Typography
           sx={{
-            fontSize: "16px",
+            fontSize: {md:"16px",xs:"12px"},
             fontWeight: "400",
           }}
         >
@@ -111,7 +111,7 @@ const ProductCard = ({
       Math.max(...product?.current_price)
     )
       return (
-        <Typography sx={{ fontSize: "18px", fontWeight: "400" }}>
+        <Typography sx={{ fontSize: {md:"18px",xs:"12px"}, fontWeight: "400" }}>
           {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
           - {Math.max(...product?.current_price)} {master?.currency} /{" "}
           {t("Item")}
@@ -119,7 +119,7 @@ const ProductCard = ({
       );
     else {
       return (
-        <Typography sx={{ fontSize: "18px", fontWeight: "400" }}>
+        <Typography sx={{ fontSize: {md:"18px",xs:"12px"}, fontWeight: "400" }}>
           {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
         </Typography>
       );
@@ -216,7 +216,7 @@ const ProductCard = ({
         overflowX: "hidden",
       }}
     >
-      <GlobalDisplayFlexBox sx={{ alignItems: "flex-end" }}>
+      <GlobalDisplayFlexBox sx={{ alignItems: {md:"flex-end",xs:"center"} }}>
         {/*  left section */}
         <Box
           sx={{
@@ -267,7 +267,7 @@ const ProductCard = ({
                 {handelProductPrice()}
                 <Typography
                   sx={{
-                    fontSize: "14px",
+                    fontSize: {md:"14px",xs:"12px"},
                     fontWeight: "400",
                     color: "#999999",
                     textDecoration: "line-through",
@@ -279,7 +279,7 @@ const ProductCard = ({
             )}
             {/*  current price  case of no product discount*/}
             {!product?.discount_percentage && (
-              <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+              <Typography sx={{ fontSize: {md:"16px",xs:"12px"}, fontWeight: "400" }}>
                 {handelProductOldPrice()}
               </Typography>
             )}
