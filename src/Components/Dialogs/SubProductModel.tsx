@@ -170,7 +170,7 @@ const SubProductModel = ({
                                 sx={{
                                   justifyContent: "flex-start",
                                   gap:{md:"2px",xs:"2px"},
-                                  width:{md:"20%",xs:"30%"}
+                                  width:{md:"30%",xs:"40%"}
                                 }}
                               >
                                 <Typography
