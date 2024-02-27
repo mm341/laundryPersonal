@@ -133,12 +133,12 @@ const DrawerMenu = ({
   const menuList = () => (
     <RTL direction={languagedirection ? languagedirection : "ltr"}>
       <Box
-        sx={{ width: "auto", mt: "40px" }}
+        sx={{ width: "auto", mt: "60px" }}
         role="presentation"
         onKeyDown={toggleDrawer(false)}
       >
         <List
-          sx={{ mt: "30px" }}
+          sx={{ mt: "35px" }}
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
@@ -327,11 +327,12 @@ const DrawerMenu = ({
         </Box>
         <Box
           sx={{
-            width: "65%",
+            width: "100%",
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "flex-end",
+           
           }}
         >
           {token && children}

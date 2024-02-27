@@ -337,7 +337,7 @@ const Navbar = () => {
                 ref={anchorRef}
                 sx={{ transform: "translateY(5px)" }}
               >
-                <Stack  direction={"row"} gap={"20px"}>
+                <Stack  direction={"row"} gap={"5px"}>
                 <img
                     onClick={handleOpenNotification}
                     style={{ width: "30px", height: "30px", cursor: "pointer" }}
@@ -347,7 +347,7 @@ const Navbar = () => {
                   />
                   <Stack
                     sx={{
-                      gap: "8px",
+                      gap: "5px",
                       justifyContent: "center",
                       display: "flex",
                       flexDirection: "row-reverse",
@@ -364,9 +364,10 @@ const Navbar = () => {
 
                     <Typography
                       sx={{
-                        fontSize: "16px",
+                        fontSize: "12px",
                         fontWeight: "400",
                         color: "#636363",
+                       display:"flex"
                       }}
                     >
                       {t("Hello")}, {accountInfo?.name}

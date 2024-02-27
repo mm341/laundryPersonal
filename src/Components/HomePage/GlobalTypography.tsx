@@ -35,7 +35,7 @@ const GlobalTypography = ({
             lg: !FirstSection ? "36px" : "25px",
             md: !FirstSection ? "36px" : "22px",
             sm: !FirstSection ? "26px" : "36px",
-            xs: "18px",
+            xs: "16px",
           },
           fontWeight: "500",
           backgroundColor: !clearBg ? theme.palette.primary.light : "white",
