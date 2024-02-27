@@ -95,13 +95,11 @@ const DrawerMenu = ({
             promiseResponse?.payload?.message === "!تم تسجيل الخروج بنجاح"
           ) {
             localStorage.removeItem("token");
-            // localStorage.removeItem("cm_firebase_token");
-            // toast.success(t("Logout Successfully"));
+           
           }
         }
       );
-      // localStorage.removeItem("token");
-      // toast.success(t("Logout Successfully"));
+     
     } catch (err) {
       //   toast.error('Unable to logout.');
     }
@@ -175,6 +173,23 @@ const DrawerMenu = ({
             <ListItemText
               primary={t("Pricing")}
               onClick={() => handleRoute("pricing")}
+            />
+          </ListItemButton>
+
+          <ListItemButton
+            sx={{
+              "&:hover": {
+                backgroundColor: "primary.main",
+              },
+            }}
+          >
+            <ListItemText
+              primary={t("Cart")}
+              onClick={() => {
+                if (path) {
+                  router.push(path);
+                }
+              }}
             />
           </ListItemButton>
 
@@ -259,6 +274,12 @@ const DrawerMenu = ({
       </Box>
     </RTL>
   );
+  //   save token in variable from localstaorage
+
+  let path: undefined | null | string = undefined;
+  if (typeof window !== "undefined") {
+    path = localStorage.getItem("path");
+  }
 
   return (
     <Container
