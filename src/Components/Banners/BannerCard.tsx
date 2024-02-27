@@ -14,7 +14,7 @@ const BannerCard = ({ banner }: { banner: Banners }) => {
     <Box
       sx={{
         width: "100%",
-        cursor: "pointer",
+      
         mt: { md: "0", xs: "20px" },
       }}
     >
@@ -26,7 +26,7 @@ const BannerCard = ({ banner }: { banner: Banners }) => {
           style={{
             height: !issmall?"447px":"250px",
             borderRadius: "8px",
-            cursor: "pointer",
+            
             width:"100%"
           }}
           loading="lazy"
