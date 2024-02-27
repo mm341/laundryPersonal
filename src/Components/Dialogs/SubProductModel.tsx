@@ -7,7 +7,6 @@ import {
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
 import {
-  Box,
   Divider,
   ListItem,
   ListItemText,
@@ -45,9 +44,7 @@ const SubProductModel = ({
   //  master data
   const { master } = useAppSelector((state) => state.master);
   //  cartList data
-  const { cartList, isLoadingAddToCart } = useAppSelector(
-    (state) => state.cartList
-  );
+  const { isLoadingAddToCart } = useAppSelector((state) => state.cartList);
   //  style of modal
   const style = {
     position: "absolute",
@@ -120,36 +117,60 @@ const SubProductModel = ({
                   >
                     <ListItemText
                       secondary={
-                        <GlobalDisplayFlexColumnBox width={"100%"} gap={"5px"}>
-                          <Typography
-                            sx={{ fontSize: "16px", fontWeight: "500" }}
-                          >
-                            {e?.name}
-                          </Typography>
-                          {/*  current price afyer discount */}
-                          <GlobalDisplayFlexBox
-                            sx={{ justifyContent: "flex-start", gap: "2px" }}
+                        <GlobalDisplayFlexBox sx={{gap:"10px"}} >
+                          {/*  img */}
+
+                          <img loading="lazy" alt="img" src={e?.image_path} style={{width:"80px",height:"80px",borderRadius:"4px"}}/>
+
+                          {/*  name and price and descrbtion */}
+                          <GlobalDisplayFlexColumnBox
+                            width={"100%"}
+                            sx={{gap:{md:"8px",xs:"3px"}}}
                           >
                             <Typography
-                              sx={{ fontSize: "14px", fontWeight: "400" }}
+                              sx={{ fontSize: "16px", fontWeight: "500" }}
                             >
-                              {e?.price}
+                              {e?.name}
                             </Typography>
 
                             <Typography
-                              sx={{ fontSize: "14px", fontWeight: "400" }}
+                              sx={{ fontSize: "12px", fontWeight: "500",opacity:"0.65" }}
                             >
-                              {master?.currency}
+                              {e?.description}
                             </Typography>
-                          </GlobalDisplayFlexBox>
+                            {/*  current price afyer discount */}
+                            <GlobalDisplayFlexBox
+                            style={{flexDirection:"row"}}
+                              sx={{ justifyContent: "flex-start", gap: {md:"2px",xs:"4px"} }}
+                            >
+                              <Typography
+                                sx={{ fontSize: "14px", fontWeight: "400" }}
+                              >
+                                {e?.price}
+                              </Typography>
 
-                          {/*  old price */}
-                          {e?.old_price > 0 && (
-                            
+                              <Typography
+                                sx={{ fontSize: "14px", fontWeight: "400" }}
+                              >
+                                {master?.currency}
+                              </Typography>
+                            </GlobalDisplayFlexBox>
+
+                            {/*  old price */}
+                            {e?.old_price > 0 && (
                               <GlobalDisplayFlexBox
+                              style={{flexDirection:"row"}}
                                 sx={{
                                   justifyContent: "flex-start",
-                                  gap: "5px",
+                                  gap:"10px",
+                                }}
+                              >
+                                 <GlobalDisplayFlexBox
+                              style={{flexDirection:"row"}}
+                                sx={{
+                                  justifyContent: "flex-start",
+                                  gap:{md:"2px",xs:"2px"},
+                                  width:{md:"20%",xs:"30%"}
                                 }}
                               >
                                 <Typography
@@ -173,23 +194,20 @@ const SubProductModel = ({
                                 >
                                   {master?.currency}
                                 </Typography>
-
-
+                                </GlobalDisplayFlexBox>
                                 <Typography
-                                sx={{
-                                  color: "#38AE04",
-                                  fontSize: "13px",
-                                  fontWeight: "400",
-                                }}
-                              >
+                                  sx={{
+                                    color: "#38AE04",
+                                    fontSize: "13px",
+                                    fontWeight: "400",
+                                  }}
+                                >
                                   {e?.discount_percentage} % {t("Off")}
-                              </Typography>
+                                </Typography>
                               </GlobalDisplayFlexBox>
-
-                             
-                           
-                          )}
-                        </GlobalDisplayFlexColumnBox>
+                            )}
+                          </GlobalDisplayFlexColumnBox>
+                        </GlobalDisplayFlexBox>
                       }
                     />
                     <Radio

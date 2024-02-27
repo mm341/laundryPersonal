@@ -31,6 +31,7 @@ export interface sub_products {
   old_price:number
   discount_percentage:number
   parent_id:string
+  image_path:string
   
 }
 export interface productInterface {
