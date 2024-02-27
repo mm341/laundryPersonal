@@ -26,9 +26,9 @@ const ServicesDialog = ({
   //  style for model
   const styleDialog = {
     position: "absolute",
-    top: { md: "53%", xs: "56%" },
+    top: "50%",
     left: "50%",
-    height: "83%",
+    height: "90vh",
     // oveflowY: "auto",
     transform: "translate(-50%, -50%)",
     width: {lg:"52%", md: "62%", xs: "85%" },
@@ -54,6 +54,7 @@ const ServicesDialog = ({
             width: "100% ",
             mx: "auto",
             height: "100%",
+            
             display: "flex",
             flexDirection: "column",
             gap: "25px",
@@ -61,10 +62,10 @@ const ServicesDialog = ({
         >
           <GlobalTypography text={"Select Service Category"} />
 
-          <Scrollbar style={{ maxHeight: issmall ? "430px" : "90%" }}>
-            <Grid sx={{ mb: "10px",mt:"2px", height: "100%" ,width:"98%",mx:"auto"}} container spacing={3}>
+          <Scrollbar style={{ maxHeight: issmall ? "430px" : "82%" }}>
+            <Grid sx={{ mb: "10px",mt:"2px", height: "100%" ,width:"100%",mx:"auto"}} container spacing={3}>
               {homeServices?.map((e: HomeServices, i: number) => (
-                <Grid key={i} item  sm={6} xs={12}>
+                <Grid style={{paddingLeft:"10px",paddingRight:"10px"}} key={i} item lg={6} md={12} xs={12}>
                   <SeviceCard
                     
                     element={e}
