@@ -87,15 +87,18 @@ const DrawerMenu = ({
   //  logout function
   const handleLogout = async () => {
     try {
-      // router.push("/", locale);
+     
       dispatch(LogoutRequest({ fcm_token: fcm_token })).then(
         (promiseResponse) => {
           if (
             promiseResponse?.payload?.message === "Logged out successfully!" ||
             promiseResponse?.payload?.message === "!تم تسجيل الخروج بنجاح"
           ) {
+         
+            router.push("/", locale);
             localStorage.removeItem("token");
-           
+            localStorage.removeItem("cm_firebase_token");
+            toast.success(t("Logout Successfully"));
           }
         }
       );

@@ -73,9 +73,8 @@ export const AccountPopover = (props: Props) => {
   }
   //  logout function
   const handleLogout = async () => {
-    router.push("/", locale);
-    // onClose?.();
-    // localStorage.clear();
+   
+    
     dispatch(LogoutRequest({ fcm_token: fcm_token })).then(
       (promiseResponse) => {
         if (
@@ -83,17 +82,14 @@ export const AccountPopover = (props: Props) => {
           promiseResponse?.payload?.message === "!تم تسجيل الخروج بنجاح"
         ) {
           setLogout(false);
+          router.push("/", locale);
           localStorage.removeItem("token");
-          // localStorage.removeItem("cm_firebase_token");
-          // toast.success(t("Logout Successfully"));
+          localStorage.removeItem("cm_firebase_token");
+          toast.success(t("Logout Successfully"));
         }
       }
     );
-    // setLogout(false);
-    // localStorage.removeItem("token");
-    // toast.success(t("Logout Successfully"));
-
-    // window.location.reload();
+   
   };
 
   const handleClick = (item: { id: number; label: string; value: string }) => {

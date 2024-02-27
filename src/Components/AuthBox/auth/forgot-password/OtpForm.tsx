@@ -211,12 +211,13 @@ const OtpForm = ({
                     }
                   }}
                   sx={{
-                    fontSize: "14px",
+                    fontSize: {md:"14px",xs:"12px"},
                     fontWeight: "400",
                     // color: theme.palette.primary.textLight,
                     display: "flex",
-                    alignItems: "center",
+                    alignItems: {md:"center",xs:"flex-start"},
                     gap: "2px",
+                    flexDirection:{md:"row",xs:"column"},
                     cursor: resend > 0 ? "default" : "pointer",
                   }}
                 >
@@ -227,6 +228,7 @@ const OtpForm = ({
                         ? {
                             color: "#329CD7",
                             display: "flex",
+                            flexDirection:"row",
                             gap: "2px",
                             alignItems: "center",
                           }

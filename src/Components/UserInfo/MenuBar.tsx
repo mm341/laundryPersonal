@@ -9,6 +9,8 @@ import CustomImageContainer from "../Cards/CustomImageContainer";
 import logouticon from "../../../public/info/logout.svg";
 import DeleteDialog from "../DeleteDialogs";
 import { toast } from "react-hot-toast";
+import { useAppDispatch } from "@/redux/store";
+import { LogoutRequest } from "@/redux/slices/ContactingUs";
 interface menubar {
   tabData: TabDatainfo[];
   onClose: () => void;
@@ -21,7 +23,14 @@ const MenuBar = ({ tabData, onClose, sidedrawer, page }: menubar) => {
   const router = useRouter();
   const { locale } = useRouter();
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
+  //  get cm_firebase_token from local storage
+  let fcm_token: string | undefined | null = "";
+
+  if (typeof window !== "undefined") {
+    fcm_token = localStorage.getItem("fcm_token");
+  }
   //  change route due to page
   const handleClick = (item: TabDatainfo) => {
     router.push(
@@ -36,12 +45,20 @@ const MenuBar = ({ tabData, onClose, sidedrawer, page }: menubar) => {
   };
 
   const handellogout = () => {
-    setOpenDeleteDialog(false);
-    router.push("/", locale);
-    // onClose?.();
-    // localStorage.clear();
-    localStorage.removeItem("token");
-    toast.success(t("Logout Successfully"));
+    dispatch(LogoutRequest({ fcm_token: fcm_token })).then(
+      (promiseResponse) => {
+        if (
+          promiseResponse?.payload?.message === "Logged out successfully!" ||
+          promiseResponse?.payload?.message === "!تم تسجيل الخروج بنجاح"
+        ) {
+          setOpenDeleteDialog(false);
+          router.push("/", locale);
+          localStorage.removeItem("token");
+          localStorage.removeItem("cm_firebase_token");
+          toast.success(t("Logout Successfully"));
+        }
+      }
+    );
   };
 
   return (
