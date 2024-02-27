@@ -29,7 +29,6 @@ const HandelNotification = ({ children }: AuxProps) => {
     await fetchToken(setTokenFound, setFcmToken);
   };
 
-
   let token: undefined | any | null = undefined;
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token");

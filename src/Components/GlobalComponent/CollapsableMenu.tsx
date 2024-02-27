@@ -24,11 +24,14 @@ const CollapsableMenu = ({
   services: HomeServices[];
   setServiceId: (e: string | undefined) => void;
 }) => {
+  //  hooks
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
   const handleClick = () => setOpen(!open);
   const handleRoute = (e: HomeServices) => {
     setServiceId(e.id);
-    setOpenAreaDialog(true);
+    router.push(`/products?service_id=${e?.id}`);
     setOpenDrawer(false);
     localStorage.setItem("service", e?.name);
   };
