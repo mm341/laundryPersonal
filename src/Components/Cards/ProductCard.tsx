@@ -398,8 +398,8 @@ const ProductCard = ({
           </Box>
         )}
 
-        {product?.discount_percentage &&
-          product?.sub_products[0]?.old_price > 0 && (
+        {!product?.discount_percentage &&
+          product?.sub_products?.filter((e)=>e.discount_percentage>0)?.length>0 && (
             <Box
               sx={{
                 position: "absolute",
