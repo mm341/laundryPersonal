@@ -181,6 +181,7 @@ const ProductCard = ({
                 AddToCart({
                   product_id: product?.id,
                   quantity: Number(quantity),
+                  coupon:localStorage.getItem("coupon")
                 })
               );
             } else {

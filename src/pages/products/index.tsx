@@ -212,6 +212,7 @@ const ProductsPage = ({
       AddToCart({
         product_id: subproductId,
         quantity: quantityForRequest,
+        coupon: localStorage.getItem("coupon"),
       })
     );
   };
