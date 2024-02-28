@@ -9,6 +9,7 @@ import { Typography, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import HandelNotification from "@/Components/GlobalComponent/HandelNotification";
+import Meta from "@/Components/GlobalComponent/Meta";
 const OrderPage = () => {
   //  hooks
 
@@ -17,6 +18,10 @@ const OrderPage = () => {
   const { push } = useRouter();
   return (
     <HandelNotification>
+       <Meta
+        title={"Order"}
+        // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
+      />
       <PublicContainer>
         <GlobalDisplayFlexColumnBox
           width={"100%"}

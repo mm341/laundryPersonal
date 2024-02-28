@@ -20,6 +20,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import CustomRatings from "@/Components/GlobalComponent/CustomRatings";
 import { GetOrderDetails } from "@/redux/slices/OrderSlice";
 import LoadingComponent from "@/Components/GlobalComponent/LoadingComponent";
+import Meta from "@/Components/GlobalComponent/Meta";
+import HandelNotification from "@/Components/GlobalComponent/HandelNotification";
 const OrderDetails = ({ orderId }: { orderId: string }) => {
   //  hooks
   const { t } = useTranslation();
@@ -40,7 +42,11 @@ const OrderDetails = ({ orderId }: { orderId: string }) => {
     (state) => state.orders
   );
   return (
-    <>
+    <HandelNotification>
+     <Meta
+        title={"Order Details"}
+        // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
+      />
       <CustomPaperBigCard
         sx={{
           boxShadow: "box-shadow: 0px 0px 6px 0px #00000026",
@@ -196,7 +202,7 @@ const OrderDetails = ({ orderId }: { orderId: string }) => {
         setOpenRateDialog={setOpenRateDialog}
         openRateDialog={openRateDialog}
       />
-    </>
+   </HandelNotification>
   );
 };
 
