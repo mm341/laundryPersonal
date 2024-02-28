@@ -798,7 +798,7 @@ export const arabic = {
   Calender: "التقويم",
   "Additional Notes": "ملاحظات اضافيه",
   "Busy Now": "مشغول الان",
-
+  "Coupon":"الكوبون",
   Others: "أخري",
   others: "أخري",
   "Contact Person Name": "اسم شخص الاتصال",

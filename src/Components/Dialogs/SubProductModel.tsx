@@ -88,7 +88,7 @@ const SubProductModel = ({
           </GlobalDisplayFlexColumnBox>
           <Scrollbar
             style={{
-              maxHeight: "300px",
+              maxHeight: "260px",
             }}
           >
             <GlobalDisplayFlexColumnBox width={"100%"} gap={"12px"}>

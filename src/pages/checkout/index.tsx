@@ -64,6 +64,7 @@ import { GetCartDetails } from "@/redux/slices/CartSlice";
 import AuthAndCartListGuard from "@/Components/authentication/CartListGuard";
 import HandelNotification from "@/Components/GlobalComponent/HandelNotification";
 import { Url } from "next/dist/shared/lib/router/router";
+import CouponSection from "@/Components/Cart/CouponSection";
 const CheckOutPage = ({
   homeServices,
   homeAreas,
@@ -94,7 +95,7 @@ const CheckOutPage = ({
   const [open, setOpen] = useState<boolean>(false);
   const [payment, setPayment] = useState<string>("cash_on_delivery");
   const [onlineMethod, setOnlineMethod] = useState<string>("");
-
+  const [couponValue, setCouponValue] = useState<string>("");
   //  selectors
 
   const { accountInfo } = useAppSelector((state) => state.profile);
@@ -220,15 +221,20 @@ const CheckOutPage = ({
       setDeliveryDate("");
     }
   }, [pickupHour]);
-  //  function add order
+
   //  get coupon value from localstorage
+
+  //  get token from localstorage
+
+  let token: string | null | undefined = undefined;
 
   let coupon: string | undefined | null = undefined;
 
   if (typeof window !== "undefined") {
     coupon = localStorage.getItem("coupon");
+    token = localStorage.getItem("token");
   }
-
+  //  function add order
   const handelAddOrder = () => {
     if (dayjs(deliveryDate) <= dayjs(pickupDate)) {
       toast.error(t("The delivery date must be a date after pick date."));
@@ -318,7 +324,7 @@ const CheckOutPage = ({
               <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
                 <Grid container spacing={3} sx={{ alignItems: "flex-start" }}>
                   {/*  left section customer details */}
-                  <Grid item md={8} xs={12}>
+                  <Grid item md={7.75} xs={12}>
                     <GlobalDisplayFlexColumnBox
                       px={"10px"}
                       width={"100%"}
@@ -693,6 +699,7 @@ const CheckOutPage = ({
                         )}
                       </GlobalDisplayFlexColumnBox>
 
+                     
                       {/* { Additional Instruction} */}
                       <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                         <ChekOutTitle title="Additional Instruction" />
@@ -706,6 +713,15 @@ const CheckOutPage = ({
                             setAdditionalInformation(e.target.value)
                           }
                           placeholder={t("For e.g. Call before delivery")}
+                        />
+                      </GlobalDisplayFlexColumnBox>
+                       {/*  coupon section */}
+                       <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                        <ChekOutTitle title="Coupon" />
+                        <CouponSection
+                          token={token}
+                          couponValue={couponValue}
+                          setCouponValue={setCouponValue}
                         />
                       </GlobalDisplayFlexColumnBox>
                       {/* { payment methods} */}
@@ -740,7 +756,7 @@ const CheckOutPage = ({
                   {/*  right section products */}
                   <Grid
                     item
-                    md={4}
+                    md={4.25}
                     xs={12}
                     sx={{ position: "sticky", top: "0px" }}
                   >

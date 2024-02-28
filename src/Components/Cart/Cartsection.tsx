@@ -44,7 +44,7 @@ const Cartsection = ({
   const { locale } = useRouter();
   const [authModalOpen, setOpen] = useState<boolean>(false);
   const [openDeleteCart, setOpenDeleteCart] = useState<boolean>(false);
-  const [couponValue, setCouponValue] = useState<string>("");
+  
   const [modalFor, setModalFor] = useState<string>("sign-in");
   const { master } = useAppSelector((state) => state.master);
   const { cartList, isloading, isloadingDeleteCart } = useAppSelector(
@@ -180,11 +180,13 @@ if(cartList?.cart_details?.products?.length===0){
           </Box>
 
           {/*  coupon section */}
-          <CouponSection
+          {/* <CouponSection
             token={token}
             couponValue={couponValue}
             setCouponValue={setCouponValue}
-          />
+          /> */}
+
+          {/*  summary section  */}
           <SummarySection />
 
           <GlobalDisplayFlexColumnBox gap={"12px"} width={"100%"} px={"18px"}>

@@ -412,6 +412,7 @@ export const english = {
   "Card Number": "Card Number",
   "We start our delivery process and you will receive your order soon.":
     "We start our delivery process and you will receive your order soon.",
+    "Coupon":"Coupon",
   Cart: "Cart",
   "By signing up, you agree to our terms and conditions":
     "By signing up, you agree to our",

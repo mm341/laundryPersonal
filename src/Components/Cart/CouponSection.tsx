@@ -24,7 +24,7 @@ const CouponSection = ({
 
   const { isloading } = useAppSelector((state) => state.cartList);
   return (
-    <GlobalDisplayFlexBox sx={{ px: "18px" }}>
+    <GlobalDisplayFlexBox sx={{justifyContent:"flex-start",gap:"15px",width:{md:"51%",xs:"100%"}}} >
       <TextField
         value={couponValue}
         onChange={(e) => setCouponValue(e.target.value)}
