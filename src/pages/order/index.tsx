@@ -16,9 +16,16 @@ const OrderPage = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const { push } = useRouter();
+
+  //  get OrderId from LocalStorage
+
+  let OrderId: undefined | null | string = undefined;
+  if (typeof window !== "undefined") {
+    OrderId = localStorage.getItem("orderId");
+  }
   return (
     <HandelNotification>
-       <Meta
+      <Meta
         title={"Order"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
@@ -71,7 +78,15 @@ const OrderPage = () => {
             py={"0"}
             width={"261px"}
             height={"48px"}
-            onClick={() => push("/info?page=order")}
+            onClick={() => {
+              push({
+                pathname: "info",
+                query: {
+                  page: "order",
+                  orderId: OrderId,
+                },
+              });
+            }}
           >
             {t("View Order Details")}
           </GlobalButton>

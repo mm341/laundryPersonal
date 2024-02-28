@@ -254,6 +254,10 @@ const CheckOutPage = ({
         ).then((promiseResponse: any) => {
           if (promiseResponse?.payload?.data?.order?.id) {
             localStorage.setItem("coupon", "");
+            localStorage.setItem(
+              "orderId",
+              promiseResponse?.payload?.data?.order?.id
+            );
             router.push("/order");
             dispatch(GetCartDetails({}));
           }
@@ -296,20 +300,6 @@ const CheckOutPage = ({
   if (typeof window !== "undefined") {
     path = localStorage.getItem("path");
   }
-
-  let handelAddresseDirection = (addresse: AddresseInterface, i: number) => {
-    if (locale === "en") {
-      return ` ${addresse?.address_name} ${addresse?.street} ${t("Street")}
-                              ${addresse?.apartment_no} ${t("Apartment")},
-                                ${addresse?.building_no} ${t("Building")},
-                                    ${addresse?.floor_no} ${t("Floor")}`;
-    } else {
-      return ` ${addresse?.address_name} ${addresse?.street} ${t("Street")}
-                              ${t("Apartment")} ${addresse?.apartment_no} ,
-                              ${t("Building")} ${addresse?.building_no} ,
-                              ${t("Floor")} ${addresse?.floor_no}`;
-    }
-  };
 
   return (
     <>
