@@ -1,5 +1,9 @@
 import { FooterSocialLinks } from "@/interfaces/FooterSocialLinks";
 import { Master } from "@/interfaces/MasterInterface";
+import {
+  OrdersInterface,
+  inititalOrdersInterface,
+} from "@/interfaces/OrdersInterface";
 import { MasterModel } from "@/models/MasterSliceModel";
 import PublicRequest from "@/utils/PublicRequests";
 
@@ -8,7 +12,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 //  update account
 export const ResendCode = createAsyncThunk(
   "updateProfile/UpdateAccount",
-  (payload: { mobile: string | undefined,id?:string }) =>
+  (payload: { mobile: string | undefined; id?: string }) =>
     PublicRequest.postData(payload, "resend/otp")
 );
 const initialState: MasterModel = {
@@ -26,6 +30,7 @@ const initialState: MasterModel = {
     email: "",
   },
   footerLinks: [],
+ 
 };
 
 // Action creators are generated for each case reducer function
@@ -42,9 +47,11 @@ export const MasterSlice = createSlice({
     ) => {
       state.footerLinks = action.payload;
     },
+  
   },
 });
 
-export const { CashMasterData, CashFooterLinks } = MasterSlice.actions;
+export const { CashMasterData, CashFooterLinks } =
+  MasterSlice.actions;
 
 export default MasterSlice.reducer;

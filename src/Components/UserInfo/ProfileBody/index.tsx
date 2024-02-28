@@ -5,8 +5,9 @@ import ProfilePage from "../ProfilePage";
 import OrderPage from "../OrderPage";
 import MyAddresses from "./MyAddresses";
 import { useRouter } from "next/router";
+import OrderDetails from "./OrderDetails";
 
-const ProfileBody = ({ page }: { page: string }) => {
+const ProfileBody = ({ page, orderId }: { page: string; orderId: string }) => {
   //  hooks
   const { locale } = useRouter();
   const [languagedirection, setLanguagedirection] = useState<string>("ltr");
@@ -23,10 +24,15 @@ const ProfileBody = ({ page }: { page: string }) => {
     if (page === "Address") {
       return <MyAddresses />;
     }
+    if (page === "order" && orderId) {
+      return <OrderDetails orderId={orderId} />;
+    }
 
     if (page === "order") {
       return <OrderPage />;
     }
+
+   
   };
 
   return <RTL direction={languagedirection}>{activeComponent()}</RTL>;

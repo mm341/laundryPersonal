@@ -8,8 +8,9 @@ import ProfileBody from "./ProfileBody";
 
 interface userInterface {
   page: string | any;
+  orderId:string |any
 }
-const UserInfo = ({ page }: userInterface) => {
+const UserInfo = ({ page,orderId }: userInterface) => {
   return (
     <CustomStackFullWidth
       sx={{
@@ -43,7 +44,7 @@ const UserInfo = ({ page }: userInterface) => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={9}>
-          <ProfileBody page={page} />
+          <ProfileBody page={page} orderId={orderId} />
         </Grid>
       </Grid>
     </CustomStackFullWidth>

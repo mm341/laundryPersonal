@@ -11,4 +11,6 @@ export type OrdersModel = {
   orders: OrdersInterface[];
   schedules:schedules[]
   deliverySchedules:schedules[]
+  orderData:OrdersInterface
+  isLoadingGetOrderDetails:boolean
 };

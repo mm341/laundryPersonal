@@ -28,7 +28,7 @@ const Index = ({
   //  hooks
   const router = useRouter();
   const { locale } = useRouter();
-  const { page }: any = router.query;
+  const { page,orderId }: any = router.query;
   const dispatch = useAppDispatch();
   const [languagedirection, setLanguagedirection] = useState<string>("ltr");
   useEffect(() => {
@@ -61,7 +61,7 @@ const Index = ({
         <CssBaseline />
         <HandelNotification>
         <PublicContainer>
-          <AuthGuard>{page && <UserInfo page={page} />}</AuthGuard>
+          <AuthGuard>{page && <UserInfo page={page}  orderId={orderId}/>}</AuthGuard>
         </PublicContainer>
         </HandelNotification>
       </RTL>

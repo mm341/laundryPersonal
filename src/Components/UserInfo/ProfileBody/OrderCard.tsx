@@ -15,7 +15,9 @@ import {
   OrdersInterface,
   inititalOrdersInterface,
 } from "@/interfaces/OrdersInterface";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { useRouter } from "next/router";
+
 const OrderCard = ({
   setOrderDetails,
   order,
@@ -26,10 +28,10 @@ const OrderCard = ({
   order: OrdersInterface;
 }) => {
   //  hooks
-
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const theme = useTheme();
-
+  const router = useRouter();
   const [productsDetails, setOpenProductsDetails] = useState<boolean>(false);
   const { master } = useAppSelector((state) => state.master);
 
@@ -44,16 +46,17 @@ const OrderCard = ({
       case "Processing":
       case "قيد الانتظار":
       case "تم تاكيد الطلب":
-        case "اختار طلبك":
-          case "يعالج":
+      case "اختار طلبك":
+      case "تم استلام طلبك":
+      case "يعالج":
         color = "#FFA412";
         break;
       case "Delivered":
-        case "تم التوصيل":
+      case "تم التوصيل":
         color = "#00A53C";
         break;
       case "Cancelled":
-        case "ألغيت":
+      case "ألغيت":
         color = "#8E1400";
         break;
     }
@@ -155,7 +158,7 @@ const OrderCard = ({
                 width: { sm: "170px", xs: "100px" },
                 height: "40px",
                 color: OrderActionStatus(order),
-                cursor:"default"
+                cursor: "default",
               }}
             >
               {order?.order_status}
@@ -170,8 +173,15 @@ const OrderCard = ({
                 transform: "translateX(-30px)",
               }}
               onClick={() => {
-                setOrderData(order);
-                setOrderDetails(true);
+              
+
+                router.push({
+                  pathname: "info",
+                  query: {
+                    page: "order",
+                    orderId: order?.id,
+                  },
+                });
               }}
             >
               {t("View Details")}

@@ -6,6 +6,7 @@ import { OrdersModel } from "@/models/OrdersModel";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 import { toast } from "react-hot-toast";
 import { productInterface } from "@/interfaces/ProductInterface";
+import { inititalOrdersInterface } from "@/interfaces/OrdersInterface";
 
 interface CouponPayload {
   amount: number;
@@ -18,6 +19,12 @@ export const GetOrders = createAsyncThunk(
     PublicRequest.getData(
       `customer/orders?filter=${payload.filter}&limit=${payload.limit}&offset=${payload?.offset}`
     )
+);
+
+export const GetOrderDetails = createAsyncThunk(
+  "orders/GetOrderDetails",
+  (payload: string) =>
+    PublicRequest.getData(`customer/orders/${payload}/details`)
 );
 
 //  enter Coupon
@@ -64,7 +71,7 @@ interface OrderPayload {
   pick_date: string;
   pick_hour: string;
   payment_type?: string;
-  coupon?:string|undefined|null
+  coupon?: string | undefined | null;
 }
 export const AddOrder = createAsyncThunk(
   "updateProfile/AddOrder",
@@ -85,20 +92,22 @@ const initialState: OrdersModel = {
   total_size: "",
   isloading: false,
   orders: [],
+  orderData: inititalOrdersInterface(),
   schedules: [],
   deliverySchedules: [],
   isloadingAddOrder: false,
   isLoadingCoupon: false,
+  isLoadingGetOrderDetails: false,
 };
 
 export const handelOrders = createSlice({
   name: "orders",
   initialState,
   reducers: {
-    clearSchedules:(state)=>{
+    clearSchedules: (state) => {
       state.schedules = [];
     },
-    clearDeliverySchedules:(state)=>{
+    clearDeliverySchedules: (state) => {
       state.deliverySchedules = [];
     },
   },
@@ -132,6 +141,26 @@ export const handelOrders = createSlice({
       state.total_size = "";
     });
 
+    // GetOrderDetails
+
+    builder.addCase(GetOrderDetails.pending, (state: OrdersModel) => {
+      state.orderData = inititalOrdersInterface();
+      state.isLoadingGetOrderDetails = true;
+    });
+    builder.addCase(
+      GetOrderDetails.fulfilled,
+      (state: OrdersModel, { payload }: any) => {
+        if (payload) {
+          state.orderData = payload.data.order;
+          state.isLoadingGetOrderDetails = false;
+        }
+      }
+    );
+    builder.addCase(GetOrderDetails.rejected, (state: OrdersModel) => {
+      state.orderData = inititalOrdersInterface();
+      state.isLoadingGetOrderDetails = false;
+    });
+
     // GetPickUpDuration
 
     builder.addCase(GetPickUpDuration.pending, (state: OrdersModel) => {
@@ -148,8 +177,6 @@ export const handelOrders = createSlice({
     builder.addCase(GetPickUpDuration.rejected, (state: OrdersModel) => {
       state.schedules = [];
     });
-
-
 
     // GetDeliveryDuration
     builder.addCase(GetDeliveryDuration.pending, (state: OrdersModel) => {
@@ -198,5 +225,5 @@ export const handelOrders = createSlice({
     });
   },
 });
-export const { clearSchedules, clearDeliverySchedules } = handelOrders.actions
+export const { clearSchedules, clearDeliverySchedules } = handelOrders.actions;
 export const OrderSlice = handelOrders.reducer;

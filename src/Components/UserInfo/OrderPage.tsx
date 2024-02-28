@@ -46,8 +46,8 @@ const OrderPage = () => {
 
   //  send request to get all orders
   useEffect(() => {
-    dispatch(GetOrders({ filter: orderType,limit:limit,offset:offset }));
-  }, [dispatch, orderType,offset]);
+    dispatch(GetOrders({ filter: orderType, limit: limit, offset: offset }));
+  }, [dispatch, orderType, offset]);
 
   return (
     <>
@@ -124,19 +124,12 @@ const OrderPage = () => {
             </Grid>
           </Grid>
         )}
-        { !orderDetails &&Number(total_size) > 10 && (
+        {!orderDetails && Number(total_size) > 10 && (
           <CustomePagination
             total_size={total_size}
             page_limit={limit}
             offset={offset}
             setOffset={setOffset}
-          />
-        )}
-        {/*  case of open order details */}
-        {orderDetails && (
-          <OrderDetails
-            orderData={orderData}
-            setOrderDetails={setOrderDetails}
           />
         )}
       </CustomPaperBigCard>
