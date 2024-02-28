@@ -26,7 +26,7 @@ const NotificationPoPover = (props: Props) => {
   );
   const { onClose, open } = props;
   const { t } = useTranslation();
-  const router=useRouter()
+  const router = useRouter();
   //  handle close popover
 
   let menuRef: any = useRef();
@@ -44,7 +44,6 @@ const NotificationPoPover = (props: Props) => {
     };
   }, []);
 
- 
   return (
     <Box
       ref={menuRef}
@@ -52,7 +51,7 @@ const NotificationPoPover = (props: Props) => {
         display: open ? "flex" : "none",
         position: "absolute",
         top: { md: "40px", xs: "50px" },
-        right: locale === "en" ? {sm:"13%",xs:"7%"} : "13.5%",
+        right: locale === "en" ? { sm: "13%", xs: "7%" } : "13.5%",
         maxHeight: "500px",
         overflowY: "auto",
         zIndex: "99999",
@@ -60,10 +59,10 @@ const NotificationPoPover = (props: Props) => {
         borderRadius: "15px",
         boxShadow: "0px 0px 4px 0px #00000033",
         height: "390px",
-        width: {sm:"390px",xs:"270px"},
+        width: { sm: "390px", xs: "270px" },
       }}
     >
-      <CustomPaperBigCard sx={{ backgroundColor: "white" }} >
+      <CustomPaperBigCard sx={{ backgroundColor: "white" }}>
         <GlobalDisplayFlexColumnBox
           width={"100%"}
           gap={"15px"}
@@ -86,13 +85,22 @@ const NotificationPoPover = (props: Props) => {
                   >
                     {e?.date}
                   </Typography>
-                  <CustomPaperBigCard sx={{ backgroundColor: "white",cursor:e?.order_id?"pointer":"default" }}
-                  
-                  onClick={()=>{
-                    if(e?.order_id){
-                      router.push("/info?page=order")
-                    }
-                  }}
+                  <CustomPaperBigCard
+                    sx={{
+                      backgroundColor: "white",
+                      cursor: e?.order_id ? "pointer" : "default",
+                    }}
+                    onClick={() => {
+                      if (e?.order_id) {
+                        router.push({
+                          pathname: "info",
+                          query: {
+                            page: "order",
+                            orderId: e?.order_id,
+                          },
+                        });
+                      }
+                    }}
                   >
                     <GlobalDisplayFlexBox sx={{ gap: "50px" }}>
                       <GlobalDisplayFlexBox sx={{ gap: "12px" }}>
