@@ -100,7 +100,7 @@ const AdditionalServicesSection = ({
         <Scrollbar
         
           style={{
-            maxHeight: "300px",
+            maxHeight: "280px",
           }}
         >
           <GlobalDisplayFlexColumnBox
