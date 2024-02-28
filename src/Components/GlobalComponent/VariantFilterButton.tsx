@@ -29,6 +29,7 @@ const VariantFilterButton = ({
           type === FilterType?.id ? theme.palette.primary.main : "white",
         // minWidth:"310px",
         width: "max-content",
+        // paddingLeft:"1px"
       }}
       sx={{
         "&:hover": {

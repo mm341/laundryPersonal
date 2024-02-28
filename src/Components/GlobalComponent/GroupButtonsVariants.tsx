@@ -27,6 +27,7 @@ const GroupButtonsVariants = ({
         mt: "10px",
         width: "100%",
         height: "60px",
+       
         // overflowX: "auto",
       }}
     >

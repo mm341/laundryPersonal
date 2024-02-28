@@ -9,13 +9,14 @@ import {
   GlobalDisplayFlexBox,
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
+import { useRouter } from "next/router";
 
 const BannerCard = ({ banner }: { banner: Banners }) => {
   // hooks
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("lg"));
   const isxsmall = useMediaQuery(theme.breakpoints.down("md"));
-
+  const { locale} = useRouter();
   
   return (
     <GlobalDisplayFlexBox sx={{ position: "relative" }}>
@@ -47,7 +48,7 @@ const BannerCard = ({ banner }: { banner: Banners }) => {
             width: { sm: "50%", xs: "100%" },
             alignItems: "center",
             transform: {
-              md: "translate(120px,15px)",
+              md: locale==="en"?"translate(120px,15px)":"translate(-120px,15px)",
               xs: "translate(0px,0px)",
             },
           }}
