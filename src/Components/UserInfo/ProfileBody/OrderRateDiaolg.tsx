@@ -187,7 +187,7 @@ const OrderRateDiaolg = ({
                 >
                   {t("Cancel")}
                 </GlobalButton>
-                <Button type="submit">
+                <Button disabled={isLoading} type="submit">
                   <GlobalButton
                     sx={{
                       fontSize: "16px",

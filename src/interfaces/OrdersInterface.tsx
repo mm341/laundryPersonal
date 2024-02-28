@@ -38,6 +38,7 @@ export const inititalOrdersInterface = () => {
     rating: 0,
     total_amount: 0,
     sub_total: 0,
+    ratings:0
   };
 };
 
@@ -80,4 +81,5 @@ export interface OrdersInterface {
   quantity: Quantity;
   rating: number;
   total_amount: number;
+  ratings:number
 }

@@ -130,7 +130,7 @@ const OrderDetails = ({ orderId }: { orderId: string }) => {
                 }}
               >
                 {(orderData?.order_status === "Delivered" &&
-                  orderData?.rating) === null && (
+                  !orderData?.ratings) && (
                   <GlobalButton
                     px={"0"}
                     py={"0"}
