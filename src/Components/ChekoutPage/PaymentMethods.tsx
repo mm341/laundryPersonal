@@ -70,7 +70,7 @@ const PaymentMethods = ({
 
         {/*  online */}
 
-        <Box
+        {/* <Box
           onClick={() => setPayment("online_payment ")}
           sx={{
             display: "flex",
@@ -101,7 +101,7 @@ const PaymentMethods = ({
             loading="lazy"
           />
           <Typography>{t("Online Payment")}</Typography>
-        </Box>
+        </Box> */}
       </GlobalDisplayFlexBox>
 
       {payment === "Online" && (
