@@ -307,6 +307,15 @@ const CheckOutPage = ({
     path = localStorage.getItem("path");
   }
 
+  //  get all CartList
+
+  useEffect(() => {
+    dispatch(GetCartDetails({}));
+    localStorage.setItem("coupon", "");
+  }, []);
+
+
+
   return (
     <>
       <Meta
@@ -699,7 +708,6 @@ const CheckOutPage = ({
                         )}
                       </GlobalDisplayFlexColumnBox>
 
-                     
                       {/* { Additional Instruction} */}
                       <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                         <ChekOutTitle title="Additional Instruction" />
@@ -715,8 +723,8 @@ const CheckOutPage = ({
                           placeholder={t("For e.g. Call before delivery")}
                         />
                       </GlobalDisplayFlexColumnBox>
-                       {/*  coupon section */}
-                       <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
+                      {/*  coupon section */}
+                      <GlobalDisplayFlexColumnBox width={"100%"} gap={"20px"}>
                         <ChekOutTitle title="Coupon" />
                         <CouponSection
                           token={token}
