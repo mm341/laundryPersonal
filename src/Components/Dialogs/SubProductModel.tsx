@@ -52,11 +52,11 @@ const SubProductModel = ({
     left: "50%",
     transform: "translate(-50%, -50%)",
 
-    width: { md: "467px", xs: "90%" },
+    width: { md: "580px", xs: "90%" },
     bgcolor: "background.paper",
     border: "1px solid white",
     boxShadow: 24,
-    height: { md: "430px", xs: "80%" },
+    height: { md: "470px", xs: "80%" },
 
     borderRadius: "10px",
     p: 3,
@@ -88,7 +88,7 @@ const SubProductModel = ({
           </GlobalDisplayFlexColumnBox>
           <Scrollbar
             style={{
-              maxHeight: "270px",
+              maxHeight: "300px",
             }}
           >
             <GlobalDisplayFlexColumnBox width={"100%"} gap={"12px"}>

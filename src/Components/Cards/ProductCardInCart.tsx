@@ -116,7 +116,7 @@ if(typeof window !=="undefined"){
                           UpdateCart({
                             product_id: product?.id,
                             quantity: Number((quantity -= 1)),
-                            coupon:localStorage.getItem("coupon")
+                          
                           })
                         );
                       }
@@ -142,7 +142,7 @@ if(typeof window !=="undefined"){
                         dispatch(
                           RemoveElement({
                             product_id: product?.id,
-                            coupon:localStorage.getItem("coupon")
+                           
                           })
                         );
                     }}
@@ -173,7 +173,7 @@ if(typeof window !=="undefined"){
                       UpdateCart({
                         product_id: product?.id,
                         quantity: Number((quantity += 1)),
-                        coupon:localStorage.getItem("coupon")
+                        
                       })
                     );
                   }}
