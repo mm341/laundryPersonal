@@ -11,7 +11,7 @@ import {
   styled,
   useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProductCardInCart from "../Cards/ProductCardInCart";
 import CouponSection from "./CouponSection";
@@ -77,6 +77,12 @@ const Cartsection = ({
       }
     });
   };
+
+  useEffect(()=>{
+if(cartList?.cart_details?.products?.length===0){
+  localStorage.setItem("coupon","")
+}
+  },[cartList])
 
   return (
     <>

@@ -13,6 +13,7 @@ export interface addToCartPayload {
   remove_product?: number;
   remove_additional?: number;
   id?: string;
+  coupon?:string | null | undefined
 }
 
 // GetCartDetails

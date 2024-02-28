@@ -29,6 +29,16 @@ const ProductCardInCart = ({
   let quantity = product?.quantity;
 
   
+
+  //  get coupon from localstorage
+
+  let coupon:null|string|undefined =undefined
+
+if(typeof window !=="undefined"){
+  coupon=localStorage.getItem("coupon")
+}
+
+
   return (
     <CustomPaperBigCard
       sx={{
@@ -106,6 +116,7 @@ const ProductCardInCart = ({
                           UpdateCart({
                             product_id: product?.id,
                             quantity: Number((quantity -= 1)),
+                            coupon:localStorage.getItem("coupon")
                           })
                         );
                       }
@@ -131,6 +142,7 @@ const ProductCardInCart = ({
                         dispatch(
                           RemoveElement({
                             product_id: product?.id,
+                            coupon:localStorage.getItem("coupon")
                           })
                         );
                     }}
@@ -161,6 +173,7 @@ const ProductCardInCart = ({
                       UpdateCart({
                         product_id: product?.id,
                         quantity: Number((quantity += 1)),
+                        coupon:localStorage.getItem("coupon")
                       })
                     );
                   }}
