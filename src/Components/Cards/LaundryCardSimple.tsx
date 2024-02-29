@@ -14,7 +14,7 @@ const LaundrySimpleCard = ({ element }: { element: cardInterface }) => {
       sx={{
         mx: "auto",
         height: "100%",
-        justifyContent: "flex-end",
+        
       }}
       gap={"12px"}
     >
