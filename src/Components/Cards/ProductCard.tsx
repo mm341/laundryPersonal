@@ -36,9 +36,6 @@ const ProductCard = ({
     (state) => state.cartList
   );
 
-  
-
-
   //  handel old price
 
   const handelProductOldPrice = () => {
@@ -49,7 +46,7 @@ const ProductCard = ({
       return (
         <Typography
           sx={{
-            fontSize: {md:"16px",xs:"12px"},
+            fontSize: { md: "16px", xs: "12px" },
             fontWeight: "400",
             textDecoration: "line-through",
             opacity: "0.6",
@@ -66,7 +63,7 @@ const ProductCard = ({
       return (
         <Typography
           sx={{
-            fontSize: {md:"16px",xs:"12px"},
+            fontSize: { md: "16px", xs: "12px" },
             fontWeight: "400",
           }}
         >
@@ -81,7 +78,7 @@ const ProductCard = ({
       return (
         <Typography
           sx={{
-            fontSize: {md:"16px",xs:"12px"},
+            fontSize: { md: "16px", xs: "12px" },
             fontWeight: "400",
             textDecoration: "line-through",
             opacity: "0.6",
@@ -94,7 +91,7 @@ const ProductCard = ({
       return (
         <Typography
           sx={{
-            fontSize: {md:"16px",xs:"12px"},
+            fontSize: { md: "16px", xs: "12px" },
             fontWeight: "400",
           }}
         >
@@ -111,7 +108,9 @@ const ProductCard = ({
       Math.max(...product?.current_price)
     )
       return (
-        <Typography sx={{ fontSize: {md:"18px",xs:"12px"}, fontWeight: "400" }}>
+        <Typography
+          sx={{ fontSize: { md: "18px", xs: "12px" }, fontWeight: "400" }}
+        >
           {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
           - {Math.max(...product?.current_price)} {master?.currency} /{" "}
           {t("Item")}
@@ -119,7 +118,9 @@ const ProductCard = ({
       );
     else {
       return (
-        <Typography sx={{ fontSize: {md:"18px",xs:"12px"}, fontWeight: "400" }}>
+        <Typography
+          sx={{ fontSize: { md: "18px", xs: "12px" }, fontWeight: "400" }}
+        >
           {Math.min(...product?.current_price)} {master?.currency} / {t("Item")}{" "}
         </Typography>
       );
@@ -216,7 +217,9 @@ const ProductCard = ({
         overflowX: "hidden",
       }}
     >
-      <GlobalDisplayFlexBox sx={{ alignItems: {md:"flex-end",xs:"center"} }}>
+      <GlobalDisplayFlexBox
+        sx={{ alignItems: { md: "flex-end", xs: "center" } }}
+      >
         {/*  left section */}
         <Box
           sx={{
@@ -225,7 +228,7 @@ const ProductCard = ({
             alignItems: "center",
             gap: "15px",
             width: { md: "85%", xs: "100%" },
-            flexDirection:{md:"row",xs:"column"}
+            flexDirection: { md: "row", xs: "column" },
           }}
         >
           <GlobalDisplayFlexBox
@@ -247,7 +250,11 @@ const ProductCard = ({
             />
           </GlobalDisplayFlexBox>
 
-          <GlobalDisplayFlexColumnBox width={"100%"} gap={"2px"} sx={{alignItems:{md:"flex-start",xs:"center"}}}>
+          <GlobalDisplayFlexColumnBox
+            width={"100%"}
+            gap={"7px"}
+            sx={{ alignItems: { md: "flex-start", xs: "center" } }}
+          >
             {/*  name */}
             <Typography
               sx={{ fontSize: { md: "20px", xs: "14px" }, fontWeight: "600" }}
@@ -256,7 +263,12 @@ const ProductCard = ({
             </Typography>
             {/* { describtion} */}
             <Typography
-              sx={{ fontSize: { md: "14px", xs: "12px" }, fontWeight: "400",opacity:"0.7",textAlign:{md:"left",xs:"center"} }}
+              sx={{
+                fontSize: { md: "14px", xs: "12px" },
+                fontWeight: "400",
+                opacity: "0.7",
+                textAlign: { md: "left", xs: "center" },
+              }}
             >
               {product?.description}
             </Typography>
@@ -267,7 +279,7 @@ const ProductCard = ({
                 {handelProductPrice()}
                 <Typography
                   sx={{
-                    fontSize: {md:"14px",xs:"12px"},
+                    fontSize: { md: "14px", xs: "12px" },
                     fontWeight: "400",
                     color: "#999999",
                     textDecoration: "line-through",
@@ -279,58 +291,12 @@ const ProductCard = ({
             )}
             {/*  current price  case of no product discount*/}
             {!product?.discount_percentage && (
-              <Typography sx={{ fontSize: {md:"16px",xs:"12px"}, fontWeight: "400" }}>
+              <Typography
+                sx={{ fontSize: { md: "16px", xs: "12px" }, fontWeight: "400" }}
+              >
                 {handelProductOldPrice()}
               </Typography>
             )}
-            {/*  quantity */}
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: {md:"flex-start",xs:"center"},
-                gap: "10px",
-                alignItems: "center",
-                mt: { md: "12px", xs: "5px" },
-              }}
-            >
-              <GlobalButton
-                onClick={() => {
-                  quantity > 1 && setQuantity((quantity -= 1));
-                }}
-                py={"0"}
-                px={"0"}
-                sx={{
-                  width: { md: "28px", xs: "20px" },
-                  height: { md: "28px", xs: "20px" },
-                  borderRadius: "5px",
-                  color: quantity > 1 ? theme.palette.primary.main : "#999999",
-                  border:
-                    quantity > 1
-                      ? `1px solid ${theme.palette.primary.main}`
-                      : `1px solid #999999`,
-                }}
-              >
-                -
-              </GlobalButton>
-              <Typography sx={{ fontSize: "14px", fontWeight: "400" }}>
-                {quantity}
-              </Typography>
-              <GlobalButton
-                onClick={() => setQuantity((quantity += 1))}
-                py={"0"}
-                px={"0"}
-                sx={{
-                  width: { md: "28px", xs: "20px" },
-                  height: { md: "28px", xs: "20px" },
-                  borderRadius: "5px",
-                  color: theme.palette.primary.main,
-                  border: `1px solid ${theme.palette.primary.main}`,
-                }}
-              >
-                +
-              </GlobalButton>
-            </Box>
           </GlobalDisplayFlexColumnBox>
         </Box>
 
@@ -338,7 +304,60 @@ const ProductCard = ({
 
         {/*  add to cart button */}
 
-        {handelAddButton(product)}
+        <GlobalDisplayFlexColumnBox gap={"17px"}>
+          {/*  quantity */}
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent:  "center" ,
+              gap: "10px",
+              alignItems: "center",
+              mt: { md: "12px", xs: "5px" },
+            }}
+          >
+            <GlobalButton
+              onClick={() => {
+                quantity > 1 && setQuantity((quantity -= 1));
+              }}
+              py={"0"}
+              px={"0"}
+              sx={{
+                width: { md: "28px", xs: "20px" },
+                height: { md: "28px", xs: "20px" },
+                borderRadius: "5px",
+                color: quantity > 1 ? theme.palette.primary.main : "#999999",
+                border:
+                  quantity > 1
+                    ? `1px solid ${theme.palette.primary.main}`
+                    : `1px solid #999999`,
+              }}
+            >
+              -
+            </GlobalButton>
+            <Typography sx={{ fontSize: "14px", fontWeight: "400" }}>
+              {quantity}
+            </Typography>
+            <GlobalButton
+              onClick={() => setQuantity((quantity += 1))}
+              py={"0"}
+              px={"0"}
+              sx={{
+                width: { md: "28px", xs: "20px" },
+                height: { md: "28px", xs: "20px" },
+                borderRadius: "5px",
+                color: theme.palette.primary.main,
+                border: `1px solid ${theme.palette.primary.main}`,
+              }}
+            >
+              +
+            </GlobalButton>
+          </Box>
+
+          {/*  add button */}
+          {handelAddButton(product)}
+        </GlobalDisplayFlexColumnBox>
+
         {product?.discount_percentage &&
           product?.sub_products[0]?.old_price === 0 && (
             <Box
@@ -399,7 +418,8 @@ const ProductCard = ({
         )}
 
         {!product?.discount_percentage &&
-          product?.sub_products?.filter((e)=>e.discount_percentage>0)?.length>0 && (
+          product?.sub_products?.filter((e) => e.discount_percentage > 0)
+            ?.length > 0 && (
             <Box
               sx={{
                 position: "absolute",

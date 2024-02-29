@@ -56,7 +56,7 @@ const SubProductModel = ({
     bgcolor: "background.paper",
     border: "1px solid white",
     boxShadow: 24,
-    height: { md: "470px", xs: "80%" },
+    height: { md: "570px", xs: "85%" },
 
     borderRadius: "10px",
     p: 3,
@@ -88,7 +88,7 @@ const SubProductModel = ({
           </GlobalDisplayFlexColumnBox>
           <Scrollbar
             style={{
-              maxHeight: "260px",
+              maxHeight: "360px",
             }}
           >
             <GlobalDisplayFlexColumnBox width={"100%"} gap={"12px"}>
@@ -222,7 +222,8 @@ const SubProductModel = ({
             </GlobalDisplayFlexColumnBox>
           </Scrollbar>
           <GlobalDisplayFlexBox
-            sx={{ justifyContent: "flex-end" }}
+          style={{flexDirection:"row"}}
+            sx={{ justifyContent: {md:"flex-end",xs:"center"} }}
             gap={"40px"}
           >
             <Typography
