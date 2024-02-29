@@ -28,16 +28,13 @@ const ProductCardInCart = ({
 
   let quantity = product?.quantity;
 
-  
-
   //  get coupon from localstorage
 
-  let coupon:null|string|undefined =undefined
+  let coupon: null | string | undefined = undefined;
 
-if(typeof window !=="undefined"){
-  coupon=localStorage.getItem("coupon")
-}
-
+  if (typeof window !== "undefined") {
+    coupon = localStorage.getItem("coupon");
+  }
 
   return (
     <CustomPaperBigCard
@@ -49,15 +46,15 @@ if(typeof window !=="undefined"){
         overflowX: "hidden",
       }}
     >
-      <GlobalDisplayFlexBox sx={{ alignItems: "flex-end" }}>
+      <GlobalDisplayFlexBox sx={{ alignItems: {md:"flex-end",xs:"center"} }}>
         {/*  left section */}
         <Box
           sx={{
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
-            gap: "15px",
-            width: { md: "70%", xs: "100%" },
+            gap: "10px",
+            width: { md: "76%", xs: "100%" },
           }}
         >
           <GlobalDisplayFlexBox
@@ -81,8 +78,11 @@ if(typeof window !=="undefined"){
 
           <GlobalDisplayFlexColumnBox
             width={"100%"}
-            sx={{gap:!checkOut ? {md:"16px",xs:"5px"} : {md:"10px",xs:"5px"}}}
-           
+            sx={{
+              gap: !checkOut
+                ? { md: "16px", xs: "5px" }
+                : { md: "10px", xs: "5px" },
+            }}
           >
             {/*product  name */}
             <Typography sx={{ fontSize: "14px", fontWeight: "500" }}>
@@ -91,112 +91,14 @@ if(typeof window !=="undefined"){
 
             {/*  service name */}
             <Typography
-              sx={{ fontSize: {md:"14px",xs:"12px"}, fontWeight: "400", color: "#999999" }}
+              sx={{
+                fontSize: { md: "14px", xs: "12px" },
+                fontWeight: "400",
+                color: "#999999",
+              }}
             >
               {product?.service?.name}
             </Typography>
-
-            {/*  quantity */}
-            {!checkOut && !isLoadingUpdateCart && (
-              <Box
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "flex-start" ,
-                  gap: "10px",
-                  alignItems: "center",
-                }}
-               
-              >
-                {product.quantity > 1 && (
-                  <GlobalButton
-                    onClick={() => {
-                      if (product.quantity > 1) {
-                        dispatch(
-                          UpdateCart({
-                            product_id: product?.id,
-                            quantity: Number((quantity -= 1)),
-                          
-                          })
-                        );
-                      }
-                    }}
-                    py={"0"}
-                    px={"0"}
-                    sx={{
-                      width: { md: "28px", xs: "20px" },
-                      height: { md: "28px", xs: "20px" },
-                      borderRadius: "5px",
-                      color: theme.palette.primary.main,
-                      border: `1px solid ${theme.palette.primary.main}`,
-                    }}
-                  >
-                    -
-                  </GlobalButton>
-                )}
-
-                {product.quantity === 1 && (
-                  <GlobalButton
-                    onClick={() => {
-                      product.quantity === 1 &&
-                        dispatch(
-                          RemoveElement({
-                            product_id: product?.id,
-                           
-                          })
-                        );
-                    }}
-                    py={"0"}
-                    px={"0"}
-                    sx={{
-                      width: { md: "28px", xs: "20px" },
-                      height: { md: "28px", xs: "20px" },
-                      borderRadius: "5px",
-                      color: theme.palette.primary.main,
-                      border: `1px solid ${theme.palette.primary.main}`,
-                    }}
-                  >
-                    <DeleteIcon
-                      sx={{
-                        color: theme.palette.primary.main,
-                        fontSize: { md: "26px", xs: "18px" },
-                      }}
-                    />
-                  </GlobalButton>
-                )}
-                <Typography sx={{ fontSize: "14px", fontWeight: "400" }}>
-                  {product?.quantity}
-                </Typography>
-                <GlobalButton
-                  onClick={() => {
-                    dispatch(
-                      UpdateCart({
-                        product_id: product?.id,
-                        quantity: Number((quantity += 1)),
-                        
-                      })
-                    );
-                  }}
-                  py={"0"}
-                  px={"0"}
-                  sx={{
-                    width: { md: "28px", xs: "20px" },
-                    height: { md: "28px", xs: "20px" },
-                    borderRadius: "5px",
-                    color: theme.palette.primary.main,
-                    border: `1px solid ${theme.palette.primary.main}`,
-                  }}
-                >
-                  +
-                </GlobalButton>
-              </Box>
-            )}
-            {isLoadingUpdateCart && (
-              <>
-                <Skeleton variant="text" width="50px" height={10} />
-                <Skeleton variant="text" width="50px" height={10} />
-              </>
-            )}
 
             {checkOut && (
               <Typography
@@ -214,9 +116,110 @@ if(typeof window !=="undefined"){
 
         {/* { right Section} */}
 
-        <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
-          {product?.cart_old_price[0]} {master?.currency}
-        </Typography>
+        <GlobalDisplayFlexColumnBox gap={"20px"}>
+          {/*  quantity */}
+          {!checkOut && !isLoadingUpdateCart && (
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                gap: "10px",
+                alignItems: "center",
+              }}
+            >
+              {product.quantity > 1 && (
+                <GlobalButton
+                  onClick={() => {
+                    if (product.quantity > 1) {
+                      dispatch(
+                        UpdateCart({
+                          product_id: product?.id,
+                          quantity: Number((quantity -= 1)),
+                        })
+                      );
+                    }
+                  }}
+                  py={"0"}
+                  px={"0"}
+                  sx={{
+                    width: { md: "28px", xs: "20px" },
+                    height: { md: "28px", xs: "20px" },
+                    borderRadius: "5px",
+                    color: theme.palette.primary.main,
+                    border: `1px solid ${theme.palette.primary.main}`,
+                  }}
+                >
+                  -
+                </GlobalButton>
+              )}
+
+              {product.quantity === 1 && (
+                <GlobalButton
+                  onClick={() => {
+                    product.quantity === 1 &&
+                      dispatch(
+                        RemoveElement({
+                          product_id: product?.id,
+                        })
+                      );
+                  }}
+                  py={"0"}
+                  px={"0"}
+                  sx={{
+                    width: { md: "28px", xs: "20px" },
+                    height: { md: "28px", xs: "20px" },
+                    borderRadius: "5px",
+                    color: theme.palette.primary.main,
+                    border: `1px solid ${theme.palette.primary.main}`,
+                  }}
+                >
+                  <DeleteIcon
+                    sx={{
+                      color: theme.palette.primary.main,
+                      fontSize: { md: "26px", xs: "18px" },
+                    }}
+                  />
+                </GlobalButton>
+              )}
+              <Typography sx={{ fontSize: "14px", fontWeight: "400" }}>
+                {product?.quantity}
+              </Typography>
+              <GlobalButton
+                onClick={() => {
+                  dispatch(
+                    UpdateCart({
+                      product_id: product?.id,
+                      quantity: Number((quantity += 1)),
+                    })
+                  );
+                }}
+                py={"0"}
+                px={"0"}
+                sx={{
+                  width: { md: "28px", xs: "20px" },
+                  height: { md: "28px", xs: "20px" },
+                  borderRadius: "5px",
+                  color: theme.palette.primary.main,
+                  border: `1px solid ${theme.palette.primary.main}`,
+                }}
+              >
+                +
+              </GlobalButton>
+            </Box>
+          )}
+          {isLoadingUpdateCart && (
+            <>
+              <Skeleton variant="text" width="50px" height={10} />
+              <Skeleton variant="text" width="50px" height={10} />
+            </>
+          )}
+
+          {/*  price */}
+          <Typography sx={{ fontSize: "16px", fontWeight: "500",textAlign:"center" }}>
+            {product?.cart_old_price[0]} {master?.currency}
+          </Typography>
+        </GlobalDisplayFlexColumnBox>
       </GlobalDisplayFlexBox>
     </CustomPaperBigCard>
   );

@@ -57,23 +57,27 @@ const AdditionalServicesSectionInCart = ({
                 <GlobalDisplayFlexBox sx={{gap:{md:"0",xs:"5px"}}} key={i}>
                   {/*   name */}
 
+<GlobalDisplayFlexBox sx={{md:"40%",xs:"100%"}}>
+
+
                   <Typography
                     sx={{
                       fontSize: "14px",
                       fontWeight: "400",
                       color: theme.palette.secondary.contrastText,
-                      width:{md:"45%",xs:"100%"}
+                     
                     }}
                   >
                     {e?.title}
                   </Typography>
+                  </GlobalDisplayFlexBox>
 
                   <GlobalDisplayFlexBox
                   style={{flexDirection:"row"}}
                     sx={{
                       width:{md:"50%",xs:"100%"},
                       gap: "15px",
-                      justifyContent: {md:"flex-end",xs:"flex-start"},
+                      justifyContent: {md:"flex-end",xs:"center"},
                     }}
                   >
                     {/*  price and delete */}
