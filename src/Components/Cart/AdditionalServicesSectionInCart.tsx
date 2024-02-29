@@ -54,35 +54,38 @@ const AdditionalServicesSectionInCart = ({
               }}
             >
               {cartList?.cart_details?.additionals?.map((e, i) => (
-                <GlobalDisplayFlexBox sx={{gap:{md:"0",xs:"5px"}}} key={i}>
+                <GlobalDisplayFlexBox
+                  sx={{ gap: { md: "0", xs: "5px" } }}
+                  key={i}
+                >
                   {/*   name */}
 
-<GlobalDisplayFlexBox sx={{md:"40%",xs:"100%"}}>
-
-
-                  <Typography
-                    sx={{
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      color: theme.palette.secondary.contrastText,
-                     
-                    }}
-                  >
-                    {e?.title}
-                  </Typography>
+                  <GlobalDisplayFlexBox sx={{ md: "40%", xs: "100%" }}>
+                    <Typography
+                      sx={{
+                        fontSize: "14px",
+                        fontWeight: "400",
+                        color: theme.palette.secondary.contrastText,
+                      }}
+                    >
+                      {e?.title}
+                    </Typography>
                   </GlobalDisplayFlexBox>
 
                   <GlobalDisplayFlexBox
-                  style={{flexDirection:"row"}}
+                    style={{ flexDirection: "row" }}
                     sx={{
-                      width:{md:"50%",xs:"100%"},
+                      width: { md: "50%", xs: "100%" },
                       gap: "15px",
-                      justifyContent: {md:"flex-end",xs:"center"},
+                      justifyContent: { md: "flex-end", xs: "center" },
                     }}
                   >
                     {/*  price and delete */}
                     <Typography sx={{ fontSize: "14px", fontWeight: "400" }}>
-                      {  e?.quantity>0? (e?.price * e?.quantity).toFixed(2):e?.price} {master?.currency}
+                      {e?.quantity > 0
+                        ? (e?.price * e?.quantity).toFixed(2)
+                        : e?.price}{" "}
+                      {master?.currency}
                     </Typography>
 
                     {!isLoadingUpdateCart ? (
