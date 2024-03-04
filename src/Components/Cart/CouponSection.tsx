@@ -26,6 +26,7 @@ const CouponSection = ({
   return (
     <GlobalDisplayFlexBox sx={{justifyContent:"flex-start",gap:"15px",width:{md:"51%",xs:"100%"}}} >
       <TextField
+       dir="ltr"
         value={couponValue}
         onChange={(e) => setCouponValue(e.target.value)}
         sx={{ width: { md: "71%", xs: "100%" }, borderRadius: "4px" }}
