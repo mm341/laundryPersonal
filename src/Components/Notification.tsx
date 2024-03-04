@@ -50,8 +50,9 @@ const NotificationPoPover = (props: Props) => {
       sx={{
         display: open ? "flex" : "none",
         position: "absolute",
-        top: { md: "40px", xs: "50px" },
-        right: locale === "en" ? { sm: "13%", xs: "7%" } : "13.5%",
+        top: { md: "50px", xs: "50px" },
+        // right: locale === "en" ? { sm: "13%", xs: "7%" } : "13.5%",
+        right: locale === "en" ? {xl:"13%",lg:"12%",md:"3%",xs:"7%"} : "21%",
         maxHeight: "500px",
         overflowY: "auto",
         zIndex: "99999",
