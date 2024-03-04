@@ -79,7 +79,7 @@ export const AddOrder = createAsyncThunk(
     PublicRequest.postData(payload, `customer/orders`)
       .then((res: any) => {
         if (res) {
-          toast.success(res?.message);
+          // toast.success(res?.message);
           return res;
         }
       })

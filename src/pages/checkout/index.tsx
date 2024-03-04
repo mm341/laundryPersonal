@@ -314,8 +314,6 @@ const CheckOutPage = ({
     localStorage.setItem("coupon", "");
   }, []);
 
-
-
   return (
     <>
       <Meta
@@ -386,7 +384,7 @@ const CheckOutPage = ({
                           <Grid item sm={6} xs={12}>
                             {/*  phone number */}
                             <TextField
-                            dir="ltr"
+                              dir="ltr"
                               InputProps={{ readOnly: true }}
                               required
                               sx={{ width: "100%" }}

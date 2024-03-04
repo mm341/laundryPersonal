@@ -799,6 +799,7 @@ export const arabic = {
   "Additional Notes": "ملاحظات اضافيه",
   "Busy Now": "مشغول الان",
   "Coupon":"الكوبون",
+  "Coupon Applied Successfully":"تم تطبيق قسيمه الخصم",
   Others: "أخري",
   others: "أخري",
   "Contact Person Name": "اسم شخص الاتصال",

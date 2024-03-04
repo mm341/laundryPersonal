@@ -46,6 +46,7 @@ const CouponSection = ({
                 ).then((promiseResponse) => {
                   if (promiseResponse?.payload?.data?.cart_details?.cart_id) {
                     localStorage.setItem("coupon", couponValue);
+                    toast.success(t("Coupon Applied Successfully"))
                   }
                 });
               } else {
