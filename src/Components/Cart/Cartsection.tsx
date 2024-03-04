@@ -90,7 +90,7 @@ if(cartList?.cart_details?.products?.length===0){
         sx={{
           backgroundColor: "white",
           boxShadow: "0px 0px 4px 0px #0000001F",
-          borderRadius: "4px",
+          borderRadius: "8px",
 
           py: "20px",
         }}
