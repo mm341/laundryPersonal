@@ -32,11 +32,13 @@ import { AuthApi } from "@/React-Query/authApi";
 import PublicHandelingErrors from "@/utils/PublicHandelingErrors";
 import SignUpvalidation from "../SignUpValidation";
 import { SaveProfileData } from "@/redux/slices/HandelUpdateProfile";
+import { GetCartDetails } from "@/redux/slices/CartSlice";
+import { useAppDispatch } from "@/redux/store";
 
 const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
   //  hooks
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const theme = useTheme();
 
@@ -99,7 +101,7 @@ const SignUpPage = ({ handleClose, setModalFor, modalFor }: SignModel) => {
       if (res.data.data.access.token) {
         toast.success(res?.data?.message);
         localStorage.setItem("token", res?.data?.data?.access?.token);
-
+        dispatch(GetCartDetails({}));
         handleClose?.();
       }
       setOpenOtpModal(false);
