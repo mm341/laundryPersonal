@@ -85,7 +85,7 @@ export const AccountPopover = (props: Props) => {
           router.push("/", locale);
           localStorage.removeItem("token");
           localStorage.removeItem("cm_firebase_token");
-          toast.success(t("Logout Successfully"));
+          // toast.success(t("Logout Successfully"));
         }
       }
     );

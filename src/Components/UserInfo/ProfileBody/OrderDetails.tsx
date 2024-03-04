@@ -43,7 +43,7 @@ const OrderDetails = ({ orderId }: { orderId: string }) => {
   );
   return (
     <HandelNotification>
-     <Meta
+      <Meta
         title={"Order Details"}
         // ogImage={`${configData?.base_urls?.react_landing_page_images}/${landingPageData?.banner_section_full?.banner_section_img_full}`}
       />
@@ -129,44 +129,44 @@ const OrderDetails = ({ orderId }: { orderId: string }) => {
                   justifyContent: "flex-end",
                 }}
               >
-                {(orderData?.order_status === "Delivered" &&
-                  !orderData?.ratings) && (
-                  <GlobalButton
-                    px={"0"}
-                    py={"0"}
-                    sx={{
-                      backgroundColor: theme.palette.primary.main,
-                      width: { md: "320px", xs: "250px" },
-                      height: "48px",
-                      borderRadius: "5px",
-                    }}
-                    onClick={() => setOpenRateDialog(true)}
-                  >
-                    <Box
+                {orderData?.order_status === "Delivered" &&
+                  !orderData?.ratings && (
+                    <GlobalButton
+                      px={"0"}
+                      py={"0"}
                       sx={{
-                        display: "flex",
-                        gap: "15px",
-                        alignItems: "center",
+                        backgroundColor: theme.palette.primary.main,
+                        width: { md: "320px", xs: "250px" },
+                        height: "48px",
+                        borderRadius: "5px",
                       }}
+                      onClick={() => setOpenRateDialog(true)}
                     >
-                      <img
-                        src={rateButtonIcon?.src}
-                        loading="lazy"
-                        alt="img"
-                        style={{ width: "20px", height: "20px" }}
-                      />
-                      <Typography
+                      <Box
                         sx={{
-                          fontSize: "16px",
-                          fontWeight: "500",
-                          color: "white",
+                          display: "flex",
+                          gap: "15px",
+                          alignItems: "center",
                         }}
                       >
-                        {t("Rate your Experience")}
-                      </Typography>
-                    </Box>
-                  </GlobalButton>
-                )}
+                        <img
+                          src={rateButtonIcon?.src}
+                          loading="lazy"
+                          alt="img"
+                          style={{ width: "20px", height: "20px" }}
+                        />
+                        <Typography
+                          sx={{
+                            fontSize: "16px",
+                            fontWeight: "500",
+                            color: "white",
+                          }}
+                        >
+                          {t("Rate your Experience")}
+                        </Typography>
+                      </Box>
+                    </GlobalButton>
+                  )}
 
                 {orderData?.order_status === "Delivered" &&
                   orderData?.rating > 0 && (
@@ -197,12 +197,12 @@ const OrderDetails = ({ orderId }: { orderId: string }) => {
       </CustomPaperBigCard>
       {/*  Order Rate Dialog */}
       <OrderRateDiaolg
-      orderId={orderId}
+        orderId={orderId}
         orderData={orderData}
         setOpenRateDialog={setOpenRateDialog}
         openRateDialog={openRateDialog}
       />
-   </HandelNotification>
+    </HandelNotification>
   );
 };
 

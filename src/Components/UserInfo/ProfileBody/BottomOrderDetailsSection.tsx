@@ -2,6 +2,7 @@ import { OrdersInterface } from "@/interfaces/OrdersInterface";
 import { useAppSelector } from "@/redux/store";
 import { GlobalDisplayFlexColumnBox } from "@/styles/PublicStyles";
 import { Box, Typography, alpha, useTheme } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -13,7 +14,7 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
   //  hooks
 
   const { t } = useTranslation();
-
+  const { locale } = useRouter();
   const { master } = useAppSelector((state) => state.master);
   //  order data
   const orderDetailsData: OrderData[] = [
@@ -26,12 +27,6 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
     },
     { key: "Order Status", value: order?.order_status },
     { key: "Payment Status", value: order?.payment_status },
-    { key: "Sub total", value: `${order?.sub_total} ${master?.currency}` },
-    {
-      key: "Delivery Charge",
-      value: `${order?.delivery_charge} ${master?.currency}`,
-    },
-    { key: "Discount", value: `${order?.discount} ${master?.currency}` },
   ];
 
   //  handel order status color
@@ -85,7 +80,7 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
               {t(e?.key)}
             </Typography>
             <Typography
-            dir="ltr"
+              dir="ltr"
               sx={{
                 fontSize: "16px",
                 fontWeight: "400",
@@ -96,6 +91,82 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
             </Typography>
           </Box>
         ))}
+
+        {/*  Sub total  */}
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { sm: "row", xs: "column" },
+            justifyContent: "space-between",
+            alignItems: { sm: "center", xs: "flex-start" },
+          }}
+        >
+          <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+            {t("Sub total")}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "16px",
+              fontWeight: "400",
+
+              color: alpha("#272727", 0.6),
+            }}
+          >
+            {order?.sub_total} {master?.currency}
+          </Typography>
+        </Box>
+
+        {/*  Delivery Charge */}
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { sm: "row", xs: "column" },
+            justifyContent: "space-between",
+            alignItems: { sm: "center", xs: "flex-start" },
+          }}
+        >
+          <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+            {t("Delivery Charge")}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "16px",
+              fontWeight: "400",
+
+              color: alpha("#272727", 0.6),
+            }}
+          >
+            {order?.delivery_charge} {master?.currency}
+          </Typography>
+        </Box>
+
+        {/*  Discount  */}
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { sm: "row", xs: "column" },
+            justifyContent: "space-between",
+            alignItems: { sm: "center", xs: "flex-start" },
+          }}
+        >
+          <Typography sx={{ fontSize: "16px", fontWeight: "400" }}>
+            {t("Discount")}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "16px",
+              fontWeight: "400",
+
+              color: alpha("#272727", 0.6),
+            }}
+          >
+            {order?.discount} {master?.currency}
+          </Typography>
+        </Box>
+
         {/*  divider */}
         <Box
           sx={{
