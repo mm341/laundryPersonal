@@ -179,12 +179,7 @@ if(cartList?.cart_details?.products?.length===0){
             />
           </Box>
 
-          {/*  coupon section */}
-          {/* <CouponSection
-            token={token}
-            couponValue={couponValue}
-            setCouponValue={setCouponValue}
-          /> */}
+       
 
           {/*  summary section  */}
           <SummarySection />

@@ -414,6 +414,7 @@ export const english = {
     "We start our delivery process and you will receive your order soon.",
     "Coupon":"Coupon",
     "Coupon Applied Successfully":"Coupon Applied Successfully",
+    "Coupon Removed Successfully":"Coupon Removed Successfully",
   Cart: "Cart",
   "By signing up, you agree to our terms and conditions":
     "By signing up, you agree to our",

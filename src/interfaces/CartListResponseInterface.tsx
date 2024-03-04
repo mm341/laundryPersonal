@@ -19,19 +19,19 @@ export const initialCart_details = () => {
 export const initialCartList = () => {
   return {
     cart_details: initialCart_details(),
-    sub_total: "",
+    sub_total: 0,
     coupon: 0,
-    delivery_fee: "",
-    total_order_amount: "",
+    delivery_fee: 0,
+    total_order_amount:0,
     discount:0
   };
 };
 
 export interface CartListInterface {
   cart_details: Cart_details;
-  sub_total: string;
+  sub_total: number;
   coupon?: number;
-  delivery_fee: string;
-  total_order_amount: string;
+  delivery_fee: number;
+  total_order_amount: number;
   discount:number
 }

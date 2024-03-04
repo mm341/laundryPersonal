@@ -800,6 +800,7 @@ export const arabic = {
   "Busy Now": "مشغول الان",
   "Coupon":"الكوبون",
   "Coupon Applied Successfully":"تم تطبيق قسيمه الخصم",
+  "Coupon Removed Successfully":"تم حذف الكوبون بنجاح",
   Others: "أخري",
   others: "أخري",
   "Contact Person Name": "اسم شخص الاتصال",
