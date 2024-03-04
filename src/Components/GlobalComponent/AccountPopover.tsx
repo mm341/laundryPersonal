@@ -134,8 +134,8 @@ export const AccountPopover = (props: Props) => {
         sx={{
           display: open ? "flex" : "none",
           position: "absolute",
-          top: { md: "40px", xs: "50px" },
-          right: locale === "en" ? "18%" : "21%",
+          top: { md: "50px", xs: "50px" },
+          right: locale === "en" ? {xl:"20%",lg:"12%",xs:"12%"} : "21%",
           backgroundColor: "#F3F6FF",
           zIndex: "99999",
           borderRadius: "5px",
