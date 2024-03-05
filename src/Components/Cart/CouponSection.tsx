@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import CloseIcon from "@mui/icons-material/Close";
+import { useRouter } from "next/router";
 const CouponSection = ({
   couponValue,
   setCouponValue,
@@ -25,7 +26,7 @@ const CouponSection = ({
   //  hooks
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-
+  const { locale } = useRouter();
   const theme = useTheme();
   const [vaildCoupon, SetValidCoupon] = useState(false);
   const { isloading } = useAppSelector((state) => state.cartList);
@@ -65,7 +66,7 @@ const CouponSection = ({
             }
             sx={{
               position: "absolute",
-              right: "10px",
+              right:locale==="en"? "10px":"90%",
               top: "7px",
               cursor: "pointer",
             }}
