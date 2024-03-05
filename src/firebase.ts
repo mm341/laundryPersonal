@@ -117,7 +117,7 @@ const messaging = (async () => {
     }
     return null;
   } catch (err) {
-    console.error("Error initializing messaging:", err);
+   
     return null;
   }
 })();
