@@ -801,6 +801,7 @@ export const arabic = {
   "Coupon":"الكوبون",
   "Coupon Applied Successfully":"تم تطبيق قسيمه الخصم",
   "Coupon Removed Successfully":"تم حذف الكوبون بنجاح",
+  "Pin Code":"رمز التحقق",
   Others: "أخري",
   others: "أخري",
   "Contact Person Name": "اسم شخص الاتصال",

@@ -27,6 +27,7 @@ const BottomOrderDetailsSection = ({ order }: { order: OrdersInterface }) => {
     },
     { key: "Order Status", value: order?.order_status },
     { key: "Payment Status", value: order?.payment_status },
+    { key: "Pin Code", value: order?.pin_code },
   ];
 
   //  handel order status color

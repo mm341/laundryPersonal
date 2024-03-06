@@ -38,7 +38,8 @@ export const inititalOrdersInterface = () => {
     rating: 0,
     total_amount: 0,
     sub_total: 0,
-    ratings:0
+    ratings: 0,
+    pin_code: 0,
   };
 };
 
@@ -56,6 +57,7 @@ export interface OrdersInterface {
     mobile?: string;
     name?: string;
   };
+  pin_code: number;
   additionals: AdditionalServicesInterface[];
   delivery_charge: number;
   delivery_date: string;
@@ -81,5 +83,5 @@ export interface OrdersInterface {
   quantity: Quantity;
   rating: number;
   total_amount: number;
-  ratings:number
+  ratings: number;
 }
