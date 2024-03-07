@@ -135,7 +135,7 @@ export const AccountPopover = (props: Props) => {
           display: open ? "flex" : "none",
           position: "absolute",
           top: { md: "50px", xs: "50px" },
-          right: locale === "en" ? {xl:"20%",lg:"12%",xs:"12%"} : "21%",
+          right: locale === "en" ? {xl:"20%",lg:"12%",xs:"12%"} : {xl:"21%",lg:"12%",xs:"12%"},
           backgroundColor: "#F3F6FF",
           zIndex: "99999",
           borderRadius: "5px",
