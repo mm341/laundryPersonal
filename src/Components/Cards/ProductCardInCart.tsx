@@ -6,7 +6,7 @@ import {
   GlobalDisplayFlexColumnBox,
 } from "@/styles/PublicStyles";
 import { Box, Skeleton, Typography, useTheme } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRouter } from "next/router";
 import { productInterface } from "@/interfaces/ProductInterface";
@@ -22,9 +22,10 @@ const ProductCardInCart = ({
   //  hooks
   const theme = useTheme();
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
+
   //  master data
   const { master } = useAppSelector((state) => state.master);
-  const { isLoadingUpdateCart } = useAppSelector((state) => state.cartList);
 
   let quantity = product?.quantity;
 
@@ -46,7 +47,9 @@ const ProductCardInCart = ({
         overflowX: "hidden",
       }}
     >
-      <GlobalDisplayFlexBox sx={{ alignItems: {md:"flex-end",xs:"center"} }}>
+      <GlobalDisplayFlexBox
+        sx={{ alignItems: { md: "flex-end", xs: "center" } }}
+      >
         {/*  left section */}
         <Box
           sx={{
@@ -118,7 +121,7 @@ const ProductCardInCart = ({
 
         <GlobalDisplayFlexColumnBox gap={"20px"}>
           {/*  quantity */}
-          {!checkOut && !isLoadingUpdateCart && (
+          {!checkOut && !loading && (
             <Box
               sx={{
                 width: "100%",
@@ -131,13 +134,16 @@ const ProductCardInCart = ({
               {product.quantity > 1 && (
                 <GlobalButton
                   onClick={() => {
+                    setLoading(true);
                     if (product.quantity > 1) {
                       dispatch(
                         UpdateCart({
                           product_id: product?.id,
                           quantity: Number((quantity -= 1)),
                         })
-                      );
+                      ).then((res) => {
+                        setLoading(false);
+                      });
                     }
                   }}
                   py={"0"}
@@ -157,12 +163,15 @@ const ProductCardInCart = ({
               {product.quantity === 1 && (
                 <GlobalButton
                   onClick={() => {
+                    setLoading(true);
                     product.quantity === 1 &&
                       dispatch(
                         RemoveElement({
                           product_id: product?.id,
                         })
-                      );
+                      ).then((res) => {
+                        setLoading(false);
+                      });
                   }}
                   py={"0"}
                   px={"0"}
@@ -187,12 +196,15 @@ const ProductCardInCart = ({
               </Typography>
               <GlobalButton
                 onClick={() => {
+                  setLoading(true);
                   dispatch(
                     UpdateCart({
                       product_id: product?.id,
                       quantity: Number((quantity += 1)),
                     })
-                  );
+                  ).then((res) => {
+                    setLoading(false);
+                  });
                 }}
                 py={"0"}
                 px={"0"}
@@ -208,15 +220,17 @@ const ProductCardInCart = ({
               </GlobalButton>
             </Box>
           )}
-          {isLoadingUpdateCart && (
-            <>
+          {loading && (
+            <GlobalDisplayFlexColumnBox gap={"2px"}>
               <Skeleton variant="text" width="50px" height={10} />
               <Skeleton variant="text" width="50px" height={10} />
-            </>
+            </GlobalDisplayFlexColumnBox>
           )}
 
           {/*  price */}
-          <Typography sx={{ fontSize: "16px", fontWeight: "500",textAlign:"center" }}>
+          <Typography
+            sx={{ fontSize: "16px", fontWeight: "500", textAlign: "center" }}
+          >
             {product?.cart_old_price[0]} {master?.currency}
           </Typography>
         </GlobalDisplayFlexColumnBox>

@@ -32,7 +32,6 @@ import { DeleteCart } from "@/redux/slices/CartSlice";
 import DeleteDialog from "../DeleteDialogs";
 const Cartsection = ({
   additionalSercvices,
- 
 }: {
   additionalSercvices: AdditionalServicesInterface[];
 }) => {
@@ -44,7 +43,7 @@ const Cartsection = ({
   const { locale } = useRouter();
   const [authModalOpen, setOpen] = useState<boolean>(false);
   const [openDeleteCart, setOpenDeleteCart] = useState<boolean>(false);
-  
+
   const [modalFor, setModalFor] = useState<string>("sign-in");
   const { master } = useAppSelector((state) => state.master);
   const { cartList, isloading, isloadingDeleteCart } = useAppSelector(
@@ -78,11 +77,11 @@ const Cartsection = ({
     });
   };
 
-  useEffect(()=>{
-if(cartList?.cart_details?.products?.length===0){
-  localStorage.setItem("coupon","")
-}
-  },[cartList])
+  useEffect(() => {
+    if (cartList?.cart_details?.products?.length === 0) {
+      localStorage.setItem("coupon", "");
+    }
+  }, [cartList]);
 
   return (
     <>
@@ -100,7 +99,7 @@ if(cartList?.cart_details?.products?.length===0){
             sx={{ justifyContent: "space-between", px: "20px" }}
           >
             <GlobalDisplayFlexBox
-            style={{flexDirection:"row",gap:"5px"}}
+              style={{ flexDirection: "row", gap: "5px" }}
               sx={{ justifyContent: "flex-start", gap: "2px" }}
             >
               <Typography sx={{ fontSize: "16px", fontWeight: "500" }}>
@@ -113,10 +112,10 @@ if(cartList?.cart_details?.products?.length===0){
             {/*  clear cart */}
             {cartList?.cart_details?.products?.length > 0 && (
               <GlobalDisplayFlexBox
-              style={{flexDirection:"row",gap:"5px"}}
+                style={{ flexDirection: "row", gap: "5px" }}
                 onClick={() => setOpenDeleteCart(true)}
                 sx={{
-                  justifyContent: {md:"flex-end",xs:"flex-start"},
+                  justifyContent: { md: "flex-end", xs: "flex-start" },
                   gap: "5px",
                   cursor: "pointer",
                 }}
@@ -178,8 +177,6 @@ if(cartList?.cart_details?.products?.length===0){
               additionalSercvices={additionalSercvices}
             />
           </Box>
-
-       
 
           {/*  summary section  */}
           <SummarySection />
@@ -266,7 +263,7 @@ if(cartList?.cart_details?.products?.length===0){
       </Box>
 
       <AuthModal
-      checkOut
+        checkOut
         open={authModalOpen}
         modalFor={modalFor}
         setModalFor={setModalFor}
