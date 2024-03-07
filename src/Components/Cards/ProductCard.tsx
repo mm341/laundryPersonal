@@ -185,7 +185,7 @@ const ProductCard = ({
                 })
               );
             } else {
-              toast.error("You Add This Product Before");
+              toast.error(t("You Add This Product Before"));
             }
           }
         }}

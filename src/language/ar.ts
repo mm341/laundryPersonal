@@ -802,6 +802,8 @@ export const arabic = {
   "Coupon Applied Successfully":"تم تطبيق قسيمه الخصم",
   "Coupon Removed Successfully":"تم حذف الكوبون بنجاح",
   "Pin Code":"رمز التحقق",
+  "You Add This Product Before":"لقد اضفت هذا العنصر من قبل",
+  "You Already Have This Item In Your Cart":"سله المشتريات تحتوي علي هذا العنصر بالفعل",
   Others: "أخري",
   others: "أخري",
   "Contact Person Name": "اسم شخص الاتصال",

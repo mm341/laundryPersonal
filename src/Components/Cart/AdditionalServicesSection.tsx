@@ -67,7 +67,7 @@ const AdditionalServicesSection = ({
               })
             );
           } else {
-            toast.error("You Already Have This Item In Your Cart");
+            toast.error(t("You Already Have This Item In Your Cart"));
           }
         }}
       >

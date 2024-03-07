@@ -415,6 +415,8 @@ export const english = {
     "Coupon":"Coupon",
     "Coupon Applied Successfully":"Coupon Applied Successfully",
     "Coupon Removed Successfully":"Coupon Removed Successfully",
+    "You Add This Product Before":"You Add This Product Before",
+    "You Already Have This Item In Your Cart":"You Already Have This Item In Your Cart",
   Cart: "Cart",
   "By signing up, you agree to our terms and conditions":
     "By signing up, you agree to our",
