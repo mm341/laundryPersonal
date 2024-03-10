@@ -349,7 +349,7 @@ const AddressForm = ({
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik
               disabled={isLoadingAddAddresse}
-              type="number"
+              type="text"
               label={t("Apartment")}
               touched={addAddressFormik.touched.apartment_no}
               errors={addAddressFormik.errors.apartment_no}
@@ -361,7 +361,7 @@ const AddressForm = ({
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik
               disabled={isLoadingAddAddresse}
-              type="number"
+              type="text"
               label={t("Building")}
               touched={addAddressFormik.touched.building_no}
               errors={addAddressFormik.errors.building_no}
@@ -374,7 +374,7 @@ const AddressForm = ({
           <Grid item xs={12} md={6}>
             <CustomTextFieldWithFormik
               disabled={isLoadingAddAddresse}
-              type="number"
+              type="text"
               label={t("Floor")}
               touched={addAddressFormik.touched.floor_no}
               errors={addAddressFormik.errors.floor_no}
