@@ -22,16 +22,19 @@ import { HomeServices } from "@/interfaces/HomeServices";
 import { HomeAreas } from "@/interfaces/HomeAreas";
 import Carousel from "react-material-ui-carousel";
 import FirstRightSection from "./FirstRightSection";
-
+import { HomeData } from "@/interfaces/HomeData";
 
 const FirstSection = ({
   homeServices,
   homeAreas,
+  homeData,
 }: {
   homeServices: HomeServices[];
   homeAreas: HomeAreas[];
+  homeData: HomeData;
 }) => {
   //  hooks
+
   const { t } = useTranslation();
   const theme = useTheme();
   const issmall = useMediaQuery(theme.breakpoints.down("md"));
@@ -55,7 +58,6 @@ const FirstSection = ({
     setOpenOrderDialog(false);
   };
 
-
   return (
     <>
       <Box
@@ -67,7 +69,7 @@ const FirstSection = ({
           boxShadow: "7px 7px 8px 0px #1E214F0F",
         }}
       >
-        <Box sx={{ width: {xl:"80%",lg:"95%",xs:"90%"}, mx: "auto" }}>
+        <Box sx={{ width: { xl: "80%", lg: "95%", xs: "90%" }, mx: "auto" }}>
           <GlobalDisplayFlexBox>
             {/*  leftSection */}
             <GlobalDisplayFlexColumnBox
@@ -119,50 +121,26 @@ const FirstSection = ({
                   navButtonsAlwaysInvisible={true}
                   autoPlay
                 >
-                  <Typography
-                    sx={{
-                      fontSize: { sm: "20px", xs: "12px" },
-                      fontWeight: "400",
-                      color: "black",
-                      mt: "20px",
-                    }}
-                  >
-                    {t(
-                      "You deserve more time for  really important in your life, where the stressful task of laundry is no longer a time-consuming chore."
-                    )}
-                  </Typography>
-
-                  <Typography
-                    sx={{
-                      fontSize: { sm: "20px", xs: "12px" },
-                      fontWeight: "400",
-                      color: "black",
-                      mt: "20px",
-                    }}
-                  >
-                    {t(
-                      "You deserve more time for  really important in your life, where the stressful task of laundry is no longer a time-consuming chore."
-                    )}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: { sm: "20px", xs: "12px" },
-                      fontWeight: "400",
-                      color: "black",
-                      mt: "20px",
-                    }}
-                  >
-                    {t(
-                      "You deserve more time for  really important in your life, where the stressful task of laundry is no longer a time-consuming chore."
-                    )}
-                  </Typography>
+                  {homeData?.sliders?.cards?.map((e, i) => (
+                    <Typography
+                      key={i}
+                      sx={{
+                        fontSize: { sm: "20px", xs: "12px" },
+                        fontWeight: "400",
+                        color: "black",
+                        mt: "20px",
+                      }}
+                    >
+                      {e?.body}
+                    </Typography>
+                  ))}
                 </Carousel>
               </GlobalDisplayFlexColumnBox>
 
               {/*  sleect area box */}
               <Box
                 sx={{
-                  width: {xl:"85%", md: "95%", xs: "100%" },
+                  width: { xl: "85%", md: "95%", xs: "100%" },
                   mr: "auto",
                   transform: { sm: "translateX(-15px)", xs: "translateX(0px)" },
                   display: "flex",
@@ -216,7 +194,7 @@ const FirstSection = ({
             {/*  Image Right Section */}
 
             {/* <Suspense fallback={<div>Loading...</div>}> */}
-              <FirstRightSection />
+            <FirstRightSection />
             {/* </Suspense> */}
           </GlobalDisplayFlexBox>
         </Box>

@@ -36,10 +36,8 @@ export default function Home({
   homeAreas: HomeAreas[];
   masterData: Master;
   footerSocialLinks: FooterSocialLinks[];
-  homeData:HomeData
+  homeData: HomeData;
 }) {
-
-  
   //  hooks
   const dispatch = useAppDispatch();
   //  selectors
@@ -72,6 +70,7 @@ export default function Home({
     dispatch(CashFooterLinks(footerSocialLinks));
   }, [dispatch, footerSocialLinks]);
 
+  
   return (
     <>
       <Meta
@@ -80,20 +79,21 @@ export default function Home({
       />
       <CssBaseline />
       <HandelNotification>
-      <HomeParentBox style={{ overflowX: "hidden" }}>
-        <FirstSection
-          homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
-          homeServices={homeServices?.length > 0 ? homeServices : services}
-        />
-        <WorkLaundry />
-        <ServiceSection
-          homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
-          homeServices={homeServices?.length > 0 ? homeServices : services}
-        />
-        <LaundrySimpleSection homeData={homeData} />
-        <AppSection />
-        <LaundryFaqs  homeData={homeData}/>
-      </HomeParentBox>
+        <HomeParentBox style={{ overflowX: "hidden" }}>
+          <FirstSection
+          homeData={homeData}
+            homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
+            homeServices={homeServices?.length > 0 ? homeServices : services}
+          />
+          <WorkLaundry />
+          <ServiceSection
+            homeAreas={homeAreas?.length > 0 ? homeAreas : areas}
+            homeServices={homeServices?.length > 0 ? homeServices : services}
+          />
+          <LaundrySimpleSection homeData={homeData} />
+          <AppSection />
+          <LaundryFaqs homeData={homeData} />
+        </HomeParentBox>
       </HandelNotification>
     </>
   );
@@ -104,7 +104,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
   let homeAreas = [];
   let masterData = {};
   let footerSocialLinks = [];
-  let homeData={}
+  let homeData = {};
 
   //  homeServices
   try {
@@ -157,9 +157,8 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
     footerSocialLinks = [];
   }
 
-
-   //  homeData
-   try {
+  //  homeData
+  try {
     const configRes = await MainApi.get("website-settings", {
       headers: {
         "Accept-Language": locale,
@@ -177,7 +176,7 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
       homeAreas,
       masterData,
       footerSocialLinks,
-      homeData
+      homeData,
     },
   };
 };

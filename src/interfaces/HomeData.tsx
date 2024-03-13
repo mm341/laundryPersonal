@@ -9,7 +9,14 @@ export interface Homefaqs {
   cards: cardInterface[];
 }
 
+export interface HomeSliders {
+  cards: {
+    body: string;
+  }[];
+}
+
 export interface HomeData {
   faqs: Homefaqs;
   features: Homefaqs;
+  sliders: HomeSliders;
 }
