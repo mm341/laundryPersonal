@@ -137,7 +137,7 @@ const FirstSection = ({
                 </Carousel>
               </GlobalDisplayFlexColumnBox>
 
-              {/*  sleect area box */}
+               {/* sleect area box
               <Box
                 sx={{
                   width: { xl: "85%", md: "95%", xs: "100%" },
@@ -186,7 +186,7 @@ const FirstSection = ({
                     {t("Select")}
                   </GlobalButton>
                 </Box>
-              </Box>
+              </Box> */}
 
               <AppSmallSection firstSection />
             </GlobalDisplayFlexColumnBox>
